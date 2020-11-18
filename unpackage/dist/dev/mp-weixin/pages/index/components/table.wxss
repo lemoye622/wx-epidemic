@@ -1,0 +1,39 @@
+
+.myCharts.data-v-5e03891c{width: 100%;
+}
+.Dizhou-cont.data-v-5e03891c {
+	margin: 20rpx 0;
+}
+.Dizhou.data-v-5e03891c {
+	font-size: 30rpx;
+	font-weight: bold;
+}
+.tips.data-v-5e03891c{font-size: 25rpx; height: 50rpx; line-height: 50rpx; color: #737373;}
+/* 表格 */
+.table-cont.data-v-5e03891c{display: -webkit-box;display: -webkit-flex;display: flex; height: 70rpx;
+-webkit-box-align: center;
+-webkit-align-items: center;
+        align-items: center; -webkit-box-pack: justify; -webkit-justify-content: space-between; justify-content: space-between;
+font-size: 25rpx;}
+.table-cont text.data-v-5e03891c{height: 70rpx; line-height: 70rpx; text-align: center;
+border-right: 1px solid #fff;}
+.table-cont text.data-v-5e03891c:nth-child(1){background: #f2f5f7; text-align: left; -webkit-box-flex: 2; -webkit-flex: 2; flex: 2; padding-left: 10rpx;}
+.table-cont text.data-v-5e03891c:nth-child(2){background: #e8effc; color: #005dff; -webkit-box-flex: 1; -webkit-flex: 1; flex: 1;}
+.table-cont text.data-v-5e03891c:nth-child(3){background: #fdeeee; color: #f55253; -webkit-box-flex: 1; -webkit-flex: 1; flex: 1;}
+.table-cont text.data-v-5e03891c:nth-child(4){background: #e9f7ec; color: #178b50; -webkit-box-flex: 1; -webkit-flex: 1; flex: 1;}
+.table-cont text.data-v-5e03891c:nth-child(5){background: #f2f2f2; color: #66666c; -webkit-box-flex: 1; -webkit-flex: 1; flex: 1;
+border-right: 0;}
+/* 确诊人数 */
+.table-datas text.data-v-5e03891c{display: block;height: 70rpx; line-height: 70rpx; text-align: center;
+}
+.table-datas.data-v-5e03891c{font-size: 27rpx;display: -webkit-box;display: -webkit-flex;display: flex; height: 70rpx;
+-webkit-box-pack: justify;
+-webkit-justify-content: space-between;
+        justify-content: space-between; -webkit-box-align: center; -webkit-align-items: center; align-items: center;
+border-bottom: 0.5rpx solid #f2f2f2;}
+.table-datas text.data-v-5e03891c:nth-child(1){text-align: left; -webkit-box-flex: 2; -webkit-flex: 2; flex: 2; padding-left: 10rpx;}
+.table-datas text.data-v-5e03891c:nth-child(2){-webkit-box-flex: 1;-webkit-flex: 1;flex: 1;}
+.table-datas text.data-v-5e03891c:nth-child(3){-webkit-box-flex: 1;-webkit-flex: 1;flex: 1;}
+.table-datas text.data-v-5e03891c:nth-child(4){-webkit-box-flex: 1;-webkit-flex: 1;flex: 1;}
+.table-datas text.data-v-5e03891c:nth-child(5){-webkit-box-flex: 1;-webkit-flex: 1;flex: 1;}
+

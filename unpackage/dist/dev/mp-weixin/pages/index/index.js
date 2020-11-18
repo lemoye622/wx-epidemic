@@ -135,7 +135,16 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var MAP = function MAP() {__webpack_require__.e(/*! require.ensure | pages/index/components/map */ "pages/index/components/map").then((function () {return resolve(__webpack_require__(/*! ./components/map.vue */ 19));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var MAP = function MAP() {Promise.all(/*! require.ensure | pages/index/components/map */[__webpack_require__.e("common/vendor"), __webpack_require__.e("pages/index/components/map")]).then((function () {return resolve(__webpack_require__(/*! ./components/map.vue */ 19));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var Line = function Line() {Promise.all(/*! require.ensure | pages/index/components/brokenLine */[__webpack_require__.e("common/vendor"), __webpack_require__.e("pages/index/components/brokenLine")]).then((function () {return resolve(__webpack_require__(/*! ./components/brokenLine.vue */ 28));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var Table = function Table() {__webpack_require__.e(/*! require.ensure | pages/index/components/table */ "pages/index/components/table").then((function () {return resolve(__webpack_require__(/*! ./components/table.vue */ 36));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+
+
+
+
+
+
+
 
 
 
@@ -184,20 +193,20 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 {
-  components: { MAP: MAP },
+  components: { MAP: MAP, Line: Line, Table: Table },
   data: function data() {
     return {
       peopleList: [
       {
-        'data': 0,
+        'data': 1877,
         'status': '累积确诊' },
 
       {
-        'data': 0,
+        'data': 1832,
         'status': '累积治愈' },
 
       {
-        'data': 0,
+        'data': 8,
         'status': '累积死亡' }],
 
 

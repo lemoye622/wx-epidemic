@@ -3,6 +3,7 @@
 		<!-- 背景 -->
 		<view class="content-img">
 			<image src="/static/pageimg.png" mode="widthFix"></image>
+			<!-- <view class="content-character">广东疫情大数据实时追踪</view> -->
 		</view>
 		<!-- 分享 -->
 		<view class="wx-share">分享</view>
@@ -13,7 +14,7 @@
 		<!-- 白色区域部分 -->
 		<view class="content-main">
 			<!-- 统计时间 -->
-			<view class="times">统计截止 2020-08-30 12:54:02</view>
+			<view class="times">统计截止 2020-10-30 12:54:02</view>
 			<!-- 累积数量 -->
 			<view class="content-main-data">
 				<block v-for="(item,index) in peopleList" :key="index">
@@ -39,6 +40,10 @@
 			</view>
 			<!-- 地图 -->
 			<MAP></MAP>
+			<!-- 折线图 -->
+			<Line></Line>
+			<!-- 表格 -->
+			<Table></Table>
 		</view>
 	</view>
 </template>
@@ -46,21 +51,25 @@
 <script>
 	// 地图组件
 	import MAP from './components/map.vue'
+	// 折线图
+	import Line from './components/brokenLine.vue'
+	// 表格
+	import Table from './components/table.vue'
 	export default {
-		components:{MAP},
+		components:{MAP,Line,Table},
 		data() {
 			return {
 				peopleList:[
 					{
-						'data':0,
+						'data':1877,
 						'status':'累积确诊'
 					},
 					{
-						'data':0,
+						'data':1832,
 						'status':'累积治愈'
 					},
 					{
-						'data':0,
+						'data':8,
 						'status':'累积死亡'
 					}
 				],
@@ -106,6 +115,7 @@
 	.content{position: relative;}
 	.content-img{width: 750upx; height: 450upx; background: #4CD964;
 	overflow: hidden;}
+	/* .content-character{position: absolute;left: 60upx;top: 173upx;} */
 	.content-img image{width: 750upx;}
 	/* 分享 */
 	.wx-share{position: absolute; top: 250upx; right: 0;

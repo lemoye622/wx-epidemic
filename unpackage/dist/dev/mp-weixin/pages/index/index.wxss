@@ -2,6 +2,7 @@
 .content.data-v-654be45b{position: relative;}
 .content-img.data-v-654be45b{width: 750rpx; height: 450rpx; background: #4CD964;
 overflow: hidden;}
+/* .content-character{position: absolute;left: 60upx;top: 173upx;} */
 .content-img image.data-v-654be45b{width: 750rpx;}
 /* 分享 */
 .wx-share.data-v-654be45b{position: absolute; top: 250rpx; right: 0;
