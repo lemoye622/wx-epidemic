@@ -76,25 +76,25 @@
 				//菜单
 				menuList:[
 					{
-						'img':'../../static/jiankang.png',
+						'img':'../../static/health.png',
 						'text':'健康信息',
 						'label':'上报健康信息',
 						'url':'../report/report'
 					},
 					{
-						'img':'../../static/xinwen.png',
+						'img':'../../static/news.png',
 						'text':'疫情新闻',
 						'label':'热点早知道',
 						'url':'../news/news'
 					},
 					{
-						'img':'../../static/yaoyan.png',
+						'img':'../../static/shatter-rumors.png',
 						'text':'粉碎谣言',
 						'label':'假消息不能信',
 						'url':''
 					},
 					{
-						'img':'../../static/fugong.png',
+						'img':'../../static/work-resumption.png',
 						'text':'复工复产',
 						'label':'复工出行助你安全',
 						'url':''

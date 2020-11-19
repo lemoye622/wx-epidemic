@@ -26,7 +26,7 @@
 		},
 		
 		created() {
-			this.cWith = uni.upx2px(750);
+			this.cWidth = uni.upx2px(750);
 			this.cHeight = uni.upx2px(500);
 			this.getServerData();
 		},
