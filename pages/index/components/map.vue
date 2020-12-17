@@ -1,6 +1,6 @@
 <template>
-	<view class="Dizhou-cont">
-		<view class="Dizhou">各市确诊数</view>
+	<view class="city-cont">
+		<view class="city">各市确诊数</view>
 		<!-- 地图 -->
 		<view class="myCharts">
 			<canvas canvas-id="canvasPie" id="canvasPie" class="charts" @touchstart="touchMap"></canvas>
@@ -172,13 +172,13 @@ export default {
 			// 汕尾市
 			let numsw = 0;
 			newvalue.forEach(item => {
-				numsw += item.diadata.Shanweidjg;
+				numsw += item.diadata.Shanweidig;
 			});
 			this.regiondata['shanwei'] = numsw;
 			// 河源市
 			let numhy = 0;
 			newvalue.forEach(item => {
-				numhy += item.diadata.Heyuandjg;
+				numhy += item.diadata.Heyuandig;
 			});
 			this.regiondata['heyuan'] = numhy;
 			// 阳江市
@@ -247,6 +247,6 @@ margin: auto;
 overflow: hidden;
 }
 .charts{width: 650upx; height: 700upx;}
-.Dizhou-cont{margin: 20upx 0;}
-.Dizhou{font-size: 30upx; font-weight: bold;}
+.city-cont{margin: 20upx 0;}
+.city{font-size: 30upx; font-weight: bold;}
 </style>

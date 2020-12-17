@@ -1,7 +1,15 @@
 <script>
 	export default {
-		onLaunch: function() {
-			console.log('App Launch')
+		onLaunch() {
+			if (!wx.cloud) {
+				console.log('微信版本过低，不支持云开发')
+			} else {
+				// 完成初始化
+				wx.cloud.init({
+					env: 'epidemic-7guqm06ef9b46335',
+					traceUser: true
+				})
+			}
 		},
 		onShow: function() {
 			console.log('App Show')

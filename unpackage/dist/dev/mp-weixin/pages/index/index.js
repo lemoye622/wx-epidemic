@@ -135,59 +135,64 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var MAP = function MAP() {Promise.all(/*! require.ensure | pages/index/components/map */[__webpack_require__.e("common/vendor"), __webpack_require__.e("pages/index/components/map")]).then((function () {return resolve(__webpack_require__(/*! ./components/map.vue */ 19));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var Line = function Line() {Promise.all(/*! require.ensure | pages/index/components/brokenLine */[__webpack_require__.e("common/vendor"), __webpack_require__.e("pages/index/components/brokenLine")]).then((function () {return resolve(__webpack_require__(/*! ./components/brokenLine.vue */ 28));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var Table = function Table() {__webpack_require__.e(/*! require.ensure | pages/index/components/table */ "pages/index/components/table").then((function () {return resolve(__webpack_require__(/*! ./components/table.vue */ 36));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 50));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// 操作数据库的类
+var Dbcrud = __webpack_require__(/*! ../../config/dataBase.js */ 48);
+// 计算确诊、治愈、死亡   每一个的总和的类
+var Total = __webpack_require__(/*! ../../config/total.js */ 49);var _console =
+console,log = _console.log;
+// 地图组件
+var MAP = function MAP() {Promise.all(/*! require.ensure | pages/index/components/map */[__webpack_require__.e("common/vendor"), __webpack_require__.e("pages/index/components/map")]).then((function () {return resolve(__webpack_require__(/*! ./components/map.vue */ 19));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var Line = function Line() {Promise.all(/*! require.ensure | pages/index/components/brokenLine */[__webpack_require__.e("common/vendor"), __webpack_require__.e("pages/index/components/brokenLine")]).then((function () {return resolve(__webpack_require__(/*! ./components/brokenLine.vue */ 28));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var Table = function Table() {__webpack_require__.e(/*! require.ensure | pages/index/components/table */ "pages/index/components/table").then((function () {return resolve(__webpack_require__(/*! ./components/table.vue */ 36));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -198,15 +203,15 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     return {
       peopleList: [
       {
-        'data': 1877,
+        'data': 0,
         'status': '累积确诊' },
 
       {
-        'data': 1832,
+        'data': 0,
         'status': '累积治愈' },
 
       {
-        'data': 8,
+        'data': 0,
         'status': '累积死亡' }],
 
 
@@ -239,10 +244,49 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
   },
-  onLoad: function onLoad() {
-
+  created: function created() {
+    this.epidemicData();
   },
-  methods: {} };exports.default = _default;
+  methods: {
+    // 获取确诊、治愈、死亡三个集合的数据
+    epidemicData: function epidemicData() {var _this = this;
+      var arr = [
+      new Dbcrud('diagnosis').pullGet(),
+      new Dbcrud('cure').pullGet(),
+      new Dbcrud('death').pullGet()];
+
+      // Promise.all 同时请求多个集合的数据
+      Promise.all(arr).
+      then(function (res) {
+        log('三个集合');
+        log(res);
+        var diagdata = res[0].data;
+        var curedata = res[1].data;
+        var diedata = res[2].data;
+        _this.covidTotal(diagdata, curedata, diedata);
+      }).
+      catch(function (error) {
+        log(error);
+      });
+    },
+
+    // 计算累积确诊、治愈、死亡
+    covidTotal: function covidTotal(diagdata, curedata, diedata) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var diagTotal, cureTotal, deathTotal;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+
+                  new Total(diagdata).sum());case 2:diagTotal = _context.sent;
+                // log(diagTotal)
+                _this2.$set(_this2.peopleList[0], 'data', diagTotal.sumdata);
+
+                // 累积治愈
+                _context.next = 6;return new Total(curedata).sum();case 6:cureTotal = _context.sent;
+                // log(cureTotal)
+                _this2.$set(_this2.peopleList[1], 'data', cureTotal.sumdata);
+
+                // 累积死亡
+                _context.next = 10;return new Total(diedata).sum();case 10:deathTotal = _context.sent;
+                // log(deathTotal)
+                _this2.$set(_this2.peopleList[2], 'data', deathTotal.sumdata);case 12:case "end":return _context.stop();}}}, _callee);}))();
+    } } };exports.default = _default;
 
 /***/ }),
 /* 17 */

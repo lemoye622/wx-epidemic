@@ -288,13 +288,13 @@ var gd = __webpack_require__(/*! config/provinces.json */ 25);var canvaMap = nul
       // 汕尾市
       var numsw = 0;
       newvalue.forEach(function (item) {
-        numsw += item.diadata.Shanweidjg;
+        numsw += item.diadata.Shanweidig;
       });
       this.regiondata['shanwei'] = numsw;
       // 河源市
       var numhy = 0;
       newvalue.forEach(function (item) {
-        numhy += item.diadata.Heyuandjg;
+        numhy += item.diadata.Heyuandig;
       });
       this.regiondata['heyuan'] = numhy;
       // 阳江市

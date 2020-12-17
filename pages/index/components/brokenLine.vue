@@ -1,6 +1,6 @@
 <template>
-	<view class="Dizhou-cont">
-		<view class="Dizhou">广东疫情新增趋势</view>
+	<view class="city-cont">
+		<view class="city">广东疫情新增趋势</view>
 		<!-- 折线图 -->
 		<view class="myCharts">
 			<canvas canvas-id="canvasLineA" id="canvasLineA" class="charts" @touchstart="touchLineA" @touchend="touchEndLineA"></canvas>
@@ -107,10 +107,10 @@
 <style scoped>
 .myCharts{width: 700upx; height: 500upx;}
 .charts{width: 700upx; height: 500upx;}
-.Dizhou-cont{
+.city-cont{
 	margin: 20upx 0;
 }
-.Dizhou{
+.city{
 	font-size: 30upx;
 	font-weight: bold;
 }

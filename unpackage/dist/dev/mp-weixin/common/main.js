@@ -90,7 +90,15 @@ __webpack_require__.r(__webpack_exports__);
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
 {
   onLaunch: function onLaunch() {
-    console.log('App Launch');
+    if (!wx.cloud) {
+      console.log('微信版本过低，不支持云开发');
+    } else {
+      // 完成初始化
+      wx.cloud.init({
+        env: 'epidemic-7guqm06ef9b46335',
+        traceUser: true });
+
+    }
   },
   onShow: function onShow() {
     console.log('App Show');

@@ -1,10 +1,10 @@
 
 .myCharts.data-v-482eef8b{width: 700rpx; height: 500rpx;}
 .charts.data-v-482eef8b{width: 700rpx; height: 500rpx;}
-.Dizhou-cont.data-v-482eef8b{
+.city-cont.data-v-482eef8b{
 	margin: 20rpx 0;
 }
-.Dizhou.data-v-482eef8b{
+.city.data-v-482eef8b{
 	font-size: 30rpx;
 	font-weight: bold;
 }

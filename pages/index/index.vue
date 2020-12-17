@@ -49,6 +49,11 @@
 </template>
 
 <script>
+	// 操作数据库的类
+	let Dbcrud = require('../../config/dataBase.js')
+	// 计算确诊、治愈、死亡   每一个的总和的类
+	let Total = require('../../config/total.js')
+	let { log } = console
 	// 地图组件
 	import MAP from './components/map.vue'
 	// 折线图
@@ -61,16 +66,16 @@
 			return {
 				peopleList:[
 					{
-						'data':1877,
-						'status':'累积确诊'
+						'data': 0,
+						'status': '累积确诊'
 					},
 					{
-						'data':1832,
-						'status':'累积治愈'
+						'data': 0,
+						'status': '累积治愈'
 					},
 					{
-						'data':8,
-						'status':'累积死亡'
+						'data': 0,
+						'status': '累积死亡'
 					}
 				],
 				//菜单
@@ -102,11 +107,49 @@
 				]
 			}
 		},
-		onLoad() {
-
+		created() {
+			this.epidemicData()
 		},
 		methods: {
-
+			// 获取确诊、治愈、死亡三个集合的数据
+			epidemicData() {
+				let arr = [
+					new Dbcrud('diagnosis').pullGet(),
+					new Dbcrud('cure').pullGet(),
+					new Dbcrud('death').pullGet()
+				]
+				// Promise.all 同时请求多个集合的数据
+				Promise.all(arr)
+				.then((res) => {
+					log('三个集合')
+					log(res)
+					let diagdata = res[0].data
+					let curedata = res[1].data
+					let diedata = res[2].data
+					this.covidTotal(diagdata, curedata, diedata)
+				})
+				.catch((error) => {
+					log(error)
+				})
+			},
+			
+			// 计算累积确诊、治愈、死亡
+			async covidTotal(diagdata, curedata, diedata) {
+				// 累积确诊
+				let diagTotal = await new Total(diagdata).sum()
+				// log(diagTotal)
+				this.$set(this.peopleList[0], 'data', diagTotal.sumdata)
+				
+				// 累积治愈
+				let cureTotal = await new Total(curedata).sum()
+				// log(cureTotal)
+				this.$set(this.peopleList[1], 'data', cureTotal.sumdata)
+				
+				// 累积死亡
+				let deathTotal = await new Total(diedata).sum()
+				// log(deathTotal)
+				this.$set(this.peopleList[2], 'data', deathTotal.sumdata)
+			}
 		}
 	}
 </script>

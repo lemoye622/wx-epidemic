@@ -247,6 +247,6 @@ margin: auto;
 overflow: hidden;
 }
 .charts.data-v-67d6712a{width: 650rpx; height: 700rpx;}
-.Dizhou-cont.data-v-67d6712a{margin: 20rpx 0;}
-.Dizhou.data-v-67d6712a{font-size: 30rpx; font-weight: bold;}
+.city-cont.data-v-67d6712a{margin: 20rpx 0;}
+.city.data-v-67d6712a{font-size: 30rpx; font-weight: bold;}
 
