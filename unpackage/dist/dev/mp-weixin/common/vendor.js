@@ -1,6 +1,6 @@
-(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["common/vendor"],{
-
-/***/ 1:
+(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["common/vendor"],[
+/* 0 */,
+/* 1 */
 /*!************************************************************!*\
   !*** ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js ***!
   \************************************************************/
@@ -757,7 +757,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1563,137 +1563,7 @@ var uni$1 = uni;var _default =
 uni$1;exports.default = _default;
 
 /***/ }),
-
-/***/ 10:
-/*!**********************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
-  \**********************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return normalizeComponent; });
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-function normalizeComponent (
-  scriptExports,
-  render,
-  staticRenderFns,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier, /* server only */
-  shadowMode, /* vue-cli only */
-  components, // fixed by xxxxxx auto components
-  renderjs // fixed by xxxxxx renderjs
-) {
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // fixed by xxxxxx auto components
-  if (components) {
-    if (!options.components) {
-      options.components = {}
-    }
-    var hasOwn = Object.prototype.hasOwnProperty
-    for (var name in components) {
-      if (hasOwn.call(components, name) && !hasOwn.call(options.components, name)) {
-        options.components[name] = components[name]
-      }
-    }
-  }
-  // fixed by xxxxxx renderjs
-  if (renderjs) {
-    (renderjs.beforeCreate || (renderjs.beforeCreate = [])).unshift(function() {
-      this[renderjs.__module] = this
-    });
-    (options.mixins || (options.mixins = [])).push(renderjs)
-  }
-
-  // render functions
-  if (render) {
-    options.render = render
-    options.staticRenderFns = staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = 'data-v-' + scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = shadowMode
-      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
-      : injectStyles
-  }
-
-  if (hook) {
-    if (options.functional) {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      var originalRender = options.render
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return originalRender(h, context)
-      }
-    } else {
-      // inject component registration as beforeCreate hook
-      var existing = options.beforeCreate
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    }
-  }
-
-  return {
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
-
-/***/ 2:
+/* 2 */
 /*!******************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js ***!
   \******************************************************************************************/
@@ -7225,7 +7095,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -7246,14 +7116,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -7329,7 +7199,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -7722,8 +7592,1122 @@ internalMixin(Vue);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../webpack/buildin/global.js */ 3)))
 
 /***/ }),
+/* 3 */
+/*!***********************************!*\
+  !*** (webpack)/buildin/global.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-/***/ 24:
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || new Function("return this")();
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 4 */
+/*!***************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/pages.json ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */
+/*!**********************************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
+  \**********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return normalizeComponent; });
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+function normalizeComponent (
+  scriptExports,
+  render,
+  staticRenderFns,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier, /* server only */
+  shadowMode, /* vue-cli only */
+  components, // fixed by xxxxxx auto components
+  renderjs // fixed by xxxxxx renderjs
+) {
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // fixed by xxxxxx auto components
+  if (components) {
+    if (!options.components) {
+      options.components = {}
+    }
+    var hasOwn = Object.prototype.hasOwnProperty
+    for (var name in components) {
+      if (hasOwn.call(components, name) && !hasOwn.call(options.components, name)) {
+        options.components[name] = components[name]
+      }
+    }
+  }
+  // fixed by xxxxxx renderjs
+  if (renderjs) {
+    (renderjs.beforeCreate || (renderjs.beforeCreate = [])).unshift(function() {
+      this[renderjs.__module] = this
+    });
+    (options.mixins || (options.mixins = [])).push(renderjs)
+  }
+
+  // render functions
+  if (render) {
+    options.render = render
+    options.staticRenderFns = staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = 'data-v-' + scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = shadowMode
+      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
+      : injectStyles
+  }
+
+  if (hook) {
+    if (options.functional) {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      var originalRender = options.render
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return originalRender(h, context)
+      }
+    } else {
+      // inject component registration as beforeCreate hook
+      var existing = options.beforeCreate
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    }
+  }
+
+  return {
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */
+/*!*********************************************************************************************!*\
+  !*** ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator/index.js ***!
+  \*********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! regenerator-runtime */ 18);
+
+/***/ }),
+/* 18 */
+/*!************************************************************!*\
+  !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+// This method of obtaining a reference to the global object needs to be
+// kept identical to the way it is obtained in runtime.js
+var g = (function() {
+  return this || (typeof self === "object" && self);
+})() || Function("return this")();
+
+// Use `getOwnPropertyNames` because not all browsers support calling
+// `hasOwnProperty` on the global `self` object in a worker. See #183.
+var hadRuntime = g.regeneratorRuntime &&
+  Object.getOwnPropertyNames(g).indexOf("regeneratorRuntime") >= 0;
+
+// Save the old regeneratorRuntime in case it needs to be restored later.
+var oldRuntime = hadRuntime && g.regeneratorRuntime;
+
+// Force reevalutation of runtime.js.
+g.regeneratorRuntime = undefined;
+
+module.exports = __webpack_require__(/*! ./runtime */ 19);
+
+if (hadRuntime) {
+  // Restore the original runtime.
+  g.regeneratorRuntime = oldRuntime;
+} else {
+  // Remove the global property added by runtime.js.
+  try {
+    delete g.regeneratorRuntime;
+  } catch(e) {
+    g.regeneratorRuntime = undefined;
+  }
+}
+
+
+/***/ }),
+/* 19 */
+/*!*****************************************************!*\
+  !*** ./node_modules/regenerator-runtime/runtime.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+!(function(global) {
+  "use strict";
+
+  var Op = Object.prototype;
+  var hasOwn = Op.hasOwnProperty;
+  var undefined; // More compressible than void 0.
+  var $Symbol = typeof Symbol === "function" ? Symbol : {};
+  var iteratorSymbol = $Symbol.iterator || "@@iterator";
+  var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
+  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+
+  var inModule = typeof module === "object";
+  var runtime = global.regeneratorRuntime;
+  if (runtime) {
+    if (inModule) {
+      // If regeneratorRuntime is defined globally and we're in a module,
+      // make the exports object identical to regeneratorRuntime.
+      module.exports = runtime;
+    }
+    // Don't bother evaluating the rest of this file if the runtime was
+    // already defined globally.
+    return;
+  }
+
+  // Define the runtime globally (as expected by generated code) as either
+  // module.exports (if we're in a module) or a new, empty object.
+  runtime = global.regeneratorRuntime = inModule ? module.exports : {};
+
+  function wrap(innerFn, outerFn, self, tryLocsList) {
+    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
+    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
+    var generator = Object.create(protoGenerator.prototype);
+    var context = new Context(tryLocsList || []);
+
+    // The ._invoke method unifies the implementations of the .next,
+    // .throw, and .return methods.
+    generator._invoke = makeInvokeMethod(innerFn, self, context);
+
+    return generator;
+  }
+  runtime.wrap = wrap;
+
+  // Try/catch helper to minimize deoptimizations. Returns a completion
+  // record like context.tryEntries[i].completion. This interface could
+  // have been (and was previously) designed to take a closure to be
+  // invoked without arguments, but in all the cases we care about we
+  // already have an existing method we want to call, so there's no need
+  // to create a new function object. We can even get away with assuming
+  // the method takes exactly one argument, since that happens to be true
+  // in every case, so we don't have to touch the arguments object. The
+  // only additional allocation required is the completion record, which
+  // has a stable shape and so hopefully should be cheap to allocate.
+  function tryCatch(fn, obj, arg) {
+    try {
+      return { type: "normal", arg: fn.call(obj, arg) };
+    } catch (err) {
+      return { type: "throw", arg: err };
+    }
+  }
+
+  var GenStateSuspendedStart = "suspendedStart";
+  var GenStateSuspendedYield = "suspendedYield";
+  var GenStateExecuting = "executing";
+  var GenStateCompleted = "completed";
+
+  // Returning this object from the innerFn has the same effect as
+  // breaking out of the dispatch switch statement.
+  var ContinueSentinel = {};
+
+  // Dummy constructor functions that we use as the .constructor and
+  // .constructor.prototype properties for functions that return Generator
+  // objects. For full spec compliance, you may wish to configure your
+  // minifier not to mangle the names of these two functions.
+  function Generator() {}
+  function GeneratorFunction() {}
+  function GeneratorFunctionPrototype() {}
+
+  // This is a polyfill for %IteratorPrototype% for environments that
+  // don't natively support it.
+  var IteratorPrototype = {};
+  IteratorPrototype[iteratorSymbol] = function () {
+    return this;
+  };
+
+  var getProto = Object.getPrototypeOf;
+  var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+  if (NativeIteratorPrototype &&
+      NativeIteratorPrototype !== Op &&
+      hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
+    // This environment has a native %IteratorPrototype%; use it instead
+    // of the polyfill.
+    IteratorPrototype = NativeIteratorPrototype;
+  }
+
+  var Gp = GeneratorFunctionPrototype.prototype =
+    Generator.prototype = Object.create(IteratorPrototype);
+  GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
+  GeneratorFunctionPrototype.constructor = GeneratorFunction;
+  GeneratorFunctionPrototype[toStringTagSymbol] =
+    GeneratorFunction.displayName = "GeneratorFunction";
+
+  // Helper for defining the .next, .throw, and .return methods of the
+  // Iterator interface in terms of a single ._invoke method.
+  function defineIteratorMethods(prototype) {
+    ["next", "throw", "return"].forEach(function(method) {
+      prototype[method] = function(arg) {
+        return this._invoke(method, arg);
+      };
+    });
+  }
+
+  runtime.isGeneratorFunction = function(genFun) {
+    var ctor = typeof genFun === "function" && genFun.constructor;
+    return ctor
+      ? ctor === GeneratorFunction ||
+        // For the native GeneratorFunction constructor, the best we can
+        // do is to check its .name property.
+        (ctor.displayName || ctor.name) === "GeneratorFunction"
+      : false;
+  };
+
+  runtime.mark = function(genFun) {
+    if (Object.setPrototypeOf) {
+      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
+    } else {
+      genFun.__proto__ = GeneratorFunctionPrototype;
+      if (!(toStringTagSymbol in genFun)) {
+        genFun[toStringTagSymbol] = "GeneratorFunction";
+      }
+    }
+    genFun.prototype = Object.create(Gp);
+    return genFun;
+  };
+
+  // Within the body of any async function, `await x` is transformed to
+  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
+  // `hasOwn.call(value, "__await")` to determine if the yielded value is
+  // meant to be awaited.
+  runtime.awrap = function(arg) {
+    return { __await: arg };
+  };
+
+  function AsyncIterator(generator) {
+    function invoke(method, arg, resolve, reject) {
+      var record = tryCatch(generator[method], generator, arg);
+      if (record.type === "throw") {
+        reject(record.arg);
+      } else {
+        var result = record.arg;
+        var value = result.value;
+        if (value &&
+            typeof value === "object" &&
+            hasOwn.call(value, "__await")) {
+          return Promise.resolve(value.__await).then(function(value) {
+            invoke("next", value, resolve, reject);
+          }, function(err) {
+            invoke("throw", err, resolve, reject);
+          });
+        }
+
+        return Promise.resolve(value).then(function(unwrapped) {
+          // When a yielded Promise is resolved, its final value becomes
+          // the .value of the Promise<{value,done}> result for the
+          // current iteration.
+          result.value = unwrapped;
+          resolve(result);
+        }, function(error) {
+          // If a rejected Promise was yielded, throw the rejection back
+          // into the async generator function so it can be handled there.
+          return invoke("throw", error, resolve, reject);
+        });
+      }
+    }
+
+    var previousPromise;
+
+    function enqueue(method, arg) {
+      function callInvokeWithMethodAndArg() {
+        return new Promise(function(resolve, reject) {
+          invoke(method, arg, resolve, reject);
+        });
+      }
+
+      return previousPromise =
+        // If enqueue has been called before, then we want to wait until
+        // all previous Promises have been resolved before calling invoke,
+        // so that results are always delivered in the correct order. If
+        // enqueue has not been called before, then it is important to
+        // call invoke immediately, without waiting on a callback to fire,
+        // so that the async generator function has the opportunity to do
+        // any necessary setup in a predictable way. This predictability
+        // is why the Promise constructor synchronously invokes its
+        // executor callback, and why async functions synchronously
+        // execute code before the first await. Since we implement simple
+        // async functions in terms of async generators, it is especially
+        // important to get this right, even though it requires care.
+        previousPromise ? previousPromise.then(
+          callInvokeWithMethodAndArg,
+          // Avoid propagating failures to Promises returned by later
+          // invocations of the iterator.
+          callInvokeWithMethodAndArg
+        ) : callInvokeWithMethodAndArg();
+    }
+
+    // Define the unified helper method that is used to implement .next,
+    // .throw, and .return (see defineIteratorMethods).
+    this._invoke = enqueue;
+  }
+
+  defineIteratorMethods(AsyncIterator.prototype);
+  AsyncIterator.prototype[asyncIteratorSymbol] = function () {
+    return this;
+  };
+  runtime.AsyncIterator = AsyncIterator;
+
+  // Note that simple async functions are implemented on top of
+  // AsyncIterator objects; they just return a Promise for the value of
+  // the final result produced by the iterator.
+  runtime.async = function(innerFn, outerFn, self, tryLocsList) {
+    var iter = new AsyncIterator(
+      wrap(innerFn, outerFn, self, tryLocsList)
+    );
+
+    return runtime.isGeneratorFunction(outerFn)
+      ? iter // If outerFn is a generator, return the full iterator.
+      : iter.next().then(function(result) {
+          return result.done ? result.value : iter.next();
+        });
+  };
+
+  function makeInvokeMethod(innerFn, self, context) {
+    var state = GenStateSuspendedStart;
+
+    return function invoke(method, arg) {
+      if (state === GenStateExecuting) {
+        throw new Error("Generator is already running");
+      }
+
+      if (state === GenStateCompleted) {
+        if (method === "throw") {
+          throw arg;
+        }
+
+        // Be forgiving, per 25.3.3.3.3 of the spec:
+        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
+        return doneResult();
+      }
+
+      context.method = method;
+      context.arg = arg;
+
+      while (true) {
+        var delegate = context.delegate;
+        if (delegate) {
+          var delegateResult = maybeInvokeDelegate(delegate, context);
+          if (delegateResult) {
+            if (delegateResult === ContinueSentinel) continue;
+            return delegateResult;
+          }
+        }
+
+        if (context.method === "next") {
+          // Setting context._sent for legacy support of Babel's
+          // function.sent implementation.
+          context.sent = context._sent = context.arg;
+
+        } else if (context.method === "throw") {
+          if (state === GenStateSuspendedStart) {
+            state = GenStateCompleted;
+            throw context.arg;
+          }
+
+          context.dispatchException(context.arg);
+
+        } else if (context.method === "return") {
+          context.abrupt("return", context.arg);
+        }
+
+        state = GenStateExecuting;
+
+        var record = tryCatch(innerFn, self, context);
+        if (record.type === "normal") {
+          // If an exception is thrown from innerFn, we leave state ===
+          // GenStateExecuting and loop back for another invocation.
+          state = context.done
+            ? GenStateCompleted
+            : GenStateSuspendedYield;
+
+          if (record.arg === ContinueSentinel) {
+            continue;
+          }
+
+          return {
+            value: record.arg,
+            done: context.done
+          };
+
+        } else if (record.type === "throw") {
+          state = GenStateCompleted;
+          // Dispatch the exception by looping back around to the
+          // context.dispatchException(context.arg) call above.
+          context.method = "throw";
+          context.arg = record.arg;
+        }
+      }
+    };
+  }
+
+  // Call delegate.iterator[context.method](context.arg) and handle the
+  // result, either by returning a { value, done } result from the
+  // delegate iterator, or by modifying context.method and context.arg,
+  // setting context.delegate to null, and returning the ContinueSentinel.
+  function maybeInvokeDelegate(delegate, context) {
+    var method = delegate.iterator[context.method];
+    if (method === undefined) {
+      // A .throw or .return when the delegate iterator has no .throw
+      // method always terminates the yield* loop.
+      context.delegate = null;
+
+      if (context.method === "throw") {
+        if (delegate.iterator.return) {
+          // If the delegate iterator has a return method, give it a
+          // chance to clean up.
+          context.method = "return";
+          context.arg = undefined;
+          maybeInvokeDelegate(delegate, context);
+
+          if (context.method === "throw") {
+            // If maybeInvokeDelegate(context) changed context.method from
+            // "return" to "throw", let that override the TypeError below.
+            return ContinueSentinel;
+          }
+        }
+
+        context.method = "throw";
+        context.arg = new TypeError(
+          "The iterator does not provide a 'throw' method");
+      }
+
+      return ContinueSentinel;
+    }
+
+    var record = tryCatch(method, delegate.iterator, context.arg);
+
+    if (record.type === "throw") {
+      context.method = "throw";
+      context.arg = record.arg;
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    var info = record.arg;
+
+    if (! info) {
+      context.method = "throw";
+      context.arg = new TypeError("iterator result is not an object");
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    if (info.done) {
+      // Assign the result of the finished delegate to the temporary
+      // variable specified by delegate.resultName (see delegateYield).
+      context[delegate.resultName] = info.value;
+
+      // Resume execution at the desired location (see delegateYield).
+      context.next = delegate.nextLoc;
+
+      // If context.method was "throw" but the delegate handled the
+      // exception, let the outer generator proceed normally. If
+      // context.method was "next", forget context.arg since it has been
+      // "consumed" by the delegate iterator. If context.method was
+      // "return", allow the original .return call to continue in the
+      // outer generator.
+      if (context.method !== "return") {
+        context.method = "next";
+        context.arg = undefined;
+      }
+
+    } else {
+      // Re-yield the result returned by the delegate method.
+      return info;
+    }
+
+    // The delegate iterator is finished, so forget it and continue with
+    // the outer generator.
+    context.delegate = null;
+    return ContinueSentinel;
+  }
+
+  // Define Generator.prototype.{next,throw,return} in terms of the
+  // unified ._invoke helper method.
+  defineIteratorMethods(Gp);
+
+  Gp[toStringTagSymbol] = "Generator";
+
+  // A Generator should always return itself as the iterator object when the
+  // @@iterator function is called on it. Some browsers' implementations of the
+  // iterator prototype chain incorrectly implement this, causing the Generator
+  // object to not be returned from this call. This ensures that doesn't happen.
+  // See https://github.com/facebook/regenerator/issues/274 for more details.
+  Gp[iteratorSymbol] = function() {
+    return this;
+  };
+
+  Gp.toString = function() {
+    return "[object Generator]";
+  };
+
+  function pushTryEntry(locs) {
+    var entry = { tryLoc: locs[0] };
+
+    if (1 in locs) {
+      entry.catchLoc = locs[1];
+    }
+
+    if (2 in locs) {
+      entry.finallyLoc = locs[2];
+      entry.afterLoc = locs[3];
+    }
+
+    this.tryEntries.push(entry);
+  }
+
+  function resetTryEntry(entry) {
+    var record = entry.completion || {};
+    record.type = "normal";
+    delete record.arg;
+    entry.completion = record;
+  }
+
+  function Context(tryLocsList) {
+    // The root entry object (effectively a try statement without a catch
+    // or a finally block) gives us a place to store values thrown from
+    // locations where there is no enclosing try statement.
+    this.tryEntries = [{ tryLoc: "root" }];
+    tryLocsList.forEach(pushTryEntry, this);
+    this.reset(true);
+  }
+
+  runtime.keys = function(object) {
+    var keys = [];
+    for (var key in object) {
+      keys.push(key);
+    }
+    keys.reverse();
+
+    // Rather than returning an object with a next method, we keep
+    // things simple and return the next function itself.
+    return function next() {
+      while (keys.length) {
+        var key = keys.pop();
+        if (key in object) {
+          next.value = key;
+          next.done = false;
+          return next;
+        }
+      }
+
+      // To avoid creating an additional object, we just hang the .value
+      // and .done properties off the next function object itself. This
+      // also ensures that the minifier will not anonymize the function.
+      next.done = true;
+      return next;
+    };
+  };
+
+  function values(iterable) {
+    if (iterable) {
+      var iteratorMethod = iterable[iteratorSymbol];
+      if (iteratorMethod) {
+        return iteratorMethod.call(iterable);
+      }
+
+      if (typeof iterable.next === "function") {
+        return iterable;
+      }
+
+      if (!isNaN(iterable.length)) {
+        var i = -1, next = function next() {
+          while (++i < iterable.length) {
+            if (hasOwn.call(iterable, i)) {
+              next.value = iterable[i];
+              next.done = false;
+              return next;
+            }
+          }
+
+          next.value = undefined;
+          next.done = true;
+
+          return next;
+        };
+
+        return next.next = next;
+      }
+    }
+
+    // Return an iterator with no values.
+    return { next: doneResult };
+  }
+  runtime.values = values;
+
+  function doneResult() {
+    return { value: undefined, done: true };
+  }
+
+  Context.prototype = {
+    constructor: Context,
+
+    reset: function(skipTempReset) {
+      this.prev = 0;
+      this.next = 0;
+      // Resetting context._sent for legacy support of Babel's
+      // function.sent implementation.
+      this.sent = this._sent = undefined;
+      this.done = false;
+      this.delegate = null;
+
+      this.method = "next";
+      this.arg = undefined;
+
+      this.tryEntries.forEach(resetTryEntry);
+
+      if (!skipTempReset) {
+        for (var name in this) {
+          // Not sure about the optimal order of these conditions:
+          if (name.charAt(0) === "t" &&
+              hasOwn.call(this, name) &&
+              !isNaN(+name.slice(1))) {
+            this[name] = undefined;
+          }
+        }
+      }
+    },
+
+    stop: function() {
+      this.done = true;
+
+      var rootEntry = this.tryEntries[0];
+      var rootRecord = rootEntry.completion;
+      if (rootRecord.type === "throw") {
+        throw rootRecord.arg;
+      }
+
+      return this.rval;
+    },
+
+    dispatchException: function(exception) {
+      if (this.done) {
+        throw exception;
+      }
+
+      var context = this;
+      function handle(loc, caught) {
+        record.type = "throw";
+        record.arg = exception;
+        context.next = loc;
+
+        if (caught) {
+          // If the dispatched exception was caught by a catch block,
+          // then let that catch block handle the exception normally.
+          context.method = "next";
+          context.arg = undefined;
+        }
+
+        return !! caught;
+      }
+
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        var record = entry.completion;
+
+        if (entry.tryLoc === "root") {
+          // Exception thrown outside of any try block that could handle
+          // it, so set the completion value of the entire function to
+          // throw the exception.
+          return handle("end");
+        }
+
+        if (entry.tryLoc <= this.prev) {
+          var hasCatch = hasOwn.call(entry, "catchLoc");
+          var hasFinally = hasOwn.call(entry, "finallyLoc");
+
+          if (hasCatch && hasFinally) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            } else if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else if (hasCatch) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            }
+
+          } else if (hasFinally) {
+            if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else {
+            throw new Error("try statement without catch or finally");
+          }
+        }
+      }
+    },
+
+    abrupt: function(type, arg) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc <= this.prev &&
+            hasOwn.call(entry, "finallyLoc") &&
+            this.prev < entry.finallyLoc) {
+          var finallyEntry = entry;
+          break;
+        }
+      }
+
+      if (finallyEntry &&
+          (type === "break" ||
+           type === "continue") &&
+          finallyEntry.tryLoc <= arg &&
+          arg <= finallyEntry.finallyLoc) {
+        // Ignore the finally entry if control is not jumping to a
+        // location outside the try/catch block.
+        finallyEntry = null;
+      }
+
+      var record = finallyEntry ? finallyEntry.completion : {};
+      record.type = type;
+      record.arg = arg;
+
+      if (finallyEntry) {
+        this.method = "next";
+        this.next = finallyEntry.finallyLoc;
+        return ContinueSentinel;
+      }
+
+      return this.complete(record);
+    },
+
+    complete: function(record, afterLoc) {
+      if (record.type === "throw") {
+        throw record.arg;
+      }
+
+      if (record.type === "break" ||
+          record.type === "continue") {
+        this.next = record.arg;
+      } else if (record.type === "return") {
+        this.rval = this.arg = record.arg;
+        this.method = "return";
+        this.next = "end";
+      } else if (record.type === "normal" && afterLoc) {
+        this.next = afterLoc;
+      }
+
+      return ContinueSentinel;
+    },
+
+    finish: function(finallyLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.finallyLoc === finallyLoc) {
+          this.complete(entry.completion, entry.afterLoc);
+          resetTryEntry(entry);
+          return ContinueSentinel;
+        }
+      }
+    },
+
+    "catch": function(tryLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc === tryLoc) {
+          var record = entry.completion;
+          if (record.type === "throw") {
+            var thrown = record.arg;
+            resetTryEntry(entry);
+          }
+          return thrown;
+        }
+      }
+
+      // The context.catch method must only be called with a location
+      // argument that corresponds to a known catch block.
+      throw new Error("illegal catch attempt");
+    },
+
+    delegateYield: function(iterable, resultName, nextLoc) {
+      this.delegate = {
+        iterator: values(iterable),
+        resultName: resultName,
+        nextLoc: nextLoc
+      };
+
+      if (this.method === "next") {
+        // Deliberately forget the last sent value so that we don't
+        // accidentally pass it on to the delegate.
+        this.arg = undefined;
+      }
+
+      return ContinueSentinel;
+    }
+  };
+})(
+  // In sloppy mode, unbound `this` refers to the global object, fallback to
+  // Function constructor if we're in global strict mode. That is sadly a form
+  // of indirect eval which violates Content Security Policy.
+  (function() {
+    return this || (typeof self === "object" && self);
+  })() || Function("return this")()
+);
+
+
+/***/ }),
+/* 20 */
+/*!*******************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/config/time.js ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.timestamp = void 0;function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;} // 计算最晚时间
+
+var moment = __webpack_require__(/*! moment */ 50);
+
+// 写一个简单的方法，不用面向对象
+var timestamp = function timestamp(timearr) {
+  // 将时间字符串转换成时间戳
+  var timesarr = timearr.map(function (item) {
+    return new Date(item).getTime();
+  });
+  // console.log(timesarr)
+  var lastTime = Math.max.apply(Math, _toConsumableArray(timesarr));
+  // console.log(lastTime)
+  // 将时间戳转换为年月日
+  var formatTime = moment(lastTime).format('YYYY-MM-DD HH:mm:ss');
+  // console.log(formatTime)
+  return formatTime;
+};exports.timestamp = timestamp;
+
+/***/ }),
+/* 21 */
+/*!***********************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/config/dataBase.js ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;} // 操作数据库 CRUD 的类
+var db = wx.cloud.database();var
+
+Dbcrud = /*#__PURE__*/function () {"use strict";
+  function Dbcrud(gather) {_classCallCheck(this, Dbcrud);
+    this.gather = gather;
+  }
+
+  // get请求数据库
+  _createClass(Dbcrud, [{ key: "pullGet", value: function pullGet() {var _this = this;
+      return new Promise(function (resolve, reject) {
+        var base = db.collection(_this.gather);
+        base.get().
+        then(function (res) {
+          resolve(res);
+        }).
+        catch(function (error) {
+          reject(error);
+        });
+      });
+    } }]);return Dbcrud;}();
+
+
+module.exports = Dbcrud;
+
+/***/ }),
+/* 22 */
+/*!********************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/config/total.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;} // 计算确诊、治愈、死亡   每一个的总和的类
+var _console = console,log = _console.log;var
+Total = /*#__PURE__*/function () {"use strict";
+  function Total(type) {_classCallCheck(this, Total);
+    this.type = type;
+  }
+
+  // uniapp类里的静态方法 static 不生效
+  _createClass(Total, [{ key: "sum", value: function sum() {var _this = this;
+      return new Promise(function (resolve, reject) {
+        // 抽出 data 和时间重组一个数组
+        var typearr = _this.type.map(function (item) {
+          var data = item.data;
+          var times = item.time;
+          return { data: data, times: times };
+        });
+        log('重组的数组');
+        log(typearr);
+
+        // 取出键值对的 value值
+        // 注意：在某些机型上小程序并不支持es7的语法，另外在微信小程序pc端也不支持
+        // let objList = typearr.map((item) => {
+        // 	// 取出对象的value值用es7的 Object.values()
+        // 	return Object.values(item.data)
+        // })
+        // log('value值')
+        // log(objList)
+
+        // 换用es5的forEach和遍历对象的for...in
+        var arrList = [];
+        typearr.forEach(function (item) {
+          for (var key in item.data) {
+            arrList.push(item.data[key]);
+          }
+        });
+        // log(arrList)
+
+        // 合并返回的value值push进一个新的数组
+        // let arrList = []
+        // objList.forEach((item) => {
+        // 	arrList.push(...item)
+        // })
+        // log('合并的value值')
+        // log(arrList)
+
+        // 计算 arrList 里的数字总和
+        var sumdata = arrList.reduce(function (prev, cur) {
+          return prev + cur;
+        });
+        // 法二
+        // let numdata = 0
+        // arrList.forEach((item) => {
+        // 	numdata += item
+        // })
+        // log(numdata)
+        // log('新增总数')
+        // log(sumdata)
+
+
+        // 取出上传时间
+        var startTime = typearr.map(function (item) {
+          var times = item.times;
+          return times;
+        });
+        var result = { startTime: startTime, sumdata: sumdata };
+        resolve(result);
+      });
+    } }]);return Total;}();
+
+
+module.exports = Total;
+
+/***/ }),
+/* 23 */,
+/* 24 */,
+/* 25 */,
+/* 26 */,
+/* 27 */,
+/* 28 */,
+/* 29 */,
+/* 30 */
 /*!************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/components/u-charts/u-charts.js ***!
   \************************************************************************************/
@@ -13396,8 +14380,7 @@ if ( true && typeof module.exports === "object") {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-
-/***/ 25:
+/* 31 */
 /*!**************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/config/provinces.json ***!
   \**************************************************************************/
@@ -13407,39 +14390,14 @@ if ( true && typeof module.exports === "object") {
 module.exports = {"type":"FeatureCollection","features":[{"type":"Feature","properties":{"adcode":440100,"name":"广州市","center":[113.280637,23.125178],"centroid":[113.544371,23.32925],"childrenNum":11,"level":"city","parent":{"adcode":440000},"subFeatureIndex":10,"acroutes":[100000,440000]},"geometry":{"type":"MultiPolygon","coordinates":[[[[112.975184,23.463622],[112.993347,23.466845],[113.00469,23.462037],[113.018025,23.469065],[113.042932,23.474137],[113.055884,23.471971],[113.063854,23.482537],[113.075503,23.484228],[113.083933,23.494266],[113.108994,23.497964],[113.128689,23.512596],[113.15352,23.502823],[113.172066,23.512384],[113.192069,23.514761],[113.191149,23.523212],[113.211918,23.543914],[113.210155,23.552997],[113.200805,23.561815],[113.202262,23.576492],[113.214524,23.584253],[113.227015,23.585731],[113.227859,23.594441],[113.245868,23.588265],[113.24035,23.606212],[113.248474,23.601567],[113.2766,23.615977],[113.280049,23.608957],[113.290548,23.617085],[113.299438,23.637456],[113.289245,23.644368],[113.31101,23.643313],[113.32833,23.645371],[113.327947,23.655502],[113.334845,23.656399],[113.338447,23.665737],[113.347413,23.667215],[113.366343,23.710311],[113.372397,23.709731],[113.378375,23.731511],[113.397841,23.730562],[113.404278,23.723495],[113.438459,23.727134],[113.443823,23.715901],[113.464286,23.70799],[113.468731,23.691006],[113.481069,23.684043],[113.510268,23.682461],[113.527052,23.686153],[113.545445,23.696387],[113.546901,23.702558],[113.55878,23.700712],[113.568053,23.690215],[113.568053,23.679454],[113.587289,23.675234],[113.587212,23.669008],[113.597252,23.664946],[113.615721,23.680192],[113.61166,23.686206],[113.623845,23.694699],[113.622619,23.699446],[113.638176,23.704562],[113.628137,23.711682],[113.631662,23.727872],[113.63649,23.731985],[113.630742,23.738946],[113.636414,23.750229],[113.626144,23.767416],[113.615185,23.779804],[113.633731,23.797198],[113.640245,23.814274],[113.651664,23.820123],[113.666379,23.813694],[113.684312,23.812956],[113.687378,23.825709],[113.706384,23.815275],[113.720178,23.825129],[113.714814,23.834982],[113.718033,23.843887],[113.709756,23.856267],[113.713511,23.862484],[113.733667,23.855003],[113.742327,23.859165],[113.749071,23.854371],[113.758191,23.857479],[113.767081,23.871439],[113.775358,23.877918],[113.781105,23.896299],[113.791605,23.903882],[113.800265,23.902566],[113.807315,23.900407],[113.841496,23.918732],[113.851152,23.920312],[113.865177,23.928947],[113.879815,23.930369],[113.887478,23.923998],[113.892536,23.931685],[113.907787,23.924577],[113.93645,23.928737],[113.941201,23.923577],[113.952697,23.929632],[113.982126,23.929684],[113.984502,23.926157],[114.008413,23.933001],[114.017992,23.925261],[114.033856,23.91889],[114.031327,23.906305],[114.036232,23.901776],[114.04267,23.889874],[114.041827,23.871491],[114.047728,23.867488],[114.050487,23.85474],[114.057767,23.846784],[114.052249,23.830029],[114.040294,23.824444],[114.035312,23.813378],[114.047728,23.803312],[114.037228,23.793509],[114.056311,23.784021],[114.05999,23.775851],[114.038454,23.771212],[114.027419,23.760141],[114.02489,23.752549],[114.018222,23.76283],[114.009945,23.762988],[114.017686,23.778276],[114.013087,23.777959],[113.998756,23.762988],[113.976071,23.757716],[113.972853,23.739262],[113.96105,23.738207],[113.955916,23.732671],[113.940282,23.738155],[113.93645,23.732143],[113.920049,23.729454],[113.912386,23.716534],[113.900967,23.715426],[113.897595,23.700184],[113.881884,23.685151],[113.847857,23.679348],[113.839963,23.655449],[113.818811,23.656188],[113.827778,23.648009],[113.825555,23.639883],[113.816742,23.63582],[113.817432,23.623471],[113.832223,23.624263],[113.834215,23.61756],[113.843565,23.617877],[113.859582,23.60996],[113.858356,23.593491],[113.864027,23.587368],[113.852838,23.570579],[113.862495,23.566303],[113.871384,23.541327],[113.888168,23.535095],[113.89315,23.520254],[113.906408,23.511856],[113.911543,23.504144],[113.923115,23.503088],[113.929936,23.494213],[113.946643,23.492522],[113.940895,23.483594],[113.931162,23.483066],[113.938749,23.476726],[113.96105,23.480371],[113.974156,23.478839],[113.981743,23.472129],[113.974462,23.46489],[113.955456,23.466053],[113.952774,23.442907],[113.960054,23.43276],[113.975382,23.429378],[113.98795,23.431439],[113.984195,23.421238],[113.986801,23.405591],[114.000442,23.39338],[113.995997,23.386771],[113.982049,23.379369],[113.990556,23.354833],[114.000902,23.346636],[113.993928,23.333149],[113.984195,23.330505],[113.996151,23.309346],[113.996687,23.297443],[113.978217,23.30104],[113.977451,23.304849],[113.958445,23.314953],[113.958905,23.33262],[113.939285,23.342934],[113.927483,23.339972],[113.895985,23.34505],[113.889394,23.334154],[113.894989,23.314689],[113.888475,23.290512],[113.890314,23.282681],[113.877209,23.264213],[113.895142,23.253523],[113.890084,23.242144],[113.903802,23.212554],[113.893993,23.21266],[113.8838,23.191694],[113.889011,23.178616],[113.902116,23.177186],[113.895679,23.164529],[113.874757,23.165377],[113.858739,23.157221],[113.849849,23.148853],[113.844715,23.125599],[113.841113,23.116169],[113.814673,23.127771],[113.791298,23.127665],[113.777427,23.131108],[113.754052,23.129572],[113.738572,23.141331],[113.71696,23.138895],[113.687837,23.119772],[113.670671,23.116434],[113.662011,23.111454],[113.661244,23.117971],[113.651281,23.119295],[113.642698,23.113467],[113.640245,23.103878],[113.610433,23.103772],[113.60139,23.0954],[113.586446,23.08777],[113.556327,23.081252],[113.54897,23.076006],[113.543759,23.06228],[113.531957,23.050938],[113.522913,23.037262],[113.52299,23.011338],[113.529198,22.982599],[113.541766,22.959369],[113.550503,22.936189],[113.564298,22.906903],[113.575104,22.888331],[113.571195,22.853143],[113.58407,22.831325],[113.612119,22.802281],[113.648139,22.761759],[113.678181,22.726113],[113.685308,22.717719],[113.716883,22.645172],[113.740487,22.534284],[113.728149,22.521993],[113.692052,22.515129],[113.651588,22.515715],[113.639326,22.548276],[113.62078,22.579554],[113.599628,22.594393],[113.589971,22.59519],[113.578552,22.604603],[113.561615,22.607528],[113.536861,22.647511],[113.533106,22.656388],[113.540693,22.666222],[113.523373,22.679297],[113.491875,22.699811],[113.464822,22.72096],[113.467964,22.728504],[113.447808,22.735836],[113.42612,22.738014],[113.412172,22.742849],[113.365116,22.772595],[113.356533,22.792989],[113.38305,22.799308],[113.393396,22.809822],[113.37439,22.822618],[113.364273,22.823467],[113.335994,22.817945],[113.312083,22.830369],[113.309631,22.851179],[113.296296,22.862485],[113.301354,22.866094],[113.300434,22.87708],[113.27706,22.894699],[113.28595,22.901438],[113.282424,22.927383],[113.298212,22.934014],[113.285183,22.951095],[113.267557,22.958786],[113.251923,22.970348],[113.250007,23.009058],[113.25836,23.013989],[113.254912,23.044842],[113.225713,23.041874],[113.211688,23.043305],[113.195747,23.056185],[113.184865,23.05963],[113.177201,23.076695],[113.193678,23.083902],[113.208776,23.083531],[113.215826,23.100646],[113.208163,23.099692],[113.203718,23.121891],[113.209695,23.121838],[113.211535,23.142603],[113.191992,23.14345],[113.186857,23.14827],[113.1877,23.159127],[113.209465,23.17708],[113.209006,23.192171],[113.204867,23.201172],[113.191072,23.214937],[113.177508,23.220866],[113.176511,23.236587],[113.182029,23.251459],[113.177738,23.271304],[113.160877,23.286649],[113.150608,23.289983],[113.150838,23.297972],[113.128,23.31453],[113.124704,23.307653],[113.105775,23.302733],[113.11022,23.295961],[113.105545,23.289718],[113.090524,23.28993],[113.086156,23.285274],[113.072284,23.284268],[113.081941,23.261726],[113.079795,23.250083],[113.070215,23.248813],[113.053508,23.253418],[113.044925,23.2522],[113.052742,23.26342],[113.051439,23.278395],[113.042549,23.283422],[113.032509,23.300881],[113.037567,23.320084],[113.023466,23.324898],[113.027604,23.33352],[113.043392,23.351131],[113.034808,23.357372],[113.018331,23.341347],[113.012583,23.352612],[112.989822,23.354728],[112.980626,23.380268],[112.988366,23.390102],[112.990588,23.402631],[113.001088,23.406332],[112.988673,23.419811],[112.982771,23.434451],[112.989132,23.443277],[112.978633,23.441586],[112.974188,23.434081],[112.96024,23.425995],[112.961926,23.44444],[112.972962,23.450042],[112.975184,23.463622]]]]}},{"type":"Feature","properties":{"adcode":440200,"name":"韶关市","center":[113.591544,24.801322],"centroid":[113.779323,24.81941],"childrenNum":10,"level":"city","parent":{"adcode":440000},"subFeatureIndex":1,"acroutes":[100000,440000]},"geometry":{"type":"MultiPolygon","coordinates":[[[[113.800265,23.902566],[113.799345,23.923524],[113.792294,23.931527],[113.775358,23.938424],[113.774285,23.952691],[113.766468,23.96085],[113.744703,23.95906],[113.739415,23.969588],[113.730448,23.974641],[113.732364,23.981114],[113.718646,23.993008],[113.728149,23.997166],[113.747078,24.023212],[113.753592,24.026842],[113.763555,24.02137],[113.772982,24.026947],[113.784171,24.022317],[113.790608,24.025106],[113.790379,24.034471],[113.803637,24.053566],[113.813063,24.052567],[113.83115,24.063507],[113.828467,24.069608],[113.837434,24.072764],[113.845711,24.086806],[113.836821,24.088331],[113.836668,24.098637],[113.842415,24.104053],[113.836974,24.111729],[113.839273,24.119931],[113.850999,24.124978],[113.853911,24.132811],[113.86464,24.133021],[113.870465,24.141169],[113.862265,24.147319],[113.857053,24.16151],[113.880045,24.174123],[113.901043,24.188521],[113.909167,24.184318],[113.930242,24.188416],[113.930319,24.19593],[113.922119,24.19304],[113.921199,24.200974],[113.896522,24.210326],[113.890391,24.229763],[113.890774,24.241476],[113.88311,24.245415],[113.870541,24.242264],[113.872074,24.253976],[113.862878,24.259018],[113.855827,24.252926],[113.84004,24.265109],[113.850003,24.274561],[113.844715,24.279707],[113.844791,24.304541],[113.850462,24.318872],[113.8405,24.336246],[113.831303,24.33656],[113.817048,24.34459],[113.818581,24.3522],[113.800955,24.377334],[113.805553,24.384364],[113.803867,24.401781],[113.77827,24.410909],[113.765318,24.417727],[113.762866,24.43299],[113.753439,24.437185],[113.726999,24.437028],[113.723934,24.43493],[113.722248,24.414633],[113.709909,24.412377],[113.686381,24.437709],[113.683163,24.454175],[113.666072,24.467493],[113.656799,24.468227],[113.643234,24.477717],[113.63718,24.486471],[113.625761,24.491923],[113.609667,24.489983],[113.596792,24.500886],[113.599628,24.512994],[113.589665,24.515248],[113.579548,24.50052],[113.57564,24.509115],[113.552572,24.511055],[113.540463,24.506233],[113.531343,24.489826],[113.530271,24.479551],[113.518852,24.469852],[113.507816,24.484007],[113.499309,24.473785],[113.489269,24.471006],[113.478847,24.477769],[113.467428,24.461726],[113.440988,24.453703],[113.419223,24.459943],[113.412172,24.472526],[113.415544,24.485266],[113.379754,24.485213],[113.37416,24.49402],[113.362051,24.47908],[113.350632,24.472159],[113.331243,24.472579],[113.31944,24.465291],[113.294993,24.457164],[113.272155,24.466969],[113.270392,24.47672],[113.261809,24.482225],[113.252766,24.497794],[113.25108,24.510216],[113.244642,24.502144],[113.235829,24.505866],[113.230158,24.498475],[113.216516,24.495697],[113.20617,24.476458],[113.19705,24.474676],[113.186781,24.480705],[113.174979,24.475882],[113.16195,24.479027],[113.153367,24.467703],[113.151451,24.478713],[113.13712,24.482907],[113.114128,24.502983],[113.096808,24.496431],[113.087305,24.471583],[113.063701,24.468804],[113.047377,24.475515],[113.025612,24.493863],[113.02063,24.513675],[112.999708,24.528716],[112.991048,24.544751],[112.981928,24.542917],[112.96936,24.568118],[112.96139,24.570266],[112.964378,24.586138],[112.950507,24.59499],[112.926366,24.596457],[112.91717,24.60049],[112.902072,24.595671],[112.8987,24.600542],[112.887971,24.595304],[112.884599,24.616358],[112.89778,24.632277],[112.896401,24.650602],[112.914487,24.662695],[112.900616,24.713776],[112.930351,24.718695],[112.938781,24.73821],[112.933647,24.755369],[112.940161,24.757514],[112.954109,24.782201],[112.95112,24.788476],[112.960087,24.800974],[112.95158,24.815771],[112.95978,24.824241],[112.979246,24.832553],[112.998942,24.850483],[113.014729,24.851528],[113.019557,24.855971],[113.022163,24.870866],[113.010974,24.882781],[113.009901,24.896889],[113.004766,24.900129],[113.00515,24.914078],[112.994804,24.927347],[112.991661,24.937533],[113.011894,24.946099],[113.002774,24.957118],[113.008522,24.961975],[113.009978,24.97738],[113.002084,24.991059],[112.990512,24.995393],[112.992045,25.017944],[112.97848,25.026504],[112.979706,25.034125],[113.002391,25.058235],[113.002007,25.071123],[113.018408,25.083122],[113.004537,25.089174],[112.999632,25.10305],[112.991125,25.109466],[112.986833,25.119219],[112.972809,25.132101],[112.96798,25.141644],[112.974341,25.168235],[112.991585,25.176785],[113.008598,25.190129],[113.030517,25.194508],[113.034502,25.201388],[113.02975,25.210508],[113.017718,25.211186],[113.006682,25.231509],[112.992581,25.247193],[112.979936,25.245056],[112.972885,25.251152],[112.958401,25.254382],[112.951886,25.245734],[112.944223,25.249485],[112.92399,25.248651],[112.910732,25.245161],[112.904524,25.238439],[112.88092,25.249641],[112.868351,25.248808],[112.865899,25.2598],[112.873946,25.274282],[112.866436,25.276574],[112.856396,25.291574],[112.855476,25.313654],[112.858772,25.320215],[112.851798,25.33344],[112.857392,25.336824],[112.868735,25.327817],[112.877701,25.333752],[112.894868,25.337605],[112.900616,25.311363],[112.913184,25.299907],[112.927822,25.299907],[112.931807,25.322819],[112.945066,25.326359],[112.95112,25.337449],[112.964685,25.342134],[112.968134,25.349839],[112.987983,25.353795],[112.995417,25.348954],[113.009211,25.352858],[113.023696,25.345934],[113.02975,25.361239],[113.041629,25.366027],[113.06462,25.381797],[113.080178,25.383358],[113.080638,25.390956],[113.088761,25.396524],[113.090447,25.406775],[113.096885,25.410729],[113.092363,25.417493],[113.114435,25.420562],[113.131525,25.414735],[113.126237,25.438406],[113.118497,25.44548],[113.127923,25.449693],[113.122329,25.455727],[113.134591,25.467688],[113.149995,25.468],[113.151987,25.492232],[113.169307,25.488021],[113.177048,25.471589],[113.200805,25.479389],[113.210692,25.496704],[113.226172,25.509701],[113.243263,25.515628],[113.249087,25.51412],[113.260813,25.49946],[113.269396,25.505282],[113.282654,25.494208],[113.291774,25.500915],[113.288785,25.50939],[113.29346,25.516771],[113.303347,25.515836],[113.296832,25.508402],[113.311393,25.490413],[113.309171,25.481001],[113.315992,25.467532],[113.313923,25.442931],[113.32971,25.450838],[113.340056,25.449901],[113.351705,25.437574],[113.359752,25.438406],[113.366956,25.431175],[113.373317,25.402612],[113.389334,25.403653],[113.393626,25.397565],[113.407037,25.401415],[113.424127,25.392673],[113.427729,25.373262],[113.442291,25.361291],[113.449878,25.359573],[113.462446,25.369827],[113.470187,25.365663],[113.480073,25.375187],[113.504137,25.374979],[113.518392,25.370555],[113.515096,25.360666],[113.524293,25.353587],[113.536095,25.368525],[113.544295,25.3666],[113.554565,25.351869],[113.581464,25.342707],[113.583304,25.331878],[113.579778,25.316622],[113.585986,25.307353],[113.61074,25.327036],[113.620473,25.325682],[113.631202,25.330576],[113.657489,25.329119],[113.663697,25.337709],[113.679101,25.334481],[113.685385,25.341249],[113.687148,25.352077],[113.707916,25.352598],[113.706537,25.360874],[113.725237,25.358636],[113.73451,25.348902],[113.744013,25.363945],[113.754129,25.361186],[113.758421,25.3438],[113.764168,25.333596],[113.758114,25.330004],[113.780186,25.334065],[113.814979,25.328702],[113.823179,25.33193],[113.832836,25.343904],[113.833449,25.353951],[113.839733,25.363477],[113.860962,25.369306],[113.876902,25.38034],[113.883263,25.395327],[113.881807,25.406931],[113.892077,25.411874],[113.88449,25.420302],[113.886865,25.436637],[113.913382,25.442775],[113.926564,25.442151],[113.93507,25.437522],[113.952544,25.443816],[113.961894,25.452554],[113.997913,25.444232],[114.002971,25.43284],[113.983275,25.415308],[113.98772,25.403497],[114.00573,25.396732],[114.010788,25.386429],[114.02305,25.384659],[114.0406,25.391216],[114.045122,25.384035],[114.024353,25.37399],[114.047881,25.367276],[114.041367,25.360666],[114.051406,25.34885],[114.049107,25.341874],[114.036768,25.342707],[114.029335,25.328338],[114.035466,25.320007],[114.056158,25.311884],[114.037228,25.308291],[114.027649,25.301833],[114.025503,25.28897],[114.01462,25.280532],[114.022131,25.269594],[114.031404,25.263655],[114.029105,25.254226],[114.039911,25.250735],[114.055928,25.277667],[114.064588,25.281105],[114.06865,25.273709],[114.076313,25.278501],[114.083517,25.275532],[114.10375,25.294438],[114.115629,25.301885],[114.126511,25.300531],[114.131339,25.308447],[114.144751,25.310634],[114.147203,25.305323],[114.158546,25.313602],[114.168508,25.312509],[114.173643,25.305062],[114.194105,25.317351],[114.204988,25.31027],[114.204681,25.299646],[114.215871,25.30074],[114.227749,25.295376],[114.236026,25.300115],[114.257025,25.29272],[114.265915,25.293813],[114.270973,25.302146],[114.287297,25.299698],[114.292891,25.289178],[114.302854,25.290845],[114.295727,25.299802],[114.312357,25.311832],[114.30477,25.314696],[114.306226,25.334117],[114.31481,25.338594],[114.338184,25.334065],[114.357344,25.326776],[114.372824,25.325422],[114.382941,25.317143],[114.387692,25.323548],[114.400874,25.327817],[114.403096,25.334273],[114.417581,25.335054],[114.430149,25.343852],[114.429919,25.349943],[114.438809,25.376072],[114.448006,25.386533],[114.458658,25.387834],[114.462644,25.381485],[114.477741,25.371544],[114.496977,25.377634],[114.508856,25.384659],[114.505944,25.39871],[114.520275,25.403289],[114.531311,25.414215],[114.540431,25.417025],[114.556755,25.406359],[114.579056,25.397617],[114.573385,25.395015],[114.573002,25.384503],[114.580972,25.384035],[114.580359,25.393506],[114.586183,25.3959],[114.599748,25.385856],[114.599518,25.359417],[114.61155,25.358272],[114.627568,25.330628],[114.636458,25.324537],[114.657073,25.328181],[114.664814,25.326776],[114.674393,25.317195],[114.685736,25.313706],[114.69225,25.322142],[114.702903,25.314123],[114.714398,25.315373],[114.713019,25.306208],[114.722828,25.302146],[114.723978,25.28397],[114.73463,25.283293],[114.742907,25.274542],[114.743597,25.24813],[114.749345,25.242555],[114.738386,25.240107],[114.738309,25.231978],[114.748425,25.235157],[114.740685,25.226246],[114.726277,25.233073],[114.712712,25.221817],[114.702213,25.221192],[114.693936,25.213635],[114.695162,25.195185],[114.680141,25.1931],[114.690334,25.179756],[114.685736,25.173188],[114.702596,25.163178],[114.724821,25.162813],[114.735014,25.155826],[114.732101,25.142478],[114.737696,25.130432],[114.735627,25.122035],[114.716084,25.114577],[114.712022,25.110039],[114.693936,25.104406],[114.679681,25.106806],[114.66512,25.101224],[114.665733,25.091104],[114.654238,25.080618],[114.640136,25.073888],[114.608715,25.075871],[114.604653,25.083696],[114.598369,25.071123],[114.584957,25.078688],[114.561583,25.077592],[114.546332,25.053382],[114.541121,25.049729],[114.539664,25.031619],[114.53269,25.022851],[114.516903,25.024573],[114.511385,25.006617],[114.506174,25.000091],[114.484639,25.001762],[114.479887,25.005781],[114.456666,24.99722],[114.456666,24.978528],[114.442181,24.972315],[114.423635,24.972576],[114.425551,24.959259],[114.395892,24.951112],[114.396199,24.937324],[114.402177,24.928444],[114.400031,24.919511],[114.390758,24.913138],[114.401027,24.902637],[114.404859,24.892605],[114.40302,24.877555],[114.387385,24.863341],[114.377882,24.860832],[114.356577,24.828999],[114.357497,24.818699],[114.349297,24.816922],[114.342399,24.807353],[114.344085,24.789574],[114.333892,24.7799],[114.341863,24.763686],[114.335808,24.749092],[114.319638,24.742291],[114.311744,24.734077],[114.293198,24.732037],[114.284385,24.72738],[114.279556,24.70802],[114.272506,24.700432],[114.257485,24.697292],[114.230815,24.697763],[114.210353,24.6885],[114.191576,24.694204],[114.169045,24.689651],[114.169811,24.682585],[114.189814,24.657983],[114.181537,24.653324],[114.175866,24.658978],[114.174563,24.645576],[114.193799,24.652643],[114.207134,24.653952],[114.208743,24.648665],[114.231581,24.640445],[114.242847,24.645419],[114.258481,24.641544],[114.265992,24.630915],[114.27902,24.631596],[114.281932,24.621019],[114.289749,24.618767],[114.291052,24.600175],[114.299942,24.58839],[114.301015,24.579067],[114.308142,24.574143],[114.310518,24.558583],[114.293275,24.551982],[114.288906,24.537991],[114.273732,24.533695],[114.280169,24.523109],[114.280399,24.511526],[114.286607,24.500572],[114.310595,24.480757],[114.306839,24.472998],[114.292968,24.468856],[114.283465,24.453965],[114.257868,24.435245],[114.242004,24.426014],[114.245683,24.411328],[114.254879,24.400155],[114.249898,24.386935],[114.249208,24.362695],[114.278637,24.364951],[114.293581,24.352672],[114.292508,24.346952],[114.280859,24.337348],[114.272966,24.324856],[114.280553,24.313098],[114.279326,24.303176],[114.263692,24.27829],[114.266451,24.272776],[114.254649,24.266055],[114.272889,24.257495],[114.254802,24.256707],[114.263156,24.246676],[114.274958,24.224195],[114.274192,24.212742],[114.290899,24.207594],[114.298026,24.195142],[114.289289,24.1819],[114.292891,24.175069],[114.306533,24.165399],[114.316419,24.147319],[114.33029,24.137279],[114.329831,24.126871],[114.337418,24.125294],[114.340713,24.135807],[114.352209,24.143219],[114.365161,24.132233],[114.378879,24.139172],[114.393517,24.140959],[114.419956,24.139329],[114.422179,24.131181],[114.433215,24.133337],[114.439499,24.121982],[114.446856,24.121245],[114.46387,24.110836],[114.479044,24.112939],[114.482953,24.118827],[114.474063,24.135229],[114.463946,24.14017],[114.469311,24.144376],[114.469848,24.162141],[114.46272,24.161931],[114.460574,24.169604],[114.470537,24.171811],[114.474216,24.16624],[114.48119,24.172284],[114.491613,24.192357],[114.511155,24.205335],[114.512458,24.210904],[114.548324,24.230603],[114.556065,24.245888],[114.566028,24.233019],[114.577293,24.227241],[114.591318,24.225981],[114.597602,24.21248],[114.590935,24.203653],[114.590782,24.187838],[114.600055,24.174911],[114.594077,24.164138],[114.568327,24.159303],[114.558134,24.15063],[114.565568,24.136175],[114.554226,24.124295],[114.546715,24.130393],[114.535833,24.124347],[114.533993,24.138856],[114.527939,24.135807],[114.522957,24.12419],[114.509469,24.106682],[114.495828,24.118617],[114.489697,24.114043],[114.493222,24.106787],[114.481267,24.086595],[114.46364,24.07592],[114.44586,24.07066],[114.437813,24.062192],[114.436587,24.048569],[114.440725,24.033208],[114.425628,24.032998],[114.420416,24.019582],[114.412523,24.027421],[114.398038,24.026],[114.399494,24.018003],[114.389685,24.012741],[114.385546,24.003901],[114.391984,23.991693],[114.385393,23.994482],[114.382941,23.981851],[114.389685,23.97043],[114.384856,23.967798],[114.386696,23.95627],[114.378036,23.942794],[114.382481,23.932159],[114.370449,23.92742],[114.36769,23.912519],[114.360486,23.910412],[114.362632,23.901091],[114.34991,23.887925],[114.331517,23.900512],[114.32163,23.894403],[114.303161,23.891454],[114.28814,23.90541],[114.279633,23.901091],[114.268367,23.902829],[114.263156,23.911044],[114.248671,23.906516],[114.236716,23.910676],[114.247905,23.929737],[114.254649,23.934686],[114.251047,23.940477],[114.271739,23.948479],[114.271816,23.959482],[114.263309,23.960218],[114.258711,23.952744],[114.244303,23.948269],[114.238479,23.941899],[114.21702,23.942636],[114.213341,23.946163],[114.201999,23.941267],[114.19196,23.9449],[114.186518,23.95627],[114.174333,23.959429],[114.16368,23.953586],[114.158162,23.939846],[114.142835,23.940425],[114.119844,23.936002],[114.117008,23.929737],[114.075624,23.924366],[114.074398,23.930895],[114.056771,23.935844],[114.04129,23.906937],[114.036232,23.901776],[114.031327,23.906305],[114.033856,23.91889],[114.017992,23.925261],[114.008413,23.933001],[113.984502,23.926157],[113.982126,23.929684],[113.952697,23.929632],[113.941201,23.923577],[113.93645,23.928737],[113.907787,23.924577],[113.892536,23.931685],[113.887478,23.923998],[113.879815,23.930369],[113.865177,23.928947],[113.851152,23.920312],[113.841496,23.918732],[113.807315,23.900407],[113.800265,23.902566]]]]}},{"type":"Feature","properties":{"adcode":440300,"name":"深圳市","center":[114.085947,22.547],"centroid":[114.14318,22.643377],"childrenNum":9,"level":"city","parent":{"adcode":440000},"subFeatureIndex":2,"acroutes":[100000,440000]},"geometry":{"type":"MultiPolygon","coordinates":[[[[113.751447,22.715381],[113.762406,22.736899],[113.790838,22.75342],[113.791835,22.767655],[113.801874,22.777109],[113.802257,22.784863],[113.811071,22.782473],[113.813446,22.790439],[113.824942,22.792935],[113.837204,22.800901],[113.838737,22.819591],[113.834675,22.822193],[113.841496,22.833979],[113.851305,22.837483],[113.857053,22.832599],[113.872611,22.837271],[113.877669,22.85447],[113.883263,22.850542],[113.887325,22.858504],[113.89951,22.855478],[113.893916,22.846189],[113.904875,22.840137],[113.910929,22.829997],[113.937829,22.832705],[113.954613,22.821025],[113.954996,22.815078],[113.972393,22.812476],[113.978371,22.806529],[113.974999,22.798458],[113.984578,22.803662],[113.990863,22.800211],[113.995308,22.771267],[114.002971,22.763459],[114.017916,22.760219],[114.035236,22.766752],[114.039911,22.764309],[114.049797,22.771161],[114.049414,22.756448],[114.064588,22.755916],[114.074781,22.740883],[114.084437,22.750551],[114.098462,22.747205],[114.107198,22.722979],[114.117621,22.723244],[114.121989,22.716231],[114.144674,22.714159],[114.145057,22.701193],[114.151801,22.690139],[114.167436,22.680679],[114.16391,22.665372],[114.15548,22.668933],[114.172494,22.654368],[114.187515,22.666382],[114.187515,22.673557],[114.195332,22.680095],[114.19947,22.702043],[114.196711,22.710227],[114.208053,22.71469],[114.208513,22.729248],[114.215641,22.73557],[114.203149,22.75512],[114.201079,22.764787],[114.182073,22.765265],[114.187974,22.770364],[114.180847,22.775728],[114.189967,22.785713],[114.20721,22.789802],[114.215641,22.807751],[114.229205,22.81253],[114.234953,22.792989],[114.245529,22.790652],[114.250817,22.781677],[114.26147,22.781783],[114.282852,22.802388],[114.284844,22.808282],[114.294347,22.803397],[114.314503,22.800157],[114.318565,22.806583],[114.33052,22.809291],[114.353128,22.806636],[114.351136,22.789696],[114.342706,22.783642],[114.354125,22.778172],[114.355964,22.764893],[114.36562,22.766062],[114.386236,22.759635],[114.394819,22.759794],[114.396352,22.777322],[114.404706,22.781305],[114.418117,22.766593],[114.42057,22.753898],[114.414055,22.752251],[114.413902,22.736261],[114.403403,22.722926],[114.409227,22.713574],[114.42057,22.713999],[114.426394,22.699918],[114.442028,22.697579],[114.445324,22.68897],[114.441338,22.682167],[114.428157,22.676746],[114.431912,22.660907],[114.449692,22.665319],[114.453447,22.669943],[114.478278,22.661864],[114.481956,22.668136],[114.505867,22.668455],[114.514451,22.660747],[114.515217,22.655485],[114.553229,22.656229],[114.580282,22.661491],[114.60289,22.655272],[114.60312,22.638739],[114.58672,22.612845],[114.572312,22.602689],[114.559054,22.583277],[114.559743,22.573172],[114.568097,22.560778],[114.589632,22.549766],[114.614539,22.545191],[114.627031,22.519918],[114.627798,22.502996],[114.611397,22.482027],[114.585417,22.473405],[114.549244,22.46574],[114.539281,22.449237],[114.52541,22.440559],[114.50694,22.438589],[114.48985,22.443647],[114.48027,22.45291],[114.474446,22.464515],[114.468162,22.491395],[114.471917,22.522206],[114.467625,22.53338],[114.434748,22.566576],[114.430686,22.583384],[114.422562,22.592744],[114.398345,22.602848],[114.381868,22.601519],[114.359489,22.591574],[114.346997,22.588702],[114.325309,22.588649],[114.311821,22.578597],[114.304847,22.568704],[114.292432,22.562959],[114.258864,22.55881],[114.232578,22.54003],[114.223304,22.552745],[114.201463,22.554341],[114.182686,22.552798],[114.182303,22.556788],[114.165596,22.558916],[114.157166,22.551947],[114.153488,22.539285],[114.135094,22.53886],[114.117238,22.526942],[114.114862,22.532795],[114.094093,22.533593],[114.084284,22.52508],[114.090338,22.520982],[114.081601,22.512415],[114.077003,22.515502],[114.064588,22.510553],[114.054702,22.49959],[114.030867,22.504274],[114.024047,22.509808],[113.976531,22.510606],[113.959135,22.504912],[113.946873,22.477343],[113.915758,22.455945],[113.89177,22.442635],[113.881731,22.446788],[113.870005,22.459565],[113.862801,22.475853],[113.859352,22.495652],[113.864027,22.515981],[113.856593,22.539605],[113.851152,22.542584],[113.834675,22.539552],[113.838354,22.559342],[113.832223,22.570246],[113.803407,22.593169],[113.782255,22.625713],[113.773288,22.643205],[113.753133,22.698536],[113.751447,22.715381]]],[[[113.819961,22.396362],[113.807315,22.40025],[113.801338,22.407386],[113.7867,22.413563],[113.798885,22.422509],[113.811224,22.420432],[113.824176,22.40435],[113.819961,22.396362]]],[[[113.844485,22.510234],[113.842569,22.515821],[113.8569,22.509595],[113.856823,22.503582],[113.844485,22.510234]]],[[[113.839657,22.498526],[113.844485,22.503369],[113.851995,22.49661],[113.847244,22.491927],[113.839657,22.498526]]]]}},{"type":"Feature","properties":{"adcode":440400,"name":"珠海市","center":[113.553986,22.224979],"centroid":[113.337286,22.160135],"childrenNum":3,"level":"city","parent":{"adcode":440000},"subFeatureIndex":3,"acroutes":[100000,440000]},"geometry":{"type":"MultiPolygon","coordinates":[[[[113.262652,22.392048],[113.273841,22.384751],[113.307178,22.346504],[113.32036,22.329561],[113.32128,22.312189],[113.336607,22.280105],[113.345114,22.258569],[113.352395,22.249133],[113.385272,22.230365],[113.390943,22.231858],[113.415774,22.202902],[113.430565,22.201302],[113.458384,22.213781],[113.462676,22.218847],[113.486357,22.227113],[113.478847,22.23831],[113.513027,22.249879],[113.514407,22.261555],[113.50475,22.266992],[113.496397,22.282237],[113.480456,22.303876],[113.470493,22.310377],[113.482985,22.318797],[113.493331,22.317998],[113.504137,22.324286],[113.494787,22.339684],[113.490342,22.34075],[113.493255,22.354069],[113.489193,22.365842],[113.491339,22.376922],[113.48697,22.390184],[113.495247,22.395403],[113.49586,22.407546],[113.508889,22.413403],[113.51433,22.408717],[113.537168,22.416332],[113.568743,22.411912],[113.585986,22.40041],[113.603766,22.403392],[113.608901,22.408824],[113.617791,22.436885],[113.624841,22.442955],[113.659098,22.441358],[113.669904,22.435607],[113.669368,22.416279],[113.649289,22.386243],[113.62806,22.349274],[113.604762,22.339897],[113.605299,22.329135],[113.616948,22.31885],[113.612809,22.308832],[113.595949,22.304249],[113.590124,22.29391],[113.595412,22.28245],[113.592194,22.268058],[113.599781,22.261128],[113.597175,22.234951],[113.589895,22.226793],[113.568819,22.22466],[113.558856,22.212395],[113.54943,22.213995],[113.538241,22.209409],[113.54077,22.199382],[113.534332,22.185622],[113.534562,22.1741],[113.544602,22.154095],[113.554641,22.142411],[113.554028,22.103884],[113.56583,22.091715],[113.565754,22.07266],[113.554488,22.069884],[113.530654,22.07362],[113.520308,22.069136],[113.503831,22.054722],[113.482679,22.054669],[113.459764,22.043724],[113.450567,22.032244],[113.448805,22.017079],[113.442214,22.009496],[113.410256,21.99091],[113.352165,21.974511],[113.33768,21.969009],[113.33017,21.961637],[113.328024,21.934442],[113.3199,21.909701],[113.300051,21.898958],[113.289399,21.883405],[113.26679,21.871645],[113.235216,21.887788],[113.218126,21.904998],[113.182106,21.952982],[113.159574,21.969009],[113.151451,21.979853],[113.147542,22.004689],[113.143097,22.011846],[113.10156,22.048262],[113.092057,22.065346],[113.087152,22.126137],[113.091903,22.136595],[113.097421,22.187702],[113.109453,22.204609],[113.106388,22.209355],[113.115584,22.215115],[113.120413,22.209622],[113.129686,22.218208],[113.158885,22.228712],[113.168541,22.238417],[113.176128,22.267792],[113.176281,22.280158],[113.185478,22.294762],[113.193065,22.358171],[113.183255,22.369837],[113.169154,22.377987],[113.1631,22.387947],[113.165399,22.40025],[113.181646,22.40238],[113.18839,22.394924],[113.192145,22.381662],[113.209389,22.388054],[113.212224,22.398599],[113.237285,22.391782],[113.24947,22.399344],[113.262652,22.392048]]],[[[114.051789,22.086324],[114.034546,22.091342],[114.026959,22.10319],[114.047651,22.108954],[114.056081,22.094277],[114.051789,22.086324]]],[[[114.231045,22.016332],[114.222615,22.018948],[114.227826,22.028827],[114.239781,22.035502],[114.267218,22.041268],[114.282852,22.049704],[114.302778,22.050505],[114.305537,22.060542],[114.32301,22.064172],[114.323623,22.056377],[114.308985,22.048636],[114.311361,22.041428],[114.299865,22.036142],[114.284231,22.036196],[114.266451,22.027599],[114.241238,22.023701],[114.231045,22.016332]]],[[[113.714584,22.007413],[113.705924,22.00784],[113.705694,22.016225],[113.695731,22.021565],[113.702628,22.029308],[113.723014,22.02872],[113.729988,22.016385],[113.714584,22.007413]]],[[[114.009945,21.853148],[114.010252,21.86368],[114.031557,21.873623],[114.016536,21.863145],[114.009945,21.853148]]],[[[113.824406,22.001271],[113.830767,21.996625],[113.842339,21.998868],[113.831763,21.98888],[113.825402,21.990536],[113.824406,22.001271]]],[[[113.815056,22.157136],[113.799575,22.166472],[113.808542,22.174207],[113.815056,22.157136]]],[[[113.999293,22.045273],[114.005424,22.045112],[114.001055,22.035929],[113.999293,22.045273]]],[[[113.765165,21.961958],[113.758191,21.965163],[113.755738,21.974672],[113.742403,21.987812],[113.750067,21.995129],[113.765855,21.992672],[113.772905,21.998761],[113.780109,21.989254],[113.778653,21.978357],[113.768154,21.972001],[113.765165,21.961958]]],[[[114.034469,21.886077],[114.042976,21.895431],[114.058687,21.902326],[114.063592,21.892384],[114.052862,21.893346],[114.04926,21.88271],[114.034469,21.886077]]],[[[113.722937,21.922152],[113.725083,21.932572],[113.71719,21.935244],[113.717956,21.951273],[113.727842,21.955119],[113.743093,21.950738],[113.751677,21.940747],[113.743476,21.928244],[113.722937,21.922152]]],[[[113.143251,21.831707],[113.138269,21.839193],[113.137043,21.868651],[113.144707,21.873516],[113.151221,21.864963],[113.167698,21.876563],[113.18088,21.862183],[113.191532,21.87234],[113.205787,21.871324],[113.203871,21.86122],[113.187624,21.848389],[113.179653,21.847373],[113.177431,21.854752],[113.159881,21.851864],[113.145856,21.838872],[113.143251,21.831707]]],[[[113.919436,22.036997],[113.922962,22.048583],[113.934687,22.043991],[113.937753,22.036249],[113.924111,22.032778],[113.919436,22.036997]]],[[[113.876979,22.117653],[113.88426,22.112583],[113.880581,22.10746],[113.869622,22.11301],[113.876979,22.117653]]],[[[113.828238,22.117919],[113.820727,22.120588],[113.816435,22.132327],[113.822413,22.136542],[113.818045,22.153295],[113.828544,22.156283],[113.83958,22.130993],[113.828238,22.117919]]],[[[114.18989,21.986423],[114.180847,21.988506],[114.178701,22.003034],[114.18192,22.010938],[114.217863,22.011098],[114.223841,22.007787],[114.220239,21.989842],[114.202689,21.991497],[114.18989,21.986423]]],[[[113.165399,21.953463],[113.172066,21.954745],[113.172373,21.941068],[113.165399,21.953463]]],[[[114.153947,21.975099],[114.144598,21.980441],[114.123675,21.97996],[114.124212,21.985248],[114.148276,21.99091],[114.152568,22.000524],[114.160308,21.995343],[114.17234,21.999776],[114.17395,21.992939],[114.167972,21.983111],[114.153947,21.975099]]],[[[113.138039,21.919213],[113.13597,21.925465],[113.144707,21.937007],[113.150455,21.937915],[113.158731,21.927015],[113.156202,21.919587],[113.141258,21.912854],[113.125164,21.896126],[113.127617,21.910395],[113.138039,21.919213]]],[[[113.665306,22.039239],[113.67136,22.045433],[113.675805,22.029361],[113.666532,22.02338],[113.670211,22.033419],[113.665306,22.039239]]],[[[113.683163,21.938824],[113.6814,21.949296],[113.692819,21.962973],[113.70669,21.957203],[113.709449,21.944968],[113.683163,21.938824]]],[[[113.901733,22.114184],[113.886405,22.111249],[113.890161,22.122775],[113.900047,22.123683],[113.901733,22.114184]]],[[[113.707687,22.143532],[113.722094,22.141878],[113.707993,22.134728],[113.707687,22.143532]]],[[[114.007493,22.026958],[114.013471,22.038225],[114.017992,22.028346],[114.007493,22.026958]]],[[[113.702705,22.101696],[113.711059,22.091769],[113.700866,22.094864],[113.702705,22.101696]]],[[[114.126664,21.961744],[114.139003,21.970345],[114.142835,21.965484],[114.126664,21.961744]]],[[[113.576866,22.212075],[113.590738,22.208982],[113.586523,22.201036],[113.576176,22.201036],[113.576866,22.212075]]]]}},{"type":"Feature","properties":{"adcode":440500,"name":"汕头市","center":[116.708463,23.37102],"centroid":[116.575091,23.322105],"childrenNum":7,"level":"city","parent":{"adcode":440000},"subFeatureIndex":4,"acroutes":[100000,440000]},"geometry":{"type":"MultiPolygon","coordinates":[[[[116.630108,23.429378],[116.650264,23.426312],[116.654403,23.431069],[116.668504,23.428638],[116.681915,23.438627],[116.68659,23.429483],[116.702608,23.438204],[116.698469,23.446977],[116.702378,23.456172],[116.7128,23.459236],[116.717935,23.471072],[116.71326,23.493103],[116.70483,23.517561],[116.70621,23.542541],[116.719391,23.552522],[116.718701,23.563135],[116.702991,23.574433],[116.714946,23.584728],[116.71303,23.597925],[116.738934,23.60162],[116.747211,23.59233],[116.755794,23.575648],[116.761389,23.573958],[116.772578,23.584147],[116.785223,23.579554],[116.794496,23.589532],[116.791737,23.59935],[116.795799,23.610488],[116.805379,23.606793],[116.815035,23.612493],[116.827527,23.611807],[116.831895,23.622152],[116.822545,23.627429],[116.821319,23.635609],[116.830976,23.645793],[116.83818,23.644632],[116.863087,23.632601],[116.86278,23.623471],[116.874812,23.616082],[116.891289,23.622785],[116.900639,23.61946],[116.900563,23.611965],[116.911062,23.602201],[116.909146,23.58193],[116.918342,23.561603],[116.91704,23.531662],[116.899183,23.518881],[116.88853,23.501609],[116.882399,23.455115],[116.873433,23.445074],[116.8719,23.414631],[116.858488,23.408023],[116.833045,23.36578],[116.806452,23.347958],[116.782771,23.313842],[116.786986,23.288554],[116.791814,23.278236],[116.791277,23.265801],[116.799861,23.244209],[116.816644,23.243044],[116.823542,23.230447],[116.814728,23.207631],[116.806758,23.20096],[116.788518,23.199266],[116.744682,23.215042],[116.724756,23.214407],[116.71487,23.20996],[116.701458,23.198207],[116.676014,23.168078],[116.665285,23.158174],[116.651874,23.152931],[116.597691,23.146522],[116.577765,23.141755],[116.566423,23.134339],[116.552245,23.114527],[116.552551,23.105891],[116.520287,23.094553],[116.509787,23.100646],[116.478826,23.104249],[116.453919,23.091161],[116.445488,23.093281],[116.446561,23.085863],[116.437212,23.080246],[116.426865,23.063393],[116.405484,23.053959],[116.395904,23.044524],[116.3805,23.039807],[116.370077,23.046856],[116.374982,23.050408],[116.368314,23.05751],[116.346703,23.05857],[116.340648,23.086498],[116.327543,23.09646],[116.312829,23.102712],[116.302866,23.096036],[116.29137,23.099162],[116.29183,23.110501],[116.261558,23.12295],[116.244545,23.140431],[116.254891,23.152507],[116.252362,23.176286],[116.262325,23.175174],[116.252745,23.191536],[116.26447,23.196724],[116.269222,23.204984],[116.261328,23.205301],[116.259719,23.216842],[116.26677,23.227906],[116.279415,23.226],[116.294129,23.239815],[116.298727,23.263526],[116.305548,23.272839],[116.302406,23.279348],[116.312752,23.286649],[116.308997,23.296067],[116.323558,23.302839],[116.328846,23.299559],[116.330839,23.316487],[116.319343,23.325903],[116.319573,23.332303],[116.329689,23.336376],[116.348848,23.335794],[116.354903,23.347324],[116.349768,23.358112],[116.350994,23.386559],[116.34517,23.399565],[116.34563,23.408182],[116.331758,23.424409],[116.322868,23.421767],[116.316891,23.442273],[116.319649,23.449196],[116.332371,23.443647],[116.350764,23.449619],[116.355363,23.472288],[116.377051,23.500658],[116.401115,23.500394],[116.408856,23.512596],[116.41491,23.510271],[116.415676,23.479737],[116.426482,23.468642],[116.435832,23.473344],[116.448707,23.488349],[116.465797,23.497647],[116.482581,23.500552],[116.492314,23.492839],[116.491164,23.478734],[116.482658,23.465472],[116.472005,23.455802],[116.465721,23.442485],[116.469553,23.437622],[116.512316,23.439472],[116.523429,23.437517],[116.544887,23.424356],[116.553088,23.412305],[116.561978,23.38693],[116.568339,23.378258],[116.569105,23.388093],[116.577995,23.40316],[116.586348,23.409609],[116.577075,23.412252],[116.58198,23.423194],[116.591177,23.426524],[116.58949,23.443383],[116.579834,23.447981],[116.580294,23.461139],[116.588111,23.461984],[116.58995,23.453265],[116.605431,23.443013],[116.614015,23.433289],[116.630108,23.429378]]],[[[117.14542,23.456119],[117.145113,23.450095],[117.154769,23.445074],[117.148562,23.437992],[117.136836,23.439895],[117.135993,23.422665],[117.145496,23.411829],[117.142967,23.400411],[117.124268,23.389732],[117.114075,23.399459],[117.102196,23.393644],[117.098747,23.405063],[117.079128,23.409027],[117.051155,23.400781],[117.029927,23.406332],[117.028854,23.414789],[116.999502,23.416216],[116.981722,23.414525],[116.964708,23.416375],[116.945089,23.422824],[116.944706,23.440001],[116.951067,23.44629],[116.961413,23.447241],[116.974441,23.457123],[116.98563,23.460822],[117.001341,23.457334],[117.016669,23.438785],[117.0228,23.43683],[117.051232,23.467849],[117.06449,23.475669],[117.079435,23.472922],[117.084569,23.461878],[117.093383,23.459395],[117.103882,23.464573],[117.109247,23.476831],[117.129479,23.48333],[117.132928,23.47271],[117.12764,23.458814],[117.141281,23.460029],[117.14542,23.456119]]]]}},{"type":"Feature","properties":{"adcode":440600,"name":"佛山市","center":[113.122717,23.028762],"centroid":[112.949778,23.004313],"childrenNum":5,"level":"city","parent":{"adcode":440000},"subFeatureIndex":5,"acroutes":[100000,440000]},"geometry":{"type":"MultiPolygon","coordinates":[[[[112.975184,23.463622],[112.972962,23.450042],[112.961926,23.44444],[112.96024,23.425995],[112.974188,23.434081],[112.978633,23.441586],[112.989132,23.443277],[112.982771,23.434451],[112.988673,23.419811],[113.001088,23.406332],[112.990588,23.402631],[112.988366,23.390102],[112.980626,23.380268],[112.989822,23.354728],[113.012583,23.352612],[113.018331,23.341347],[113.034808,23.357372],[113.043392,23.351131],[113.027604,23.33352],[113.023466,23.324898],[113.037567,23.320084],[113.032509,23.300881],[113.042549,23.283422],[113.051439,23.278395],[113.052742,23.26342],[113.044925,23.2522],[113.053508,23.253418],[113.070215,23.248813],[113.079795,23.250083],[113.081941,23.261726],[113.072284,23.284268],[113.086156,23.285274],[113.090524,23.28993],[113.105545,23.289718],[113.11022,23.295961],[113.105775,23.302733],[113.124704,23.307653],[113.128,23.31453],[113.150838,23.297972],[113.150608,23.289983],[113.160877,23.286649],[113.177738,23.271304],[113.182029,23.251459],[113.176511,23.236587],[113.177508,23.220866],[113.191072,23.214937],[113.204867,23.201172],[113.209006,23.192171],[113.209465,23.17708],[113.1877,23.159127],[113.186857,23.14827],[113.191992,23.14345],[113.211535,23.142603],[113.209695,23.121838],[113.203718,23.121891],[113.208163,23.099692],[113.215826,23.100646],[113.208776,23.083531],[113.193678,23.083902],[113.177201,23.076695],[113.184865,23.05963],[113.195747,23.056185],[113.211688,23.043305],[113.225713,23.041874],[113.254912,23.044842],[113.25836,23.013989],[113.250007,23.009058],[113.251923,22.970348],[113.267557,22.958786],[113.285183,22.951095],[113.298212,22.934014],[113.282424,22.927383],[113.28595,22.901438],[113.27706,22.894699],[113.300434,22.87708],[113.301354,22.866094],[113.296296,22.862485],[113.309631,22.851179],[113.312083,22.830369],[113.335994,22.817945],[113.364273,22.823467],[113.37439,22.822618],[113.393396,22.809822],[113.38305,22.799308],[113.356533,22.792989],[113.365116,22.772595],[113.358756,22.764893],[113.342432,22.758254],[113.329327,22.749011],[113.329097,22.741255],[113.301431,22.736261],[113.284877,22.738864],[113.270546,22.726485],[113.260889,22.730311],[113.254069,22.74083],[113.243033,22.745345],[113.236289,22.740777],[113.222264,22.712246],[113.204254,22.697314],[113.199273,22.682539],[113.201035,22.675949],[113.189386,22.673876],[113.17199,22.680679],[113.161414,22.673717],[113.113362,22.701618],[113.102096,22.698536],[113.087228,22.717878],[113.075273,22.777959],[113.059562,22.801219],[113.049523,22.807751],[113.025229,22.802335],[112.988596,22.800423],[112.980396,22.802759],[112.963995,22.826971],[112.923454,22.856274],[112.905904,22.851444],[112.900463,22.845286],[112.888967,22.845764],[112.883679,22.852187],[112.873639,22.848206],[112.867892,22.835412],[112.860305,22.833767],[112.851491,22.839978],[112.844594,22.835306],[112.850648,22.830157],[112.852947,22.809609],[112.843061,22.810671],[112.835857,22.803821],[112.819303,22.803025],[112.812099,22.791714],[112.822369,22.784545],[112.818001,22.765424],[112.811486,22.765318],[112.803899,22.752145],[112.810413,22.750498],[112.807961,22.72877],[112.778302,22.715221],[112.769489,22.701246],[112.755771,22.692425],[112.744505,22.696729],[112.741286,22.691362],[112.734082,22.698217],[112.717989,22.691681],[112.708256,22.71028],[112.69538,22.695613],[112.692392,22.705232],[112.706646,22.718303],[112.709022,22.729567],[112.698599,22.733764],[112.707796,22.74407],[112.702891,22.756395],[112.69653,22.75905],[112.680436,22.747045],[112.687563,22.737164],[112.701128,22.728398],[112.690322,22.726379],[112.683885,22.733923],[112.675914,22.727495],[112.682659,22.72165],[112.680053,22.713999],[112.665109,22.724041],[112.672083,22.713521],[112.664649,22.713043],[112.660127,22.727335],[112.646256,22.726698],[112.641044,22.712883],[112.625104,22.711077],[112.620965,22.70114],[112.616674,22.707995],[112.604182,22.706241],[112.587321,22.696357],[112.600273,22.688439],[112.595981,22.680786],[112.584716,22.677809],[112.583566,22.664362],[112.577359,22.656388],[112.546474,22.642248],[112.536281,22.648627],[112.540189,22.661864],[112.535591,22.67765],[112.554214,22.682061],[112.560038,22.695826],[112.549462,22.70098],[112.53835,22.71825],[112.523176,22.728079],[112.507542,22.723457],[112.500108,22.728664],[112.47704,22.715912],[112.47658,22.704009],[112.463168,22.711661],[112.448607,22.70842],[112.435809,22.680998],[112.426306,22.670847],[112.411898,22.671219],[112.401475,22.690565],[112.403085,22.700183],[112.410748,22.704488],[112.399023,22.726485],[112.392739,22.744442],[112.392509,22.76978],[112.413507,22.774454],[112.441403,22.787731],[112.443779,22.791661],[112.463398,22.789271],[112.482788,22.795006],[112.489992,22.809131],[112.500414,22.812476],[112.499035,22.826918],[112.510531,22.823042],[112.52034,22.82729],[112.527544,22.815131],[112.532449,22.822883],[112.557433,22.826122],[112.571841,22.833077],[112.57414,22.84741],[112.563104,22.854151],[112.557816,22.863387],[112.561648,22.873312],[112.587168,22.862962],[112.591613,22.869809],[112.604258,22.870552],[112.632384,22.877664],[112.635526,22.883714],[112.659284,22.887163],[112.676374,22.895442],[112.677524,22.902764],[112.685418,22.89836],[112.692468,22.901969],[112.68649,22.907593],[112.696683,22.917196],[112.690092,22.927277],[112.672696,22.940486],[112.686874,22.948443],[112.699749,22.94839],[112.708869,22.927754],[112.734082,22.940751],[112.74144,22.962923],[112.736228,22.963878],[112.734772,22.98122],[112.751556,22.99103],[112.759679,22.979735],[112.777076,22.996545],[112.787882,23.000999],[112.788572,23.001158],[112.789721,23.00137],[112.790564,23.00206],[112.788189,22.991879],[112.794856,22.990394],[112.820453,23.010225],[112.834094,23.014784],[112.819227,23.052051],[112.818767,23.072614],[112.805355,23.091426],[112.799684,23.109971],[112.798458,23.13863],[112.793936,23.150071],[112.775773,23.166754],[112.771941,23.191694],[112.772938,23.199742],[112.764431,23.202919],[112.766347,23.21356],[112.772861,23.215678],[112.769412,23.223354],[112.781521,23.225842],[112.786349,23.205937],[112.7934,23.208213],[112.795316,23.226318],[112.799837,23.228224],[112.806582,23.212395],[112.80091,23.200431],[112.810873,23.200378],[112.815012,23.217107],[112.831949,23.215678],[112.842984,23.224465],[112.8472,23.238651],[112.823595,23.24569],[112.844977,23.263314],[112.847966,23.275061],[112.857546,23.287231],[112.866895,23.293263],[112.87134,23.315588],[112.883296,23.347324],[112.863907,23.349122],[112.859691,23.364563],[112.838386,23.387352],[112.814092,23.391793],[112.805892,23.387511],[112.810107,23.371332],[112.806582,23.367419],[112.787269,23.371173],[112.785736,23.394173],[112.794166,23.407547],[112.796389,23.429113],[112.803669,23.435773],[112.802673,23.444229],[112.811793,23.462513],[112.831029,23.468114],[112.838156,23.484704],[112.845743,23.487134],[112.845284,23.502929],[112.850418,23.527596],[112.840762,23.536046],[112.831642,23.537577],[112.830493,23.545762],[112.827197,23.567042],[112.848502,23.566936],[112.86291,23.57343],[112.871647,23.570896],[112.893412,23.55268],[112.900309,23.566725],[112.91533,23.55231],[112.911192,23.541643],[112.893259,23.526434],[112.887741,23.517402],[112.903298,23.488613],[112.928435,23.483488],[112.925753,23.472393],[112.933493,23.47065],[112.930198,23.463094],[112.94223,23.460188],[112.957634,23.447558],[112.965835,23.452155],[112.966294,23.460663],[112.975184,23.463622]]],[[[112.789721,23.00137],[112.788572,23.001158],[112.787882,23.000999],[112.790564,23.00206],[112.789721,23.00137]]]]}},{"type":"Feature","properties":{"adcode":440700,"name":"江门市","center":[113.094942,22.590431],"centroid":[112.67645,22.284349],"childrenNum":7,"level":"city","parent":{"adcode":440000},"subFeatureIndex":6,"acroutes":[100000,440000]},"geometry":{"type":"MultiPolygon","coordinates":[[[[112.47658,22.704009],[112.47704,22.715912],[112.500108,22.728664],[112.507542,22.723457],[112.523176,22.728079],[112.53835,22.71825],[112.549462,22.70098],[112.560038,22.695826],[112.554214,22.682061],[112.535591,22.67765],[112.540189,22.661864],[112.536281,22.648627],[112.546474,22.642248],[112.577359,22.656388],[112.583566,22.664362],[112.584716,22.677809],[112.595981,22.680786],[112.600273,22.688439],[112.587321,22.696357],[112.604182,22.706241],[112.616674,22.707995],[112.620965,22.70114],[112.625104,22.711077],[112.641044,22.712883],[112.646256,22.726698],[112.660127,22.727335],[112.664649,22.713043],[112.672083,22.713521],[112.665109,22.724041],[112.680053,22.713999],[112.682659,22.72165],[112.675914,22.727495],[112.683885,22.733923],[112.690322,22.726379],[112.701128,22.728398],[112.687563,22.737164],[112.680436,22.747045],[112.69653,22.75905],[112.702891,22.756395],[112.707796,22.74407],[112.698599,22.733764],[112.709022,22.729567],[112.706646,22.718303],[112.692392,22.705232],[112.69538,22.695613],[112.708256,22.71028],[112.717989,22.691681],[112.734082,22.698217],[112.741286,22.691362],[112.744505,22.696729],[112.755771,22.692425],[112.769489,22.701246],[112.778302,22.715221],[112.807961,22.72877],[112.810413,22.750498],[112.803899,22.752145],[112.811486,22.765318],[112.818001,22.765424],[112.822369,22.784545],[112.812099,22.791714],[112.819303,22.803025],[112.835857,22.803821],[112.843061,22.810671],[112.852947,22.809609],[112.850648,22.830157],[112.844594,22.835306],[112.851491,22.839978],[112.860305,22.833767],[112.867892,22.835412],[112.873639,22.848206],[112.883679,22.852187],[112.888967,22.845764],[112.900463,22.845286],[112.905904,22.851444],[112.923454,22.856274],[112.963995,22.826971],[112.980396,22.802759],[112.988596,22.800423],[113.025229,22.802335],[113.049523,22.807751],[113.059562,22.801219],[113.075273,22.777959],[113.087228,22.717878],[113.102096,22.698536],[113.113362,22.701618],[113.161414,22.673717],[113.160801,22.665425],[113.17061,22.651392],[113.163176,22.651392],[113.157199,22.63204],[113.157045,22.614228],[113.176358,22.590032],[113.185095,22.574289],[113.188697,22.552798],[113.187087,22.539924],[113.215367,22.513107],[113.2251,22.497142],[113.2251,22.497142],[113.240121,22.476172],[113.245179,22.457276],[113.256444,22.43779],[113.256368,22.410794],[113.262652,22.392048],[113.24947,22.399344],[113.237285,22.391782],[113.212224,22.398599],[113.209389,22.388054],[113.192145,22.381662],[113.18839,22.394924],[113.181646,22.40238],[113.165399,22.40025],[113.1631,22.387947],[113.169154,22.377987],[113.183255,22.369837],[113.193065,22.358171],[113.185478,22.294762],[113.176281,22.280158],[113.176128,22.267792],[113.168541,22.238417],[113.158885,22.228712],[113.129686,22.218208],[113.120413,22.209622],[113.115584,22.215115],[113.106388,22.209355],[113.109453,22.204609],[113.097421,22.187702],[113.091903,22.136595],[113.087152,22.126137],[113.078568,22.116212],[113.045844,22.088513],[113.035498,22.077357],[113.03067,22.066521],[113.032279,22.045753],[113.050672,22.018254],[113.054198,22.003835],[113.051822,21.977556],[113.04753,21.956455],[113.037797,21.935297],[112.989669,21.86956],[112.972042,21.857157],[112.944529,21.84208],[112.911345,21.838979],[112.893565,21.844326],[112.885135,21.852185],[112.86291,21.883084],[112.840915,21.920496],[112.832332,21.924557],[112.800374,21.924824],[112.792327,21.921297],[112.767113,21.89046],[112.737454,21.864214],[112.686031,21.810531],[112.651697,21.762124],[112.639358,21.756025],[112.598817,21.75014],[112.558812,21.750996],[112.535591,21.754099],[112.523406,21.761],[112.497502,21.785393],[112.47773,21.795663],[112.439411,21.803685],[112.427379,21.790207],[112.415806,21.734784],[112.409522,21.728417],[112.35327,21.707118],[112.323995,21.705994],[112.315105,21.700749],[112.307824,21.704174],[112.303456,21.71445],[112.310047,21.732483],[112.304529,21.744415],[112.313955,21.751263],[112.326754,21.767527],[112.333574,21.770844],[112.32775,21.799193],[112.34576,21.811814],[112.342464,21.818499],[112.358558,21.834006],[112.351737,21.849298],[112.370054,21.861434],[112.356872,21.872019],[112.343077,21.876723],[112.348365,21.885276],[112.350818,21.901631],[112.345147,21.906067],[112.346909,21.920442],[112.341085,21.919213],[112.340472,21.942831],[112.331045,21.9595],[112.323841,21.962919],[112.318477,21.976381],[112.299011,21.985248],[112.276939,21.982524],[112.273644,21.99358],[112.263757,22.001432],[112.239387,22.006185],[112.225669,22.012219],[112.232029,22.019589],[112.221607,22.01788],[112.216779,22.03956],[112.231263,22.0528],[112.226818,22.063585],[112.212334,22.069243],[112.199075,22.064706],[112.185051,22.066841],[112.173785,22.085204],[112.16773,22.085417],[112.156541,22.095718],[112.149721,22.090915],[112.143206,22.095185],[112.126116,22.096572],[112.126806,22.105538],[112.106727,22.125497],[112.105884,22.135795],[112.089867,22.137342],[112.086341,22.131313],[112.073236,22.130192],[112.072776,22.125177],[112.034381,22.113437],[112.027254,22.127044],[112.038826,22.131366],[112.051165,22.14684],[112.03668,22.168019],[112.041585,22.187489],[112.052161,22.194742],[112.051625,22.207542],[112.037906,22.215061],[112.037906,22.232178],[112.024112,22.235217],[112.021353,22.242842],[112.004262,22.248333],[112.010547,22.266193],[112.019973,22.268271],[112.036604,22.262781],[112.049479,22.270777],[112.061511,22.28357],[112.068332,22.295988],[112.062201,22.304515],[112.068945,22.318477],[112.065036,22.324392],[112.081896,22.351086],[112.098757,22.351618],[112.107877,22.347463],[112.119985,22.35636],[112.119832,22.337766],[112.128185,22.349754],[112.1347,22.349221],[112.13447,22.337233],[112.147268,22.339098],[112.150564,22.35327],[112.144433,22.358597],[112.153323,22.368452],[112.154012,22.37591],[112.165431,22.385018],[112.172022,22.381769],[112.175088,22.36989],[112.189189,22.36467],[112.186353,22.376069],[112.192791,22.384432],[112.188423,22.398066],[112.196163,22.404936],[112.211184,22.399078],[112.226895,22.408025],[112.243678,22.408238],[112.235938,22.427035],[112.242835,22.445191],[112.252875,22.458926],[112.262531,22.480803],[112.25732,22.500229],[112.275636,22.510659],[112.301233,22.515289],[112.307364,22.525399],[112.302153,22.544818],[112.307747,22.556841],[112.303609,22.560139],[112.309127,22.572427],[112.328133,22.569874],[112.331505,22.563916],[112.323918,22.554554],[112.33641,22.545457],[112.342541,22.55067],[112.358635,22.545563],[112.353577,22.556682],[112.342694,22.558065],[112.344533,22.564342],[112.364306,22.558544],[112.366835,22.550404],[112.377411,22.552479],[112.371127,22.558278],[112.379404,22.57881],[112.380247,22.594978],[112.390363,22.594765],[112.396034,22.602636],[112.398333,22.619917],[112.405077,22.618216],[112.407146,22.628425],[112.400402,22.635921],[112.416113,22.647723],[112.412741,22.656814],[112.419562,22.664202],[112.429218,22.666063],[112.435272,22.661279],[112.428375,22.657133],[112.443243,22.642248],[112.440867,22.627627],[112.435732,22.619971],[112.441787,22.606039],[112.456348,22.600562],[112.463552,22.584873],[112.475047,22.585511],[112.483171,22.592372],[112.505626,22.597849],[112.52172,22.607262],[112.515742,22.626617],[112.505243,22.638473],[112.506545,22.657664],[112.500261,22.668667],[112.489992,22.676215],[112.492674,22.686897],[112.47658,22.704009]]],[[[112.77539,21.564101],[112.761289,21.573743],[112.770255,21.583224],[112.76696,21.588099],[112.753548,21.583546],[112.756001,21.611932],[112.744888,21.604006],[112.735385,21.602506],[112.73094,21.613752],[112.738681,21.630353],[112.752399,21.649896],[112.77608,21.655625],[112.780295,21.671524],[112.763358,21.681802],[112.754621,21.682658],[112.749257,21.671417],[112.734542,21.666599],[112.727568,21.672381],[112.713467,21.673344],[112.70542,21.682605],[112.712164,21.688118],[112.707872,21.698501],[112.724196,21.719694],[112.740443,21.727507],[112.765351,21.733874],[112.77493,21.732269],[112.782287,21.737994],[112.776386,21.751103],[112.781368,21.768329],[112.789108,21.759556],[112.800067,21.759502],[112.806888,21.769346],[112.817311,21.767367],[112.840839,21.776674],[112.859232,21.770576],[112.876015,21.772716],[112.875785,21.750354],[112.866436,21.742542],[112.832945,21.736389],[112.826124,21.729005],[112.81869,21.712202],[112.811256,21.703746],[112.805432,21.68132],[112.813096,21.674843],[112.821066,21.653697],[112.805432,21.639509],[112.798611,21.618572],[112.798918,21.610861],[112.81164,21.599935],[112.817311,21.59008],[112.806735,21.578778],[112.77539,21.564101]]],[[[112.530993,21.583921],[112.524938,21.586277],[112.524249,21.596293],[112.535055,21.628479],[112.544328,21.638866],[112.550382,21.633726],[112.570461,21.64572],[112.570155,21.652787],[112.561648,21.657177],[112.559808,21.665475],[112.572377,21.672381],[112.589237,21.676128],[112.592303,21.693042],[112.610006,21.702676],[112.631465,21.706904],[112.648631,21.715092],[112.657215,21.708242],[112.664036,21.713754],[112.669707,21.693952],[112.665952,21.683943],[112.640431,21.673719],[112.639895,21.6545],[112.650241,21.646362],[112.665645,21.642507],[112.659821,21.630942],[112.637672,21.632655],[112.634683,21.623766],[112.62495,21.616162],[112.621502,21.606737],[112.610543,21.611396],[112.598817,21.606416],[112.595138,21.613324],[112.583566,21.613324],[112.568622,21.619429],[112.54701,21.60754],[112.544788,21.600631],[112.560881,21.59474],[112.562414,21.59008],[112.546703,21.586813],[112.53766,21.591259],[112.530993,21.583921]]],[[[112.435426,21.663548],[112.449987,21.673077],[112.458417,21.690098],[112.466081,21.686673],[112.468073,21.66692],[112.460869,21.660764],[112.456348,21.648772],[112.445772,21.649146],[112.435426,21.663548]]],[[[112.680513,21.69818],[112.6799,21.707493],[112.686184,21.713701],[112.690092,21.699893],[112.680513,21.69818]]],[[[113.025459,21.847801],[113.020247,21.849619],[113.007372,21.869186],[113.023466,21.879823],[113.045844,21.882763],[113.051975,21.868812],[113.04684,21.854752],[113.032663,21.854698],[113.025459,21.847801]]],[[[112.883449,21.593776],[112.867049,21.595597],[112.861991,21.60663],[112.883066,21.615466],[112.903222,21.610861],[112.902532,21.602292],[112.893105,21.594794],[112.883449,21.593776]]],[[[112.656372,21.595704],[112.65369,21.60588],[112.667025,21.607862],[112.656372,21.595704]]],[[[112.587934,21.58617],[112.579274,21.591634],[112.581727,21.600578],[112.59989,21.599185],[112.60035,21.591741],[112.587934,21.58617]]],[[[112.674228,21.610646],[112.664802,21.612467],[112.672312,21.617608],[112.674228,21.610646]]],[[[112.801677,21.564261],[112.794013,21.568922],[112.807195,21.577439],[112.818077,21.579635],[112.814245,21.569458],[112.801677,21.564261]]]]}},{"type":"Feature","properties":{"adcode":440800,"name":"湛江市","center":[110.364977,21.274898],"centroid":[110.109823,21.047897],"childrenNum":9,"level":"city","parent":{"adcode":440000},"subFeatureIndex":7,"acroutes":[100000,440000]},"geometry":{"type":"MultiPolygon","coordinates":[[[[110.387592,21.890407],[110.398398,21.861755],[110.387362,21.852239],[110.372571,21.856355],[110.362532,21.868224],[110.350729,21.863947],[110.354255,21.856462],[110.351572,21.845663],[110.342606,21.837322],[110.339387,21.806359],[110.345901,21.800851],[110.348124,21.809354],[110.357857,21.815451],[110.365137,21.807055],[110.350193,21.809675],[110.348354,21.802509],[110.362225,21.797642],[110.377246,21.806627],[110.37556,21.798765],[110.386749,21.795556],[110.388359,21.789084],[110.380312,21.784484],[110.373184,21.784163],[110.370042,21.770148],[110.375177,21.760305],[110.365367,21.748],[110.368739,21.721835],[110.351419,21.713647],[110.369889,21.689349],[110.367666,21.683354],[110.385753,21.674736],[110.39242,21.681588],[110.396712,21.673612],[110.402843,21.689188],[110.40974,21.686619],[110.412346,21.675753],[110.382457,21.667456],[110.385753,21.657552],[110.407058,21.648611],[110.396865,21.633137],[110.405295,21.634636],[110.405525,21.61809],[110.412653,21.616966],[110.412653,21.60438],[110.406522,21.60181],[110.413342,21.586063],[110.42024,21.591312],[110.417481,21.598168],[110.427214,21.600096],[110.443154,21.58692],[110.439399,21.581082],[110.427904,21.580653],[110.429666,21.575725],[110.422692,21.562226],[110.434494,21.553868],[110.443768,21.556386],[110.450358,21.550439],[110.45534,21.554511],[110.470361,21.547546],[110.475572,21.554136],[110.483849,21.543849],[110.477718,21.526221],[110.485152,21.513735],[110.497567,21.517111],[110.510442,21.499587],[110.508373,21.490958],[110.508066,21.490583],[110.509063,21.479273],[110.490823,21.482811],[110.494118,21.474234],[110.484539,21.456705],[110.484002,21.447108],[110.49021,21.438744],[110.494348,21.443194],[110.508066,21.436439],[110.50845,21.427002],[110.521785,21.414132],[110.53305,21.411558],[110.531288,21.39874],[110.539258,21.376696],[110.546998,21.371547],[110.558801,21.37616],[110.558187,21.370581],[110.568457,21.361408],[110.556961,21.344455],[110.56041,21.337963],[110.548225,21.333456],[110.55152,21.32648],[110.538875,21.330183],[110.529755,21.318056],[110.523011,21.316607],[110.522168,21.303567],[110.555582,21.286929],[110.570296,21.281884],[110.592138,21.265351],[110.6126,21.286231],[110.62287,21.291062],[110.637967,21.289022],[110.644635,21.254507],[110.645401,21.227394],[110.626395,21.215688],[110.562786,21.211016],[110.534736,21.204411],[110.52439,21.206344],[110.501092,21.217514],[110.491896,21.216118],[110.481397,21.207579],[110.46331,21.203015],[110.460475,21.193079],[110.451125,21.186419],[110.439706,21.186312],[110.427674,21.193563],[110.422386,21.190716],[110.409894,21.146508],[110.401234,21.131088],[110.388282,21.125823],[110.37694,21.133345],[110.371498,21.131035],[110.359696,21.113894],[110.348967,21.106048],[110.334406,21.101427],[110.311644,21.099761],[110.29693,21.093795],[110.249644,21.045258],[110.247652,21.020741],[110.23424,21.014342],[110.216997,21.04058],[110.217993,21.053053],[110.211249,21.054182],[110.203739,21.040312],[110.201899,21.029344],[110.207264,21.009718],[110.205041,21.003426],[110.180747,20.981753],[110.179521,20.960453],[110.175689,20.94028],[110.177682,20.907083],[110.184196,20.891746],[110.20121,20.867312],[110.209716,20.860207],[110.233244,20.858485],[110.257691,20.843305],[110.269034,20.839698],[110.291489,20.848203],[110.321454,20.848634],[110.351189,20.841528],[110.364448,20.835337],[110.393723,20.816655],[110.404759,20.783269],[110.407748,20.764365],[110.407365,20.732098],[110.405295,20.721377],[110.392267,20.682905],[110.41135,20.671156],[110.442235,20.671479],[110.466146,20.680264],[110.486915,20.64011],[110.493275,20.613856],[110.49979,20.572443],[110.522934,20.514728],[110.546462,20.48079],[110.55175,20.462982],[110.545772,20.427521],[110.541557,20.420665],[110.516727,20.404361],[110.491666,20.374125],[110.483542,20.358302],[110.452274,20.311203],[110.43641,20.297157],[110.425145,20.291646],[110.404529,20.289161],[110.389585,20.293213],[110.376173,20.288621],[110.348814,20.25901],[110.327508,20.251552],[110.296777,20.249175],[110.285664,20.238312],[110.277464,20.24885],[110.258305,20.253174],[110.21646,20.250526],[110.192243,20.227664],[110.168639,20.219502],[110.146337,20.21761],[110.117981,20.219773],[110.082574,20.258686],[110.07652,20.259929],[110.026246,20.257389],[109.993368,20.254471],[109.986318,20.251714],[109.968461,20.228259],[109.949302,20.216691],[109.929223,20.211718],[109.913512,20.219448],[109.909297,20.230691],[109.91742,20.282407],[109.915811,20.316875],[109.902476,20.339508],[109.871131,20.361705],[109.861245,20.376663],[109.860709,20.391997],[109.864924,20.401716],[109.886612,20.410084],[109.895579,20.427521],[109.898798,20.447276],[109.896882,20.461848],[109.888298,20.475448],[109.83994,20.489478],[109.824459,20.502913],[109.816565,20.518774],[109.81212,20.541593],[109.813576,20.574655],[109.803,20.600754],[109.793344,20.615635],[109.77748,20.622536],[109.749124,20.617953],[109.745062,20.621134],[109.732724,20.674767],[109.729888,20.719653],[109.711725,20.774706],[109.693026,20.807394],[109.664823,20.862306],[109.657082,20.888033],[109.654937,20.903532],[109.655626,20.929251],[109.664133,21.010363],[109.673866,21.068265],[109.667122,21.112604],[109.667505,21.121793],[109.674939,21.136622],[109.720768,21.183734],[109.758551,21.21746],[109.763992,21.226266],[109.765218,21.262184],[109.760083,21.335548],[109.757478,21.346762],[109.770659,21.35953],[109.836798,21.359155],[109.862165,21.362642],[109.868832,21.365807],[109.889754,21.395898],[109.904699,21.430112],[109.894353,21.442283],[109.843465,21.442926],[109.819171,21.445285],[109.785604,21.456919],[109.788363,21.490476],[109.774185,21.507626],[109.772882,21.531258],[109.754795,21.556333],[109.752113,21.5776],[109.754489,21.582582],[109.743836,21.60106],[109.746212,21.622963],[109.753799,21.627836],[109.757018,21.644917],[109.765985,21.657231],[109.766368,21.668045],[109.777863,21.670507],[109.786064,21.646523],[109.784684,21.63817],[109.795183,21.63046],[109.807216,21.628907],[109.809055,21.642989],[109.820014,21.637849],[109.844615,21.638331],[109.853275,21.649949],[109.864157,21.646844],[109.874044,21.658087],[109.884773,21.648076],[109.898338,21.649628],[109.915811,21.668794],[109.906844,21.672488],[109.913742,21.683782],[109.904622,21.686994],[109.915351,21.705619],[109.923781,21.704442],[109.922632,21.727507],[109.941715,21.73671],[109.931292,21.752173],[109.939952,21.768115],[109.935584,21.798658],[109.940718,21.807964],[109.936197,21.81283],[109.946773,21.824328],[109.945393,21.830317],[109.953363,21.842294],[109.944933,21.846839],[109.978654,21.866246],[109.986241,21.879128],[110.005017,21.880198],[110.00655,21.875119],[110.022184,21.869667],[110.038048,21.869988],[110.054372,21.856837],[110.082038,21.864481],[110.092154,21.883993],[110.097212,21.886291],[110.101197,21.870255],[110.107942,21.870789],[110.107175,21.882603],[110.11982,21.901684],[110.133462,21.899867],[110.141815,21.881801],[110.150859,21.897088],[110.161281,21.894255],[110.18205,21.899653],[110.212015,21.893079],[110.210099,21.887467],[110.236003,21.878647],[110.254779,21.881694],[110.272482,21.895003],[110.283748,21.892224],[110.290416,21.917984],[110.312027,21.906601],[110.32383,21.892759],[110.337318,21.887841],[110.34866,21.890941],[110.368126,21.889017],[110.381001,21.892865],[110.387592,21.890407]]],[[[110.714758,21.526811],[110.729396,21.523863],[110.72817,21.531097],[110.735987,21.533348],[110.725257,21.547761],[110.727403,21.573636],[110.734301,21.575564],[110.736523,21.58542],[110.747176,21.588741],[110.743344,21.606201],[110.73683,21.609522],[110.736217,21.623874],[110.749858,21.635922],[110.75461,21.634797],[110.761507,21.647969],[110.771853,21.647808],[110.786874,21.633298],[110.798216,21.631852],[110.79883,21.619857],[110.793618,21.596025],[110.795611,21.579582],[110.813697,21.583064],[110.817759,21.569083],[110.826342,21.559815],[110.818679,21.551672],[110.822127,21.541974],[110.828872,21.542671],[110.848031,21.527668],[110.848721,21.517058],[110.856231,21.503714],[110.840674,21.493638],[110.857841,21.496103],[110.867344,21.506125],[110.876004,21.49814],[110.874471,21.484848],[110.877843,21.476754],[110.870409,21.471125],[110.883897,21.469678],[110.895316,21.460833],[110.895853,21.451236],[110.880449,21.444856],[110.893554,21.436653],[110.901907,21.425768],[110.910337,21.439817],[110.927121,21.441586],[110.929037,21.447912],[110.938233,21.441854],[110.950112,21.443731],[110.965363,21.433329],[110.977012,21.406785],[110.950879,21.388282],[110.929113,21.376052],[110.907272,21.369669],[110.888572,21.367577],[110.848414,21.369401],[110.796377,21.374765],[110.768558,21.364948],[110.741351,21.344133],[110.713149,21.312582],[110.688855,21.278126],[110.659579,21.239636],[110.645401,21.227394],[110.644635,21.254507],[110.637967,21.289022],[110.62287,21.291062],[110.6126,21.286231],[110.592138,21.265351],[110.570296,21.281884],[110.555582,21.286929],[110.522168,21.303567],[110.523011,21.316607],[110.529755,21.318056],[110.538875,21.330183],[110.55152,21.32648],[110.548225,21.333456],[110.56041,21.337963],[110.556961,21.344455],[110.568457,21.361408],[110.558187,21.370581],[110.558801,21.37616],[110.546998,21.371547],[110.539258,21.376696],[110.531288,21.39874],[110.53305,21.411558],[110.521785,21.414132],[110.50845,21.427002],[110.508066,21.436439],[110.494348,21.443194],[110.49021,21.438744],[110.484002,21.447108],[110.49044,21.456866],[110.484539,21.456705],[110.494118,21.474234],[110.506687,21.472251],[110.514044,21.480774],[110.508066,21.490583],[110.508373,21.490958],[110.517646,21.489725],[110.518183,21.480184],[110.532437,21.480345],[110.538875,21.473859],[110.545466,21.47922],[110.54171,21.493102],[110.557038,21.512663],[110.575201,21.515772],[110.577194,21.499158],[110.590069,21.500605],[110.599035,21.507304],[110.609381,21.498997],[110.621184,21.481042],[110.645478,21.482918],[110.645095,21.501248],[110.657893,21.503607],[110.656973,21.490904],[110.665863,21.497497],[110.683337,21.488332],[110.687935,21.49144],[110.681881,21.507519],[110.672148,21.51261],[110.677742,21.521398],[110.693453,21.513896],[110.706788,21.521023],[110.708014,21.519362],[110.713532,21.511752],[110.708474,21.500927],[110.723342,21.503553],[110.730775,21.501088],[110.717364,21.519684],[110.714758,21.526811]]],[[[110.396329,21.90612],[110.395946,21.91264],[110.384297,21.930595],[110.372954,21.93332],[110.391117,21.950258],[110.400007,21.955387],[110.412959,21.953837],[110.418477,21.944381],[110.442388,21.940854],[110.440702,21.93658],[110.414799,21.932732],[110.413419,21.915686],[110.400391,21.913976],[110.413726,21.911304],[110.396329,21.90612]]],[[[110.381078,21.783361],[110.391041,21.776674],[110.389048,21.762124],[110.379162,21.763675],[110.381078,21.783361]]],[[[110.545006,21.083853],[110.53466,21.088529],[110.528759,21.099922],[110.533357,21.108359],[110.530521,21.115667],[110.520405,21.114539],[110.510825,21.137858],[110.502012,21.142908],[110.489214,21.139094],[110.46331,21.14957],[110.451201,21.165203],[110.434188,21.168372],[110.431582,21.180941],[110.457409,21.184915],[110.465533,21.191683],[110.465073,21.198933],[110.482853,21.201028],[110.496034,21.212144],[110.506534,21.209781],[110.525463,21.190501],[110.557115,21.201618],[110.583018,21.201726],[110.589532,21.194529],[110.60394,21.198074],[110.613443,21.207633],[110.632373,21.21107],[110.635132,21.205807],[110.631606,21.190877],[110.615819,21.177718],[110.604247,21.155856],[110.582328,21.094763],[110.574971,21.087991],[110.545006,21.083853]]],[[[110.51757,21.078962],[110.530138,21.077457],[110.548838,21.069609],[110.560103,21.061385],[110.560717,21.048322],[110.539181,20.9874],[110.536576,20.961798],[110.538108,20.937644],[110.535809,20.92301],[110.526153,20.916284],[110.511822,20.916553],[110.501935,20.925593],[110.495651,20.950125],[110.47289,20.983151],[110.467372,20.987185],[110.451661,20.988368],[110.434341,20.985141],[110.407518,20.990466],[110.391654,20.985894],[110.363911,20.988046],[110.347664,20.984765],[110.309498,20.963358],[110.272253,20.952976],[110.241598,20.949372],[110.214468,20.937698],[110.20121,20.938397],[110.198451,20.956903],[110.205348,20.978526],[110.211096,20.986862],[110.227649,20.994876],[110.262673,21.025956],[110.275778,21.033591],[110.283595,21.053644],[110.306126,21.088099],[110.328964,21.088152],[110.334865,21.078585],[110.352492,21.079499],[110.383684,21.092774],[110.398551,21.096268],[110.413879,21.093688],[110.433881,21.078693],[110.459708,21.06289],[110.478944,21.062729],[110.497644,21.076059],[110.51757,21.078962]]],[[[110.714758,21.526811],[110.717364,21.519684],[110.708014,21.519362],[110.706788,21.521023],[110.714758,21.526811]]],[[[110.405372,20.678054],[110.401004,20.691581],[110.408744,20.695999],[110.41043,20.707908],[110.423842,20.71114],[110.435414,20.698747],[110.438786,20.679779],[110.428593,20.675198],[110.423995,20.683659],[110.42047,20.676977],[110.405372,20.678054]]],[[[110.645018,20.935654],[110.646321,20.917307],[110.634135,20.899011],[110.621107,20.87038],[110.611757,20.860046],[110.588536,20.856762],[110.562632,20.861068],[110.55152,20.872641],[110.546002,20.894975],[110.548914,20.908644],[110.567691,20.925324],[110.584091,20.948834],[110.589686,20.953084],[110.604553,20.952331],[110.639807,20.940173],[110.645018,20.935654]]],[[[110.556655,20.327463],[110.575891,20.350687],[110.58639,20.381091],[110.594284,20.371155],[110.593671,20.360678],[110.564548,20.325302],[110.556655,20.327463]]],[[[110.420776,21.159992],[110.42775,21.163323],[110.447753,21.160153],[110.442235,21.148281],[110.419473,21.151182],[110.420776,21.159992]]],[[[110.395409,21.104382],[110.416101,21.112389],[110.428593,21.105189],[110.426524,21.094602],[110.396099,21.098525],[110.395409,21.104382]]]]}},{"type":"Feature","properties":{"adcode":440900,"name":"茂名市","center":[110.919229,21.659751],"centroid":[110.958735,22.008883],"childrenNum":5,"level":"city","parent":{"adcode":440000},"subFeatureIndex":8,"acroutes":[100000,440000]},"geometry":{"type":"MultiPolygon","coordinates":[[[[110.508373,21.490958],[110.510442,21.499587],[110.497567,21.517111],[110.485152,21.513735],[110.477718,21.526221],[110.483849,21.543849],[110.475572,21.554136],[110.470361,21.547546],[110.45534,21.554511],[110.450358,21.550439],[110.443768,21.556386],[110.434494,21.553868],[110.422692,21.562226],[110.429666,21.575725],[110.427904,21.580653],[110.439399,21.581082],[110.443154,21.58692],[110.427214,21.600096],[110.417481,21.598168],[110.42024,21.591312],[110.413342,21.586063],[110.406522,21.60181],[110.412653,21.60438],[110.412653,21.616966],[110.405525,21.61809],[110.405295,21.634636],[110.396865,21.633137],[110.407058,21.648611],[110.385753,21.657552],[110.382457,21.667456],[110.412346,21.675753],[110.40974,21.686619],[110.402843,21.689188],[110.396712,21.673612],[110.39242,21.681588],[110.385753,21.674736],[110.367666,21.683354],[110.369889,21.689349],[110.351419,21.713647],[110.368739,21.721835],[110.365367,21.748],[110.375177,21.760305],[110.379162,21.763675],[110.389048,21.762124],[110.391041,21.776674],[110.381078,21.783361],[110.380312,21.784484],[110.388359,21.789084],[110.386749,21.795556],[110.37556,21.798765],[110.377246,21.806627],[110.362225,21.797642],[110.348354,21.802509],[110.350193,21.809675],[110.365137,21.807055],[110.357857,21.815451],[110.348124,21.809354],[110.345901,21.800851],[110.339387,21.806359],[110.342606,21.837322],[110.351572,21.845663],[110.354255,21.856462],[110.350729,21.863947],[110.362532,21.868224],[110.372571,21.856355],[110.387362,21.852239],[110.398398,21.861755],[110.387592,21.890407],[110.396329,21.90612],[110.413726,21.911304],[110.400391,21.913976],[110.413419,21.915686],[110.414799,21.932732],[110.440702,21.93658],[110.442388,21.940854],[110.418477,21.944381],[110.412959,21.953837],[110.400007,21.955387],[110.391117,21.950258],[110.376786,21.967781],[110.352952,21.976595],[110.359926,21.993901],[110.356324,22.00736],[110.363528,22.005811],[110.347741,22.038972],[110.353105,22.043564],[110.355481,22.061556],[110.351726,22.074421],[110.358853,22.075916],[110.359236,22.084083],[110.351266,22.088993],[110.350806,22.096999],[110.365674,22.098707],[110.362915,22.110288],[110.364601,22.12523],[110.360922,22.132113],[110.352186,22.132487],[110.334329,22.149027],[110.326589,22.152655],[110.326052,22.164445],[110.334789,22.170366],[110.337471,22.184022],[110.342529,22.183435],[110.348507,22.195862],[110.375407,22.166312],[110.381078,22.164232],[110.393493,22.170473],[110.390964,22.179008],[110.399318,22.187382],[110.41066,22.190209],[110.409817,22.203276],[110.414569,22.208555],[110.430816,22.206209],[110.453501,22.192182],[110.460245,22.178581],[110.490133,22.155162],[110.483389,22.150521],[110.489444,22.144599],[110.510672,22.145026],[110.529448,22.154469],[110.529295,22.164392],[110.560333,22.196396],[110.585317,22.185088],[110.602484,22.183382],[110.598422,22.163431],[110.606009,22.155909],[110.6208,22.15783],[110.629077,22.14908],[110.653141,22.159377],[110.658123,22.167539],[110.66548,22.165192],[110.670462,22.17282],[110.678892,22.17266],[110.67529,22.188449],[110.664714,22.203382],[110.652835,22.207702],[110.646857,22.223007],[110.653525,22.238203],[110.664637,22.245348],[110.686019,22.248547],[110.694526,22.258249],[110.695445,22.272323],[110.711999,22.27776],[110.720966,22.294123],[110.725334,22.295615],[110.738899,22.281917],[110.758748,22.274668],[110.784498,22.280798],[110.78971,22.286661],[110.785571,22.294603],[110.772619,22.295562],[110.773233,22.307393],[110.760511,22.324818],[110.749398,22.329774],[110.750165,22.344799],[110.741275,22.362007],[110.729396,22.366375],[110.723801,22.359876],[110.711539,22.369624],[110.712382,22.395457],[110.706864,22.405362],[110.713992,22.417078],[110.713302,22.437471],[110.706711,22.446415],[110.693529,22.448279],[110.692686,22.457755],[110.68349,22.473405],[110.688241,22.477769],[110.698358,22.474469],[110.705102,22.466432],[110.725947,22.461215],[110.741351,22.464302],[110.747789,22.476119],[110.739972,22.488734],[110.740432,22.498845],[110.750471,22.517045],[110.760817,22.516779],[110.754303,22.536838],[110.756909,22.548436],[110.748095,22.554767],[110.761507,22.559607],[110.764496,22.565938],[110.760204,22.580777],[110.778674,22.585405],[110.793542,22.571363],[110.799213,22.556841],[110.805804,22.558916],[110.807566,22.570672],[110.81546,22.578065],[110.83324,22.584926],[110.853779,22.582267],[110.861213,22.587745],[110.87769,22.582692],[110.887269,22.583543],[110.897922,22.591999],[110.895853,22.613537],[110.941299,22.608113],[110.957699,22.616727],[110.961761,22.625766],[110.959002,22.636506],[110.977319,22.641557],[110.987358,22.640228],[110.997091,22.631349],[111.010043,22.644906],[111.027976,22.651551],[111.030735,22.646767],[111.055642,22.648521],[111.06208,22.666169],[111.074035,22.667232],[111.089669,22.694285],[111.104767,22.694869],[111.108369,22.704328],[111.123543,22.701459],[111.124539,22.695826],[111.136878,22.685941],[111.137108,22.674514],[111.127911,22.666169],[111.136418,22.643789],[111.143162,22.638686],[111.144235,22.625713],[111.161862,22.620236],[111.174737,22.605773],[111.185849,22.60439],[111.196732,22.61024],[111.215662,22.594659],[111.219187,22.58583],[111.249076,22.58365],[111.25352,22.589234],[111.279271,22.592053],[111.303105,22.580724],[111.303641,22.569448],[111.326633,22.557267],[111.322724,22.54966],[111.293909,22.547638],[111.285172,22.523856],[111.277278,22.517843],[111.272067,22.506136],[111.276972,22.491927],[111.293295,22.50603],[111.329852,22.516087],[111.338588,22.522951],[111.350084,22.506988],[111.373688,22.516034],[111.384647,22.509808],[111.403117,22.516087],[111.413387,22.512628],[111.410628,22.492033],[111.403347,22.479526],[111.408788,22.475268],[111.409631,22.457116],[111.421127,22.446948],[111.417065,22.431135],[111.421817,22.426662],[111.43952,22.427834],[111.446034,22.442209],[111.471325,22.441996],[111.480444,22.46015],[111.47347,22.474629],[111.476919,22.480164],[111.469409,22.490277],[111.486882,22.505551],[111.507804,22.493949],[111.525201,22.480164],[111.545433,22.499324],[111.54459,22.517364],[111.561144,22.523377],[111.559381,22.528804],[111.569344,22.540722],[111.59632,22.551362],[111.60682,22.54966],[111.612031,22.542584],[111.610269,22.534125],[111.618315,22.533912],[111.616093,22.521408],[111.621304,22.521195],[111.616016,22.508158],[111.619618,22.497302],[111.625673,22.510925],[111.633873,22.503262],[111.648128,22.498207],[111.671425,22.503262],[111.678553,22.496397],[111.680315,22.4824],[111.683381,22.468774],[111.679089,22.45685],[111.660083,22.434915],[111.649584,22.426716],[111.630884,22.402859],[111.616783,22.390504],[111.60728,22.39322],[111.600689,22.375537],[111.590266,22.369784],[111.57149,22.375217],[111.55256,22.364723],[111.542751,22.368079],[111.531102,22.358384],[111.517001,22.365309],[111.511176,22.349594],[111.494163,22.339418],[111.492247,22.333557],[111.479601,22.334143],[111.465807,22.33004],[111.468182,22.326683],[111.459369,22.309738],[111.46481,22.30217],[111.459446,22.296415],[111.453468,22.270297],[111.433389,22.275255],[111.42266,22.272643],[111.416835,22.263367],[111.401278,22.253025],[111.388556,22.251319],[111.381275,22.240869],[111.37683,22.243162],[111.360507,22.233938],[111.346099,22.211488],[111.354069,22.193356],[111.348091,22.181035],[111.327169,22.171326],[111.33445,22.160017],[111.331384,22.142198],[111.340657,22.129445],[111.337515,22.118453],[111.32441,22.113383],[111.327169,22.10303],[111.312685,22.088353],[111.316976,22.082641],[111.304561,22.084403],[111.298583,22.069991],[111.300653,22.064012],[111.288467,22.058299],[111.285325,22.048369],[111.295901,22.03139],[111.304638,22.029948],[111.305941,22.011846],[111.287624,22.000043],[111.283333,21.986797],[111.287624,21.977984],[111.283716,21.971841],[111.283409,21.952181],[111.294675,21.935885],[111.287241,21.924129],[111.290077,21.907991],[111.310922,21.893988],[111.320119,21.897836],[111.325177,21.886986],[111.340044,21.874424],[111.362499,21.877044],[111.367864,21.862557],[111.374608,21.860525],[111.40327,21.862183],[111.402887,21.854858],[111.417218,21.850154],[111.423503,21.81374],[111.401508,21.798337],[111.386947,21.780258],[111.374301,21.774374],[111.388786,21.756239],[111.383651,21.750247],[111.381275,21.734463],[111.389859,21.727132],[111.40304,21.728095],[111.431243,21.71857],[111.44067,21.69347],[111.428944,21.676984],[111.43155,21.670293],[111.42289,21.661353],[111.421587,21.648772],[111.416299,21.646898],[111.415456,21.632762],[111.42059,21.617394],[111.427718,21.614234],[111.416452,21.598061],[111.423809,21.591794],[111.418291,21.578671],[111.42151,21.573743],[111.430783,21.57985],[111.428944,21.570315],[111.439367,21.575725],[111.44703,21.570904],[111.458909,21.534151],[111.459139,21.524935],[111.452395,21.515182],[111.395837,21.501731],[111.382502,21.495514],[111.353149,21.464317],[111.329852,21.446787],[111.307627,21.433811],[111.301189,21.433704],[111.285862,21.419012],[111.263483,21.412684],[111.257352,21.415151],[111.257736,21.436546],[111.250532,21.449574],[111.253597,21.452577],[111.273829,21.443891],[111.2818,21.446518],[111.281493,21.458152],[111.295595,21.476271],[111.290536,21.484204],[111.276895,21.484955],[111.251605,21.48056],[111.239113,21.471769],[111.211983,21.469035],[111.171442,21.458474],[111.146611,21.459225],[111.116646,21.453167],[111.108599,21.455472],[111.076564,21.45247],[111.061313,21.449199],[111.034797,21.438744],[111.00077,21.417993],[110.977012,21.406785],[110.965363,21.433329],[110.950112,21.443731],[110.938233,21.441854],[110.929037,21.447912],[110.927121,21.441586],[110.910337,21.439817],[110.901907,21.425768],[110.893554,21.436653],[110.880449,21.444856],[110.895853,21.451236],[110.895316,21.460833],[110.883897,21.469678],[110.870409,21.471125],[110.877843,21.476754],[110.874471,21.484848],[110.876004,21.49814],[110.867344,21.506125],[110.857841,21.496103],[110.840674,21.493638],[110.856231,21.503714],[110.848721,21.517058],[110.848031,21.527668],[110.828872,21.542671],[110.822127,21.541974],[110.818679,21.551672],[110.826342,21.559815],[110.817759,21.569083],[110.813697,21.583064],[110.795611,21.579582],[110.793618,21.596025],[110.79883,21.619857],[110.798216,21.631852],[110.786874,21.633298],[110.771853,21.647808],[110.761507,21.647969],[110.75461,21.634797],[110.749858,21.635922],[110.736217,21.623874],[110.73683,21.609522],[110.743344,21.606201],[110.747176,21.588741],[110.736523,21.58542],[110.734301,21.575564],[110.727403,21.573636],[110.725257,21.547761],[110.735987,21.533348],[110.72817,21.531097],[110.729396,21.523863],[110.714758,21.526811],[110.706788,21.521023],[110.693453,21.513896],[110.677742,21.521398],[110.672148,21.51261],[110.681881,21.507519],[110.687935,21.49144],[110.683337,21.488332],[110.665863,21.497497],[110.656973,21.490904],[110.657893,21.503607],[110.645095,21.501248],[110.645478,21.482918],[110.621184,21.481042],[110.609381,21.498997],[110.599035,21.507304],[110.590069,21.500605],[110.577194,21.499158],[110.575201,21.515772],[110.557038,21.512663],[110.54171,21.493102],[110.545466,21.47922],[110.538875,21.473859],[110.532437,21.480345],[110.518183,21.480184],[110.517646,21.489725],[110.508373,21.490958]]],[[[110.508066,21.490583],[110.514044,21.480774],[110.506687,21.472251],[110.494118,21.474234],[110.490823,21.482811],[110.509063,21.479273],[110.508066,21.490583]]],[[[110.379162,21.763675],[110.375177,21.760305],[110.370042,21.770148],[110.373184,21.784163],[110.380312,21.784484],[110.381078,21.783361],[110.379162,21.763675]]],[[[110.717364,21.519684],[110.730775,21.501088],[110.723342,21.503553],[110.708474,21.500927],[110.713532,21.511752],[110.708014,21.519362],[110.717364,21.519684]]],[[[111.1847,21.37101],[111.1847,21.381953],[111.195659,21.391017],[111.194816,21.380075],[111.1847,21.37101]]],[[[110.484002,21.447108],[110.484539,21.456705],[110.49044,21.456866],[110.484002,21.447108]]]]}},{"type":"Feature","properties":{"adcode":441200,"name":"肇庆市","center":[112.472529,23.051546],"centroid":[112.210411,23.536359],"childrenNum":8,"level":"city","parent":{"adcode":440000},"subFeatureIndex":9,"acroutes":[100000,440000]},"geometry":{"type":"MultiPolygon","coordinates":[[[[112.830493,23.545762],[112.831642,23.537577],[112.840762,23.536046],[112.850418,23.527596],[112.845284,23.502929],[112.845743,23.487134],[112.838156,23.484704],[112.831029,23.468114],[112.811793,23.462513],[112.802673,23.444229],[112.803669,23.435773],[112.796389,23.429113],[112.794166,23.407547],[112.785736,23.394173],[112.787269,23.371173],[112.806582,23.367419],[112.810107,23.371332],[112.805892,23.387511],[112.814092,23.391793],[112.838386,23.387352],[112.859691,23.364563],[112.863907,23.349122],[112.883296,23.347324],[112.87134,23.315588],[112.866895,23.293263],[112.857546,23.287231],[112.847966,23.275061],[112.844977,23.263314],[112.823595,23.24569],[112.8472,23.238651],[112.842984,23.224465],[112.831949,23.215678],[112.815012,23.217107],[112.810873,23.200378],[112.80091,23.200431],[112.806582,23.212395],[112.799837,23.228224],[112.795316,23.226318],[112.7934,23.208213],[112.786349,23.205937],[112.781521,23.225842],[112.769412,23.223354],[112.772861,23.215678],[112.766347,23.21356],[112.764431,23.202919],[112.772938,23.199742],[112.771941,23.191694],[112.775773,23.166754],[112.793936,23.150071],[112.798458,23.13863],[112.799684,23.109971],[112.805355,23.091426],[112.818767,23.072614],[112.819227,23.052051],[112.834094,23.014784],[112.820453,23.010225],[112.794856,22.990394],[112.788189,22.991879],[112.790564,23.00206],[112.787882,23.000999],[112.777076,22.996545],[112.759679,22.979735],[112.751556,22.99103],[112.734772,22.98122],[112.736228,22.963878],[112.74144,22.962923],[112.734082,22.940751],[112.708869,22.927754],[112.699749,22.94839],[112.686874,22.948443],[112.672696,22.940486],[112.690092,22.927277],[112.696683,22.917196],[112.68649,22.907593],[112.692468,22.901969],[112.685418,22.89836],[112.677524,22.902764],[112.676374,22.895442],[112.659284,22.887163],[112.635526,22.883714],[112.632384,22.877664],[112.604258,22.870552],[112.591613,22.869809],[112.587168,22.862962],[112.561648,22.873312],[112.557816,22.863387],[112.563104,22.854151],[112.57414,22.84741],[112.571841,22.833077],[112.557433,22.826122],[112.532449,22.822883],[112.527544,22.815131],[112.52034,22.82729],[112.510531,22.823042],[112.499035,22.826918],[112.500414,22.812476],[112.489992,22.809131],[112.482788,22.795006],[112.463398,22.789271],[112.443779,22.791661],[112.441403,22.787731],[112.413507,22.774454],[112.392509,22.76978],[112.382622,22.784545],[112.384232,22.792245],[112.374116,22.794369],[112.356336,22.787997],[112.32844,22.786722],[112.315488,22.790015],[112.323841,22.802706],[112.336257,22.806476],[112.319703,22.825378],[112.310353,22.824848],[112.312269,22.850489],[112.298704,22.865138],[112.296022,22.873312],[112.29993,22.89178],[112.305602,22.896132],[112.307364,22.911254],[112.295332,22.915605],[112.285369,22.911254],[112.278319,22.91465],[112.26598,22.906638],[112.257703,22.910564],[112.261075,22.918735],[112.262914,22.939796],[112.257167,22.951625],[112.270885,22.943775],[112.280158,22.949026],[112.283683,22.944518],[112.290197,22.952633],[112.277322,22.970613],[112.285369,22.976235],[112.286595,22.984985],[112.299087,23.010331],[112.286825,23.020033],[112.289814,23.024274],[112.285446,23.042563],[112.295869,23.060849],[112.301233,23.079557],[112.317634,23.080298],[112.32637,23.093599],[112.327137,23.104196],[112.312729,23.115163],[112.311886,23.121255],[112.301233,23.122315],[112.285676,23.129731],[112.265137,23.119507],[112.234712,23.114898],[112.191182,23.074522],[112.165431,23.075052],[112.133473,23.08581],[112.118299,23.083001],[112.099446,23.089943],[112.083736,23.079716],[112.047563,23.072349],[112.035761,23.07272],[112.025951,23.081199],[111.991464,23.087028],[111.982727,23.097308],[111.979049,23.119719],[111.967553,23.129678],[111.959353,23.130843],[111.9218,23.124857],[111.899192,23.125599],[111.884708,23.131267],[111.876737,23.138365],[111.860414,23.141225],[111.836963,23.131585],[111.814048,23.129943],[111.770441,23.13328],[111.753658,23.137994],[111.726988,23.150865],[111.707522,23.150971],[111.692118,23.157909],[111.679089,23.154732],[111.656098,23.158492],[111.649507,23.164741],[111.637781,23.185446],[111.624446,23.189894],[111.594251,23.188518],[111.575322,23.194077],[111.539839,23.212978],[111.533784,23.22113],[111.542598,23.234787],[111.569191,23.243097],[111.576318,23.253682],[111.573866,23.270881],[111.550185,23.298183],[111.532175,23.324634],[111.523898,23.322624],[111.52796,23.310351],[111.519989,23.305484],[111.515774,23.288448],[111.506348,23.282311],[111.49286,23.284586],[111.472551,23.275061],[111.456917,23.281729],[111.453391,23.289559],[111.437834,23.295115],[111.442202,23.301411],[111.421127,23.316276],[111.408712,23.315958],[111.392618,23.325586],[111.375757,23.319926],[111.375068,23.315271],[111.365565,23.31982],[111.361963,23.330293],[111.364722,23.343886],[111.373382,23.355203],[111.37798,23.369587],[111.389169,23.375985],[111.392081,23.391106],[111.383421,23.399671],[111.395607,23.43831],[111.392848,23.446712],[111.399975,23.456859],[111.399745,23.469382],[111.428867,23.466581],[111.433849,23.480266],[111.438754,23.481005],[111.452012,23.500975],[111.459599,23.49976],[111.464274,23.511486],[111.480215,23.532613],[111.478452,23.543914],[111.481901,23.558858],[111.489028,23.561339],[111.488951,23.592277],[111.482744,23.605684],[111.487035,23.626638],[111.508264,23.62574],[111.538382,23.630859],[111.551104,23.640464],[111.564286,23.633181],[111.584288,23.644685],[111.58858,23.638142],[111.594405,23.643471],[111.607433,23.637403],[111.615633,23.638986],[111.61479,23.658773],[111.625596,23.6765],[111.637092,23.678293],[111.635559,23.684518],[111.643223,23.696123],[111.665294,23.699973],[111.662689,23.706408],[111.66675,23.718907],[111.621611,23.725974],[111.618315,23.73478],[111.629351,23.736362],[111.628048,23.788607],[111.639161,23.786551],[111.641153,23.79704],[111.649354,23.811059],[111.645828,23.815327],[111.653722,23.821967],[111.654872,23.833296],[111.664451,23.834877],[111.693497,23.817277],[111.696946,23.835931],[111.714572,23.837195],[111.719707,23.825814],[111.737794,23.819227],[111.745994,23.820755],[111.752355,23.812745],[111.765843,23.815011],[111.774963,23.80816],[111.791593,23.809162],[111.796191,23.815696],[111.810599,23.807001],[111.815274,23.829081],[111.824777,23.832348],[111.820102,23.855372],[111.823781,23.871755],[111.816884,23.875073],[111.812668,23.887504],[111.822631,23.903567],[111.822861,23.911202],[111.838879,23.91136],[111.845929,23.904409],[111.857655,23.918311],[111.851294,23.93416],[111.854436,23.947427],[111.866085,23.946321],[111.87896,23.936213],[111.8867,23.944321],[111.897506,23.946637],[111.911991,23.943952],[111.910151,23.952164],[111.917585,23.95227],[111.940347,23.987746],[111.921494,24.012005],[111.921034,24.037364],[111.905783,24.046833],[111.89697,24.069608],[111.887927,24.07918],[111.88877,24.092064],[111.883482,24.095587],[111.878653,24.1101],[111.878807,24.126818],[111.88785,24.15473],[111.886777,24.163875],[111.87122,24.176593],[111.877887,24.228922],[111.912834,24.221726],[111.920804,24.233492],[111.942646,24.234858],[111.961575,24.234753],[111.978052,24.222671],[111.986866,24.205124],[111.994223,24.19861],[111.997672,24.186945],[112.006868,24.19015],[112.024955,24.188364],[112.041815,24.191516],[112.04603,24.197611],[112.041355,24.216682],[112.050398,24.224247],[112.053157,24.24594],[112.058369,24.247043],[112.067872,24.260698],[112.086878,24.256917],[112.106114,24.228555],[112.11508,24.229027],[112.122591,24.222986],[112.129258,24.207489],[112.144433,24.201394],[112.148341,24.190098],[112.157538,24.185841],[112.166658,24.187943],[112.169876,24.197454],[112.196929,24.204074],[112.215093,24.223459],[112.218311,24.244365],[112.235708,24.246203],[112.249503,24.243367],[112.256324,24.2597],[112.255557,24.279182],[112.261995,24.290576],[112.256937,24.320762],[112.258316,24.324279],[112.27441,24.320604],[112.293723,24.327585],[112.293646,24.344538],[112.284679,24.377334],[112.288971,24.388666],[112.307211,24.378593],[112.319703,24.380167],[112.342004,24.353512],[112.373732,24.347949],[112.384845,24.328373],[112.393888,24.326641],[112.401858,24.310211],[112.411285,24.307061],[112.423777,24.284958],[112.444239,24.287741],[112.449987,24.28102],[112.458723,24.238377],[112.453052,24.20938],[112.439564,24.19057],[112.439028,24.180324],[112.43144,24.173387],[112.434813,24.164453],[112.429525,24.160564],[112.434659,24.147529],[112.428452,24.139802],[112.429831,24.127081],[112.446921,24.121929],[112.455351,24.12482],[112.452516,24.115725],[112.463782,24.120772],[112.486696,24.114148],[112.49367,24.095377],[112.489532,24.086122],[112.500798,24.08081],[112.497885,24.064401],[112.507542,24.051778],[112.507618,24.043309],[112.518501,24.016635],[112.506469,24.007269],[112.511297,24.001376],[112.516125,23.977009],[112.535668,23.970746],[112.564253,23.977325],[112.567012,23.964903],[112.575136,23.967325],[112.588318,23.956692],[112.608167,23.952586],[112.622651,23.943636],[112.645106,23.941004],[112.662886,23.949585],[112.675838,23.939846],[112.682582,23.939056],[112.683272,23.92405],[112.693464,23.912729],[112.693235,23.904251],[112.685494,23.895351],[112.692162,23.88961],[112.672159,23.864801],[112.679516,23.857216],[112.672159,23.851473],[112.675225,23.831241],[112.661353,23.821651],[112.655376,23.812587],[112.675455,23.815169],[112.689479,23.806369],[112.70588,23.806369],[112.700668,23.793192],[112.704194,23.790557],[112.69768,23.765677],[112.706033,23.752813],[112.730021,23.758507],[112.743126,23.752444],[112.725882,23.725816],[112.711321,23.712104],[112.713467,23.706883],[112.724579,23.710258],[112.72159,23.698549],[112.715076,23.691639],[112.728718,23.678504],[112.744965,23.686523],[112.739907,23.672596],[112.744965,23.668481],[112.751249,23.675286],[112.75922,23.672332],[112.768646,23.677397],[112.780908,23.671224],[112.784663,23.655291],[112.778302,23.641255],[112.752092,23.628643],[112.750483,23.610065],[112.756844,23.603309],[112.772171,23.603309],[112.781828,23.588529],[112.799761,23.588951],[112.800144,23.571846],[112.7934,23.571688],[112.796772,23.551835],[112.802137,23.545551],[112.830493,23.545762]]]]}},{"type":"Feature","properties":{"adcode":441300,"name":"惠州市","center":[114.412599,23.079404],"centroid":[114.507031,23.234468],"childrenNum":5,"level":"city","parent":{"adcode":440000},"subFeatureIndex":10,"acroutes":[100000,440000]},"geometry":{"type":"MultiPolygon","coordinates":[[[[114.229205,22.81253],[114.23388,22.816937],[114.235643,22.839872],[114.233114,22.842314],[114.2348,22.862962],[114.231198,22.880318],[114.236946,22.88589],[114.24484,22.88053],[114.251737,22.884351],[114.26032,22.899634],[114.259171,22.906054],[114.249208,22.905152],[114.245299,22.911732],[114.229742,22.914703],[114.213035,22.928444],[114.211349,22.953959],[114.223841,22.963719],[114.222385,22.980743],[114.212498,22.987796],[114.20039,22.986682],[114.185139,22.992727],[114.158546,22.978303],[114.15571,22.983129],[114.13816,22.986417],[114.132182,22.994424],[114.124442,22.994],[114.139233,23.023479],[114.151035,23.019079],[114.150269,23.024698],[114.120993,23.048022],[114.102217,23.058623],[114.091564,23.077331],[114.088959,23.094182],[114.065891,23.101441],[114.049797,23.097467],[114.029871,23.084379],[114.010252,23.083425],[113.993315,23.092645],[113.986418,23.10197],[113.970554,23.113308],[113.962737,23.114209],[113.938366,23.107534],[113.905565,23.11511],[113.894836,23.111295],[113.876596,23.124275],[113.863261,23.114633],[113.848163,23.116911],[113.844715,23.125599],[113.849849,23.148853],[113.858739,23.157221],[113.874757,23.165377],[113.895679,23.164529],[113.902116,23.177186],[113.889011,23.178616],[113.8838,23.191694],[113.893993,23.21266],[113.903802,23.212554],[113.890084,23.242144],[113.895142,23.253523],[113.877209,23.264213],[113.890314,23.282681],[113.888475,23.290512],[113.894989,23.314689],[113.889394,23.334154],[113.895985,23.34505],[113.927483,23.339972],[113.939285,23.342934],[113.958905,23.33262],[113.958445,23.314953],[113.977451,23.304849],[113.978217,23.30104],[113.996687,23.297443],[113.996151,23.309346],[113.984195,23.330505],[113.993928,23.333149],[114.000902,23.346636],[113.990556,23.354833],[113.982049,23.379369],[113.995997,23.386771],[114.000442,23.39338],[113.986801,23.405591],[113.984195,23.421238],[113.98795,23.431439],[113.975382,23.429378],[113.960054,23.43276],[113.952774,23.442907],[113.955456,23.466053],[113.974462,23.46489],[113.981743,23.472129],[113.974156,23.478839],[113.96105,23.480371],[113.938749,23.476726],[113.931162,23.483066],[113.940895,23.483594],[113.946643,23.492522],[113.929936,23.494213],[113.923115,23.503088],[113.911543,23.504144],[113.906408,23.511856],[113.89315,23.520254],[113.888168,23.535095],[113.871384,23.541327],[113.862495,23.566303],[113.852838,23.570579],[113.864027,23.587368],[113.858356,23.593491],[113.859582,23.60996],[113.843565,23.617877],[113.834215,23.61756],[113.832223,23.624263],[113.817432,23.623471],[113.816742,23.63582],[113.825555,23.639883],[113.827778,23.648009],[113.818811,23.656188],[113.839963,23.655449],[113.847857,23.679348],[113.881884,23.685151],[113.897595,23.700184],[113.900967,23.715426],[113.912386,23.716534],[113.920049,23.729454],[113.93645,23.732143],[113.940282,23.738155],[113.955916,23.732671],[113.96105,23.738207],[113.972853,23.739262],[113.976071,23.757716],[113.998756,23.762988],[114.013087,23.777959],[114.017686,23.778276],[114.009945,23.762988],[114.018222,23.76283],[114.02489,23.752549],[114.027419,23.760141],[114.038454,23.771212],[114.05999,23.775851],[114.056311,23.784021],[114.037228,23.793509],[114.047728,23.803312],[114.035312,23.813378],[114.040294,23.824444],[114.052249,23.830029],[114.057767,23.846784],[114.050487,23.85474],[114.047728,23.867488],[114.041827,23.871491],[114.04267,23.889874],[114.036232,23.901776],[114.04129,23.906937],[114.056771,23.935844],[114.074398,23.930895],[114.075624,23.924366],[114.117008,23.929737],[114.119844,23.936002],[114.142835,23.940425],[114.158162,23.939846],[114.16368,23.953586],[114.174333,23.959429],[114.186518,23.95627],[114.19196,23.9449],[114.201999,23.941267],[114.213341,23.946163],[114.21702,23.942636],[114.238479,23.941899],[114.244303,23.948269],[114.258711,23.952744],[114.263309,23.960218],[114.271816,23.959482],[114.271739,23.948479],[114.251047,23.940477],[114.254649,23.934686],[114.247905,23.929737],[114.236716,23.910676],[114.248671,23.906516],[114.263156,23.911044],[114.268367,23.902829],[114.279633,23.901091],[114.28814,23.90541],[114.303161,23.891454],[114.32163,23.894403],[114.331517,23.900512],[114.34991,23.887925],[114.346154,23.878392],[114.356347,23.869595],[114.343855,23.86654],[114.33029,23.852948],[114.326918,23.8324],[114.332666,23.808635],[114.34102,23.807844],[114.342706,23.796882],[114.348913,23.791453],[114.337954,23.770632],[114.341556,23.7516],[114.357267,23.747593],[114.355351,23.736046],[114.368839,23.725499],[114.378649,23.744693],[114.388612,23.739262],[114.405395,23.708201],[114.421413,23.709942],[114.424248,23.697178],[114.440112,23.687578],[114.473143,23.703349],[114.493529,23.699182],[114.512688,23.688527],[114.520428,23.668428],[114.530545,23.666634],[114.545872,23.631757],[114.557061,23.622204],[114.55047,23.605315],[114.556985,23.5965],[114.554609,23.590165],[114.567561,23.579554],[114.567637,23.570738],[114.57898,23.561498],[114.583041,23.563504],[114.600591,23.555214],[114.611321,23.544178],[114.606646,23.536838],[114.623583,23.529233],[114.625039,23.549406],[114.636764,23.548614],[114.6396,23.556429],[114.65554,23.562871],[114.661825,23.535623],[114.677076,23.529338],[114.692173,23.532402],[114.698764,23.520624],[114.685582,23.508317],[114.68267,23.493949],[114.698381,23.470438],[114.697155,23.46061],[114.676079,23.45522],[114.66673,23.447347],[114.642435,23.416956],[114.632779,23.407865],[114.650712,23.396922],[114.652858,23.411882],[114.659985,23.403318],[114.665657,23.409662],[114.686119,23.413521],[114.707501,23.40427],[114.693246,23.393538],[114.70022,23.389256],[114.703746,23.367578],[114.697461,23.366203],[114.719916,23.358588],[114.715854,23.347905],[114.727427,23.338333],[114.72758,23.327649],[114.73509,23.334366],[114.73693,23.328389],[114.75448,23.328812],[114.761684,23.314636],[114.776628,23.313472],[114.779617,23.294903],[114.768581,23.2794],[114.779234,23.275114],[114.78023,23.265801],[114.786821,23.266277],[114.786821,23.25654],[114.793258,23.23971],[114.786284,23.236269],[114.782989,23.224571],[114.786361,23.207101],[114.802455,23.205566],[114.804294,23.199795],[114.827362,23.184493],[114.834413,23.171784],[114.850353,23.165271],[114.856944,23.177451],[114.868823,23.189841],[114.861926,23.199901],[114.859933,23.211072],[114.87595,23.222877],[114.879629,23.241139],[114.898865,23.246643],[114.89488,23.254899],[114.91174,23.274532],[114.91174,23.295908],[114.919097,23.314848],[114.915419,23.316064],[114.913043,23.338756],[114.923236,23.338597],[114.944158,23.350179],[114.953891,23.343727],[114.948066,23.329606],[114.961631,23.326749],[114.970981,23.313631],[114.976116,23.316858],[114.971058,23.302469],[114.978032,23.294374],[114.992133,23.296755],[114.996884,23.31379],[115.007384,23.324475],[115.007154,23.332356],[115.031525,23.329235],[115.048768,23.320561],[115.056125,23.321195],[115.06126,23.331351],[115.069384,23.330875],[115.078274,23.344944],[115.087623,23.343886],[115.100269,23.355997],[115.11345,23.35954],[115.12234,23.368159],[115.141346,23.360809],[115.157517,23.362342],[115.169089,23.368794],[115.168553,23.377307],[115.17637,23.381008],[115.189551,23.376619],[115.197675,23.380796],[115.205799,23.377412],[115.221739,23.384445],[115.235457,23.385343],[115.240822,23.376725],[115.265039,23.384445],[115.277608,23.375879],[115.295618,23.357319],[115.306117,23.360597],[115.303282,23.346425],[115.306884,23.344415],[115.303665,23.324634],[115.310792,23.307971],[115.334856,23.322412],[115.345585,23.316964],[115.348191,23.308552],[115.362369,23.305114],[115.365971,23.299823],[115.377313,23.302892],[115.384517,23.289877],[115.39494,23.288342],[115.401378,23.276437],[115.403447,23.250083],[115.419311,23.243785],[115.425289,23.236322],[115.409655,23.237963],[115.40314,23.230658],[115.404443,23.21986],[115.388119,23.22023],[115.376241,23.205143],[115.342367,23.19413],[115.336925,23.170302],[115.325277,23.159392],[115.317076,23.163523],[115.311635,23.157645],[115.294468,23.160981],[115.283509,23.157433],[115.28167,23.145145],[115.285348,23.135505],[115.281363,23.125016],[115.287724,23.117865],[115.290253,23.095559],[115.262664,23.091426],[115.265882,23.084114],[115.251551,23.073568],[115.24588,23.061803],[115.22695,23.0538],[115.220743,23.054754],[115.20235,23.043835],[115.194226,23.045637],[115.180431,23.040337],[115.165947,23.027084],[115.163341,23.012558],[115.14878,23.000363],[115.146864,22.991136],[115.129467,23.003279],[115.110998,23.009589],[115.099349,22.996227],[115.085937,23.007733],[115.074901,22.999727],[115.075974,22.995219],[115.062333,22.994106],[115.047925,22.966848],[115.043557,22.969924],[115.020029,22.955498],[115.010066,22.955922],[114.99995,22.949504],[114.997804,22.938682],[114.986308,22.935075],[114.975962,22.938682],[114.965923,22.926693],[114.953507,22.928656],[114.946304,22.919372],[114.930363,22.920698],[114.917794,22.907009],[114.926225,22.900854],[114.926071,22.890454],[114.941245,22.877452],[114.939023,22.870075],[114.925075,22.868323],[114.932356,22.859035],[114.927987,22.849745],[114.931666,22.840456],[114.940556,22.842473],[114.950135,22.834722],[114.950595,22.81614],[114.944388,22.809397],[114.952741,22.794582],[114.974276,22.78805],[114.977725,22.776631],[114.992286,22.771055],[114.999797,22.773551],[114.994432,22.754376],[115.007154,22.740724],[115.009836,22.729248],[115.023094,22.717559],[115.02616,22.702149],[115.008533,22.698058],[114.997881,22.683071],[114.974353,22.668455],[114.945307,22.645491],[114.93772,22.637357],[114.924232,22.610878],[114.923236,22.58833],[114.927374,22.55849],[114.925305,22.551628],[114.914422,22.545776],[114.883614,22.540243],[114.885453,22.569182],[114.875184,22.590351],[114.842766,22.590351],[114.806517,22.584873],[114.747352,22.581628],[114.738999,22.606358],[114.743597,22.620183],[114.740915,22.638473],[114.728576,22.651285],[114.730492,22.671591],[114.738462,22.686047],[114.733941,22.719259],[114.739305,22.734242],[114.75241,22.759741],[114.749881,22.76399],[114.731335,22.771214],[114.709647,22.787678],[114.695545,22.784173],[114.693706,22.774507],[114.685966,22.765212],[114.601741,22.730736],[114.59423,22.721172],[114.6045,22.713202],[114.609098,22.700608],[114.604423,22.693062],[114.558441,22.682752],[114.532231,22.665691],[114.514451,22.660747],[114.505867,22.668455],[114.481956,22.668136],[114.478278,22.661864],[114.453447,22.669943],[114.449692,22.665319],[114.431912,22.660907],[114.428157,22.676746],[114.441338,22.682167],[114.445324,22.68897],[114.442028,22.697579],[114.426394,22.699918],[114.42057,22.713999],[114.409227,22.713574],[114.403403,22.722926],[114.413902,22.736261],[114.414055,22.752251],[114.42057,22.753898],[114.418117,22.766593],[114.404706,22.781305],[114.396352,22.777322],[114.394819,22.759794],[114.386236,22.759635],[114.36562,22.766062],[114.355964,22.764893],[114.354125,22.778172],[114.342706,22.783642],[114.351136,22.789696],[114.353128,22.806636],[114.33052,22.809291],[114.318565,22.806583],[114.314503,22.800157],[114.294347,22.803397],[114.284844,22.808282],[114.282852,22.802388],[114.26147,22.781783],[114.250817,22.781677],[114.245529,22.790652],[114.234953,22.792989],[114.229205,22.81253]]],[[[114.650482,22.573916],[114.641592,22.572799],[114.638144,22.585724],[114.657763,22.575565],[114.658913,22.560512],[114.650482,22.573916]]],[[[114.628947,22.448492],[114.620287,22.466325],[114.631783,22.468082],[114.657227,22.462439],[114.652092,22.454507],[114.638527,22.454241],[114.628947,22.448492]]],[[[114.609941,22.670262],[114.617988,22.669518],[114.61293,22.661704],[114.609941,22.670262]]],[[[114.840007,22.51199],[114.845908,22.516779],[114.855641,22.513799],[114.84062,22.502038],[114.840007,22.51199]]],[[[114.649409,22.675152],[114.653548,22.664043],[114.648107,22.664734],[114.649409,22.675152]]],[[[114.72689,22.577693],[114.719226,22.580246],[114.720836,22.588543],[114.72689,22.577693]]],[[[114.641286,22.429378],[114.654238,22.445138],[114.659602,22.444073],[114.650482,22.428739],[114.641286,22.429378]]]]}},{"type":"Feature","properties":{"adcode":441400,"name":"梅州市","center":[116.117582,24.299112],"centroid":[116.084478,24.201791],"childrenNum":8,"level":"city","parent":{"adcode":440000},"subFeatureIndex":11,"acroutes":[100000,440000]},"geometry":{"type":"MultiPolygon","coordinates":[[[[116.368468,23.73304],[116.35475,23.743058],[116.350151,23.751969],[116.338732,23.758823],[116.335437,23.773953],[116.320033,23.775534],[116.306621,23.769841],[116.295892,23.759139],[116.288458,23.763199],[116.271215,23.757294],[116.271598,23.746433],[116.233126,23.718169],[116.236957,23.727608],[116.227684,23.728821],[116.214119,23.71896],[116.214349,23.702558],[116.19588,23.685784],[116.181089,23.68552],[116.183005,23.674442],[116.17764,23.657296],[116.187373,23.652336],[116.191358,23.641361],[116.179939,23.637139],[116.17787,23.628221],[116.165455,23.616082],[116.150664,23.616241],[116.133497,23.62421],[116.117326,23.620885],[116.106137,23.628379],[116.09878,23.622574],[116.087208,23.626426],[116.074256,23.636295],[116.072417,23.642785],[116.056476,23.646374],[116.055786,23.639514],[116.039386,23.648168],[116.021223,23.644685],[116.01126,23.654236],[116.017467,23.661939],[116.006585,23.675497],[115.985816,23.676974],[115.972328,23.664102],[115.95861,23.655871],[115.954471,23.64516],[115.923663,23.628168],[115.914696,23.630859],[115.897836,23.620093],[115.896227,23.625846],[115.876148,23.633973],[115.863656,23.646057],[115.86036,23.65756],[115.83461,23.660884],[115.81844,23.644632],[115.800047,23.615502],[115.808247,23.606687],[115.807787,23.59877],[115.798131,23.597133],[115.812309,23.578974],[115.802116,23.557168],[115.80794,23.554158],[115.801349,23.543122],[115.788398,23.539267],[115.793302,23.525694],[115.786175,23.517455],[115.776059,23.524638],[115.759735,23.522895],[115.751612,23.52749],[115.736437,23.525958],[115.733755,23.51624],[115.723179,23.514656],[115.713829,23.519092],[115.70195,23.534092],[115.69467,23.550092],[115.687389,23.557538],[115.669686,23.548403],[115.659493,23.532613],[115.639797,23.528758],[115.642096,23.513863],[115.637115,23.514972],[115.622094,23.507102],[115.623167,23.489934],[115.616116,23.475035],[115.606537,23.471865],[115.594964,23.469434],[115.596804,23.464838],[115.582013,23.448668],[115.561244,23.434557],[115.543234,23.436935],[115.527293,23.428743],[115.52668,23.421978],[115.518403,23.422506],[115.507827,23.411142],[115.513652,23.407177],[115.50936,23.399935],[115.510816,23.388621],[115.505068,23.378734],[115.475486,23.373658],[115.463914,23.375456],[115.457017,23.38381],[115.460082,23.400252],[115.454411,23.404904],[115.454871,23.418119],[115.435558,23.43165],[115.440693,23.447981],[115.432876,23.468906],[115.426208,23.468431],[115.426438,23.483119],[115.416858,23.484122],[115.418468,23.495956],[115.432569,23.495903],[115.440616,23.500975],[115.432569,23.516134],[115.435328,23.534356],[115.450349,23.555954],[115.436708,23.561762],[115.437781,23.571688],[115.428737,23.581138],[115.43142,23.600195],[115.432722,23.63772],[115.441919,23.643102],[115.448893,23.662888],[115.452648,23.663363],[115.451652,23.680509],[115.457093,23.696281],[115.454028,23.706672],[115.445981,23.709572],[115.443528,23.703349],[115.420231,23.696123],[115.407432,23.703349],[115.411724,23.707568],[115.412567,23.723021],[115.403677,23.724392],[115.388503,23.734516],[115.382985,23.748173],[115.399385,23.768734],[115.387276,23.778223],[115.365588,23.760246],[115.347961,23.75392],[115.325966,23.75761],[115.317153,23.761617],[115.349264,23.782545],[115.358461,23.792455],[115.35072,23.800677],[115.363136,23.80426],[115.349801,23.818489],[115.356315,23.829028],[115.354399,23.842411],[115.37647,23.851052],[115.371872,23.865223],[115.378846,23.867646],[115.381835,23.88034],[115.391875,23.881921],[115.391491,23.89672],[115.403524,23.909675],[115.400688,23.927999],[115.411877,23.939898],[115.408505,23.950585],[115.425212,23.953796],[115.453261,23.967009],[115.452495,23.983956],[115.446517,23.99364],[115.449889,24.012531],[115.445214,24.016109],[115.445598,24.038311],[115.426132,24.053934],[115.417778,24.068241],[115.428967,24.076708],[115.437551,24.104],[115.44874,24.112781],[115.442302,24.124452],[115.446824,24.130498],[115.453261,24.125504],[115.463301,24.130077],[115.473494,24.142168],[115.481387,24.143167],[115.480084,24.130761],[115.483763,24.123506],[115.494339,24.122297],[115.500393,24.128395],[115.508364,24.105157],[115.513192,24.099058],[115.529592,24.098479],[115.537409,24.108838],[115.532581,24.12256],[115.522235,24.128868],[115.521929,24.137122],[115.509897,24.140381],[115.520856,24.143324],[115.507061,24.165977],[115.510356,24.175542],[115.503612,24.187575],[115.515185,24.190728],[115.520626,24.182689],[115.545303,24.170234],[115.538789,24.179588],[115.538099,24.192777],[115.551204,24.198504],[115.557718,24.206333],[115.564156,24.200816],[115.571437,24.204231],[115.573276,24.227136],[115.570823,24.235751],[115.577874,24.242264],[115.590826,24.242894],[115.592205,24.255289],[115.576725,24.270098],[115.580863,24.277554],[115.577721,24.290313],[115.567758,24.295249],[115.571743,24.309948],[115.563619,24.312993],[115.560477,24.329002],[115.552737,24.333359],[115.550898,24.359914],[115.557948,24.386201],[115.576035,24.395801],[115.583852,24.411276],[115.582166,24.42271],[115.573812,24.42785],[115.575805,24.441747],[115.58891,24.45061],[115.593048,24.459733],[115.575728,24.461044],[115.576495,24.470953],[115.57067,24.478398],[115.560401,24.477035],[115.551511,24.469433],[115.554116,24.484427],[115.538712,24.48233],[115.530129,24.491661],[115.515951,24.495068],[115.505452,24.493181],[115.493266,24.498004],[115.486982,24.516348],[115.491427,24.522847],[115.485679,24.541502],[115.488055,24.547947],[115.483227,24.562722],[115.50024,24.562093],[115.493649,24.569166],[115.513882,24.576186],[115.506065,24.601485],[115.520702,24.618296],[115.520779,24.628507],[115.529056,24.634476],[115.559481,24.64301],[115.567681,24.631963],[115.570747,24.61929],[115.578181,24.615206],[115.594198,24.615206],[115.608682,24.62615],[115.629068,24.619762],[115.635582,24.612168],[115.649607,24.614735],[115.660566,24.606774],[115.671679,24.604732],[115.685167,24.585352],[115.687083,24.570633],[115.678269,24.56487],[115.686086,24.547004],[115.708541,24.544856],[115.717968,24.539721],[115.743948,24.543651],[115.759429,24.5502],[115.785102,24.56728],[115.806101,24.562932],[115.844113,24.562722],[115.848941,24.569952],[115.840971,24.576238],[115.840971,24.584043],[115.818056,24.603213],[115.796828,24.629606],[115.786712,24.634162],[115.789471,24.644895],[115.780197,24.663166],[115.761804,24.668139],[115.779584,24.677299],[115.798284,24.674944],[115.797747,24.682114],[115.805641,24.685883],[115.808017,24.697606],[115.801196,24.705665],[115.794988,24.70174],[115.780887,24.702054],[115.769162,24.709904],[115.771614,24.726282],[115.757359,24.73617],[115.757129,24.749929],[115.765406,24.76332],[115.776672,24.77446],[115.765406,24.79381],[115.774143,24.80453],[115.77284,24.814046],[115.779278,24.819797],[115.78081,24.835115],[115.791846,24.83867],[115.785562,24.846145],[115.79108,24.855083],[115.782573,24.862922],[115.796674,24.858584],[115.80725,24.862766],[115.805105,24.873218],[115.809243,24.892866],[115.819666,24.906816],[115.831621,24.908175],[115.850474,24.900338],[115.856145,24.891769],[115.865572,24.89041],[115.864729,24.876144],[115.8599,24.864804],[115.871779,24.868671],[115.893544,24.871075],[115.907033,24.880168],[115.904044,24.888007],[115.885421,24.898823],[115.882049,24.923847],[115.878447,24.932571],[115.8973,24.937115],[115.908412,24.923272],[115.954625,24.918519],[115.962748,24.91319],[115.976696,24.915959],[115.985586,24.899658],[116.00306,24.896471],[116.015245,24.905719],[116.023368,24.902166],[116.038313,24.886909],[116.043907,24.87165],[116.051648,24.862034],[116.06276,24.859891],[116.068891,24.84996],[116.083222,24.853515],[116.09058,24.838199],[116.094871,24.849229],[116.116023,24.851424],[116.139551,24.844681],[116.153269,24.846667],[116.181012,24.875099],[116.191741,24.877137],[116.200938,24.85801],[116.210901,24.854455],[116.22048,24.842642],[116.22117,24.830828],[116.229294,24.826019],[116.23895,24.83041],[116.250063,24.827901],[116.250906,24.822777],[116.23895,24.813262],[116.233049,24.80066],[116.251289,24.793392],[116.26493,24.799876],[116.29137,24.800242],[116.299954,24.802909],[116.318193,24.818176],[116.332295,24.826646],[116.345783,24.829103],[116.351071,24.848549],[116.349768,24.856703],[116.3618,24.869873],[116.374599,24.86841],[116.379274,24.877503],[116.394754,24.877869],[116.393911,24.856912],[116.407323,24.853253],[116.417822,24.840656],[116.377894,24.821836],[116.374905,24.807197],[116.38939,24.790359],[116.399659,24.794019],[116.40717,24.777808],[116.419125,24.767295],[116.41537,24.756467],[116.417209,24.743076],[116.437365,24.733606],[116.446102,24.714456],[116.455911,24.713724],[116.469706,24.719323],[116.486949,24.71859],[116.501511,24.698339],[116.504959,24.66704],[116.517681,24.651544],[116.513466,24.645052],[116.510477,24.615572],[116.530096,24.604941],[116.553318,24.613059],[116.570484,24.621752],[116.57217,24.628978],[116.586425,24.636727],[116.596465,24.654057],[116.624131,24.641387],[116.632101,24.640078],[116.635167,24.647722],[116.650954,24.651387],[116.667048,24.658611],[116.690116,24.659501],[116.700462,24.655732],[116.707282,24.665103],[116.741923,24.666568],[116.753802,24.654528],[116.777559,24.67955],[116.80124,24.678293],[116.815342,24.65458],[116.811969,24.644895],[116.798558,24.637146],[116.798864,24.624003],[116.787522,24.614735],[116.781621,24.603056],[116.761159,24.582943],[116.767826,24.564189],[116.757327,24.557483],[116.758323,24.546637],[116.772348,24.534743],[116.781085,24.533747],[116.783307,24.51834],[116.796795,24.50204],[116.816798,24.490403],[116.814269,24.483798],[116.832278,24.496117],[116.849369,24.47908],[116.860788,24.46225],[116.85343,24.453127],[116.841475,24.453389],[116.838946,24.442586],[116.848219,24.426906],[116.8555,24.423812],[116.863547,24.409807],[116.869448,24.407237],[116.87328,24.391132],[116.885235,24.396221],[116.903935,24.369883],[116.896961,24.360071],[116.896118,24.35073],[116.908226,24.341756],[116.909299,24.329212],[116.919569,24.320972],[116.912978,24.31147],[116.914281,24.287741],[116.918189,24.283383],[116.935892,24.284748],[116.939418,24.274561],[116.935203,24.249879],[116.939188,24.239585],[116.933363,24.222251],[116.917116,24.232809],[116.896577,24.218784],[116.904548,24.202813],[116.900333,24.196771],[116.884315,24.193671],[116.883856,24.181638],[116.878568,24.167817],[116.867072,24.163717],[116.859485,24.177276],[116.847836,24.182689],[116.836034,24.173387],[116.831819,24.161878],[116.809594,24.169183],[116.796872,24.157043],[116.789745,24.157095],[116.780241,24.147319],[116.76637,24.124032],[116.766447,24.107523],[116.772195,24.09401],[116.76752,24.074657],[116.75748,24.082125],[116.744069,24.061982],[116.734642,24.053619],[116.71257,24.062455],[116.700155,24.050094],[116.708662,24.033471],[116.708815,24.019161],[116.697166,24.002586],[116.690422,24.005375],[116.69548,23.991903],[116.68797,23.981062],[116.684751,23.989588],[116.657775,23.988588],[116.646969,23.994429],[116.641144,23.989588],[116.637312,23.968851],[116.628652,23.973693],[116.610796,23.968483],[116.60842,23.961166],[116.62574,23.950006],[116.623518,23.947269],[116.604205,23.950322],[116.608343,23.94153],[116.604205,23.929474],[116.604741,23.910781],[116.590487,23.900933],[116.575083,23.909149],[116.557992,23.907253],[116.558682,23.899037],[116.536304,23.886608],[116.535384,23.88171],[116.522279,23.882131],[116.514386,23.866698],[116.496989,23.869226],[116.498981,23.85848],[116.516608,23.845994],[116.525881,23.8324],[116.518371,23.823443],[116.509864,23.827764],[116.513389,23.815854],[116.510324,23.808793],[116.516761,23.802679],[116.505955,23.793614],[116.504729,23.763673],[116.496146,23.752496],[116.485187,23.751547],[116.464954,23.755238],[116.451849,23.76905],[116.439357,23.773584],[116.436215,23.780331],[116.416903,23.777854],[116.402955,23.769261],[116.401958,23.76225],[116.380883,23.737364],[116.373296,23.740264],[116.368468,23.73304]]]]}},{"type":"Feature","properties":{"adcode":441500,"name":"汕尾市","center":[115.364238,22.774485],"centroid":[115.537741,23.004576],"childrenNum":4,"level":"city","parent":{"adcode":440000},"subFeatureIndex":12,"acroutes":[100000,440000]},"geometry":{"type":"MultiPolygon","coordinates":[[[[116.226918,22.914491],[116.21389,22.899262],[116.20408,22.892895],[116.192661,22.876019],[116.17672,22.860574],[116.155262,22.844384],[116.147675,22.843004],[116.138018,22.833607],[116.122538,22.82936],[116.106903,22.817892],[116.097094,22.816777],[116.088204,22.821609],[116.081077,22.834882],[116.070501,22.843588],[116.056093,22.844703],[116.038926,22.840774],[116.010647,22.828086],[115.997312,22.826865],[115.976083,22.812636],[115.959529,22.796175],[115.950563,22.795644],[115.942286,22.802759],[115.929487,22.801644],[115.909485,22.787147],[115.883352,22.785341],[115.86243,22.770789],[115.84488,22.749117],[115.829322,22.73472],[115.818746,22.731373],[115.805105,22.733711],[115.794222,22.744761],[115.793302,22.762397],[115.795985,22.783589],[115.794759,22.798883],[115.788398,22.809981],[115.755903,22.837324],[115.740116,22.840827],[115.696279,22.842791],[115.690301,22.857071],[115.682561,22.863918],[115.654205,22.865457],[115.63244,22.860043],[115.598949,22.842526],[115.583699,22.828564],[115.580173,22.80483],[115.570364,22.78651],[115.546376,22.766752],[115.541701,22.755492],[115.549595,22.749117],[115.573429,22.753101],[115.588067,22.744974],[115.602551,22.753898],[115.609142,22.752782],[115.607609,22.731533],[115.589063,22.724307],[115.567758,22.696251],[115.565382,22.685463],[115.581936,22.673185],[115.574195,22.650488],[115.559175,22.658515],[115.556722,22.665212],[115.537793,22.662927],[115.507827,22.682593],[115.493803,22.682805],[115.471731,22.697845],[115.441536,22.694285],[115.42912,22.683815],[115.396933,22.68525],[115.381375,22.683974],[115.378923,22.6937],[115.365741,22.698058],[115.35118,22.710545],[115.34183,22.72521],[115.346505,22.743008],[115.34344,22.768505],[115.337998,22.776684],[115.326886,22.781677],[115.310256,22.78412],[115.284429,22.783058],[115.235764,22.775569],[115.22902,22.782208],[115.233311,22.80175],[115.259521,22.817414],[115.244347,22.823945],[115.227947,22.825272],[115.198595,22.821874],[115.190241,22.818636],[115.18411,22.800635],[115.193307,22.791395],[115.194303,22.775463],[115.188402,22.772701],[115.173917,22.775357],[115.161195,22.786934],[115.154528,22.801644],[115.133376,22.799945],[115.106246,22.790174],[115.081799,22.789006],[115.066931,22.785607],[115.055129,22.778384],[115.050991,22.764628],[115.049918,22.746727],[115.034054,22.744442],[115.023784,22.736527],[115.023708,22.726167],[115.034513,22.721916],[115.039112,22.710811],[115.02616,22.702149],[115.023094,22.717559],[115.009836,22.729248],[115.007154,22.740724],[114.994432,22.754376],[114.999797,22.773551],[114.992286,22.771055],[114.977725,22.776631],[114.974276,22.78805],[114.952741,22.794582],[114.944388,22.809397],[114.950595,22.81614],[114.950135,22.834722],[114.940556,22.842473],[114.931666,22.840456],[114.927987,22.849745],[114.932356,22.859035],[114.925075,22.868323],[114.939023,22.870075],[114.941245,22.877452],[114.926071,22.890454],[114.926225,22.900854],[114.917794,22.907009],[114.930363,22.920698],[114.946304,22.919372],[114.953507,22.928656],[114.965923,22.926693],[114.975962,22.938682],[114.986308,22.935075],[114.997804,22.938682],[114.99995,22.949504],[115.010066,22.955922],[115.020029,22.955498],[115.043557,22.969924],[115.047925,22.966848],[115.062333,22.994106],[115.075974,22.995219],[115.074901,22.999727],[115.085937,23.007733],[115.099349,22.996227],[115.110998,23.009589],[115.129467,23.003279],[115.146864,22.991136],[115.14878,23.000363],[115.163341,23.012558],[115.165947,23.027084],[115.180431,23.040337],[115.194226,23.045637],[115.20235,23.043835],[115.220743,23.054754],[115.22695,23.0538],[115.24588,23.061803],[115.251551,23.073568],[115.265882,23.084114],[115.262664,23.091426],[115.290253,23.095559],[115.287724,23.117865],[115.281363,23.125016],[115.285348,23.135505],[115.28167,23.145145],[115.283509,23.157433],[115.294468,23.160981],[115.311635,23.157645],[115.317076,23.163523],[115.325277,23.159392],[115.336925,23.170302],[115.342367,23.19413],[115.376241,23.205143],[115.388119,23.22023],[115.404443,23.21986],[115.40314,23.230658],[115.409655,23.237963],[115.425289,23.236322],[115.419311,23.243785],[115.418161,23.25527],[115.430883,23.270617],[115.423909,23.277178],[115.437934,23.281993],[115.445674,23.279718],[115.459009,23.288554],[115.452342,23.29321],[115.460235,23.30067],[115.458396,23.312414],[115.468359,23.311409],[115.485756,23.315218],[115.497328,23.322465],[115.471348,23.327543],[115.47564,23.333467],[115.470888,23.35642],[115.475486,23.373658],[115.505068,23.378734],[115.510816,23.388621],[115.50936,23.399935],[115.513652,23.407177],[115.507827,23.411142],[115.518403,23.422506],[115.52668,23.421978],[115.527293,23.428743],[115.543234,23.436935],[115.561244,23.434557],[115.582013,23.448668],[115.596804,23.464838],[115.594964,23.469434],[115.606537,23.471865],[115.61443,23.469751],[115.625236,23.45168],[115.646235,23.439684],[115.648304,23.430329],[115.657884,23.420445],[115.682868,23.407759],[115.673058,23.395071],[115.671602,23.38344],[115.676813,23.354992],[115.694057,23.354675],[115.703023,23.368265],[115.725938,23.369375],[115.739886,23.379263],[115.777668,23.383651],[115.787401,23.368952],[115.811236,23.346689],[115.819666,23.335741],[115.812845,23.326696],[115.802039,23.324422],[115.797288,23.309134],[115.797671,23.286596],[115.824571,23.272416],[115.831621,23.258128],[115.810929,23.24876],[115.797288,23.249184],[115.768089,23.24442],[115.758126,23.244949],[115.749236,23.236375],[115.750079,23.225683],[115.757743,23.215942],[115.752148,23.193601],[115.73866,23.211125],[115.730613,23.199107],[115.733525,23.192806],[115.725631,23.183805],[115.752991,23.167813],[115.76349,23.159233],[115.780657,23.15828],[115.791386,23.13953],[115.79951,23.133015],[115.833154,23.122897],[115.832924,23.112196],[115.85147,23.098791],[115.864345,23.117865],[115.883505,23.11956],[115.898832,23.129466],[115.908795,23.125652],[115.916612,23.112302],[115.923126,23.110977],[115.920751,23.100116],[115.939833,23.082206],[115.937688,23.067156],[115.950333,23.06599],[115.951099,23.061273],[115.964741,23.052952],[115.966963,23.04728],[115.955314,23.038322],[115.950716,23.024327],[115.937688,23.030424],[115.923586,23.017594],[115.942209,23.006195],[115.954471,23.021571],[115.959989,23.017435],[115.945505,22.996015],[115.94949,22.990023],[115.941213,22.987053],[115.9488,22.972682],[115.943819,22.956293],[115.958993,22.957036],[115.963515,22.94961],[115.973247,22.969818],[115.977846,22.951838],[115.967116,22.943775],[115.979225,22.938629],[115.983287,22.925897],[116.0026,22.937409],[116.005665,22.945632],[116.017697,22.934067],[116.026894,22.939107],[116.055633,22.920433],[116.080234,22.915764],[116.086595,22.901491],[116.109969,22.891143],[116.124453,22.892523],[116.135106,22.900589],[116.143843,22.890294],[116.157178,22.886049],[116.16967,22.886367],[116.173272,22.900271],[116.16806,22.913695],[116.181549,22.92611],[116.198256,22.93168],[116.211667,22.926004],[116.223929,22.926852],[116.226918,22.914491]]],[[[115.107702,22.77132],[115.108622,22.783217],[115.117129,22.779712],[115.107702,22.77132]]],[[[115.185796,22.737695],[115.195146,22.741945],[115.196525,22.735889],[115.185796,22.737695]]]]}},{"type":"Feature","properties":{"adcode":441600,"name":"河源市","center":[114.697802,23.746266],"centroid":[114.962729,24.043541],"childrenNum":6,"level":"city","parent":{"adcode":440000},"subFeatureIndex":13,"acroutes":[100000,440000]},"geometry":{"type":"MultiPolygon","coordinates":[[[[115.419311,23.243785],[115.403447,23.250083],[115.401378,23.276437],[115.39494,23.288342],[115.384517,23.289877],[115.377313,23.302892],[115.365971,23.299823],[115.362369,23.305114],[115.348191,23.308552],[115.345585,23.316964],[115.334856,23.322412],[115.310792,23.307971],[115.303665,23.324634],[115.306884,23.344415],[115.303282,23.346425],[115.306117,23.360597],[115.295618,23.357319],[115.277608,23.375879],[115.265039,23.384445],[115.240822,23.376725],[115.235457,23.385343],[115.221739,23.384445],[115.205799,23.377412],[115.197675,23.380796],[115.189551,23.376619],[115.17637,23.381008],[115.168553,23.377307],[115.169089,23.368794],[115.157517,23.362342],[115.141346,23.360809],[115.12234,23.368159],[115.11345,23.35954],[115.100269,23.355997],[115.087623,23.343886],[115.078274,23.344944],[115.069384,23.330875],[115.06126,23.331351],[115.056125,23.321195],[115.048768,23.320561],[115.031525,23.329235],[115.007154,23.332356],[115.007384,23.324475],[114.996884,23.31379],[114.992133,23.296755],[114.978032,23.294374],[114.971058,23.302469],[114.976116,23.316858],[114.970981,23.313631],[114.961631,23.326749],[114.948066,23.329606],[114.953891,23.343727],[114.944158,23.350179],[114.923236,23.338597],[114.913043,23.338756],[114.915419,23.316064],[114.919097,23.314848],[114.91174,23.295908],[114.91174,23.274532],[114.89488,23.254899],[114.898865,23.246643],[114.879629,23.241139],[114.87595,23.222877],[114.859933,23.211072],[114.861926,23.199901],[114.868823,23.189841],[114.856944,23.177451],[114.850353,23.165271],[114.834413,23.171784],[114.827362,23.184493],[114.804294,23.199795],[114.802455,23.205566],[114.786361,23.207101],[114.782989,23.224571],[114.786284,23.236269],[114.793258,23.23971],[114.786821,23.25654],[114.786821,23.266277],[114.78023,23.265801],[114.779234,23.275114],[114.768581,23.2794],[114.779617,23.294903],[114.776628,23.313472],[114.761684,23.314636],[114.75448,23.328812],[114.73693,23.328389],[114.73509,23.334366],[114.72758,23.327649],[114.727427,23.338333],[114.715854,23.347905],[114.719916,23.358588],[114.697461,23.366203],[114.703746,23.367578],[114.70022,23.389256],[114.693246,23.393538],[114.707501,23.40427],[114.686119,23.413521],[114.665657,23.409662],[114.659985,23.403318],[114.652858,23.411882],[114.650712,23.396922],[114.632779,23.407865],[114.642435,23.416956],[114.66673,23.447347],[114.676079,23.45522],[114.697155,23.46061],[114.698381,23.470438],[114.68267,23.493949],[114.685582,23.508317],[114.698764,23.520624],[114.692173,23.532402],[114.677076,23.529338],[114.661825,23.535623],[114.65554,23.562871],[114.6396,23.556429],[114.636764,23.548614],[114.625039,23.549406],[114.623583,23.529233],[114.606646,23.536838],[114.611321,23.544178],[114.600591,23.555214],[114.583041,23.563504],[114.57898,23.561498],[114.567637,23.570738],[114.567561,23.579554],[114.554609,23.590165],[114.556985,23.5965],[114.55047,23.605315],[114.557061,23.622204],[114.545872,23.631757],[114.530545,23.666634],[114.520428,23.668428],[114.512688,23.688527],[114.493529,23.699182],[114.473143,23.703349],[114.440112,23.687578],[114.424248,23.697178],[114.421413,23.709942],[114.405395,23.708201],[114.388612,23.739262],[114.378649,23.744693],[114.368839,23.725499],[114.355351,23.736046],[114.357267,23.747593],[114.341556,23.7516],[114.337954,23.770632],[114.348913,23.791453],[114.342706,23.796882],[114.34102,23.807844],[114.332666,23.808635],[114.326918,23.8324],[114.33029,23.852948],[114.343855,23.86654],[114.356347,23.869595],[114.346154,23.878392],[114.34991,23.887925],[114.362632,23.901091],[114.360486,23.910412],[114.36769,23.912519],[114.370449,23.92742],[114.382481,23.932159],[114.378036,23.942794],[114.386696,23.95627],[114.384856,23.967798],[114.389685,23.97043],[114.382941,23.981851],[114.385393,23.994482],[114.391984,23.991693],[114.385546,24.003901],[114.389685,24.012741],[114.399494,24.018003],[114.398038,24.026],[114.412523,24.027421],[114.420416,24.019582],[114.425628,24.032998],[114.440725,24.033208],[114.436587,24.048569],[114.437813,24.062192],[114.44586,24.07066],[114.46364,24.07592],[114.481267,24.086595],[114.493222,24.106787],[114.489697,24.114043],[114.495828,24.118617],[114.509469,24.106682],[114.522957,24.12419],[114.527939,24.135807],[114.533993,24.138856],[114.535833,24.124347],[114.546715,24.130393],[114.554226,24.124295],[114.565568,24.136175],[114.558134,24.15063],[114.568327,24.159303],[114.594077,24.164138],[114.600055,24.174911],[114.590782,24.187838],[114.590935,24.203653],[114.597602,24.21248],[114.591318,24.225981],[114.577293,24.227241],[114.566028,24.233019],[114.556065,24.245888],[114.548324,24.230603],[114.512458,24.210904],[114.511155,24.205335],[114.491613,24.192357],[114.48119,24.172284],[114.474216,24.16624],[114.470537,24.171811],[114.460574,24.169604],[114.46272,24.161931],[114.469848,24.162141],[114.469311,24.144376],[114.463946,24.14017],[114.474063,24.135229],[114.482953,24.118827],[114.479044,24.112939],[114.46387,24.110836],[114.446856,24.121245],[114.439499,24.121982],[114.433215,24.133337],[114.422179,24.131181],[114.419956,24.139329],[114.393517,24.140959],[114.378879,24.139172],[114.365161,24.132233],[114.352209,24.143219],[114.340713,24.135807],[114.337418,24.125294],[114.329831,24.126871],[114.33029,24.137279],[114.316419,24.147319],[114.306533,24.165399],[114.292891,24.175069],[114.289289,24.1819],[114.298026,24.195142],[114.290899,24.207594],[114.274192,24.212742],[114.274958,24.224195],[114.263156,24.246676],[114.254802,24.256707],[114.272889,24.257495],[114.254649,24.266055],[114.266451,24.272776],[114.263692,24.27829],[114.279326,24.303176],[114.280553,24.313098],[114.272966,24.324856],[114.280859,24.337348],[114.292508,24.346952],[114.293581,24.352672],[114.278637,24.364951],[114.249208,24.362695],[114.249898,24.386935],[114.254879,24.400155],[114.245683,24.411328],[114.242004,24.426014],[114.257868,24.435245],[114.283465,24.453965],[114.292968,24.468856],[114.306839,24.472998],[114.310595,24.480757],[114.286607,24.500572],[114.280399,24.511526],[114.280169,24.523109],[114.273732,24.533695],[114.288906,24.537991],[114.293275,24.551982],[114.310518,24.558583],[114.308142,24.574143],[114.324006,24.579538],[114.331593,24.576971],[114.338567,24.583362],[114.351059,24.57849],[114.363858,24.582524],[114.37658,24.571995],[114.379722,24.563403],[114.391677,24.563455],[114.387309,24.548],[114.390758,24.533537],[114.403403,24.528716],[114.406315,24.517973],[114.402023,24.498528],[114.41099,24.502564],[114.422256,24.496903],[114.42877,24.486262],[114.442718,24.498633],[114.451455,24.500362],[114.469924,24.510688],[114.481113,24.529974],[114.500656,24.534166],[114.534147,24.559002],[114.546715,24.542812],[114.562579,24.53752],[114.572159,24.542288],[114.592468,24.537991],[114.608255,24.563613],[114.624349,24.575662],[114.638604,24.570371],[114.665197,24.583676],[114.677842,24.553815],[114.686502,24.538568],[114.699914,24.537101],[114.705202,24.526096],[114.71869,24.55413],[114.72666,24.549781],[114.738079,24.56508],[114.732868,24.57519],[114.735703,24.582838],[114.730415,24.592424],[114.729879,24.608922],[114.752717,24.616253],[114.768964,24.605779],[114.781226,24.612954],[114.796017,24.602166],[114.804217,24.605413],[114.826366,24.588286],[114.83288,24.596352],[114.846675,24.60248],[114.859243,24.597295],[114.854262,24.582524],[114.861619,24.56728],[114.869053,24.562355],[114.882924,24.569218],[114.88668,24.580271],[114.89327,24.582367],[114.893807,24.590957],[114.901854,24.607926],[114.898558,24.623008],[114.905839,24.632538],[114.909594,24.661543],[114.919634,24.667092],[114.936801,24.665417],[114.937414,24.651911],[114.955194,24.655418],[114.962321,24.665155],[114.978875,24.673216],[114.991213,24.673321],[115.003858,24.679183],[115.007844,24.672431],[115.024857,24.669133],[115.030911,24.678136],[115.046699,24.688761],[115.045549,24.69792],[115.054899,24.709904],[115.059421,24.702735],[115.073829,24.704252],[115.074212,24.697972],[115.083255,24.700484],[115.08724,24.687087],[115.104943,24.667825],[115.111611,24.671437],[115.120731,24.66437],[115.125636,24.681486],[115.138511,24.681277],[115.14832,24.68986],[115.155448,24.688761],[115.168859,24.695094],[115.195146,24.691902],[115.188095,24.697135],[115.18434,24.711421],[115.200204,24.713671],[115.224575,24.726386],[115.233771,24.723508],[115.247566,24.731671],[115.258908,24.728793],[115.269944,24.749406],[115.278528,24.754113],[115.306654,24.758664],[115.321981,24.748725],[115.338995,24.749092],[115.358537,24.735176],[115.363749,24.739361],[115.362829,24.757461],[115.372562,24.774408],[115.389499,24.774408],[115.401301,24.790359],[115.41295,24.792869],[115.450962,24.766301],[115.465677,24.767243],[115.478705,24.761123],[115.48292,24.749667],[115.500087,24.74114],[115.496485,24.734077],[115.506601,24.724921],[115.507904,24.716497],[115.523691,24.717544],[115.52783,24.712573],[115.523078,24.703049],[115.534191,24.691954],[115.556186,24.68269],[115.555189,24.671803],[115.559634,24.660915],[115.559481,24.64301],[115.529056,24.634476],[115.520779,24.628507],[115.520702,24.618296],[115.506065,24.601485],[115.513882,24.576186],[115.493649,24.569166],[115.50024,24.562093],[115.483227,24.562722],[115.488055,24.547947],[115.485679,24.541502],[115.491427,24.522847],[115.486982,24.516348],[115.493266,24.498004],[115.505452,24.493181],[115.515951,24.495068],[115.530129,24.491661],[115.538712,24.48233],[115.554116,24.484427],[115.551511,24.469433],[115.560401,24.477035],[115.57067,24.478398],[115.576495,24.470953],[115.575728,24.461044],[115.593048,24.459733],[115.58891,24.45061],[115.575805,24.441747],[115.573812,24.42785],[115.582166,24.42271],[115.583852,24.411276],[115.576035,24.395801],[115.557948,24.386201],[115.550898,24.359914],[115.552737,24.333359],[115.560477,24.329002],[115.563619,24.312993],[115.571743,24.309948],[115.567758,24.295249],[115.577721,24.290313],[115.580863,24.277554],[115.576725,24.270098],[115.592205,24.255289],[115.590826,24.242894],[115.577874,24.242264],[115.570823,24.235751],[115.573276,24.227136],[115.571437,24.204231],[115.564156,24.200816],[115.557718,24.206333],[115.551204,24.198504],[115.538099,24.192777],[115.538789,24.179588],[115.545303,24.170234],[115.520626,24.182689],[115.515185,24.190728],[115.503612,24.187575],[115.510356,24.175542],[115.507061,24.165977],[115.520856,24.143324],[115.509897,24.140381],[115.521929,24.137122],[115.522235,24.128868],[115.532581,24.12256],[115.537409,24.108838],[115.529592,24.098479],[115.513192,24.099058],[115.508364,24.105157],[115.500393,24.128395],[115.494339,24.122297],[115.483763,24.123506],[115.480084,24.130761],[115.481387,24.143167],[115.473494,24.142168],[115.463301,24.130077],[115.453261,24.125504],[115.446824,24.130498],[115.442302,24.124452],[115.44874,24.112781],[115.437551,24.104],[115.428967,24.076708],[115.417778,24.068241],[115.426132,24.053934],[115.445598,24.038311],[115.445214,24.016109],[115.449889,24.012531],[115.446517,23.99364],[115.452495,23.983956],[115.453261,23.967009],[115.425212,23.953796],[115.408505,23.950585],[115.411877,23.939898],[115.400688,23.927999],[115.403524,23.909675],[115.391491,23.89672],[115.391875,23.881921],[115.381835,23.88034],[115.378846,23.867646],[115.371872,23.865223],[115.37647,23.851052],[115.354399,23.842411],[115.356315,23.829028],[115.349801,23.818489],[115.363136,23.80426],[115.35072,23.800677],[115.358461,23.792455],[115.349264,23.782545],[115.317153,23.761617],[115.325966,23.75761],[115.347961,23.75392],[115.365588,23.760246],[115.387276,23.778223],[115.399385,23.768734],[115.382985,23.748173],[115.388503,23.734516],[115.403677,23.724392],[115.412567,23.723021],[115.411724,23.707568],[115.407432,23.703349],[115.420231,23.696123],[115.443528,23.703349],[115.445981,23.709572],[115.454028,23.706672],[115.457093,23.696281],[115.451652,23.680509],[115.452648,23.663363],[115.448893,23.662888],[115.441919,23.643102],[115.432722,23.63772],[115.43142,23.600195],[115.428737,23.581138],[115.437781,23.571688],[115.436708,23.561762],[115.450349,23.555954],[115.435328,23.534356],[115.432569,23.516134],[115.440616,23.500975],[115.432569,23.495903],[115.418468,23.495956],[115.416858,23.484122],[115.426438,23.483119],[115.426208,23.468431],[115.432876,23.468906],[115.440693,23.447981],[115.435558,23.43165],[115.454871,23.418119],[115.454411,23.404904],[115.460082,23.400252],[115.457017,23.38381],[115.463914,23.375456],[115.475486,23.373658],[115.470888,23.35642],[115.47564,23.333467],[115.471348,23.327543],[115.497328,23.322465],[115.485756,23.315218],[115.468359,23.311409],[115.458396,23.312414],[115.460235,23.30067],[115.452342,23.29321],[115.459009,23.288554],[115.445674,23.279718],[115.437934,23.281993],[115.423909,23.277178],[115.430883,23.270617],[115.418161,23.25527],[115.419311,23.243785]]]]}},{"type":"Feature","properties":{"adcode":441700,"name":"阳江市","center":[111.975107,21.859222],"centroid":[111.779569,22.02617],"childrenNum":4,"level":"city","parent":{"adcode":440000},"subFeatureIndex":14,"acroutes":[100000,440000]},"geometry":{"type":"MultiPolygon","coordinates":[[[[112.307824,21.704174],[112.292573,21.699465],[112.274103,21.699732],[112.263068,21.69347],[112.260232,21.698073],[112.240076,21.701606],[112.241073,21.71552],[112.231646,21.729594],[112.220381,21.726918],[112.208808,21.737085],[112.197006,21.736657],[112.192101,21.757684],[112.196163,21.779403],[112.192331,21.789351],[112.183901,21.796358],[112.171792,21.798444],[112.136539,21.793844],[112.063197,21.771325],[112.03645,21.761428],[112.001197,21.74281],[111.955981,21.710543],[111.949697,21.690848],[111.95031,21.675592],[111.954525,21.667723],[111.972228,21.653644],[112.001274,21.655946],[112.022196,21.645988],[112.024955,21.629764],[112.006178,21.614663],[111.999204,21.61793],[111.972458,21.603256],[111.947244,21.600417],[111.941726,21.606844],[111.921494,21.599507],[111.88762,21.578671],[111.868691,21.559172],[111.862789,21.556976],[111.854972,21.567261],[111.846772,21.567369],[111.829375,21.557994],[111.812822,21.555047],[111.80738,21.559065],[111.813665,21.57144],[111.830985,21.582849],[111.810293,21.604541],[111.794429,21.611289],[111.758716,21.613913],[111.736644,21.610004],[111.693727,21.590348],[111.68453,21.581403],[111.676407,21.565815],[111.677403,21.529758],[111.662382,21.525739],[111.650427,21.512288],[111.645139,21.519308],[111.615863,21.529597],[111.605977,21.529383],[111.579384,21.518237],[111.560684,21.505429],[111.547886,21.502642],[111.541755,21.506393],[111.539839,21.518987],[111.515851,21.514753],[111.495006,21.50157],[111.47577,21.50023],[111.452395,21.515182],[111.459139,21.524935],[111.458909,21.534151],[111.44703,21.570904],[111.439367,21.575725],[111.428944,21.570315],[111.430783,21.57985],[111.42151,21.573743],[111.418291,21.578671],[111.423809,21.591794],[111.416452,21.598061],[111.427718,21.614234],[111.42059,21.617394],[111.415456,21.632762],[111.416299,21.646898],[111.421587,21.648772],[111.42289,21.661353],[111.43155,21.670293],[111.428944,21.676984],[111.44067,21.69347],[111.431243,21.71857],[111.40304,21.728095],[111.389859,21.727132],[111.381275,21.734463],[111.383651,21.750247],[111.388786,21.756239],[111.374301,21.774374],[111.386947,21.780258],[111.401508,21.798337],[111.423503,21.81374],[111.417218,21.850154],[111.402887,21.854858],[111.40327,21.862183],[111.374608,21.860525],[111.367864,21.862557],[111.362499,21.877044],[111.340044,21.874424],[111.325177,21.886986],[111.320119,21.897836],[111.310922,21.893988],[111.290077,21.907991],[111.287241,21.924129],[111.294675,21.935885],[111.283409,21.952181],[111.283716,21.971841],[111.287624,21.977984],[111.283333,21.986797],[111.287624,22.000043],[111.305941,22.011846],[111.304638,22.029948],[111.295901,22.03139],[111.285325,22.048369],[111.288467,22.058299],[111.300653,22.064012],[111.298583,22.069991],[111.304561,22.084403],[111.316976,22.082641],[111.312685,22.088353],[111.327169,22.10303],[111.32441,22.113383],[111.337515,22.118453],[111.340657,22.129445],[111.331384,22.142198],[111.33445,22.160017],[111.327169,22.171326],[111.348091,22.181035],[111.354069,22.193356],[111.346099,22.211488],[111.360507,22.233938],[111.37683,22.243162],[111.381275,22.240869],[111.388556,22.251319],[111.401278,22.253025],[111.416835,22.263367],[111.42266,22.272643],[111.433389,22.275255],[111.453468,22.270297],[111.459446,22.296415],[111.46481,22.30217],[111.459369,22.309738],[111.468182,22.326683],[111.465807,22.33004],[111.479601,22.334143],[111.492247,22.333557],[111.494163,22.339418],[111.511176,22.349594],[111.517001,22.365309],[111.531102,22.358384],[111.542751,22.368079],[111.55256,22.364723],[111.57149,22.375217],[111.590266,22.369784],[111.600689,22.375537],[111.60728,22.39322],[111.616783,22.390504],[111.630884,22.402859],[111.649584,22.426716],[111.660083,22.434915],[111.679089,22.45685],[111.683381,22.468774],[111.680315,22.4824],[111.691198,22.482134],[111.713346,22.504699],[111.721393,22.525931],[111.719707,22.54035],[111.738023,22.570459],[111.764004,22.582692],[111.76408,22.588011],[111.780327,22.595988],[111.784313,22.607581],[111.802476,22.626192],[111.814508,22.633263],[111.807074,22.645384],[111.809756,22.656123],[111.820332,22.666701],[111.820102,22.676427],[111.833437,22.680732],[111.835277,22.68897],[111.84248,22.687801],[111.841331,22.679085],[111.850681,22.676268],[111.86256,22.658993],[111.870836,22.65979],[111.871296,22.633529],[111.857425,22.632731],[111.85344,22.624331],[111.86049,22.617099],[111.859111,22.605401],[111.846925,22.612207],[111.841178,22.605454],[111.831904,22.60891],[111.821788,22.59769],[111.83405,22.595829],[111.835736,22.585937],[111.859417,22.581575],[111.870836,22.571735],[111.873825,22.579288],[111.900265,22.570512],[111.902258,22.581469],[111.914213,22.593701],[111.918965,22.592106],[111.931227,22.606039],[111.939121,22.620875],[111.956517,22.633795],[111.96602,22.627521],[111.98518,22.593861],[111.998361,22.589287],[111.998591,22.575459],[111.989931,22.565033],[111.976366,22.562959],[111.969546,22.546468],[111.98403,22.515342],[111.983724,22.505391],[111.995373,22.492406],[112.008861,22.491075],[112.014302,22.484795],[112.012923,22.471755],[112.034534,22.466325],[112.045494,22.45307],[112.058828,22.451207],[112.073006,22.434969],[112.077375,22.420858],[112.086725,22.416226],[112.108949,22.41335],[112.13286,22.405842],[112.142057,22.41548],[112.161523,22.400676],[112.165431,22.385018],[112.154012,22.37591],[112.153323,22.368452],[112.144433,22.358597],[112.150564,22.35327],[112.147268,22.339098],[112.13447,22.337233],[112.1347,22.349221],[112.128185,22.349754],[112.119832,22.337766],[112.119985,22.35636],[112.107877,22.347463],[112.098757,22.351618],[112.081896,22.351086],[112.065036,22.324392],[112.068945,22.318477],[112.062201,22.304515],[112.068332,22.295988],[112.061511,22.28357],[112.049479,22.270777],[112.036604,22.262781],[112.019973,22.268271],[112.010547,22.266193],[112.004262,22.248333],[112.021353,22.242842],[112.024112,22.235217],[112.037906,22.232178],[112.037906,22.215061],[112.051625,22.207542],[112.052161,22.194742],[112.041585,22.187489],[112.03668,22.168019],[112.051165,22.14684],[112.038826,22.131366],[112.027254,22.127044],[112.034381,22.113437],[112.072776,22.125177],[112.073236,22.130192],[112.086341,22.131313],[112.089867,22.137342],[112.105884,22.135795],[112.106727,22.125497],[112.126806,22.105538],[112.126116,22.096572],[112.143206,22.095185],[112.149721,22.090915],[112.156541,22.095718],[112.16773,22.085417],[112.173785,22.085204],[112.185051,22.066841],[112.199075,22.064706],[112.212334,22.069243],[112.226818,22.063585],[112.231263,22.0528],[112.216779,22.03956],[112.221607,22.01788],[112.232029,22.019589],[112.225669,22.012219],[112.239387,22.006185],[112.263757,22.001432],[112.273644,21.99358],[112.276939,21.982524],[112.299011,21.985248],[112.318477,21.976381],[112.323841,21.962919],[112.331045,21.9595],[112.340472,21.942831],[112.341085,21.919213],[112.346909,21.920442],[112.345147,21.906067],[112.350818,21.901631],[112.348365,21.885276],[112.343077,21.876723],[112.356872,21.872019],[112.370054,21.861434],[112.351737,21.849298],[112.358558,21.834006],[112.342464,21.818499],[112.34576,21.811814],[112.32775,21.799193],[112.333574,21.770844],[112.326754,21.767527],[112.313955,21.751263],[112.304529,21.744415],[112.310047,21.732483],[112.303456,21.71445],[112.307824,21.704174]]],[[[112.181065,21.545885],[112.180836,21.554779],[112.189879,21.558315],[112.190952,21.5506],[112.204823,21.548189],[112.186813,21.543314],[112.181065,21.545885]]],[[[112.140601,21.601917],[112.144816,21.613913],[112.150104,21.601863],[112.140601,21.601917]]],[[[112.118146,21.633458],[112.118146,21.642829],[112.129258,21.640526],[112.118146,21.633458]]]]}},{"type":"Feature","properties":{"adcode":441800,"name":"清远市","center":[113.051227,23.685022],"centroid":[112.879385,24.313377],"childrenNum":8,"level":"city","parent":{"adcode":440000},"subFeatureIndex":15,"acroutes":[100000,440000]},"geometry":{"type":"MultiPolygon","coordinates":[[[[113.800265,23.902566],[113.791605,23.903882],[113.781105,23.896299],[113.775358,23.877918],[113.767081,23.871439],[113.758191,23.857479],[113.749071,23.854371],[113.742327,23.859165],[113.733667,23.855003],[113.713511,23.862484],[113.709756,23.856267],[113.718033,23.843887],[113.714814,23.834982],[113.720178,23.825129],[113.706384,23.815275],[113.687378,23.825709],[113.684312,23.812956],[113.666379,23.813694],[113.651664,23.820123],[113.640245,23.814274],[113.633731,23.797198],[113.615185,23.779804],[113.626144,23.767416],[113.636414,23.750229],[113.630742,23.738946],[113.63649,23.731985],[113.631662,23.727872],[113.628137,23.711682],[113.638176,23.704562],[113.622619,23.699446],[113.623845,23.694699],[113.61166,23.686206],[113.615721,23.680192],[113.597252,23.664946],[113.587212,23.669008],[113.587289,23.675234],[113.568053,23.679454],[113.568053,23.690215],[113.55878,23.700712],[113.546901,23.702558],[113.545445,23.696387],[113.527052,23.686153],[113.510268,23.682461],[113.481069,23.684043],[113.468731,23.691006],[113.464286,23.70799],[113.443823,23.715901],[113.438459,23.727134],[113.404278,23.723495],[113.397841,23.730562],[113.378375,23.731511],[113.372397,23.709731],[113.366343,23.710311],[113.347413,23.667215],[113.338447,23.665737],[113.334845,23.656399],[113.327947,23.655502],[113.32833,23.645371],[113.31101,23.643313],[113.289245,23.644368],[113.299438,23.637456],[113.290548,23.617085],[113.280049,23.608957],[113.2766,23.615977],[113.248474,23.601567],[113.24035,23.606212],[113.245868,23.588265],[113.227859,23.594441],[113.227015,23.585731],[113.214524,23.584253],[113.202262,23.576492],[113.200805,23.561815],[113.210155,23.552997],[113.211918,23.543914],[113.191149,23.523212],[113.192069,23.514761],[113.172066,23.512384],[113.15352,23.502823],[113.128689,23.512596],[113.108994,23.497964],[113.083933,23.494266],[113.075503,23.484228],[113.063854,23.482537],[113.055884,23.471971],[113.042932,23.474137],[113.018025,23.469065],[113.00469,23.462037],[112.993347,23.466845],[112.975184,23.463622],[112.966294,23.460663],[112.965835,23.452155],[112.957634,23.447558],[112.94223,23.460188],[112.930198,23.463094],[112.933493,23.47065],[112.925753,23.472393],[112.928435,23.483488],[112.903298,23.488613],[112.887741,23.517402],[112.893259,23.526434],[112.911192,23.541643],[112.91533,23.55231],[112.900309,23.566725],[112.893412,23.55268],[112.871647,23.570896],[112.86291,23.57343],[112.848502,23.566936],[112.827197,23.567042],[112.830493,23.545762],[112.802137,23.545551],[112.796772,23.551835],[112.7934,23.571688],[112.800144,23.571846],[112.799761,23.588951],[112.781828,23.588529],[112.772171,23.603309],[112.756844,23.603309],[112.750483,23.610065],[112.752092,23.628643],[112.778302,23.641255],[112.784663,23.655291],[112.780908,23.671224],[112.768646,23.677397],[112.75922,23.672332],[112.751249,23.675286],[112.744965,23.668481],[112.739907,23.672596],[112.744965,23.686523],[112.728718,23.678504],[112.715076,23.691639],[112.72159,23.698549],[112.724579,23.710258],[112.713467,23.706883],[112.711321,23.712104],[112.725882,23.725816],[112.743126,23.752444],[112.730021,23.758507],[112.706033,23.752813],[112.69768,23.765677],[112.704194,23.790557],[112.700668,23.793192],[112.70588,23.806369],[112.689479,23.806369],[112.675455,23.815169],[112.655376,23.812587],[112.661353,23.821651],[112.675225,23.831241],[112.672159,23.851473],[112.679516,23.857216],[112.672159,23.864801],[112.692162,23.88961],[112.685494,23.895351],[112.693235,23.904251],[112.693464,23.912729],[112.683272,23.92405],[112.682582,23.939056],[112.675838,23.939846],[112.662886,23.949585],[112.645106,23.941004],[112.622651,23.943636],[112.608167,23.952586],[112.588318,23.956692],[112.575136,23.967325],[112.567012,23.964903],[112.564253,23.977325],[112.535668,23.970746],[112.516125,23.977009],[112.511297,24.001376],[112.506469,24.007269],[112.518501,24.016635],[112.507618,24.043309],[112.507542,24.051778],[112.497885,24.064401],[112.500798,24.08081],[112.489532,24.086122],[112.49367,24.095377],[112.486696,24.114148],[112.463782,24.120772],[112.452516,24.115725],[112.455351,24.12482],[112.446921,24.121929],[112.429831,24.127081],[112.428452,24.139802],[112.434659,24.147529],[112.429525,24.160564],[112.434813,24.164453],[112.43144,24.173387],[112.439028,24.180324],[112.439564,24.19057],[112.453052,24.20938],[112.458723,24.238377],[112.449987,24.28102],[112.444239,24.287741],[112.423777,24.284958],[112.411285,24.307061],[112.401858,24.310211],[112.393888,24.326641],[112.384845,24.328373],[112.373732,24.347949],[112.342004,24.353512],[112.319703,24.380167],[112.307211,24.378593],[112.288971,24.388666],[112.284679,24.377334],[112.293646,24.344538],[112.293723,24.327585],[112.27441,24.320604],[112.258316,24.324279],[112.256937,24.320762],[112.261995,24.290576],[112.255557,24.279182],[112.256324,24.2597],[112.249503,24.243367],[112.235708,24.246203],[112.218311,24.244365],[112.215093,24.223459],[112.196929,24.204074],[112.169876,24.197454],[112.166658,24.187943],[112.157538,24.185841],[112.148341,24.190098],[112.144433,24.201394],[112.129258,24.207489],[112.122591,24.222986],[112.11508,24.229027],[112.106114,24.228555],[112.086878,24.256917],[112.067872,24.260698],[112.058369,24.247043],[112.053157,24.24594],[112.050398,24.224247],[112.041355,24.216682],[112.04603,24.197611],[112.041815,24.191516],[112.024955,24.188364],[112.006868,24.19015],[111.997672,24.186945],[111.994223,24.19861],[111.986866,24.205124],[111.978052,24.222671],[111.961575,24.234753],[111.942646,24.234858],[111.94073,24.245153],[111.952685,24.25156],[111.956057,24.26033],[111.969009,24.263691],[111.975983,24.255079],[111.988015,24.259018],[111.990391,24.279812],[112.003113,24.28165],[112.015911,24.293989],[112.026104,24.295091],[112.033231,24.31336],[112.045187,24.320762],[112.050552,24.332572],[112.059442,24.339709],[112.061817,24.368152],[112.057679,24.387093],[112.043578,24.392706],[112.042121,24.410279],[112.023192,24.441538],[111.999741,24.450452],[111.996522,24.459261],[111.986636,24.464505],[111.987096,24.480862],[111.996369,24.494911],[112.009704,24.502878],[112.005259,24.512051],[112.007405,24.534533],[111.997825,24.551196],[111.989855,24.550776],[111.978282,24.56136],[111.971998,24.578648],[111.963338,24.5809],[111.948547,24.592686],[111.937128,24.595828],[111.938431,24.609498],[111.927472,24.629397],[111.934292,24.641911],[111.953528,24.647199],[111.947551,24.665364],[111.939197,24.6695],[111.944179,24.676409],[111.939657,24.686616],[111.952839,24.69635],[111.961345,24.721206],[111.972688,24.72738],[111.985026,24.727485],[111.999128,24.733135],[112.013919,24.731514],[112.030473,24.745064],[112.033845,24.771165],[112.05423,24.788895],[112.059212,24.79951],[112.083812,24.804844],[112.096458,24.817235],[112.097224,24.826385],[112.112628,24.831508],[112.124047,24.841074],[112.141444,24.844524],[112.149491,24.836945],[112.161063,24.844211],[112.171103,24.862713],[112.165661,24.867208],[112.16819,24.890828],[112.175164,24.927504],[112.15248,24.932414],[112.142134,24.937951],[112.120062,24.963698],[112.122744,24.990485],[112.134623,24.99581],[112.155698,25.026974],[112.148878,25.035429],[112.153553,25.045502],[112.152173,25.055939],[112.162749,25.068462],[112.165815,25.085001],[112.17708,25.107379],[112.174168,25.129493],[112.183901,25.14107],[112.183288,25.14884],[112.193174,25.172197],[112.18735,25.183092],[112.201758,25.185803],[112.23931,25.187419],[112.246591,25.184969],[112.255557,25.171571],[112.256094,25.159372],[112.281997,25.164742],[112.288435,25.15859],[112.302536,25.157182],[112.313648,25.173917],[112.332425,25.174543],[112.350894,25.187054],[112.364842,25.191693],[112.373732,25.177567],[112.393122,25.160154],[112.387374,25.152177],[112.399483,25.140653],[112.413354,25.141331],[112.426153,25.156244],[112.430674,25.175273],[112.443013,25.185594],[112.454815,25.1735],[112.452669,25.159841],[112.458264,25.152072],[112.4775,25.151394],[112.491065,25.144459],[112.502637,25.144616],[112.507695,25.136742],[112.537047,25.134239],[112.562644,25.124487],[112.596518,25.12626],[112.612765,25.133196],[112.624797,25.134082],[112.628169,25.140601],[112.648018,25.133613],[112.659821,25.132779],[112.667868,25.12214],[112.668864,25.113951],[112.679746,25.109935],[112.695227,25.095538],[112.697296,25.089957],[112.715613,25.078375],[112.719215,25.048268],[112.715153,25.026035],[112.725882,25.010062],[112.741823,24.998577],[112.745348,24.981348],[112.742206,24.977484],[112.746344,24.956492],[112.773474,24.949963],[112.784433,24.938577],[112.782211,24.922698],[112.786732,24.912406],[112.780755,24.897307],[112.788342,24.892396],[112.804436,24.890724],[112.842065,24.897151],[112.873486,24.89668],[112.879311,24.907809],[112.904371,24.92181],[112.924527,24.918884],[112.937402,24.920452],[112.94177,24.915907],[112.959244,24.923481],[112.966831,24.919302],[112.984457,24.921183],[112.994804,24.927347],[113.00515,24.914078],[113.004766,24.900129],[113.009901,24.896889],[113.010974,24.882781],[113.022163,24.870866],[113.019557,24.855971],[113.014729,24.851528],[112.998942,24.850483],[112.979246,24.832553],[112.95978,24.824241],[112.95158,24.815771],[112.960087,24.800974],[112.95112,24.788476],[112.954109,24.782201],[112.940161,24.757514],[112.933647,24.755369],[112.938781,24.73821],[112.930351,24.718695],[112.900616,24.713776],[112.914487,24.662695],[112.896401,24.650602],[112.89778,24.632277],[112.884599,24.616358],[112.887971,24.595304],[112.8987,24.600542],[112.902072,24.595671],[112.91717,24.60049],[112.926366,24.596457],[112.950507,24.59499],[112.964378,24.586138],[112.96139,24.570266],[112.96936,24.568118],[112.981928,24.542917],[112.991048,24.544751],[112.999708,24.528716],[113.02063,24.513675],[113.025612,24.493863],[113.047377,24.475515],[113.063701,24.468804],[113.087305,24.471583],[113.096808,24.496431],[113.114128,24.502983],[113.13712,24.482907],[113.151451,24.478713],[113.153367,24.467703],[113.16195,24.479027],[113.174979,24.475882],[113.186781,24.480705],[113.19705,24.474676],[113.20617,24.476458],[113.216516,24.495697],[113.230158,24.498475],[113.235829,24.505866],[113.244642,24.502144],[113.25108,24.510216],[113.252766,24.497794],[113.261809,24.482225],[113.270392,24.47672],[113.272155,24.466969],[113.294993,24.457164],[113.31944,24.465291],[113.331243,24.472579],[113.350632,24.472159],[113.362051,24.47908],[113.37416,24.49402],[113.379754,24.485213],[113.415544,24.485266],[113.412172,24.472526],[113.419223,24.459943],[113.440988,24.453703],[113.467428,24.461726],[113.478847,24.477769],[113.489269,24.471006],[113.499309,24.473785],[113.507816,24.484007],[113.518852,24.469852],[113.530271,24.479551],[113.531343,24.489826],[113.540463,24.506233],[113.552572,24.511055],[113.57564,24.509115],[113.579548,24.50052],[113.589665,24.515248],[113.599628,24.512994],[113.596792,24.500886],[113.609667,24.489983],[113.625761,24.491923],[113.63718,24.486471],[113.643234,24.477717],[113.656799,24.468227],[113.666072,24.467493],[113.683163,24.454175],[113.686381,24.437709],[113.709909,24.412377],[113.722248,24.414633],[113.723934,24.43493],[113.726999,24.437028],[113.753439,24.437185],[113.762866,24.43299],[113.765318,24.417727],[113.77827,24.410909],[113.803867,24.401781],[113.805553,24.384364],[113.800955,24.377334],[113.818581,24.3522],[113.817048,24.34459],[113.831303,24.33656],[113.8405,24.336246],[113.850462,24.318872],[113.844791,24.304541],[113.844715,24.279707],[113.850003,24.274561],[113.84004,24.265109],[113.855827,24.252926],[113.862878,24.259018],[113.872074,24.253976],[113.870541,24.242264],[113.88311,24.245415],[113.890774,24.241476],[113.890391,24.229763],[113.896522,24.210326],[113.921199,24.200974],[113.922119,24.19304],[113.930319,24.19593],[113.930242,24.188416],[113.909167,24.184318],[113.901043,24.188521],[113.880045,24.174123],[113.857053,24.16151],[113.862265,24.147319],[113.870465,24.141169],[113.86464,24.133021],[113.853911,24.132811],[113.850999,24.124978],[113.839273,24.119931],[113.836974,24.111729],[113.842415,24.104053],[113.836668,24.098637],[113.836821,24.088331],[113.845711,24.086806],[113.837434,24.072764],[113.828467,24.069608],[113.83115,24.063507],[113.813063,24.052567],[113.803637,24.053566],[113.790379,24.034471],[113.790608,24.025106],[113.784171,24.022317],[113.772982,24.026947],[113.763555,24.02137],[113.753592,24.026842],[113.747078,24.023212],[113.728149,23.997166],[113.718646,23.993008],[113.732364,23.981114],[113.730448,23.974641],[113.739415,23.969588],[113.744703,23.95906],[113.766468,23.96085],[113.774285,23.952691],[113.775358,23.938424],[113.792294,23.931527],[113.799345,23.923524],[113.800265,23.902566]]]]}},{"type":"Feature","properties":{"adcode":441900,"name":"东莞市","center":[113.746262,23.046237],"centroid":[113.879968,22.931881],"childrenNum":0,"level":"city","parent":{"adcode":440000},"subFeatureIndex":16,"acroutes":[100000,440000]},"geometry":{"type":"MultiPolygon","coordinates":[[[[114.229205,22.81253],[114.215641,22.807751],[114.20721,22.789802],[114.189967,22.785713],[114.180847,22.775728],[114.187974,22.770364],[114.182073,22.765265],[114.201079,22.764787],[114.203149,22.75512],[114.215641,22.73557],[114.208513,22.729248],[114.208053,22.71469],[114.196711,22.710227],[114.19947,22.702043],[114.195332,22.680095],[114.187515,22.673557],[114.187515,22.666382],[114.172494,22.654368],[114.15548,22.668933],[114.16391,22.665372],[114.167436,22.680679],[114.151801,22.690139],[114.145057,22.701193],[114.144674,22.714159],[114.121989,22.716231],[114.117621,22.723244],[114.107198,22.722979],[114.098462,22.747205],[114.084437,22.750551],[114.074781,22.740883],[114.064588,22.755916],[114.049414,22.756448],[114.049797,22.771161],[114.039911,22.764309],[114.035236,22.766752],[114.017916,22.760219],[114.002971,22.763459],[113.995308,22.771267],[113.990863,22.800211],[113.984578,22.803662],[113.974999,22.798458],[113.978371,22.806529],[113.972393,22.812476],[113.954996,22.815078],[113.954613,22.821025],[113.937829,22.832705],[113.910929,22.829997],[113.904875,22.840137],[113.893916,22.846189],[113.89951,22.855478],[113.887325,22.858504],[113.883263,22.850542],[113.877669,22.85447],[113.872611,22.837271],[113.857053,22.832599],[113.851305,22.837483],[113.841496,22.833979],[113.834675,22.822193],[113.838737,22.819591],[113.837204,22.800901],[113.824942,22.792935],[113.813446,22.790439],[113.811071,22.782473],[113.802257,22.784863],[113.801874,22.777109],[113.791835,22.767655],[113.790838,22.75342],[113.762406,22.736899],[113.751447,22.715381],[113.746005,22.72606],[113.733743,22.736367],[113.723934,22.73828],[113.697724,22.73743],[113.678181,22.726113],[113.648139,22.761759],[113.612119,22.802281],[113.58407,22.831325],[113.571195,22.853143],[113.575104,22.888331],[113.564298,22.906903],[113.550503,22.936189],[113.541766,22.959369],[113.529198,22.982599],[113.52299,23.011338],[113.522913,23.037262],[113.531957,23.050938],[113.543759,23.06228],[113.54897,23.076006],[113.556327,23.081252],[113.586446,23.08777],[113.60139,23.0954],[113.610433,23.103772],[113.640245,23.103878],[113.642698,23.113467],[113.651281,23.119295],[113.661244,23.117971],[113.662011,23.111454],[113.670671,23.116434],[113.687837,23.119772],[113.71696,23.138895],[113.738572,23.141331],[113.754052,23.129572],[113.777427,23.131108],[113.791298,23.127665],[113.814673,23.127771],[113.841113,23.116169],[113.844715,23.125599],[113.848163,23.116911],[113.863261,23.114633],[113.876596,23.124275],[113.894836,23.111295],[113.905565,23.11511],[113.938366,23.107534],[113.962737,23.114209],[113.970554,23.113308],[113.986418,23.10197],[113.993315,23.092645],[114.010252,23.083425],[114.029871,23.084379],[114.049797,23.097467],[114.065891,23.101441],[114.088959,23.094182],[114.091564,23.077331],[114.102217,23.058623],[114.120993,23.048022],[114.150269,23.024698],[114.151035,23.019079],[114.139233,23.023479],[114.124442,22.994],[114.132182,22.994424],[114.13816,22.986417],[114.15571,22.983129],[114.158546,22.978303],[114.185139,22.992727],[114.20039,22.986682],[114.212498,22.987796],[114.222385,22.980743],[114.223841,22.963719],[114.211349,22.953959],[114.213035,22.928444],[114.229742,22.914703],[114.245299,22.911732],[114.249208,22.905152],[114.259171,22.906054],[114.26032,22.899634],[114.251737,22.884351],[114.24484,22.88053],[114.236946,22.88589],[114.231198,22.880318],[114.2348,22.862962],[114.233114,22.842314],[114.235643,22.839872],[114.23388,22.816937],[114.229205,22.81253]]]]}},{"type":"Feature","properties":{"adcode":442000,"name":"中山市","center":[113.382391,22.521113],"centroid":[113.398784,22.517323],"childrenNum":0,"level":"city","parent":{"adcode":440000},"subFeatureIndex":17,"acroutes":[100000,440000]},"geometry":{"type":"MultiPolygon","coordinates":[[[[113.568743,22.411912],[113.537168,22.416332],[113.51433,22.408717],[113.508889,22.413403],[113.49586,22.407546],[113.495247,22.395403],[113.48697,22.390184],[113.491339,22.376922],[113.489193,22.365842],[113.493255,22.354069],[113.490342,22.34075],[113.494787,22.339684],[113.504137,22.324286],[113.493331,22.317998],[113.482985,22.318797],[113.470493,22.310377],[113.480456,22.303876],[113.496397,22.282237],[113.50475,22.266992],[113.514407,22.261555],[113.513027,22.249879],[113.478847,22.23831],[113.486357,22.227113],[113.462676,22.218847],[113.458384,22.213781],[113.430565,22.201302],[113.415774,22.202902],[113.390943,22.231858],[113.385272,22.230365],[113.352395,22.249133],[113.345114,22.258569],[113.336607,22.280105],[113.32128,22.312189],[113.32036,22.329561],[113.307178,22.346504],[113.273841,22.384751],[113.262652,22.392048],[113.256368,22.410794],[113.256444,22.43779],[113.245179,22.457276],[113.240121,22.476172],[113.2251,22.497142],[113.2251,22.497142],[113.215367,22.513107],[113.187087,22.539924],[113.188697,22.552798],[113.185095,22.574289],[113.176358,22.590032],[113.157045,22.614228],[113.157199,22.63204],[113.163176,22.651392],[113.17061,22.651392],[113.160801,22.665425],[113.161414,22.673717],[113.17199,22.680679],[113.189386,22.673876],[113.201035,22.675949],[113.199273,22.682539],[113.204254,22.697314],[113.222264,22.712246],[113.236289,22.740777],[113.243033,22.745345],[113.254069,22.74083],[113.260889,22.730311],[113.270546,22.726485],[113.284877,22.738864],[113.301431,22.736261],[113.329097,22.741255],[113.329327,22.749011],[113.342432,22.758254],[113.358756,22.764893],[113.365116,22.772595],[113.412172,22.742849],[113.42612,22.738014],[113.447808,22.735836],[113.467964,22.728504],[113.464822,22.72096],[113.491875,22.699811],[113.523373,22.679297],[113.540693,22.666222],[113.533106,22.656388],[113.536861,22.647511],[113.561615,22.607528],[113.578552,22.604603],[113.589971,22.59519],[113.599628,22.594393],[113.62078,22.579554],[113.639326,22.548276],[113.651588,22.515715],[113.692052,22.515129],[113.668448,22.480431],[113.631509,22.47596],[113.610127,22.445723],[113.573724,22.411699],[113.568743,22.411912]]]]}},{"type":"Feature","properties":{"adcode":442100,"name":"东沙群岛","center":[116.887312,20.617512],"childrenNum":0,"level":"city","parent":{"adcode":440000},"subFeatureIndex":18,"acroutes":[100000,440000]},"geometry":{"type":"MultiPolygon","coordinates":[[[[116.769589,20.771743],[116.820093,20.780414],[116.845307,20.778529],[116.860328,20.779876],[116.886001,20.775514],[116.90677,20.762049],[116.911982,20.755908],[116.9257,20.726765],[116.933747,20.67633],[116.931831,20.666198],[116.917729,20.637037],[116.904931,20.619301],[116.887151,20.604043],[116.862933,20.588891],[116.825611,20.583714],[116.796029,20.582636],[116.770355,20.58792],[116.749586,20.600915],[116.748667,20.612292],[116.758476,20.618438],[116.791737,20.613155],[116.82791,20.619732],[116.848832,20.628304],[116.874506,20.650621],[116.88991,20.683066],[116.888301,20.713996],[116.880943,20.733499],[116.872513,20.738294],[116.831129,20.741526],[116.809747,20.738401],[116.797638,20.745458],[116.768976,20.743896],[116.761005,20.750306],[116.769742,20.75817],[116.769589,20.771743]]],[[[116.735562,20.694544],[116.71441,20.700256],[116.72238,20.707476],[116.736788,20.701118],[116.735562,20.694544]]],[[[115.943359,21.09745],[115.950026,21.110616],[115.965047,21.12362],[116.000301,21.126951],[116.024441,21.124211],[116.043831,21.110186],[116.057549,21.087507],[116.065749,21.064879],[116.067358,21.040419],[116.055096,21.027408],[116.040075,21.020472],[116.016931,21.023214],[115.989188,21.035473],[115.953322,21.064288],[115.944125,21.08267],[115.943359,21.09745]]],[[[115.926728,20.981538],[115.931557,20.992993],[115.954088,20.999823],[115.987196,20.966693],[116.000914,20.948404],[115.998844,20.922956],[115.969875,20.919513],[115.953168,20.928337],[115.939374,20.945821],[115.931173,20.964057],[115.926728,20.981538]]]]}},{"type":"Feature","properties":{"adcode":445100,"name":"潮州市","center":[116.632301,23.661701],"centroid":[116.790217,23.783155],"childrenNum":3,"level":"city","parent":{"adcode":440000},"subFeatureIndex":19,"acroutes":[100000,440000]},"geometry":{"type":"MultiPolygon","coordinates":[[[[116.91704,23.531662],[116.918342,23.561603],[116.909146,23.58193],[116.911062,23.602201],[116.900563,23.611965],[116.900639,23.61946],[116.891289,23.622785],[116.874812,23.616082],[116.86278,23.623471],[116.863087,23.632601],[116.83818,23.644632],[116.830976,23.645793],[116.821319,23.635609],[116.822545,23.627429],[116.831895,23.622152],[116.827527,23.611807],[116.815035,23.612493],[116.805379,23.606793],[116.795799,23.610488],[116.791737,23.59935],[116.794496,23.589532],[116.785223,23.579554],[116.772578,23.584147],[116.761389,23.573958],[116.755794,23.575648],[116.747211,23.59233],[116.738934,23.60162],[116.71303,23.597925],[116.714946,23.584728],[116.702991,23.574433],[116.718701,23.563135],[116.719391,23.552522],[116.70621,23.542541],[116.70483,23.517561],[116.71326,23.493103],[116.717935,23.471072],[116.7128,23.459236],[116.702378,23.456172],[116.698469,23.446977],[116.702608,23.438204],[116.68659,23.429483],[116.681915,23.438627],[116.668504,23.428638],[116.654403,23.431069],[116.650264,23.426312],[116.630108,23.429378],[116.633557,23.45057],[116.619762,23.466423],[116.608343,23.464785],[116.586578,23.475563],[116.580754,23.473873],[116.559908,23.482432],[116.554774,23.495586],[116.543661,23.505623],[116.544811,23.528546],[116.554007,23.534356],[116.553624,23.541591],[116.570638,23.548614],[116.564966,23.557063],[116.567036,23.569207],[116.551555,23.579502],[116.542282,23.573694],[116.533315,23.581508],[116.533775,23.590113],[116.526264,23.590165],[116.527261,23.603309],[116.533698,23.606265],[116.533545,23.617296],[116.526111,23.626532],[116.527184,23.63429],[116.514156,23.655924],[116.48488,23.658879],[116.474534,23.655924],[116.470319,23.669589],[116.448477,23.677766],[116.444722,23.6698],[116.434376,23.67977],[116.43154,23.690637],[116.404104,23.694382],[116.385481,23.714688],[116.377741,23.712209],[116.37161,23.717431],[116.368468,23.73304],[116.373296,23.740264],[116.380883,23.737364],[116.401958,23.76225],[116.402955,23.769261],[116.416903,23.777854],[116.436215,23.780331],[116.439357,23.773584],[116.451849,23.76905],[116.464954,23.755238],[116.485187,23.751547],[116.496146,23.752496],[116.504729,23.763673],[116.505955,23.793614],[116.516761,23.802679],[116.510324,23.808793],[116.513389,23.815854],[116.509864,23.827764],[116.518371,23.823443],[116.525881,23.8324],[116.516608,23.845994],[116.498981,23.85848],[116.496989,23.869226],[116.514386,23.866698],[116.522279,23.882131],[116.535384,23.88171],[116.536304,23.886608],[116.558682,23.899037],[116.557992,23.907253],[116.575083,23.909149],[116.590487,23.900933],[116.604741,23.910781],[116.604205,23.929474],[116.608343,23.94153],[116.604205,23.950322],[116.623518,23.947269],[116.62574,23.950006],[116.60842,23.961166],[116.610796,23.968483],[116.628652,23.973693],[116.637312,23.968851],[116.641144,23.989588],[116.646969,23.994429],[116.657775,23.988588],[116.684751,23.989588],[116.68797,23.981062],[116.69548,23.991903],[116.690422,24.005375],[116.697166,24.002586],[116.708815,24.019161],[116.708662,24.033471],[116.700155,24.050094],[116.71257,24.062455],[116.734642,24.053619],[116.744069,24.061982],[116.75748,24.082125],[116.76752,24.074657],[116.772195,24.09401],[116.766447,24.107523],[116.76637,24.124032],[116.780241,24.147319],[116.789745,24.157095],[116.796872,24.157043],[116.809594,24.169183],[116.831819,24.161878],[116.836034,24.173387],[116.847836,24.182689],[116.859485,24.177276],[116.867072,24.163717],[116.878568,24.167817],[116.883856,24.181638],[116.884315,24.193671],[116.900333,24.196771],[116.904548,24.202813],[116.896577,24.218784],[116.917116,24.232809],[116.933363,24.222251],[116.94325,24.216262],[116.956125,24.216998],[116.971299,24.198084],[116.976357,24.199818],[116.991148,24.189887],[116.998659,24.17901],[116.990382,24.168342],[116.97881,24.162088],[116.972908,24.153521],[116.964785,24.153364],[116.947082,24.134914],[116.934896,24.126923],[116.926619,24.098585],[116.929455,24.091381],[116.929761,24.065453],[116.936965,24.054566],[116.952446,24.054723],[116.95007,24.040836],[116.939801,24.03305],[116.955129,24.020266],[116.954439,24.005954],[116.96011,24.002112],[116.96992,24.007427],[116.981339,23.996692],[116.975361,23.99064],[116.973138,23.97422],[116.982641,23.959324],[116.980189,23.941056],[116.973292,23.927052],[116.954745,23.920417],[116.959267,23.91452],[116.958807,23.90067],[116.972985,23.894824],[116.979269,23.884449],[116.975514,23.872281],[116.960033,23.868173],[116.962026,23.861377],[116.981568,23.855582],[116.989922,23.8628],[117.01207,23.855266],[117.022416,23.838776],[117.026785,23.819912],[117.018431,23.812218],[117.020041,23.800729],[117.031766,23.791348],[117.039353,23.778434],[117.042572,23.763779],[117.047783,23.758665],[117.051079,23.736731],[117.049929,23.721649],[117.053225,23.698391],[117.066636,23.688791],[117.07407,23.690954],[117.087941,23.669325],[117.115454,23.665263],[117.124881,23.646057],[117.132928,23.651439],[117.147489,23.653813],[117.159368,23.640094],[117.173699,23.634659],[117.185961,23.636242],[117.192552,23.629593],[117.192935,23.561656],[117.113002,23.542383],[117.09959,23.537577],[117.085566,23.536943],[117.069548,23.542277],[117.044795,23.539689],[117.031766,23.531293],[117.018125,23.505359],[117.010231,23.502665],[116.963405,23.506997],[116.940951,23.514656],[116.930528,23.528071],[116.91704,23.531662]]]]}},{"type":"Feature","properties":{"adcode":445200,"name":"揭阳市","center":[116.355733,23.543778],"centroid":[116.124312,23.334048],"childrenNum":5,"level":"city","parent":{"adcode":440000},"subFeatureIndex":20,"acroutes":[100000,440000]},"geometry":{"type":"MultiPolygon","coordinates":[[[[116.226918,22.914491],[116.223929,22.926852],[116.211667,22.926004],[116.198256,22.93168],[116.181549,22.92611],[116.16806,22.913695],[116.173272,22.900271],[116.16967,22.886367],[116.157178,22.886049],[116.143843,22.890294],[116.135106,22.900589],[116.124453,22.892523],[116.109969,22.891143],[116.086595,22.901491],[116.080234,22.915764],[116.055633,22.920433],[116.026894,22.939107],[116.017697,22.934067],[116.005665,22.945632],[116.0026,22.937409],[115.983287,22.925897],[115.979225,22.938629],[115.967116,22.943775],[115.977846,22.951838],[115.973247,22.969818],[115.963515,22.94961],[115.958993,22.957036],[115.943819,22.956293],[115.9488,22.972682],[115.941213,22.987053],[115.94949,22.990023],[115.945505,22.996015],[115.959989,23.017435],[115.954471,23.021571],[115.942209,23.006195],[115.923586,23.017594],[115.937688,23.030424],[115.950716,23.024327],[115.955314,23.038322],[115.966963,23.04728],[115.964741,23.052952],[115.951099,23.061273],[115.950333,23.06599],[115.937688,23.067156],[115.939833,23.082206],[115.920751,23.100116],[115.923126,23.110977],[115.916612,23.112302],[115.908795,23.125652],[115.898832,23.129466],[115.883505,23.11956],[115.864345,23.117865],[115.85147,23.098791],[115.832924,23.112196],[115.833154,23.122897],[115.79951,23.133015],[115.791386,23.13953],[115.780657,23.15828],[115.76349,23.159233],[115.752991,23.167813],[115.725631,23.183805],[115.733525,23.192806],[115.730613,23.199107],[115.73866,23.211125],[115.752148,23.193601],[115.757743,23.215942],[115.750079,23.225683],[115.749236,23.236375],[115.758126,23.244949],[115.768089,23.24442],[115.797288,23.249184],[115.810929,23.24876],[115.831621,23.258128],[115.824571,23.272416],[115.797671,23.286596],[115.797288,23.309134],[115.802039,23.324422],[115.812845,23.326696],[115.819666,23.335741],[115.811236,23.346689],[115.787401,23.368952],[115.777668,23.383651],[115.739886,23.379263],[115.725938,23.369375],[115.703023,23.368265],[115.694057,23.354675],[115.676813,23.354992],[115.671602,23.38344],[115.673058,23.395071],[115.682868,23.407759],[115.657884,23.420445],[115.648304,23.430329],[115.646235,23.439684],[115.625236,23.45168],[115.61443,23.469751],[115.606537,23.471865],[115.616116,23.475035],[115.623167,23.489934],[115.622094,23.507102],[115.637115,23.514972],[115.642096,23.513863],[115.639797,23.528758],[115.659493,23.532613],[115.669686,23.548403],[115.687389,23.557538],[115.69467,23.550092],[115.70195,23.534092],[115.713829,23.519092],[115.723179,23.514656],[115.733755,23.51624],[115.736437,23.525958],[115.751612,23.52749],[115.759735,23.522895],[115.776059,23.524638],[115.786175,23.517455],[115.793302,23.525694],[115.788398,23.539267],[115.801349,23.543122],[115.80794,23.554158],[115.802116,23.557168],[115.812309,23.578974],[115.798131,23.597133],[115.807787,23.59877],[115.808247,23.606687],[115.800047,23.615502],[115.81844,23.644632],[115.83461,23.660884],[115.86036,23.65756],[115.863656,23.646057],[115.876148,23.633973],[115.896227,23.625846],[115.897836,23.620093],[115.914696,23.630859],[115.923663,23.628168],[115.954471,23.64516],[115.95861,23.655871],[115.972328,23.664102],[115.985816,23.676974],[116.006585,23.675497],[116.017467,23.661939],[116.01126,23.654236],[116.021223,23.644685],[116.039386,23.648168],[116.055786,23.639514],[116.056476,23.646374],[116.072417,23.642785],[116.074256,23.636295],[116.087208,23.626426],[116.09878,23.622574],[116.106137,23.628379],[116.117326,23.620885],[116.133497,23.62421],[116.150664,23.616241],[116.165455,23.616082],[116.17787,23.628221],[116.179939,23.637139],[116.191358,23.641361],[116.187373,23.652336],[116.17764,23.657296],[116.183005,23.674442],[116.181089,23.68552],[116.19588,23.685784],[116.214349,23.702558],[116.214119,23.71896],[116.227684,23.728821],[116.236957,23.727608],[116.233126,23.718169],[116.271598,23.746433],[116.271215,23.757294],[116.288458,23.763199],[116.295892,23.759139],[116.306621,23.769841],[116.320033,23.775534],[116.335437,23.773953],[116.338732,23.758823],[116.350151,23.751969],[116.35475,23.743058],[116.368468,23.73304],[116.37161,23.717431],[116.377741,23.712209],[116.385481,23.714688],[116.404104,23.694382],[116.43154,23.690637],[116.434376,23.67977],[116.444722,23.6698],[116.448477,23.677766],[116.470319,23.669589],[116.474534,23.655924],[116.48488,23.658879],[116.514156,23.655924],[116.527184,23.63429],[116.526111,23.626532],[116.533545,23.617296],[116.533698,23.606265],[116.527261,23.603309],[116.526264,23.590165],[116.533775,23.590113],[116.533315,23.581508],[116.542282,23.573694],[116.551555,23.579502],[116.567036,23.569207],[116.564966,23.557063],[116.570638,23.548614],[116.553624,23.541591],[116.554007,23.534356],[116.544811,23.528546],[116.543661,23.505623],[116.554774,23.495586],[116.559908,23.482432],[116.580754,23.473873],[116.586578,23.475563],[116.608343,23.464785],[116.619762,23.466423],[116.633557,23.45057],[116.630108,23.429378],[116.614015,23.433289],[116.605431,23.443013],[116.58995,23.453265],[116.588111,23.461984],[116.580294,23.461139],[116.579834,23.447981],[116.58949,23.443383],[116.591177,23.426524],[116.58198,23.423194],[116.577075,23.412252],[116.586348,23.409609],[116.577995,23.40316],[116.569105,23.388093],[116.568339,23.378258],[116.561978,23.38693],[116.553088,23.412305],[116.544887,23.424356],[116.523429,23.437517],[116.512316,23.439472],[116.469553,23.437622],[116.465721,23.442485],[116.472005,23.455802],[116.482658,23.465472],[116.491164,23.478734],[116.492314,23.492839],[116.482581,23.500552],[116.465797,23.497647],[116.448707,23.488349],[116.435832,23.473344],[116.426482,23.468642],[116.415676,23.479737],[116.41491,23.510271],[116.408856,23.512596],[116.401115,23.500394],[116.377051,23.500658],[116.355363,23.472288],[116.350764,23.449619],[116.332371,23.443647],[116.319649,23.449196],[116.316891,23.442273],[116.322868,23.421767],[116.331758,23.424409],[116.34563,23.408182],[116.34517,23.399565],[116.350994,23.386559],[116.349768,23.358112],[116.354903,23.347324],[116.348848,23.335794],[116.329689,23.336376],[116.319573,23.332303],[116.319343,23.325903],[116.330839,23.316487],[116.328846,23.299559],[116.323558,23.302839],[116.308997,23.296067],[116.312752,23.286649],[116.302406,23.279348],[116.305548,23.272839],[116.298727,23.263526],[116.294129,23.239815],[116.279415,23.226],[116.26677,23.227906],[116.259719,23.216842],[116.261328,23.205301],[116.269222,23.204984],[116.26447,23.196724],[116.252745,23.191536],[116.262325,23.175174],[116.252362,23.176286],[116.254891,23.152507],[116.244545,23.140431],[116.261558,23.12295],[116.29183,23.110501],[116.29137,23.099162],[116.302866,23.096036],[116.312829,23.102712],[116.327543,23.09646],[116.340648,23.086498],[116.346703,23.05857],[116.368314,23.05751],[116.374982,23.050408],[116.370077,23.046856],[116.3805,23.039807],[116.395904,23.044524],[116.405484,23.053959],[116.426865,23.063393],[116.437212,23.080246],[116.446561,23.085863],[116.445488,23.093281],[116.453919,23.091161],[116.478826,23.104249],[116.509787,23.100646],[116.520287,23.094553],[116.552551,23.105891],[116.56374,23.092963],[116.565809,23.08316],[116.557379,23.056238],[116.563204,23.025812],[116.576002,23.017117],[116.561978,23.006991],[116.563051,23.000734],[116.550405,22.993894],[116.540979,22.994583],[116.533162,22.984561],[116.52956,22.96531],[116.515995,22.939001],[116.505572,22.930884],[116.486949,22.93115],[116.473691,22.937728],[116.45024,22.936773],[116.382646,22.919213],[116.334977,22.938736],[116.31735,22.952845],[116.302789,22.951519],[116.269452,22.938364],[116.226918,22.914491]]]]}},{"type":"Feature","properties":{"adcode":445300,"name":"云浮市","center":[112.044439,22.929801],"centroid":[111.798789,22.813665],"childrenNum":5,"level":"city","parent":{"adcode":440000},"subFeatureIndex":21,"acroutes":[100000,440000]},"geometry":{"type":"MultiPolygon","coordinates":[[[[111.375068,23.315271],[111.375757,23.319926],[111.392618,23.325586],[111.408712,23.315958],[111.421127,23.316276],[111.442202,23.301411],[111.437834,23.295115],[111.453391,23.289559],[111.456917,23.281729],[111.472551,23.275061],[111.49286,23.284586],[111.506348,23.282311],[111.515774,23.288448],[111.519989,23.305484],[111.52796,23.310351],[111.523898,23.322624],[111.532175,23.324634],[111.550185,23.298183],[111.573866,23.270881],[111.576318,23.253682],[111.569191,23.243097],[111.542598,23.234787],[111.533784,23.22113],[111.539839,23.212978],[111.575322,23.194077],[111.594251,23.188518],[111.624446,23.189894],[111.637781,23.185446],[111.649507,23.164741],[111.656098,23.158492],[111.679089,23.154732],[111.692118,23.157909],[111.707522,23.150971],[111.726988,23.150865],[111.753658,23.137994],[111.770441,23.13328],[111.814048,23.129943],[111.836963,23.131585],[111.860414,23.141225],[111.876737,23.138365],[111.884708,23.131267],[111.899192,23.125599],[111.9218,23.124857],[111.959353,23.130843],[111.967553,23.129678],[111.979049,23.119719],[111.982727,23.097308],[111.991464,23.087028],[112.025951,23.081199],[112.035761,23.07272],[112.047563,23.072349],[112.083736,23.079716],[112.099446,23.089943],[112.118299,23.083001],[112.133473,23.08581],[112.165431,23.075052],[112.191182,23.074522],[112.234712,23.114898],[112.265137,23.119507],[112.285676,23.129731],[112.301233,23.122315],[112.311886,23.121255],[112.312729,23.115163],[112.327137,23.104196],[112.32637,23.093599],[112.317634,23.080298],[112.301233,23.079557],[112.295869,23.060849],[112.285446,23.042563],[112.289814,23.024274],[112.286825,23.020033],[112.299087,23.010331],[112.286595,22.984985],[112.285369,22.976235],[112.277322,22.970613],[112.290197,22.952633],[112.283683,22.944518],[112.280158,22.949026],[112.270885,22.943775],[112.257167,22.951625],[112.262914,22.939796],[112.261075,22.918735],[112.257703,22.910564],[112.26598,22.906638],[112.278319,22.91465],[112.285369,22.911254],[112.295332,22.915605],[112.307364,22.911254],[112.305602,22.896132],[112.29993,22.89178],[112.296022,22.873312],[112.298704,22.865138],[112.312269,22.850489],[112.310353,22.824848],[112.319703,22.825378],[112.336257,22.806476],[112.323841,22.802706],[112.315488,22.790015],[112.32844,22.786722],[112.356336,22.787997],[112.374116,22.794369],[112.384232,22.792245],[112.382622,22.784545],[112.392509,22.76978],[112.392739,22.744442],[112.399023,22.726485],[112.410748,22.704488],[112.403085,22.700183],[112.401475,22.690565],[112.411898,22.671219],[112.426306,22.670847],[112.435809,22.680998],[112.448607,22.70842],[112.463168,22.711661],[112.47658,22.704009],[112.492674,22.686897],[112.489992,22.676215],[112.500261,22.668667],[112.506545,22.657664],[112.505243,22.638473],[112.515742,22.626617],[112.52172,22.607262],[112.505626,22.597849],[112.483171,22.592372],[112.475047,22.585511],[112.463552,22.584873],[112.456348,22.600562],[112.441787,22.606039],[112.435732,22.619971],[112.440867,22.627627],[112.443243,22.642248],[112.428375,22.657133],[112.435272,22.661279],[112.429218,22.666063],[112.419562,22.664202],[112.412741,22.656814],[112.416113,22.647723],[112.400402,22.635921],[112.407146,22.628425],[112.405077,22.618216],[112.398333,22.619917],[112.396034,22.602636],[112.390363,22.594765],[112.380247,22.594978],[112.379404,22.57881],[112.371127,22.558278],[112.377411,22.552479],[112.366835,22.550404],[112.364306,22.558544],[112.344533,22.564342],[112.342694,22.558065],[112.353577,22.556682],[112.358635,22.545563],[112.342541,22.55067],[112.33641,22.545457],[112.323918,22.554554],[112.331505,22.563916],[112.328133,22.569874],[112.309127,22.572427],[112.303609,22.560139],[112.307747,22.556841],[112.302153,22.544818],[112.307364,22.525399],[112.301233,22.515289],[112.275636,22.510659],[112.25732,22.500229],[112.262531,22.480803],[112.252875,22.458926],[112.242835,22.445191],[112.235938,22.427035],[112.243678,22.408238],[112.226895,22.408025],[112.211184,22.399078],[112.196163,22.404936],[112.188423,22.398066],[112.192791,22.384432],[112.186353,22.376069],[112.189189,22.36467],[112.175088,22.36989],[112.172022,22.381769],[112.165431,22.385018],[112.161523,22.400676],[112.142057,22.41548],[112.13286,22.405842],[112.108949,22.41335],[112.086725,22.416226],[112.077375,22.420858],[112.073006,22.434969],[112.058828,22.451207],[112.045494,22.45307],[112.034534,22.466325],[112.012923,22.471755],[112.014302,22.484795],[112.008861,22.491075],[111.995373,22.492406],[111.983724,22.505391],[111.98403,22.515342],[111.969546,22.546468],[111.976366,22.562959],[111.989931,22.565033],[111.998591,22.575459],[111.998361,22.589287],[111.98518,22.593861],[111.96602,22.627521],[111.956517,22.633795],[111.939121,22.620875],[111.931227,22.606039],[111.918965,22.592106],[111.914213,22.593701],[111.902258,22.581469],[111.900265,22.570512],[111.873825,22.579288],[111.870836,22.571735],[111.859417,22.581575],[111.835736,22.585937],[111.83405,22.595829],[111.821788,22.59769],[111.831904,22.60891],[111.841178,22.605454],[111.846925,22.612207],[111.859111,22.605401],[111.86049,22.617099],[111.85344,22.624331],[111.857425,22.632731],[111.871296,22.633529],[111.870836,22.65979],[111.86256,22.658993],[111.850681,22.676268],[111.841331,22.679085],[111.84248,22.687801],[111.835277,22.68897],[111.833437,22.680732],[111.820102,22.676427],[111.820332,22.666701],[111.809756,22.656123],[111.807074,22.645384],[111.814508,22.633263],[111.802476,22.626192],[111.784313,22.607581],[111.780327,22.595988],[111.76408,22.588011],[111.764004,22.582692],[111.738023,22.570459],[111.719707,22.54035],[111.721393,22.525931],[111.713346,22.504699],[111.691198,22.482134],[111.680315,22.4824],[111.678553,22.496397],[111.671425,22.503262],[111.648128,22.498207],[111.633873,22.503262],[111.625673,22.510925],[111.619618,22.497302],[111.616016,22.508158],[111.621304,22.521195],[111.616093,22.521408],[111.618315,22.533912],[111.610269,22.534125],[111.612031,22.542584],[111.60682,22.54966],[111.59632,22.551362],[111.569344,22.540722],[111.559381,22.528804],[111.561144,22.523377],[111.54459,22.517364],[111.545433,22.499324],[111.525201,22.480164],[111.507804,22.493949],[111.486882,22.505551],[111.469409,22.490277],[111.476919,22.480164],[111.47347,22.474629],[111.480444,22.46015],[111.471325,22.441996],[111.446034,22.442209],[111.43952,22.427834],[111.421817,22.426662],[111.417065,22.431135],[111.421127,22.446948],[111.409631,22.457116],[111.408788,22.475268],[111.403347,22.479526],[111.410628,22.492033],[111.413387,22.512628],[111.403117,22.516087],[111.384647,22.509808],[111.373688,22.516034],[111.350084,22.506988],[111.338588,22.522951],[111.329852,22.516087],[111.293295,22.50603],[111.276972,22.491927],[111.272067,22.506136],[111.277278,22.517843],[111.285172,22.523856],[111.293909,22.547638],[111.322724,22.54966],[111.326633,22.557267],[111.303641,22.569448],[111.303105,22.580724],[111.279271,22.592053],[111.25352,22.589234],[111.249076,22.58365],[111.219187,22.58583],[111.215662,22.594659],[111.196732,22.61024],[111.185849,22.60439],[111.174737,22.605773],[111.161862,22.620236],[111.144235,22.625713],[111.143162,22.638686],[111.136418,22.643789],[111.127911,22.666169],[111.137108,22.674514],[111.136878,22.685941],[111.124539,22.695826],[111.123543,22.701459],[111.108369,22.704328],[111.104767,22.694869],[111.089669,22.694285],[111.083155,22.708739],[111.063919,22.719897],[111.060547,22.731533],[111.085378,22.729673],[111.095111,22.733445],[111.099249,22.741786],[111.120094,22.742424],[111.146304,22.73727],[111.174737,22.740086],[111.176193,22.736261],[111.202097,22.740458],[111.204626,22.750126],[111.218497,22.748108],[111.232139,22.758997],[111.239036,22.768824],[111.241105,22.781305],[111.255207,22.787094],[111.256893,22.793838],[111.272143,22.790652],[111.272833,22.798883],[111.291609,22.807804],[111.287624,22.816087],[111.30663,22.839606],[111.303641,22.843959],[111.319659,22.851232],[111.330541,22.866094],[111.341577,22.870552],[111.35154,22.885147],[111.358744,22.889233],[111.361963,22.909981],[111.370316,22.915446],[111.375528,22.926534],[111.373995,22.939213],[111.364722,22.947594],[111.36932,22.951042],[111.363572,22.968598],[111.375374,22.967856],[111.37729,22.973265],[111.397216,22.981273],[111.40373,22.991242],[111.389629,23.005612],[111.396986,23.013353],[111.414,23.01611],[111.416069,23.025653],[111.434002,23.036202],[111.427181,23.060637],[111.434539,23.071555],[111.402044,23.066202],[111.394687,23.06811],[111.379513,23.081305],[111.374225,23.092539],[111.374991,23.111295],[111.379973,23.123162],[111.3766,23.14202],[111.366024,23.144721],[111.398672,23.159816],[111.392464,23.16956],[111.384341,23.167654],[111.384264,23.19413],[111.388862,23.210225],[111.377903,23.215784],[111.379206,23.221554],[111.365795,23.236904],[111.371926,23.264319],[111.36112,23.270564],[111.351233,23.266013],[111.349624,23.272786],[111.356598,23.283369],[111.353379,23.288977],[111.376524,23.304638],[111.375068,23.315271]]]]}}]};
 
 /***/ }),
-
-/***/ 3:
-/*!***********************************!*\
-  !*** (webpack)/buildin/global.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || new Function("return this")();
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-
-/***/ 33:
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */
 /*!*********************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/config/line.json ***!
   \*********************************************************************/
@@ -13449,910 +14407,21346 @@ module.exports = g;
 module.exports = {"data":{"LineA":{"chartData":{"categories":["06-13","06-14","06-15","06-16","06-17","06-18"],"series":[{"name":"新增确诊","data":[35,20,25,37,4,20]},{"name":"新增治愈","data":[35,50,65,77,49,80]},{"name":"新增死亡","data":[100,20,5,3,4,40]}]}}}};
 
 /***/ }),
-
-/***/ 4:
-/*!***************************************************************!*\
-  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/pages.json ***!
-  \***************************************************************/
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */
+/*!**********************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/moment.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
+/* WEBPACK VAR INJECTION */(function(module) {var require;//! moment.js
+//! version : 2.29.1
+//! authors : Tim Wood, Iskren Chernev, Moment.js contributors
+//! license : MIT
+//! momentjs.com
 
+;(function (global, factory) {
+   true ? module.exports = factory() :
+  undefined;
+})(this, function () {'use strict';
 
-/***/ }),
+  var hookCallback;
 
-/***/ 48:
-/*!***********************************************************************!*\
-  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/config/dataBase.js ***!
-  \***********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;} // 操作数据库 CRUD 的类
-var db = wx.cloud.database();var
-
-Dbcrud = /*#__PURE__*/function () {"use strict";
-  function Dbcrud(gather) {_classCallCheck(this, Dbcrud);
-    this.gather = gather;
+  function hooks() {
+    return hookCallback.apply(null, arguments);
   }
 
-  // get请求数据库
-  _createClass(Dbcrud, [{ key: "pullGet", value: function pullGet() {var _this = this;
-      return new Promise(function (resolve, reject) {
-        var base = db.collection(_this.gather);
-        base.get().
-        then(function (res) {
-          resolve(res);
-        }).
-        catch(function (error) {
-          reject(error);
+  // This is done to register the method called with moment()
+  // without creating circular dependencies.
+  function setHookCallback(callback) {
+    hookCallback = callback;
+  }
+
+  function isArray(input) {
+    return (
+      input instanceof Array ||
+      Object.prototype.toString.call(input) === '[object Array]');
+
+  }
+
+  function isObject(input) {
+    // IE8 will treat undefined and null as object if it wasn't for
+    // input != null
+    return (
+      input != null &&
+      Object.prototype.toString.call(input) === '[object Object]');
+
+  }
+
+  function hasOwnProp(a, b) {
+    return Object.prototype.hasOwnProperty.call(a, b);
+  }
+
+  function isObjectEmpty(obj) {
+    if (Object.getOwnPropertyNames) {
+      return Object.getOwnPropertyNames(obj).length === 0;
+    } else {
+      var k;
+      for (k in obj) {
+        if (hasOwnProp(obj, k)) {
+          return false;
+        }
+      }
+      return true;
+    }
+  }
+
+  function isUndefined(input) {
+    return input === void 0;
+  }
+
+  function isNumber(input) {
+    return (
+      typeof input === 'number' ||
+      Object.prototype.toString.call(input) === '[object Number]');
+
+  }
+
+  function isDate(input) {
+    return (
+      input instanceof Date ||
+      Object.prototype.toString.call(input) === '[object Date]');
+
+  }
+
+  function map(arr, fn) {
+    var res = [],
+    i;
+    for (i = 0; i < arr.length; ++i) {
+      res.push(fn(arr[i], i));
+    }
+    return res;
+  }
+
+  function extend(a, b) {
+    for (var i in b) {
+      if (hasOwnProp(b, i)) {
+        a[i] = b[i];
+      }
+    }
+
+    if (hasOwnProp(b, 'toString')) {
+      a.toString = b.toString;
+    }
+
+    if (hasOwnProp(b, 'valueOf')) {
+      a.valueOf = b.valueOf;
+    }
+
+    return a;
+  }
+
+  function createUTC(input, format, locale, strict) {
+    return createLocalOrUTC(input, format, locale, strict, true).utc();
+  }
+
+  function defaultParsingFlags() {
+    // We need to deep clone this object.
+    return {
+      empty: false,
+      unusedTokens: [],
+      unusedInput: [],
+      overflow: -2,
+      charsLeftOver: 0,
+      nullInput: false,
+      invalidEra: null,
+      invalidMonth: null,
+      invalidFormat: false,
+      userInvalidated: false,
+      iso: false,
+      parsedDateParts: [],
+      era: null,
+      meridiem: null,
+      rfc2822: false,
+      weekdayMismatch: false };
+
+  }
+
+  function getParsingFlags(m) {
+    if (m._pf == null) {
+      m._pf = defaultParsingFlags();
+    }
+    return m._pf;
+  }
+
+  var some;
+  if (Array.prototype.some) {
+    some = Array.prototype.some;
+  } else {
+    some = function some(fun) {
+      var t = Object(this),
+      len = t.length >>> 0,
+      i;
+
+      for (i = 0; i < len; i++) {
+        if (i in t && fun.call(this, t[i], i, t)) {
+          return true;
+        }
+      }
+
+      return false;
+    };
+  }
+
+  function isValid(m) {
+    if (m._isValid == null) {
+      var flags = getParsingFlags(m),
+      parsedParts = some.call(flags.parsedDateParts, function (i) {
+        return i != null;
+      }),
+      isNowValid =
+      !isNaN(m._d.getTime()) &&
+      flags.overflow < 0 &&
+      !flags.empty &&
+      !flags.invalidEra &&
+      !flags.invalidMonth &&
+      !flags.invalidWeekday &&
+      !flags.weekdayMismatch &&
+      !flags.nullInput &&
+      !flags.invalidFormat &&
+      !flags.userInvalidated && (
+      !flags.meridiem || flags.meridiem && parsedParts);
+
+      if (m._strict) {
+        isNowValid =
+        isNowValid &&
+        flags.charsLeftOver === 0 &&
+        flags.unusedTokens.length === 0 &&
+        flags.bigHour === undefined;
+      }
+
+      if (Object.isFrozen == null || !Object.isFrozen(m)) {
+        m._isValid = isNowValid;
+      } else {
+        return isNowValid;
+      }
+    }
+    return m._isValid;
+  }
+
+  function createInvalid(flags) {
+    var m = createUTC(NaN);
+    if (flags != null) {
+      extend(getParsingFlags(m), flags);
+    } else {
+      getParsingFlags(m).userInvalidated = true;
+    }
+
+    return m;
+  }
+
+  // Plugins that add properties should also add the key here (null value),
+  // so we can properly clone ourselves.
+  var momentProperties = hooks.momentProperties = [],
+  updateInProgress = false;
+
+  function copyConfig(to, from) {
+    var i, prop, val;
+
+    if (!isUndefined(from._isAMomentObject)) {
+      to._isAMomentObject = from._isAMomentObject;
+    }
+    if (!isUndefined(from._i)) {
+      to._i = from._i;
+    }
+    if (!isUndefined(from._f)) {
+      to._f = from._f;
+    }
+    if (!isUndefined(from._l)) {
+      to._l = from._l;
+    }
+    if (!isUndefined(from._strict)) {
+      to._strict = from._strict;
+    }
+    if (!isUndefined(from._tzm)) {
+      to._tzm = from._tzm;
+    }
+    if (!isUndefined(from._isUTC)) {
+      to._isUTC = from._isUTC;
+    }
+    if (!isUndefined(from._offset)) {
+      to._offset = from._offset;
+    }
+    if (!isUndefined(from._pf)) {
+      to._pf = getParsingFlags(from);
+    }
+    if (!isUndefined(from._locale)) {
+      to._locale = from._locale;
+    }
+
+    if (momentProperties.length > 0) {
+      for (i = 0; i < momentProperties.length; i++) {
+        prop = momentProperties[i];
+        val = from[prop];
+        if (!isUndefined(val)) {
+          to[prop] = val;
+        }
+      }
+    }
+
+    return to;
+  }
+
+  // Moment prototype object
+  function Moment(config) {
+    copyConfig(this, config);
+    this._d = new Date(config._d != null ? config._d.getTime() : NaN);
+    if (!this.isValid()) {
+      this._d = new Date(NaN);
+    }
+    // Prevent infinite loop in case updateOffset creates new moment
+    // objects.
+    if (updateInProgress === false) {
+      updateInProgress = true;
+      hooks.updateOffset(this);
+      updateInProgress = false;
+    }
+  }
+
+  function isMoment(obj) {
+    return (
+      obj instanceof Moment || obj != null && obj._isAMomentObject != null);
+
+  }
+
+  function warn(msg) {
+    if (
+    hooks.suppressDeprecationWarnings === false &&
+    typeof console !== 'undefined' &&
+    console.warn)
+    {
+      console.warn('Deprecation warning: ' + msg);
+    }
+  }
+
+  function deprecate(msg, fn) {
+    var firstTime = true;
+
+    return extend(function () {
+      if (hooks.deprecationHandler != null) {
+        hooks.deprecationHandler(null, msg);
+      }
+      if (firstTime) {
+        var args = [],
+        arg,
+        i,
+        key;
+        for (i = 0; i < arguments.length; i++) {
+          arg = '';
+          if (typeof arguments[i] === 'object') {
+            arg += '\n[' + i + '] ';
+            for (key in arguments[0]) {
+              if (hasOwnProp(arguments[0], key)) {
+                arg += key + ': ' + arguments[0][key] + ', ';
+              }
+            }
+            arg = arg.slice(0, -2); // Remove trailing comma and space
+          } else {
+            arg = arguments[i];
+          }
+          args.push(arg);
+        }
+        warn(
+        msg +
+        '\nArguments: ' +
+        Array.prototype.slice.call(args).join('') +
+        '\n' +
+        new Error().stack);
+
+        firstTime = false;
+      }
+      return fn.apply(this, arguments);
+    }, fn);
+  }
+
+  var deprecations = {};
+
+  function deprecateSimple(name, msg) {
+    if (hooks.deprecationHandler != null) {
+      hooks.deprecationHandler(name, msg);
+    }
+    if (!deprecations[name]) {
+      warn(msg);
+      deprecations[name] = true;
+    }
+  }
+
+  hooks.suppressDeprecationWarnings = false;
+  hooks.deprecationHandler = null;
+
+  function isFunction(input) {
+    return (
+      typeof Function !== 'undefined' && input instanceof Function ||
+      Object.prototype.toString.call(input) === '[object Function]');
+
+  }
+
+  function set(config) {
+    var prop, i;
+    for (i in config) {
+      if (hasOwnProp(config, i)) {
+        prop = config[i];
+        if (isFunction(prop)) {
+          this[i] = prop;
+        } else {
+          this['_' + i] = prop;
+        }
+      }
+    }
+    this._config = config;
+    // Lenient ordinal parsing accepts just a number in addition to
+    // number + (possibly) stuff coming from _dayOfMonthOrdinalParse.
+    // TODO: Remove "ordinalParse" fallback in next major release.
+    this._dayOfMonthOrdinalParseLenient = new RegExp(
+    (this._dayOfMonthOrdinalParse.source || this._ordinalParse.source) +
+    '|' +
+    /\d{1,2}/.source);
+
+  }
+
+  function mergeConfigs(parentConfig, childConfig) {
+    var res = extend({}, parentConfig),
+    prop;
+    for (prop in childConfig) {
+      if (hasOwnProp(childConfig, prop)) {
+        if (isObject(parentConfig[prop]) && isObject(childConfig[prop])) {
+          res[prop] = {};
+          extend(res[prop], parentConfig[prop]);
+          extend(res[prop], childConfig[prop]);
+        } else if (childConfig[prop] != null) {
+          res[prop] = childConfig[prop];
+        } else {
+          delete res[prop];
+        }
+      }
+    }
+    for (prop in parentConfig) {
+      if (
+      hasOwnProp(parentConfig, prop) &&
+      !hasOwnProp(childConfig, prop) &&
+      isObject(parentConfig[prop]))
+      {
+        // make sure changes to properties don't modify parent config
+        res[prop] = extend({}, res[prop]);
+      }
+    }
+    return res;
+  }
+
+  function Locale(config) {
+    if (config != null) {
+      this.set(config);
+    }
+  }
+
+  var keys;
+
+  if (Object.keys) {
+    keys = Object.keys;
+  } else {
+    keys = function keys(obj) {
+      var i,
+      res = [];
+      for (i in obj) {
+        if (hasOwnProp(obj, i)) {
+          res.push(i);
+        }
+      }
+      return res;
+    };
+  }
+
+  var defaultCalendar = {
+    sameDay: '[Today at] LT',
+    nextDay: '[Tomorrow at] LT',
+    nextWeek: 'dddd [at] LT',
+    lastDay: '[Yesterday at] LT',
+    lastWeek: '[Last] dddd [at] LT',
+    sameElse: 'L' };
+
+
+  function calendar(key, mom, now) {
+    var output = this._calendar[key] || this._calendar['sameElse'];
+    return isFunction(output) ? output.call(mom, now) : output;
+  }
+
+  function zeroFill(number, targetLength, forceSign) {
+    var absNumber = '' + Math.abs(number),
+    zerosToFill = targetLength - absNumber.length,
+    sign = number >= 0;
+    return (
+      (sign ? forceSign ? '+' : '' : '-') +
+      Math.pow(10, Math.max(0, zerosToFill)).toString().substr(1) +
+      absNumber);
+
+  }
+
+  var formattingTokens = /(\[[^\[]*\])|(\\)?([Hh]mm(ss)?|Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Qo?|N{1,5}|YYYYYY|YYYYY|YYYY|YY|y{2,4}|yo?|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|kk?|mm?|ss?|S{1,9}|x|X|zz?|ZZ?|.)/g,
+  localFormattingTokens = /(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g,
+  formatFunctions = {},
+  formatTokenFunctions = {};
+
+  // token:    'M'
+  // padded:   ['MM', 2]
+  // ordinal:  'Mo'
+  // callback: function () { this.month() + 1 }
+  function addFormatToken(token, padded, ordinal, callback) {
+    var func = callback;
+    if (typeof callback === 'string') {
+      func = function func() {
+        return this[callback]();
+      };
+    }
+    if (token) {
+      formatTokenFunctions[token] = func;
+    }
+    if (padded) {
+      formatTokenFunctions[padded[0]] = function () {
+        return zeroFill(func.apply(this, arguments), padded[1], padded[2]);
+      };
+    }
+    if (ordinal) {
+      formatTokenFunctions[ordinal] = function () {
+        return this.localeData().ordinal(
+        func.apply(this, arguments),
+        token);
+
+      };
+    }
+  }
+
+  function removeFormattingTokens(input) {
+    if (input.match(/\[[\s\S]/)) {
+      return input.replace(/^\[|\]$/g, '');
+    }
+    return input.replace(/\\/g, '');
+  }
+
+  function makeFormatFunction(format) {
+    var array = format.match(formattingTokens),
+    i,
+    length;
+
+    for (i = 0, length = array.length; i < length; i++) {
+      if (formatTokenFunctions[array[i]]) {
+        array[i] = formatTokenFunctions[array[i]];
+      } else {
+        array[i] = removeFormattingTokens(array[i]);
+      }
+    }
+
+    return function (mom) {
+      var output = '',
+      i;
+      for (i = 0; i < length; i++) {
+        output += isFunction(array[i]) ?
+        array[i].call(mom, format) :
+        array[i];
+      }
+      return output;
+    };
+  }
+
+  // format date using native date object
+  function formatMoment(m, format) {
+    if (!m.isValid()) {
+      return m.localeData().invalidDate();
+    }
+
+    format = expandFormat(format, m.localeData());
+    formatFunctions[format] =
+    formatFunctions[format] || makeFormatFunction(format);
+
+    return formatFunctions[format](m);
+  }
+
+  function expandFormat(format, locale) {
+    var i = 5;
+
+    function replaceLongDateFormatTokens(input) {
+      return locale.longDateFormat(input) || input;
+    }
+
+    localFormattingTokens.lastIndex = 0;
+    while (i >= 0 && localFormattingTokens.test(format)) {
+      format = format.replace(
+      localFormattingTokens,
+      replaceLongDateFormatTokens);
+
+      localFormattingTokens.lastIndex = 0;
+      i -= 1;
+    }
+
+    return format;
+  }
+
+  var defaultLongDateFormat = {
+    LTS: 'h:mm:ss A',
+    LT: 'h:mm A',
+    L: 'MM/DD/YYYY',
+    LL: 'MMMM D, YYYY',
+    LLL: 'MMMM D, YYYY h:mm A',
+    LLLL: 'dddd, MMMM D, YYYY h:mm A' };
+
+
+  function longDateFormat(key) {
+    var format = this._longDateFormat[key],
+    formatUpper = this._longDateFormat[key.toUpperCase()];
+
+    if (format || !formatUpper) {
+      return format;
+    }
+
+    this._longDateFormat[key] = formatUpper.
+    match(formattingTokens).
+    map(function (tok) {
+      if (
+      tok === 'MMMM' ||
+      tok === 'MM' ||
+      tok === 'DD' ||
+      tok === 'dddd')
+      {
+        return tok.slice(1);
+      }
+      return tok;
+    }).
+    join('');
+
+    return this._longDateFormat[key];
+  }
+
+  var defaultInvalidDate = 'Invalid date';
+
+  function invalidDate() {
+    return this._invalidDate;
+  }
+
+  var defaultOrdinal = '%d',
+  defaultDayOfMonthOrdinalParse = /\d{1,2}/;
+
+  function ordinal(number) {
+    return this._ordinal.replace('%d', number);
+  }
+
+  var defaultRelativeTime = {
+    future: 'in %s',
+    past: '%s ago',
+    s: 'a few seconds',
+    ss: '%d seconds',
+    m: 'a minute',
+    mm: '%d minutes',
+    h: 'an hour',
+    hh: '%d hours',
+    d: 'a day',
+    dd: '%d days',
+    w: 'a week',
+    ww: '%d weeks',
+    M: 'a month',
+    MM: '%d months',
+    y: 'a year',
+    yy: '%d years' };
+
+
+  function relativeTime(number, withoutSuffix, string, isFuture) {
+    var output = this._relativeTime[string];
+    return isFunction(output) ?
+    output(number, withoutSuffix, string, isFuture) :
+    output.replace(/%d/i, number);
+  }
+
+  function pastFuture(diff, output) {
+    var format = this._relativeTime[diff > 0 ? 'future' : 'past'];
+    return isFunction(format) ? format(output) : format.replace(/%s/i, output);
+  }
+
+  var aliases = {};
+
+  function addUnitAlias(unit, shorthand) {
+    var lowerCase = unit.toLowerCase();
+    aliases[lowerCase] = aliases[lowerCase + 's'] = aliases[shorthand] = unit;
+  }
+
+  function normalizeUnits(units) {
+    return typeof units === 'string' ?
+    aliases[units] || aliases[units.toLowerCase()] :
+    undefined;
+  }
+
+  function normalizeObjectUnits(inputObject) {
+    var normalizedInput = {},
+    normalizedProp,
+    prop;
+
+    for (prop in inputObject) {
+      if (hasOwnProp(inputObject, prop)) {
+        normalizedProp = normalizeUnits(prop);
+        if (normalizedProp) {
+          normalizedInput[normalizedProp] = inputObject[prop];
+        }
+      }
+    }
+
+    return normalizedInput;
+  }
+
+  var priorities = {};
+
+  function addUnitPriority(unit, priority) {
+    priorities[unit] = priority;
+  }
+
+  function getPrioritizedUnits(unitsObj) {
+    var units = [],
+    u;
+    for (u in unitsObj) {
+      if (hasOwnProp(unitsObj, u)) {
+        units.push({ unit: u, priority: priorities[u] });
+      }
+    }
+    units.sort(function (a, b) {
+      return a.priority - b.priority;
+    });
+    return units;
+  }
+
+  function isLeapYear(year) {
+    return year % 4 === 0 && year % 100 !== 0 || year % 400 === 0;
+  }
+
+  function absFloor(number) {
+    if (number < 0) {
+      // -0 -> 0
+      return Math.ceil(number) || 0;
+    } else {
+      return Math.floor(number);
+    }
+  }
+
+  function toInt(argumentForCoercion) {
+    var coercedNumber = +argumentForCoercion,
+    value = 0;
+
+    if (coercedNumber !== 0 && isFinite(coercedNumber)) {
+      value = absFloor(coercedNumber);
+    }
+
+    return value;
+  }
+
+  function makeGetSet(unit, keepTime) {
+    return function (value) {
+      if (value != null) {
+        set$1(this, unit, value);
+        hooks.updateOffset(this, keepTime);
+        return this;
+      } else {
+        return get(this, unit);
+      }
+    };
+  }
+
+  function get(mom, unit) {
+    return mom.isValid() ?
+    mom._d['get' + (mom._isUTC ? 'UTC' : '') + unit]() :
+    NaN;
+  }
+
+  function set$1(mom, unit, value) {
+    if (mom.isValid() && !isNaN(value)) {
+      if (
+      unit === 'FullYear' &&
+      isLeapYear(mom.year()) &&
+      mom.month() === 1 &&
+      mom.date() === 29)
+      {
+        value = toInt(value);
+        mom._d['set' + (mom._isUTC ? 'UTC' : '') + unit](
+        value,
+        mom.month(),
+        daysInMonth(value, mom.month()));
+
+      } else {
+        mom._d['set' + (mom._isUTC ? 'UTC' : '') + unit](value);
+      }
+    }
+  }
+
+  // MOMENTS
+
+  function stringGet(units) {
+    units = normalizeUnits(units);
+    if (isFunction(this[units])) {
+      return this[units]();
+    }
+    return this;
+  }
+
+  function stringSet(units, value) {
+    if (typeof units === 'object') {
+      units = normalizeObjectUnits(units);
+      var prioritized = getPrioritizedUnits(units),
+      i;
+      for (i = 0; i < prioritized.length; i++) {
+        this[prioritized[i].unit](units[prioritized[i].unit]);
+      }
+    } else {
+      units = normalizeUnits(units);
+      if (isFunction(this[units])) {
+        return this[units](value);
+      }
+    }
+    return this;
+  }
+
+  var match1 = /\d/, //       0 - 9
+  match2 = /\d\d/, //      00 - 99
+  match3 = /\d{3}/, //     000 - 999
+  match4 = /\d{4}/, //    0000 - 9999
+  match6 = /[+-]?\d{6}/, // -999999 - 999999
+  match1to2 = /\d\d?/, //       0 - 99
+  match3to4 = /\d\d\d\d?/, //     999 - 9999
+  match5to6 = /\d\d\d\d\d\d?/, //   99999 - 999999
+  match1to3 = /\d{1,3}/, //       0 - 999
+  match1to4 = /\d{1,4}/, //       0 - 9999
+  match1to6 = /[+-]?\d{1,6}/, // -999999 - 999999
+  matchUnsigned = /\d+/, //       0 - inf
+  matchSigned = /[+-]?\d+/, //    -inf - inf
+  matchOffset = /Z|[+-]\d\d:?\d\d/gi, // +00:00 -00:00 +0000 -0000 or Z
+  matchShortOffset = /Z|[+-]\d\d(?::?\d\d)?/gi, // +00 -00 +00:00 -00:00 +0000 -0000 or Z
+  matchTimestamp = /[+-]?\d+(\.\d{1,3})?/, // 123456789 123456789.123
+  // any word (or two) characters or numbers including two/three word month in arabic.
+  // includes scottish gaelic two word and hyphenated months
+  matchWord = /[0-9]{0,256}['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFF07\uFF10-\uFFEF]{1,256}|[\u0600-\u06FF\/]{1,256}(\s*?[\u0600-\u06FF]{1,256}){1,2}/i,
+  regexes;
+
+  regexes = {};
+
+  function addRegexToken(token, regex, strictRegex) {
+    regexes[token] = isFunction(regex) ?
+    regex :
+    function (isStrict, localeData) {
+      return isStrict && strictRegex ? strictRegex : regex;
+    };
+  }
+
+  function getParseRegexForToken(token, config) {
+    if (!hasOwnProp(regexes, token)) {
+      return new RegExp(unescapeFormat(token));
+    }
+
+    return regexes[token](config._strict, config._locale);
+  }
+
+  // Code from http://stackoverflow.com/questions/3561493/is-there-a-regexp-escape-function-in-javascript
+  function unescapeFormat(s) {
+    return regexEscape(
+    s.
+    replace('\\', '').
+    replace(/\\(\[)|\\(\])|\[([^\]\[]*)\]|\\(.)/g, function (
+    matched,
+    p1,
+    p2,
+    p3,
+    p4)
+    {
+      return p1 || p2 || p3 || p4;
+    }));
+
+  }
+
+  function regexEscape(s) {
+    return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+  }
+
+  var tokens = {};
+
+  function addParseToken(token, callback) {
+    var i,
+    func = callback;
+    if (typeof token === 'string') {
+      token = [token];
+    }
+    if (isNumber(callback)) {
+      func = function func(input, array) {
+        array[callback] = toInt(input);
+      };
+    }
+    for (i = 0; i < token.length; i++) {
+      tokens[token[i]] = func;
+    }
+  }
+
+  function addWeekParseToken(token, callback) {
+    addParseToken(token, function (input, array, config, token) {
+      config._w = config._w || {};
+      callback(input, config._w, config, token);
+    });
+  }
+
+  function addTimeToArrayFromToken(token, input, config) {
+    if (input != null && hasOwnProp(tokens, token)) {
+      tokens[token](input, config._a, config, token);
+    }
+  }
+
+  var YEAR = 0,
+  MONTH = 1,
+  DATE = 2,
+  HOUR = 3,
+  MINUTE = 4,
+  SECOND = 5,
+  MILLISECOND = 6,
+  WEEK = 7,
+  WEEKDAY = 8;
+
+  function mod(n, x) {
+    return (n % x + x) % x;
+  }
+
+  var indexOf;
+
+  if (Array.prototype.indexOf) {
+    indexOf = Array.prototype.indexOf;
+  } else {
+    indexOf = function indexOf(o) {
+      // I know
+      var i;
+      for (i = 0; i < this.length; ++i) {
+        if (this[i] === o) {
+          return i;
+        }
+      }
+      return -1;
+    };
+  }
+
+  function daysInMonth(year, month) {
+    if (isNaN(year) || isNaN(month)) {
+      return NaN;
+    }
+    var modMonth = mod(month, 12);
+    year += (month - modMonth) / 12;
+    return modMonth === 1 ?
+    isLeapYear(year) ?
+    29 :
+    28 :
+    31 - modMonth % 7 % 2;
+  }
+
+  // FORMATTING
+
+  addFormatToken('M', ['MM', 2], 'Mo', function () {
+    return this.month() + 1;
+  });
+
+  addFormatToken('MMM', 0, 0, function (format) {
+    return this.localeData().monthsShort(this, format);
+  });
+
+  addFormatToken('MMMM', 0, 0, function (format) {
+    return this.localeData().months(this, format);
+  });
+
+  // ALIASES
+
+  addUnitAlias('month', 'M');
+
+  // PRIORITY
+
+  addUnitPriority('month', 8);
+
+  // PARSING
+
+  addRegexToken('M', match1to2);
+  addRegexToken('MM', match1to2, match2);
+  addRegexToken('MMM', function (isStrict, locale) {
+    return locale.monthsShortRegex(isStrict);
+  });
+  addRegexToken('MMMM', function (isStrict, locale) {
+    return locale.monthsRegex(isStrict);
+  });
+
+  addParseToken(['M', 'MM'], function (input, array) {
+    array[MONTH] = toInt(input) - 1;
+  });
+
+  addParseToken(['MMM', 'MMMM'], function (input, array, config, token) {
+    var month = config._locale.monthsParse(input, token, config._strict);
+    // if we didn't find a month name, mark the date as invalid.
+    if (month != null) {
+      array[MONTH] = month;
+    } else {
+      getParsingFlags(config).invalidMonth = input;
+    }
+  });
+
+  // LOCALES
+
+  var defaultLocaleMonths = 'January_February_March_April_May_June_July_August_September_October_November_December'.split(
+  '_'),
+
+  defaultLocaleMonthsShort = 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split(
+  '_'),
+
+  MONTHS_IN_FORMAT = /D[oD]?(\[[^\[\]]*\]|\s)+MMMM?/,
+  defaultMonthsShortRegex = matchWord,
+  defaultMonthsRegex = matchWord;
+
+  function localeMonths(m, format) {
+    if (!m) {
+      return isArray(this._months) ?
+      this._months :
+      this._months['standalone'];
+    }
+    return isArray(this._months) ?
+    this._months[m.month()] :
+    this._months[
+    (this._months.isFormat || MONTHS_IN_FORMAT).test(format) ?
+    'format' :
+    'standalone'][
+    m.month()];
+  }
+
+  function localeMonthsShort(m, format) {
+    if (!m) {
+      return isArray(this._monthsShort) ?
+      this._monthsShort :
+      this._monthsShort['standalone'];
+    }
+    return isArray(this._monthsShort) ?
+    this._monthsShort[m.month()] :
+    this._monthsShort[
+    MONTHS_IN_FORMAT.test(format) ? 'format' : 'standalone'][
+    m.month()];
+  }
+
+  function handleStrictParse(monthName, format, strict) {
+    var i,
+    ii,
+    mom,
+    llc = monthName.toLocaleLowerCase();
+    if (!this._monthsParse) {
+      // this is not used
+      this._monthsParse = [];
+      this._longMonthsParse = [];
+      this._shortMonthsParse = [];
+      for (i = 0; i < 12; ++i) {
+        mom = createUTC([2000, i]);
+        this._shortMonthsParse[i] = this.monthsShort(
+        mom,
+        '').
+        toLocaleLowerCase();
+        this._longMonthsParse[i] = this.months(mom, '').toLocaleLowerCase();
+      }
+    }
+
+    if (strict) {
+      if (format === 'MMM') {
+        ii = indexOf.call(this._shortMonthsParse, llc);
+        return ii !== -1 ? ii : null;
+      } else {
+        ii = indexOf.call(this._longMonthsParse, llc);
+        return ii !== -1 ? ii : null;
+      }
+    } else {
+      if (format === 'MMM') {
+        ii = indexOf.call(this._shortMonthsParse, llc);
+        if (ii !== -1) {
+          return ii;
+        }
+        ii = indexOf.call(this._longMonthsParse, llc);
+        return ii !== -1 ? ii : null;
+      } else {
+        ii = indexOf.call(this._longMonthsParse, llc);
+        if (ii !== -1) {
+          return ii;
+        }
+        ii = indexOf.call(this._shortMonthsParse, llc);
+        return ii !== -1 ? ii : null;
+      }
+    }
+  }
+
+  function localeMonthsParse(monthName, format, strict) {
+    var i, mom, regex;
+
+    if (this._monthsParseExact) {
+      return handleStrictParse.call(this, monthName, format, strict);
+    }
+
+    if (!this._monthsParse) {
+      this._monthsParse = [];
+      this._longMonthsParse = [];
+      this._shortMonthsParse = [];
+    }
+
+    // TODO: add sorting
+    // Sorting makes sure if one month (or abbr) is a prefix of another
+    // see sorting in computeMonthsParse
+    for (i = 0; i < 12; i++) {
+      // make the regex if we don't have it already
+      mom = createUTC([2000, i]);
+      if (strict && !this._longMonthsParse[i]) {
+        this._longMonthsParse[i] = new RegExp(
+        '^' + this.months(mom, '').replace('.', '') + '$',
+        'i');
+
+        this._shortMonthsParse[i] = new RegExp(
+        '^' + this.monthsShort(mom, '').replace('.', '') + '$',
+        'i');
+
+      }
+      if (!strict && !this._monthsParse[i]) {
+        regex =
+        '^' + this.months(mom, '') + '|^' + this.monthsShort(mom, '');
+        this._monthsParse[i] = new RegExp(regex.replace('.', ''), 'i');
+      }
+      // test the regex
+      if (
+      strict &&
+      format === 'MMMM' &&
+      this._longMonthsParse[i].test(monthName))
+      {
+        return i;
+      } else if (
+      strict &&
+      format === 'MMM' &&
+      this._shortMonthsParse[i].test(monthName))
+      {
+        return i;
+      } else if (!strict && this._monthsParse[i].test(monthName)) {
+        return i;
+      }
+    }
+  }
+
+  // MOMENTS
+
+  function setMonth(mom, value) {
+    var dayOfMonth;
+
+    if (!mom.isValid()) {
+      // No op
+      return mom;
+    }
+
+    if (typeof value === 'string') {
+      if (/^\d+$/.test(value)) {
+        value = toInt(value);
+      } else {
+        value = mom.localeData().monthsParse(value);
+        // TODO: Another silent failure?
+        if (!isNumber(value)) {
+          return mom;
+        }
+      }
+    }
+
+    dayOfMonth = Math.min(mom.date(), daysInMonth(mom.year(), value));
+    mom._d['set' + (mom._isUTC ? 'UTC' : '') + 'Month'](value, dayOfMonth);
+    return mom;
+  }
+
+  function getSetMonth(value) {
+    if (value != null) {
+      setMonth(this, value);
+      hooks.updateOffset(this, true);
+      return this;
+    } else {
+      return get(this, 'Month');
+    }
+  }
+
+  function getDaysInMonth() {
+    return daysInMonth(this.year(), this.month());
+  }
+
+  function monthsShortRegex(isStrict) {
+    if (this._monthsParseExact) {
+      if (!hasOwnProp(this, '_monthsRegex')) {
+        computeMonthsParse.call(this);
+      }
+      if (isStrict) {
+        return this._monthsShortStrictRegex;
+      } else {
+        return this._monthsShortRegex;
+      }
+    } else {
+      if (!hasOwnProp(this, '_monthsShortRegex')) {
+        this._monthsShortRegex = defaultMonthsShortRegex;
+      }
+      return this._monthsShortStrictRegex && isStrict ?
+      this._monthsShortStrictRegex :
+      this._monthsShortRegex;
+    }
+  }
+
+  function monthsRegex(isStrict) {
+    if (this._monthsParseExact) {
+      if (!hasOwnProp(this, '_monthsRegex')) {
+        computeMonthsParse.call(this);
+      }
+      if (isStrict) {
+        return this._monthsStrictRegex;
+      } else {
+        return this._monthsRegex;
+      }
+    } else {
+      if (!hasOwnProp(this, '_monthsRegex')) {
+        this._monthsRegex = defaultMonthsRegex;
+      }
+      return this._monthsStrictRegex && isStrict ?
+      this._monthsStrictRegex :
+      this._monthsRegex;
+    }
+  }
+
+  function computeMonthsParse() {
+    function cmpLenRev(a, b) {
+      return b.length - a.length;
+    }
+
+    var shortPieces = [],
+    longPieces = [],
+    mixedPieces = [],
+    i,
+    mom;
+    for (i = 0; i < 12; i++) {
+      // make the regex if we don't have it already
+      mom = createUTC([2000, i]);
+      shortPieces.push(this.monthsShort(mom, ''));
+      longPieces.push(this.months(mom, ''));
+      mixedPieces.push(this.months(mom, ''));
+      mixedPieces.push(this.monthsShort(mom, ''));
+    }
+    // Sorting makes sure if one month (or abbr) is a prefix of another it
+    // will match the longer piece.
+    shortPieces.sort(cmpLenRev);
+    longPieces.sort(cmpLenRev);
+    mixedPieces.sort(cmpLenRev);
+    for (i = 0; i < 12; i++) {
+      shortPieces[i] = regexEscape(shortPieces[i]);
+      longPieces[i] = regexEscape(longPieces[i]);
+    }
+    for (i = 0; i < 24; i++) {
+      mixedPieces[i] = regexEscape(mixedPieces[i]);
+    }
+
+    this._monthsRegex = new RegExp('^(' + mixedPieces.join('|') + ')', 'i');
+    this._monthsShortRegex = this._monthsRegex;
+    this._monthsStrictRegex = new RegExp(
+    '^(' + longPieces.join('|') + ')',
+    'i');
+
+    this._monthsShortStrictRegex = new RegExp(
+    '^(' + shortPieces.join('|') + ')',
+    'i');
+
+  }
+
+  // FORMATTING
+
+  addFormatToken('Y', 0, 0, function () {
+    var y = this.year();
+    return y <= 9999 ? zeroFill(y, 4) : '+' + y;
+  });
+
+  addFormatToken(0, ['YY', 2], 0, function () {
+    return this.year() % 100;
+  });
+
+  addFormatToken(0, ['YYYY', 4], 0, 'year');
+  addFormatToken(0, ['YYYYY', 5], 0, 'year');
+  addFormatToken(0, ['YYYYYY', 6, true], 0, 'year');
+
+  // ALIASES
+
+  addUnitAlias('year', 'y');
+
+  // PRIORITIES
+
+  addUnitPriority('year', 1);
+
+  // PARSING
+
+  addRegexToken('Y', matchSigned);
+  addRegexToken('YY', match1to2, match2);
+  addRegexToken('YYYY', match1to4, match4);
+  addRegexToken('YYYYY', match1to6, match6);
+  addRegexToken('YYYYYY', match1to6, match6);
+
+  addParseToken(['YYYYY', 'YYYYYY'], YEAR);
+  addParseToken('YYYY', function (input, array) {
+    array[YEAR] =
+    input.length === 2 ? hooks.parseTwoDigitYear(input) : toInt(input);
+  });
+  addParseToken('YY', function (input, array) {
+    array[YEAR] = hooks.parseTwoDigitYear(input);
+  });
+  addParseToken('Y', function (input, array) {
+    array[YEAR] = parseInt(input, 10);
+  });
+
+  // HELPERS
+
+  function daysInYear(year) {
+    return isLeapYear(year) ? 366 : 365;
+  }
+
+  // HOOKS
+
+  hooks.parseTwoDigitYear = function (input) {
+    return toInt(input) + (toInt(input) > 68 ? 1900 : 2000);
+  };
+
+  // MOMENTS
+
+  var getSetYear = makeGetSet('FullYear', true);
+
+  function getIsLeapYear() {
+    return isLeapYear(this.year());
+  }
+
+  function createDate(y, m, d, h, M, s, ms) {
+    // can't just apply() to create a date:
+    // https://stackoverflow.com/q/181348
+    var date;
+    // the date constructor remaps years 0-99 to 1900-1999
+    if (y < 100 && y >= 0) {
+      // preserve leap years using a full 400 year cycle, then reset
+      date = new Date(y + 400, m, d, h, M, s, ms);
+      if (isFinite(date.getFullYear())) {
+        date.setFullYear(y);
+      }
+    } else {
+      date = new Date(y, m, d, h, M, s, ms);
+    }
+
+    return date;
+  }
+
+  function createUTCDate(y) {
+    var date, args;
+    // the Date.UTC function remaps years 0-99 to 1900-1999
+    if (y < 100 && y >= 0) {
+      args = Array.prototype.slice.call(arguments);
+      // preserve leap years using a full 400 year cycle, then reset
+      args[0] = y + 400;
+      date = new Date(Date.UTC.apply(null, args));
+      if (isFinite(date.getUTCFullYear())) {
+        date.setUTCFullYear(y);
+      }
+    } else {
+      date = new Date(Date.UTC.apply(null, arguments));
+    }
+
+    return date;
+  }
+
+  // start-of-first-week - start-of-year
+  function firstWeekOffset(year, dow, doy) {
+    var // first-week day -- which january is always in the first week (4 for iso, 1 for other)
+    fwd = 7 + dow - doy,
+    // first-week day local weekday -- which local weekday is fwd
+    fwdlw = (7 + createUTCDate(year, 0, fwd).getUTCDay() - dow) % 7;
+
+    return -fwdlw + fwd - 1;
+  }
+
+  // https://en.wikipedia.org/wiki/ISO_week_date#Calculating_a_date_given_the_year.2C_week_number_and_weekday
+  function dayOfYearFromWeeks(year, week, weekday, dow, doy) {
+    var localWeekday = (7 + weekday - dow) % 7,
+    weekOffset = firstWeekOffset(year, dow, doy),
+    dayOfYear = 1 + 7 * (week - 1) + localWeekday + weekOffset,
+    resYear,
+    resDayOfYear;
+
+    if (dayOfYear <= 0) {
+      resYear = year - 1;
+      resDayOfYear = daysInYear(resYear) + dayOfYear;
+    } else if (dayOfYear > daysInYear(year)) {
+      resYear = year + 1;
+      resDayOfYear = dayOfYear - daysInYear(year);
+    } else {
+      resYear = year;
+      resDayOfYear = dayOfYear;
+    }
+
+    return {
+      year: resYear,
+      dayOfYear: resDayOfYear };
+
+  }
+
+  function weekOfYear(mom, dow, doy) {
+    var weekOffset = firstWeekOffset(mom.year(), dow, doy),
+    week = Math.floor((mom.dayOfYear() - weekOffset - 1) / 7) + 1,
+    resWeek,
+    resYear;
+
+    if (week < 1) {
+      resYear = mom.year() - 1;
+      resWeek = week + weeksInYear(resYear, dow, doy);
+    } else if (week > weeksInYear(mom.year(), dow, doy)) {
+      resWeek = week - weeksInYear(mom.year(), dow, doy);
+      resYear = mom.year() + 1;
+    } else {
+      resYear = mom.year();
+      resWeek = week;
+    }
+
+    return {
+      week: resWeek,
+      year: resYear };
+
+  }
+
+  function weeksInYear(year, dow, doy) {
+    var weekOffset = firstWeekOffset(year, dow, doy),
+    weekOffsetNext = firstWeekOffset(year + 1, dow, doy);
+    return (daysInYear(year) - weekOffset + weekOffsetNext) / 7;
+  }
+
+  // FORMATTING
+
+  addFormatToken('w', ['ww', 2], 'wo', 'week');
+  addFormatToken('W', ['WW', 2], 'Wo', 'isoWeek');
+
+  // ALIASES
+
+  addUnitAlias('week', 'w');
+  addUnitAlias('isoWeek', 'W');
+
+  // PRIORITIES
+
+  addUnitPriority('week', 5);
+  addUnitPriority('isoWeek', 5);
+
+  // PARSING
+
+  addRegexToken('w', match1to2);
+  addRegexToken('ww', match1to2, match2);
+  addRegexToken('W', match1to2);
+  addRegexToken('WW', match1to2, match2);
+
+  addWeekParseToken(['w', 'ww', 'W', 'WW'], function (
+  input,
+  week,
+  config,
+  token)
+  {
+    week[token.substr(0, 1)] = toInt(input);
+  });
+
+  // HELPERS
+
+  // LOCALES
+
+  function localeWeek(mom) {
+    return weekOfYear(mom, this._week.dow, this._week.doy).week;
+  }
+
+  var defaultLocaleWeek = {
+    dow: 0, // Sunday is the first day of the week.
+    doy: 6 // The week that contains Jan 6th is the first week of the year.
+  };
+
+  function localeFirstDayOfWeek() {
+    return this._week.dow;
+  }
+
+  function localeFirstDayOfYear() {
+    return this._week.doy;
+  }
+
+  // MOMENTS
+
+  function getSetWeek(input) {
+    var week = this.localeData().week(this);
+    return input == null ? week : this.add((input - week) * 7, 'd');
+  }
+
+  function getSetISOWeek(input) {
+    var week = weekOfYear(this, 1, 4).week;
+    return input == null ? week : this.add((input - week) * 7, 'd');
+  }
+
+  // FORMATTING
+
+  addFormatToken('d', 0, 'do', 'day');
+
+  addFormatToken('dd', 0, 0, function (format) {
+    return this.localeData().weekdaysMin(this, format);
+  });
+
+  addFormatToken('ddd', 0, 0, function (format) {
+    return this.localeData().weekdaysShort(this, format);
+  });
+
+  addFormatToken('dddd', 0, 0, function (format) {
+    return this.localeData().weekdays(this, format);
+  });
+
+  addFormatToken('e', 0, 0, 'weekday');
+  addFormatToken('E', 0, 0, 'isoWeekday');
+
+  // ALIASES
+
+  addUnitAlias('day', 'd');
+  addUnitAlias('weekday', 'e');
+  addUnitAlias('isoWeekday', 'E');
+
+  // PRIORITY
+  addUnitPriority('day', 11);
+  addUnitPriority('weekday', 11);
+  addUnitPriority('isoWeekday', 11);
+
+  // PARSING
+
+  addRegexToken('d', match1to2);
+  addRegexToken('e', match1to2);
+  addRegexToken('E', match1to2);
+  addRegexToken('dd', function (isStrict, locale) {
+    return locale.weekdaysMinRegex(isStrict);
+  });
+  addRegexToken('ddd', function (isStrict, locale) {
+    return locale.weekdaysShortRegex(isStrict);
+  });
+  addRegexToken('dddd', function (isStrict, locale) {
+    return locale.weekdaysRegex(isStrict);
+  });
+
+  addWeekParseToken(['dd', 'ddd', 'dddd'], function (input, week, config, token) {
+    var weekday = config._locale.weekdaysParse(input, token, config._strict);
+    // if we didn't get a weekday name, mark the date as invalid
+    if (weekday != null) {
+      week.d = weekday;
+    } else {
+      getParsingFlags(config).invalidWeekday = input;
+    }
+  });
+
+  addWeekParseToken(['d', 'e', 'E'], function (input, week, config, token) {
+    week[token] = toInt(input);
+  });
+
+  // HELPERS
+
+  function parseWeekday(input, locale) {
+    if (typeof input !== 'string') {
+      return input;
+    }
+
+    if (!isNaN(input)) {
+      return parseInt(input, 10);
+    }
+
+    input = locale.weekdaysParse(input);
+    if (typeof input === 'number') {
+      return input;
+    }
+
+    return null;
+  }
+
+  function parseIsoWeekday(input, locale) {
+    if (typeof input === 'string') {
+      return locale.weekdaysParse(input) % 7 || 7;
+    }
+    return isNaN(input) ? null : input;
+  }
+
+  // LOCALES
+  function shiftWeekdays(ws, n) {
+    return ws.slice(n, 7).concat(ws.slice(0, n));
+  }
+
+  var defaultLocaleWeekdays = 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split(
+  '_'),
+
+  defaultLocaleWeekdaysShort = 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_'),
+  defaultLocaleWeekdaysMin = 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_'),
+  defaultWeekdaysRegex = matchWord,
+  defaultWeekdaysShortRegex = matchWord,
+  defaultWeekdaysMinRegex = matchWord;
+
+  function localeWeekdays(m, format) {
+    var weekdays = isArray(this._weekdays) ?
+    this._weekdays :
+    this._weekdays[
+    m && m !== true && this._weekdays.isFormat.test(format) ?
+    'format' :
+    'standalone'];
+
+    return m === true ?
+    shiftWeekdays(weekdays, this._week.dow) :
+    m ?
+    weekdays[m.day()] :
+    weekdays;
+  }
+
+  function localeWeekdaysShort(m) {
+    return m === true ?
+    shiftWeekdays(this._weekdaysShort, this._week.dow) :
+    m ?
+    this._weekdaysShort[m.day()] :
+    this._weekdaysShort;
+  }
+
+  function localeWeekdaysMin(m) {
+    return m === true ?
+    shiftWeekdays(this._weekdaysMin, this._week.dow) :
+    m ?
+    this._weekdaysMin[m.day()] :
+    this._weekdaysMin;
+  }
+
+  function handleStrictParse$1(weekdayName, format, strict) {
+    var i,
+    ii,
+    mom,
+    llc = weekdayName.toLocaleLowerCase();
+    if (!this._weekdaysParse) {
+      this._weekdaysParse = [];
+      this._shortWeekdaysParse = [];
+      this._minWeekdaysParse = [];
+
+      for (i = 0; i < 7; ++i) {
+        mom = createUTC([2000, 1]).day(i);
+        this._minWeekdaysParse[i] = this.weekdaysMin(
+        mom,
+        '').
+        toLocaleLowerCase();
+        this._shortWeekdaysParse[i] = this.weekdaysShort(
+        mom,
+        '').
+        toLocaleLowerCase();
+        this._weekdaysParse[i] = this.weekdays(mom, '').toLocaleLowerCase();
+      }
+    }
+
+    if (strict) {
+      if (format === 'dddd') {
+        ii = indexOf.call(this._weekdaysParse, llc);
+        return ii !== -1 ? ii : null;
+      } else if (format === 'ddd') {
+        ii = indexOf.call(this._shortWeekdaysParse, llc);
+        return ii !== -1 ? ii : null;
+      } else {
+        ii = indexOf.call(this._minWeekdaysParse, llc);
+        return ii !== -1 ? ii : null;
+      }
+    } else {
+      if (format === 'dddd') {
+        ii = indexOf.call(this._weekdaysParse, llc);
+        if (ii !== -1) {
+          return ii;
+        }
+        ii = indexOf.call(this._shortWeekdaysParse, llc);
+        if (ii !== -1) {
+          return ii;
+        }
+        ii = indexOf.call(this._minWeekdaysParse, llc);
+        return ii !== -1 ? ii : null;
+      } else if (format === 'ddd') {
+        ii = indexOf.call(this._shortWeekdaysParse, llc);
+        if (ii !== -1) {
+          return ii;
+        }
+        ii = indexOf.call(this._weekdaysParse, llc);
+        if (ii !== -1) {
+          return ii;
+        }
+        ii = indexOf.call(this._minWeekdaysParse, llc);
+        return ii !== -1 ? ii : null;
+      } else {
+        ii = indexOf.call(this._minWeekdaysParse, llc);
+        if (ii !== -1) {
+          return ii;
+        }
+        ii = indexOf.call(this._weekdaysParse, llc);
+        if (ii !== -1) {
+          return ii;
+        }
+        ii = indexOf.call(this._shortWeekdaysParse, llc);
+        return ii !== -1 ? ii : null;
+      }
+    }
+  }
+
+  function localeWeekdaysParse(weekdayName, format, strict) {
+    var i, mom, regex;
+
+    if (this._weekdaysParseExact) {
+      return handleStrictParse$1.call(this, weekdayName, format, strict);
+    }
+
+    if (!this._weekdaysParse) {
+      this._weekdaysParse = [];
+      this._minWeekdaysParse = [];
+      this._shortWeekdaysParse = [];
+      this._fullWeekdaysParse = [];
+    }
+
+    for (i = 0; i < 7; i++) {
+      // make the regex if we don't have it already
+
+      mom = createUTC([2000, 1]).day(i);
+      if (strict && !this._fullWeekdaysParse[i]) {
+        this._fullWeekdaysParse[i] = new RegExp(
+        '^' + this.weekdays(mom, '').replace('.', '\\.?') + '$',
+        'i');
+
+        this._shortWeekdaysParse[i] = new RegExp(
+        '^' + this.weekdaysShort(mom, '').replace('.', '\\.?') + '$',
+        'i');
+
+        this._minWeekdaysParse[i] = new RegExp(
+        '^' + this.weekdaysMin(mom, '').replace('.', '\\.?') + '$',
+        'i');
+
+      }
+      if (!this._weekdaysParse[i]) {
+        regex =
+        '^' +
+        this.weekdays(mom, '') +
+        '|^' +
+        this.weekdaysShort(mom, '') +
+        '|^' +
+        this.weekdaysMin(mom, '');
+        this._weekdaysParse[i] = new RegExp(regex.replace('.', ''), 'i');
+      }
+      // test the regex
+      if (
+      strict &&
+      format === 'dddd' &&
+      this._fullWeekdaysParse[i].test(weekdayName))
+      {
+        return i;
+      } else if (
+      strict &&
+      format === 'ddd' &&
+      this._shortWeekdaysParse[i].test(weekdayName))
+      {
+        return i;
+      } else if (
+      strict &&
+      format === 'dd' &&
+      this._minWeekdaysParse[i].test(weekdayName))
+      {
+        return i;
+      } else if (!strict && this._weekdaysParse[i].test(weekdayName)) {
+        return i;
+      }
+    }
+  }
+
+  // MOMENTS
+
+  function getSetDayOfWeek(input) {
+    if (!this.isValid()) {
+      return input != null ? this : NaN;
+    }
+    var day = this._isUTC ? this._d.getUTCDay() : this._d.getDay();
+    if (input != null) {
+      input = parseWeekday(input, this.localeData());
+      return this.add(input - day, 'd');
+    } else {
+      return day;
+    }
+  }
+
+  function getSetLocaleDayOfWeek(input) {
+    if (!this.isValid()) {
+      return input != null ? this : NaN;
+    }
+    var weekday = (this.day() + 7 - this.localeData()._week.dow) % 7;
+    return input == null ? weekday : this.add(input - weekday, 'd');
+  }
+
+  function getSetISODayOfWeek(input) {
+    if (!this.isValid()) {
+      return input != null ? this : NaN;
+    }
+
+    // behaves the same as moment#day except
+    // as a getter, returns 7 instead of 0 (1-7 range instead of 0-6)
+    // as a setter, sunday should belong to the previous week.
+
+    if (input != null) {
+      var weekday = parseIsoWeekday(input, this.localeData());
+      return this.day(this.day() % 7 ? weekday : weekday - 7);
+    } else {
+      return this.day() || 7;
+    }
+  }
+
+  function weekdaysRegex(isStrict) {
+    if (this._weekdaysParseExact) {
+      if (!hasOwnProp(this, '_weekdaysRegex')) {
+        computeWeekdaysParse.call(this);
+      }
+      if (isStrict) {
+        return this._weekdaysStrictRegex;
+      } else {
+        return this._weekdaysRegex;
+      }
+    } else {
+      if (!hasOwnProp(this, '_weekdaysRegex')) {
+        this._weekdaysRegex = defaultWeekdaysRegex;
+      }
+      return this._weekdaysStrictRegex && isStrict ?
+      this._weekdaysStrictRegex :
+      this._weekdaysRegex;
+    }
+  }
+
+  function weekdaysShortRegex(isStrict) {
+    if (this._weekdaysParseExact) {
+      if (!hasOwnProp(this, '_weekdaysRegex')) {
+        computeWeekdaysParse.call(this);
+      }
+      if (isStrict) {
+        return this._weekdaysShortStrictRegex;
+      } else {
+        return this._weekdaysShortRegex;
+      }
+    } else {
+      if (!hasOwnProp(this, '_weekdaysShortRegex')) {
+        this._weekdaysShortRegex = defaultWeekdaysShortRegex;
+      }
+      return this._weekdaysShortStrictRegex && isStrict ?
+      this._weekdaysShortStrictRegex :
+      this._weekdaysShortRegex;
+    }
+  }
+
+  function weekdaysMinRegex(isStrict) {
+    if (this._weekdaysParseExact) {
+      if (!hasOwnProp(this, '_weekdaysRegex')) {
+        computeWeekdaysParse.call(this);
+      }
+      if (isStrict) {
+        return this._weekdaysMinStrictRegex;
+      } else {
+        return this._weekdaysMinRegex;
+      }
+    } else {
+      if (!hasOwnProp(this, '_weekdaysMinRegex')) {
+        this._weekdaysMinRegex = defaultWeekdaysMinRegex;
+      }
+      return this._weekdaysMinStrictRegex && isStrict ?
+      this._weekdaysMinStrictRegex :
+      this._weekdaysMinRegex;
+    }
+  }
+
+  function computeWeekdaysParse() {
+    function cmpLenRev(a, b) {
+      return b.length - a.length;
+    }
+
+    var minPieces = [],
+    shortPieces = [],
+    longPieces = [],
+    mixedPieces = [],
+    i,
+    mom,
+    minp,
+    shortp,
+    longp;
+    for (i = 0; i < 7; i++) {
+      // make the regex if we don't have it already
+      mom = createUTC([2000, 1]).day(i);
+      minp = regexEscape(this.weekdaysMin(mom, ''));
+      shortp = regexEscape(this.weekdaysShort(mom, ''));
+      longp = regexEscape(this.weekdays(mom, ''));
+      minPieces.push(minp);
+      shortPieces.push(shortp);
+      longPieces.push(longp);
+      mixedPieces.push(minp);
+      mixedPieces.push(shortp);
+      mixedPieces.push(longp);
+    }
+    // Sorting makes sure if one weekday (or abbr) is a prefix of another it
+    // will match the longer piece.
+    minPieces.sort(cmpLenRev);
+    shortPieces.sort(cmpLenRev);
+    longPieces.sort(cmpLenRev);
+    mixedPieces.sort(cmpLenRev);
+
+    this._weekdaysRegex = new RegExp('^(' + mixedPieces.join('|') + ')', 'i');
+    this._weekdaysShortRegex = this._weekdaysRegex;
+    this._weekdaysMinRegex = this._weekdaysRegex;
+
+    this._weekdaysStrictRegex = new RegExp(
+    '^(' + longPieces.join('|') + ')',
+    'i');
+
+    this._weekdaysShortStrictRegex = new RegExp(
+    '^(' + shortPieces.join('|') + ')',
+    'i');
+
+    this._weekdaysMinStrictRegex = new RegExp(
+    '^(' + minPieces.join('|') + ')',
+    'i');
+
+  }
+
+  // FORMATTING
+
+  function hFormat() {
+    return this.hours() % 12 || 12;
+  }
+
+  function kFormat() {
+    return this.hours() || 24;
+  }
+
+  addFormatToken('H', ['HH', 2], 0, 'hour');
+  addFormatToken('h', ['hh', 2], 0, hFormat);
+  addFormatToken('k', ['kk', 2], 0, kFormat);
+
+  addFormatToken('hmm', 0, 0, function () {
+    return '' + hFormat.apply(this) + zeroFill(this.minutes(), 2);
+  });
+
+  addFormatToken('hmmss', 0, 0, function () {
+    return (
+      '' +
+      hFormat.apply(this) +
+      zeroFill(this.minutes(), 2) +
+      zeroFill(this.seconds(), 2));
+
+  });
+
+  addFormatToken('Hmm', 0, 0, function () {
+    return '' + this.hours() + zeroFill(this.minutes(), 2);
+  });
+
+  addFormatToken('Hmmss', 0, 0, function () {
+    return (
+      '' +
+      this.hours() +
+      zeroFill(this.minutes(), 2) +
+      zeroFill(this.seconds(), 2));
+
+  });
+
+  function meridiem(token, lowercase) {
+    addFormatToken(token, 0, 0, function () {
+      return this.localeData().meridiem(
+      this.hours(),
+      this.minutes(),
+      lowercase);
+
+    });
+  }
+
+  meridiem('a', true);
+  meridiem('A', false);
+
+  // ALIASES
+
+  addUnitAlias('hour', 'h');
+
+  // PRIORITY
+  addUnitPriority('hour', 13);
+
+  // PARSING
+
+  function matchMeridiem(isStrict, locale) {
+    return locale._meridiemParse;
+  }
+
+  addRegexToken('a', matchMeridiem);
+  addRegexToken('A', matchMeridiem);
+  addRegexToken('H', match1to2);
+  addRegexToken('h', match1to2);
+  addRegexToken('k', match1to2);
+  addRegexToken('HH', match1to2, match2);
+  addRegexToken('hh', match1to2, match2);
+  addRegexToken('kk', match1to2, match2);
+
+  addRegexToken('hmm', match3to4);
+  addRegexToken('hmmss', match5to6);
+  addRegexToken('Hmm', match3to4);
+  addRegexToken('Hmmss', match5to6);
+
+  addParseToken(['H', 'HH'], HOUR);
+  addParseToken(['k', 'kk'], function (input, array, config) {
+    var kInput = toInt(input);
+    array[HOUR] = kInput === 24 ? 0 : kInput;
+  });
+  addParseToken(['a', 'A'], function (input, array, config) {
+    config._isPm = config._locale.isPM(input);
+    config._meridiem = input;
+  });
+  addParseToken(['h', 'hh'], function (input, array, config) {
+    array[HOUR] = toInt(input);
+    getParsingFlags(config).bigHour = true;
+  });
+  addParseToken('hmm', function (input, array, config) {
+    var pos = input.length - 2;
+    array[HOUR] = toInt(input.substr(0, pos));
+    array[MINUTE] = toInt(input.substr(pos));
+    getParsingFlags(config).bigHour = true;
+  });
+  addParseToken('hmmss', function (input, array, config) {
+    var pos1 = input.length - 4,
+    pos2 = input.length - 2;
+    array[HOUR] = toInt(input.substr(0, pos1));
+    array[MINUTE] = toInt(input.substr(pos1, 2));
+    array[SECOND] = toInt(input.substr(pos2));
+    getParsingFlags(config).bigHour = true;
+  });
+  addParseToken('Hmm', function (input, array, config) {
+    var pos = input.length - 2;
+    array[HOUR] = toInt(input.substr(0, pos));
+    array[MINUTE] = toInt(input.substr(pos));
+  });
+  addParseToken('Hmmss', function (input, array, config) {
+    var pos1 = input.length - 4,
+    pos2 = input.length - 2;
+    array[HOUR] = toInt(input.substr(0, pos1));
+    array[MINUTE] = toInt(input.substr(pos1, 2));
+    array[SECOND] = toInt(input.substr(pos2));
+  });
+
+  // LOCALES
+
+  function localeIsPM(input) {
+    // IE8 Quirks Mode & IE7 Standards Mode do not allow accessing strings like arrays
+    // Using charAt should be more compatible.
+    return (input + '').toLowerCase().charAt(0) === 'p';
+  }
+
+  var defaultLocaleMeridiemParse = /[ap]\.?m?\.?/i,
+  // Setting the hour should keep the time, because the user explicitly
+  // specified which hour they want. So trying to maintain the same hour (in
+  // a new timezone) makes sense. Adding/subtracting hours does not follow
+  // this rule.
+  getSetHour = makeGetSet('Hours', true);
+
+  function localeMeridiem(hours, minutes, isLower) {
+    if (hours > 11) {
+      return isLower ? 'pm' : 'PM';
+    } else {
+      return isLower ? 'am' : 'AM';
+    }
+  }
+
+  var baseConfig = {
+    calendar: defaultCalendar,
+    longDateFormat: defaultLongDateFormat,
+    invalidDate: defaultInvalidDate,
+    ordinal: defaultOrdinal,
+    dayOfMonthOrdinalParse: defaultDayOfMonthOrdinalParse,
+    relativeTime: defaultRelativeTime,
+
+    months: defaultLocaleMonths,
+    monthsShort: defaultLocaleMonthsShort,
+
+    week: defaultLocaleWeek,
+
+    weekdays: defaultLocaleWeekdays,
+    weekdaysMin: defaultLocaleWeekdaysMin,
+    weekdaysShort: defaultLocaleWeekdaysShort,
+
+    meridiemParse: defaultLocaleMeridiemParse };
+
+
+  // internal storage for locale config files
+  var locales = {},
+  localeFamilies = {},
+  globalLocale;
+
+  function commonPrefix(arr1, arr2) {
+    var i,
+    minl = Math.min(arr1.length, arr2.length);
+    for (i = 0; i < minl; i += 1) {
+      if (arr1[i] !== arr2[i]) {
+        return i;
+      }
+    }
+    return minl;
+  }
+
+  function normalizeLocale(key) {
+    return key ? key.toLowerCase().replace('_', '-') : key;
+  }
+
+  // pick the locale from the array
+  // try ['en-au', 'en-gb'] as 'en-au', 'en-gb', 'en', as in move through the list trying each
+  // substring from most specific to least, but move to the next array item if it's a more specific variant than the current root
+  function chooseLocale(names) {
+    var i = 0,
+    j,
+    next,
+    locale,
+    split;
+
+    while (i < names.length) {
+      split = normalizeLocale(names[i]).split('-');
+      j = split.length;
+      next = normalizeLocale(names[i + 1]);
+      next = next ? next.split('-') : null;
+      while (j > 0) {
+        locale = loadLocale(split.slice(0, j).join('-'));
+        if (locale) {
+          return locale;
+        }
+        if (
+        next &&
+        next.length >= j &&
+        commonPrefix(split, next) >= j - 1)
+        {
+          //the next array item is better than a shallower substring of this one
+          break;
+        }
+        j--;
+      }
+      i++;
+    }
+    return globalLocale;
+  }
+
+  function loadLocale(name) {
+    var oldLocale = null,
+    aliasedRequire;
+    // TODO: Find a better way to register and load all the locales in Node
+    if (
+    locales[name] === undefined &&
+    typeof module !== 'undefined' &&
+    module &&
+    module.exports)
+    {
+      try {
+        oldLocale = globalLocale._abbr;
+        aliasedRequire = require;
+        __webpack_require__(52)("./" + name);
+        getSetGlobalLocale(oldLocale);
+      } catch (e) {
+        // mark as not found to avoid repeating expensive file require call causing high CPU
+        // when trying to find en-US, en_US, en-us for every format call
+        locales[name] = null; // null means not found
+      }
+    }
+    return locales[name];
+  }
+
+  // This function will load locale and then set the global locale.  If
+  // no arguments are passed in, it will simply return the current global
+  // locale key.
+  function getSetGlobalLocale(key, values) {
+    var data;
+    if (key) {
+      if (isUndefined(values)) {
+        data = getLocale(key);
+      } else {
+        data = defineLocale(key, values);
+      }
+
+      if (data) {
+        // moment.duration._locale = moment._locale = data;
+        globalLocale = data;
+      } else {
+        if (typeof console !== 'undefined' && console.warn) {
+          //warn user if arguments are passed but the locale could not be set
+          console.warn(
+          'Locale ' + key + ' not found. Did you forget to load it?');
+
+        }
+      }
+    }
+
+    return globalLocale._abbr;
+  }
+
+  function defineLocale(name, config) {
+    if (config !== null) {
+      var locale,
+      parentConfig = baseConfig;
+      config.abbr = name;
+      if (locales[name] != null) {
+        deprecateSimple(
+        'defineLocaleOverride',
+        'use moment.updateLocale(localeName, config) to change ' +
+        'an existing locale. moment.defineLocale(localeName, ' +
+        'config) should only be used for creating a new locale ' +
+        'See http://momentjs.com/guides/#/warnings/define-locale/ for more info.');
+
+        parentConfig = locales[name]._config;
+      } else if (config.parentLocale != null) {
+        if (locales[config.parentLocale] != null) {
+          parentConfig = locales[config.parentLocale]._config;
+        } else {
+          locale = loadLocale(config.parentLocale);
+          if (locale != null) {
+            parentConfig = locale._config;
+          } else {
+            if (!localeFamilies[config.parentLocale]) {
+              localeFamilies[config.parentLocale] = [];
+            }
+            localeFamilies[config.parentLocale].push({
+              name: name,
+              config: config });
+
+            return null;
+          }
+        }
+      }
+      locales[name] = new Locale(mergeConfigs(parentConfig, config));
+
+      if (localeFamilies[name]) {
+        localeFamilies[name].forEach(function (x) {
+          defineLocale(x.name, x.config);
         });
+      }
+
+      // backwards compat for now: also set the locale
+      // make sure we set the locale AFTER all child locales have been
+      // created, so we won't end up with the child locale set.
+      getSetGlobalLocale(name);
+
+      return locales[name];
+    } else {
+      // useful for testing
+      delete locales[name];
+      return null;
+    }
+  }
+
+  function updateLocale(name, config) {
+    if (config != null) {
+      var locale,
+      tmpLocale,
+      parentConfig = baseConfig;
+
+      if (locales[name] != null && locales[name].parentLocale != null) {
+        // Update existing child locale in-place to avoid memory-leaks
+        locales[name].set(mergeConfigs(locales[name]._config, config));
+      } else {
+        // MERGE
+        tmpLocale = loadLocale(name);
+        if (tmpLocale != null) {
+          parentConfig = tmpLocale._config;
+        }
+        config = mergeConfigs(parentConfig, config);
+        if (tmpLocale == null) {
+          // updateLocale is called for creating a new locale
+          // Set abbr so it will have a name (getters return
+          // undefined otherwise).
+          config.abbr = name;
+        }
+        locale = new Locale(config);
+        locale.parentLocale = locales[name];
+        locales[name] = locale;
+      }
+
+      // backwards compat for now: also set the locale
+      getSetGlobalLocale(name);
+    } else {
+      // pass null for config to unupdate, useful for tests
+      if (locales[name] != null) {
+        if (locales[name].parentLocale != null) {
+          locales[name] = locales[name].parentLocale;
+          if (name === getSetGlobalLocale()) {
+            getSetGlobalLocale(name);
+          }
+        } else if (locales[name] != null) {
+          delete locales[name];
+        }
+      }
+    }
+    return locales[name];
+  }
+
+  // returns locale data
+  function getLocale(key) {
+    var locale;
+
+    if (key && key._locale && key._locale._abbr) {
+      key = key._locale._abbr;
+    }
+
+    if (!key) {
+      return globalLocale;
+    }
+
+    if (!isArray(key)) {
+      //short-circuit everything else
+      locale = loadLocale(key);
+      if (locale) {
+        return locale;
+      }
+      key = [key];
+    }
+
+    return chooseLocale(key);
+  }
+
+  function listLocales() {
+    return keys(locales);
+  }
+
+  function checkOverflow(m) {
+    var overflow,
+    a = m._a;
+
+    if (a && getParsingFlags(m).overflow === -2) {
+      overflow =
+      a[MONTH] < 0 || a[MONTH] > 11 ?
+      MONTH :
+      a[DATE] < 1 || a[DATE] > daysInMonth(a[YEAR], a[MONTH]) ?
+      DATE :
+      a[HOUR] < 0 ||
+      a[HOUR] > 24 ||
+      a[HOUR] === 24 && (
+      a[MINUTE] !== 0 ||
+      a[SECOND] !== 0 ||
+      a[MILLISECOND] !== 0) ?
+      HOUR :
+      a[MINUTE] < 0 || a[MINUTE] > 59 ?
+      MINUTE :
+      a[SECOND] < 0 || a[SECOND] > 59 ?
+      SECOND :
+      a[MILLISECOND] < 0 || a[MILLISECOND] > 999 ?
+      MILLISECOND :
+      -1;
+
+      if (
+      getParsingFlags(m)._overflowDayOfYear && (
+      overflow < YEAR || overflow > DATE))
+      {
+        overflow = DATE;
+      }
+      if (getParsingFlags(m)._overflowWeeks && overflow === -1) {
+        overflow = WEEK;
+      }
+      if (getParsingFlags(m)._overflowWeekday && overflow === -1) {
+        overflow = WEEKDAY;
+      }
+
+      getParsingFlags(m).overflow = overflow;
+    }
+
+    return m;
+  }
+
+  // iso 8601 regex
+  // 0000-00-00 0000-W00 or 0000-W00-0 + T + 00 or 00:00 or 00:00:00 or 00:00:00.000 + +00:00 or +0000 or +00)
+  var extendedIsoRegex = /^\s*((?:[+-]\d{6}|\d{4})-(?:\d\d-\d\d|W\d\d-\d|W\d\d|\d\d\d|\d\d))(?:(T| )(\d\d(?::\d\d(?::\d\d(?:[.,]\d+)?)?)?)([+-]\d\d(?::?\d\d)?|\s*Z)?)?$/,
+  basicIsoRegex = /^\s*((?:[+-]\d{6}|\d{4})(?:\d\d\d\d|W\d\d\d|W\d\d|\d\d\d|\d\d|))(?:(T| )(\d\d(?:\d\d(?:\d\d(?:[.,]\d+)?)?)?)([+-]\d\d(?::?\d\d)?|\s*Z)?)?$/,
+  tzRegex = /Z|[+-]\d\d(?::?\d\d)?/,
+  isoDates = [
+  ['YYYYYY-MM-DD', /[+-]\d{6}-\d\d-\d\d/],
+  ['YYYY-MM-DD', /\d{4}-\d\d-\d\d/],
+  ['GGGG-[W]WW-E', /\d{4}-W\d\d-\d/],
+  ['GGGG-[W]WW', /\d{4}-W\d\d/, false],
+  ['YYYY-DDD', /\d{4}-\d{3}/],
+  ['YYYY-MM', /\d{4}-\d\d/, false],
+  ['YYYYYYMMDD', /[+-]\d{10}/],
+  ['YYYYMMDD', /\d{8}/],
+  ['GGGG[W]WWE', /\d{4}W\d{3}/],
+  ['GGGG[W]WW', /\d{4}W\d{2}/, false],
+  ['YYYYDDD', /\d{7}/],
+  ['YYYYMM', /\d{6}/, false],
+  ['YYYY', /\d{4}/, false]],
+
+  // iso time formats and regexes
+  isoTimes = [
+  ['HH:mm:ss.SSSS', /\d\d:\d\d:\d\d\.\d+/],
+  ['HH:mm:ss,SSSS', /\d\d:\d\d:\d\d,\d+/],
+  ['HH:mm:ss', /\d\d:\d\d:\d\d/],
+  ['HH:mm', /\d\d:\d\d/],
+  ['HHmmss.SSSS', /\d\d\d\d\d\d\.\d+/],
+  ['HHmmss,SSSS', /\d\d\d\d\d\d,\d+/],
+  ['HHmmss', /\d\d\d\d\d\d/],
+  ['HHmm', /\d\d\d\d/],
+  ['HH', /\d\d/]],
+
+  aspNetJsonRegex = /^\/?Date\((-?\d+)/i,
+  // RFC 2822 regex: For details see https://tools.ietf.org/html/rfc2822#section-3.3
+  rfc2822 = /^(?:(Mon|Tue|Wed|Thu|Fri|Sat|Sun),?\s)?(\d{1,2})\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s(\d{2,4})\s(\d\d):(\d\d)(?::(\d\d))?\s(?:(UT|GMT|[ECMP][SD]T)|([Zz])|([+-]\d{4}))$/,
+  obsOffsets = {
+    UT: 0,
+    GMT: 0,
+    EDT: -4 * 60,
+    EST: -5 * 60,
+    CDT: -5 * 60,
+    CST: -6 * 60,
+    MDT: -6 * 60,
+    MST: -7 * 60,
+    PDT: -7 * 60,
+    PST: -8 * 60 };
+
+
+  // date from iso format
+  function configFromISO(config) {
+    var i,
+    l,
+    string = config._i,
+    match = extendedIsoRegex.exec(string) || basicIsoRegex.exec(string),
+    allowTime,
+    dateFormat,
+    timeFormat,
+    tzFormat;
+
+    if (match) {
+      getParsingFlags(config).iso = true;
+
+      for (i = 0, l = isoDates.length; i < l; i++) {
+        if (isoDates[i][1].exec(match[1])) {
+          dateFormat = isoDates[i][0];
+          allowTime = isoDates[i][2] !== false;
+          break;
+        }
+      }
+      if (dateFormat == null) {
+        config._isValid = false;
+        return;
+      }
+      if (match[3]) {
+        for (i = 0, l = isoTimes.length; i < l; i++) {
+          if (isoTimes[i][1].exec(match[3])) {
+            // match[2] should be 'T' or space
+            timeFormat = (match[2] || ' ') + isoTimes[i][0];
+            break;
+          }
+        }
+        if (timeFormat == null) {
+          config._isValid = false;
+          return;
+        }
+      }
+      if (!allowTime && timeFormat != null) {
+        config._isValid = false;
+        return;
+      }
+      if (match[4]) {
+        if (tzRegex.exec(match[4])) {
+          tzFormat = 'Z';
+        } else {
+          config._isValid = false;
+          return;
+        }
+      }
+      config._f = dateFormat + (timeFormat || '') + (tzFormat || '');
+      configFromStringAndFormat(config);
+    } else {
+      config._isValid = false;
+    }
+  }
+
+  function extractFromRFC2822Strings(
+  yearStr,
+  monthStr,
+  dayStr,
+  hourStr,
+  minuteStr,
+  secondStr)
+  {
+    var result = [
+    untruncateYear(yearStr),
+    defaultLocaleMonthsShort.indexOf(monthStr),
+    parseInt(dayStr, 10),
+    parseInt(hourStr, 10),
+    parseInt(minuteStr, 10)];
+
+
+    if (secondStr) {
+      result.push(parseInt(secondStr, 10));
+    }
+
+    return result;
+  }
+
+  function untruncateYear(yearStr) {
+    var year = parseInt(yearStr, 10);
+    if (year <= 49) {
+      return 2000 + year;
+    } else if (year <= 999) {
+      return 1900 + year;
+    }
+    return year;
+  }
+
+  function preprocessRFC2822(s) {
+    // Remove comments and folding whitespace and replace multiple-spaces with a single space
+    return s.
+    replace(/\([^)]*\)|[\n\t]/g, ' ').
+    replace(/(\s\s+)/g, ' ').
+    replace(/^\s\s*/, '').
+    replace(/\s\s*$/, '');
+  }
+
+  function checkWeekday(weekdayStr, parsedInput, config) {
+    if (weekdayStr) {
+      // TODO: Replace the vanilla JS Date object with an independent day-of-week check.
+      var weekdayProvided = defaultLocaleWeekdaysShort.indexOf(weekdayStr),
+      weekdayActual = new Date(
+      parsedInput[0],
+      parsedInput[1],
+      parsedInput[2]).
+      getDay();
+      if (weekdayProvided !== weekdayActual) {
+        getParsingFlags(config).weekdayMismatch = true;
+        config._isValid = false;
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function calculateOffset(obsOffset, militaryOffset, numOffset) {
+    if (obsOffset) {
+      return obsOffsets[obsOffset];
+    } else if (militaryOffset) {
+      // the only allowed military tz is Z
+      return 0;
+    } else {
+      var hm = parseInt(numOffset, 10),
+      m = hm % 100,
+      h = (hm - m) / 100;
+      return h * 60 + m;
+    }
+  }
+
+  // date and time from ref 2822 format
+  function configFromRFC2822(config) {
+    var match = rfc2822.exec(preprocessRFC2822(config._i)),
+    parsedArray;
+    if (match) {
+      parsedArray = extractFromRFC2822Strings(
+      match[4],
+      match[3],
+      match[2],
+      match[5],
+      match[6],
+      match[7]);
+
+      if (!checkWeekday(match[1], parsedArray, config)) {
+        return;
+      }
+
+      config._a = parsedArray;
+      config._tzm = calculateOffset(match[8], match[9], match[10]);
+
+      config._d = createUTCDate.apply(null, config._a);
+      config._d.setUTCMinutes(config._d.getUTCMinutes() - config._tzm);
+
+      getParsingFlags(config).rfc2822 = true;
+    } else {
+      config._isValid = false;
+    }
+  }
+
+  // date from 1) ASP.NET, 2) ISO, 3) RFC 2822 formats, or 4) optional fallback if parsing isn't strict
+  function configFromString(config) {
+    var matched = aspNetJsonRegex.exec(config._i);
+    if (matched !== null) {
+      config._d = new Date(+matched[1]);
+      return;
+    }
+
+    configFromISO(config);
+    if (config._isValid === false) {
+      delete config._isValid;
+    } else {
+      return;
+    }
+
+    configFromRFC2822(config);
+    if (config._isValid === false) {
+      delete config._isValid;
+    } else {
+      return;
+    }
+
+    if (config._strict) {
+      config._isValid = false;
+    } else {
+      // Final attempt, use Input Fallback
+      hooks.createFromInputFallback(config);
+    }
+  }
+
+  hooks.createFromInputFallback = deprecate(
+  'value provided is not in a recognized RFC2822 or ISO format. moment construction falls back to js Date(), ' +
+  'which is not reliable across all browsers and versions. Non RFC2822/ISO date formats are ' +
+  'discouraged. Please refer to http://momentjs.com/guides/#/warnings/js-date/ for more info.',
+  function (config) {
+    config._d = new Date(config._i + (config._useUTC ? ' UTC' : ''));
+  });
+
+
+  // Pick the first defined of two or three arguments.
+  function defaults(a, b, c) {
+    if (a != null) {
+      return a;
+    }
+    if (b != null) {
+      return b;
+    }
+    return c;
+  }
+
+  function currentDateArray(config) {
+    // hooks is actually the exported moment object
+    var nowValue = new Date(hooks.now());
+    if (config._useUTC) {
+      return [
+      nowValue.getUTCFullYear(),
+      nowValue.getUTCMonth(),
+      nowValue.getUTCDate()];
+
+    }
+    return [nowValue.getFullYear(), nowValue.getMonth(), nowValue.getDate()];
+  }
+
+  // convert an array to a date.
+  // the array should mirror the parameters below
+  // note: all values past the year are optional and will default to the lowest possible value.
+  // [year, month, day , hour, minute, second, millisecond]
+  function configFromArray(config) {
+    var i,
+    date,
+    input = [],
+    currentDate,
+    expectedWeekday,
+    yearToUse;
+
+    if (config._d) {
+      return;
+    }
+
+    currentDate = currentDateArray(config);
+
+    //compute day of the year from weeks and weekdays
+    if (config._w && config._a[DATE] == null && config._a[MONTH] == null) {
+      dayOfYearFromWeekInfo(config);
+    }
+
+    //if the day of the year is set, figure out what it is
+    if (config._dayOfYear != null) {
+      yearToUse = defaults(config._a[YEAR], currentDate[YEAR]);
+
+      if (
+      config._dayOfYear > daysInYear(yearToUse) ||
+      config._dayOfYear === 0)
+      {
+        getParsingFlags(config)._overflowDayOfYear = true;
+      }
+
+      date = createUTCDate(yearToUse, 0, config._dayOfYear);
+      config._a[MONTH] = date.getUTCMonth();
+      config._a[DATE] = date.getUTCDate();
+    }
+
+    // Default to current date.
+    // * if no year, month, day of month are given, default to today
+    // * if day of month is given, default month and year
+    // * if month is given, default only year
+    // * if year is given, don't default anything
+    for (i = 0; i < 3 && config._a[i] == null; ++i) {
+      config._a[i] = input[i] = currentDate[i];
+    }
+
+    // Zero out whatever was not defaulted, including time
+    for (; i < 7; i++) {
+      config._a[i] = input[i] =
+      config._a[i] == null ? i === 2 ? 1 : 0 : config._a[i];
+    }
+
+    // Check for 24:00:00.000
+    if (
+    config._a[HOUR] === 24 &&
+    config._a[MINUTE] === 0 &&
+    config._a[SECOND] === 0 &&
+    config._a[MILLISECOND] === 0)
+    {
+      config._nextDay = true;
+      config._a[HOUR] = 0;
+    }
+
+    config._d = (config._useUTC ? createUTCDate : createDate).apply(
+    null,
+    input);
+
+    expectedWeekday = config._useUTC ?
+    config._d.getUTCDay() :
+    config._d.getDay();
+
+    // Apply timezone offset from input. The actual utcOffset can be changed
+    // with parseZone.
+    if (config._tzm != null) {
+      config._d.setUTCMinutes(config._d.getUTCMinutes() - config._tzm);
+    }
+
+    if (config._nextDay) {
+      config._a[HOUR] = 24;
+    }
+
+    // check for mismatching day of week
+    if (
+    config._w &&
+    typeof config._w.d !== 'undefined' &&
+    config._w.d !== expectedWeekday)
+    {
+      getParsingFlags(config).weekdayMismatch = true;
+    }
+  }
+
+  function dayOfYearFromWeekInfo(config) {
+    var w, weekYear, week, weekday, dow, doy, temp, weekdayOverflow, curWeek;
+
+    w = config._w;
+    if (w.GG != null || w.W != null || w.E != null) {
+      dow = 1;
+      doy = 4;
+
+      // TODO: We need to take the current isoWeekYear, but that depends on
+      // how we interpret now (local, utc, fixed offset). So create
+      // a now version of current config (take local/utc/offset flags, and
+      // create now).
+      weekYear = defaults(
+      w.GG,
+      config._a[YEAR],
+      weekOfYear(createLocal(), 1, 4).year);
+
+      week = defaults(w.W, 1);
+      weekday = defaults(w.E, 1);
+      if (weekday < 1 || weekday > 7) {
+        weekdayOverflow = true;
+      }
+    } else {
+      dow = config._locale._week.dow;
+      doy = config._locale._week.doy;
+
+      curWeek = weekOfYear(createLocal(), dow, doy);
+
+      weekYear = defaults(w.gg, config._a[YEAR], curWeek.year);
+
+      // Default to current week.
+      week = defaults(w.w, curWeek.week);
+
+      if (w.d != null) {
+        // weekday -- low day numbers are considered next week
+        weekday = w.d;
+        if (weekday < 0 || weekday > 6) {
+          weekdayOverflow = true;
+        }
+      } else if (w.e != null) {
+        // local weekday -- counting starts from beginning of week
+        weekday = w.e + dow;
+        if (w.e < 0 || w.e > 6) {
+          weekdayOverflow = true;
+        }
+      } else {
+        // default to beginning of week
+        weekday = dow;
+      }
+    }
+    if (week < 1 || week > weeksInYear(weekYear, dow, doy)) {
+      getParsingFlags(config)._overflowWeeks = true;
+    } else if (weekdayOverflow != null) {
+      getParsingFlags(config)._overflowWeekday = true;
+    } else {
+      temp = dayOfYearFromWeeks(weekYear, week, weekday, dow, doy);
+      config._a[YEAR] = temp.year;
+      config._dayOfYear = temp.dayOfYear;
+    }
+  }
+
+  // constant that refers to the ISO standard
+  hooks.ISO_8601 = function () {};
+
+  // constant that refers to the RFC 2822 form
+  hooks.RFC_2822 = function () {};
+
+  // date from string and format string
+  function configFromStringAndFormat(config) {
+    // TODO: Move this to another part of the creation flow to prevent circular deps
+    if (config._f === hooks.ISO_8601) {
+      configFromISO(config);
+      return;
+    }
+    if (config._f === hooks.RFC_2822) {
+      configFromRFC2822(config);
+      return;
+    }
+    config._a = [];
+    getParsingFlags(config).empty = true;
+
+    // This array is used to make a Date, either with `new Date` or `Date.UTC`
+    var string = '' + config._i,
+    i,
+    parsedInput,
+    tokens,
+    token,
+    skipped,
+    stringLength = string.length,
+    totalParsedInputLength = 0,
+    era;
+
+    tokens =
+    expandFormat(config._f, config._locale).match(formattingTokens) || [];
+
+    for (i = 0; i < tokens.length; i++) {
+      token = tokens[i];
+      parsedInput = (string.match(getParseRegexForToken(token, config)) ||
+      [])[0];
+      if (parsedInput) {
+        skipped = string.substr(0, string.indexOf(parsedInput));
+        if (skipped.length > 0) {
+          getParsingFlags(config).unusedInput.push(skipped);
+        }
+        string = string.slice(
+        string.indexOf(parsedInput) + parsedInput.length);
+
+        totalParsedInputLength += parsedInput.length;
+      }
+      // don't parse if it's not a known token
+      if (formatTokenFunctions[token]) {
+        if (parsedInput) {
+          getParsingFlags(config).empty = false;
+        } else {
+          getParsingFlags(config).unusedTokens.push(token);
+        }
+        addTimeToArrayFromToken(token, parsedInput, config);
+      } else if (config._strict && !parsedInput) {
+        getParsingFlags(config).unusedTokens.push(token);
+      }
+    }
+
+    // add remaining unparsed input length to the string
+    getParsingFlags(config).charsLeftOver =
+    stringLength - totalParsedInputLength;
+    if (string.length > 0) {
+      getParsingFlags(config).unusedInput.push(string);
+    }
+
+    // clear _12h flag if hour is <= 12
+    if (
+    config._a[HOUR] <= 12 &&
+    getParsingFlags(config).bigHour === true &&
+    config._a[HOUR] > 0)
+    {
+      getParsingFlags(config).bigHour = undefined;
+    }
+
+    getParsingFlags(config).parsedDateParts = config._a.slice(0);
+    getParsingFlags(config).meridiem = config._meridiem;
+    // handle meridiem
+    config._a[HOUR] = meridiemFixWrap(
+    config._locale,
+    config._a[HOUR],
+    config._meridiem);
+
+
+    // handle era
+    era = getParsingFlags(config).era;
+    if (era !== null) {
+      config._a[YEAR] = config._locale.erasConvertYear(era, config._a[YEAR]);
+    }
+
+    configFromArray(config);
+    checkOverflow(config);
+  }
+
+  function meridiemFixWrap(locale, hour, meridiem) {
+    var isPm;
+
+    if (meridiem == null) {
+      // nothing to do
+      return hour;
+    }
+    if (locale.meridiemHour != null) {
+      return locale.meridiemHour(hour, meridiem);
+    } else if (locale.isPM != null) {
+      // Fallback
+      isPm = locale.isPM(meridiem);
+      if (isPm && hour < 12) {
+        hour += 12;
+      }
+      if (!isPm && hour === 12) {
+        hour = 0;
+      }
+      return hour;
+    } else {
+      // this is not supposed to happen
+      return hour;
+    }
+  }
+
+  // date from string and array of format strings
+  function configFromStringAndArray(config) {
+    var tempConfig,
+    bestMoment,
+    scoreToBeat,
+    i,
+    currentScore,
+    validFormatFound,
+    bestFormatIsValid = false;
+
+    if (config._f.length === 0) {
+      getParsingFlags(config).invalidFormat = true;
+      config._d = new Date(NaN);
+      return;
+    }
+
+    for (i = 0; i < config._f.length; i++) {
+      currentScore = 0;
+      validFormatFound = false;
+      tempConfig = copyConfig({}, config);
+      if (config._useUTC != null) {
+        tempConfig._useUTC = config._useUTC;
+      }
+      tempConfig._f = config._f[i];
+      configFromStringAndFormat(tempConfig);
+
+      if (isValid(tempConfig)) {
+        validFormatFound = true;
+      }
+
+      // if there is any input that was not parsed add a penalty for that format
+      currentScore += getParsingFlags(tempConfig).charsLeftOver;
+
+      //or tokens
+      currentScore += getParsingFlags(tempConfig).unusedTokens.length * 10;
+
+      getParsingFlags(tempConfig).score = currentScore;
+
+      if (!bestFormatIsValid) {
+        if (
+        scoreToBeat == null ||
+        currentScore < scoreToBeat ||
+        validFormatFound)
+        {
+          scoreToBeat = currentScore;
+          bestMoment = tempConfig;
+          if (validFormatFound) {
+            bestFormatIsValid = true;
+          }
+        }
+      } else {
+        if (currentScore < scoreToBeat) {
+          scoreToBeat = currentScore;
+          bestMoment = tempConfig;
+        }
+      }
+    }
+
+    extend(config, bestMoment || tempConfig);
+  }
+
+  function configFromObject(config) {
+    if (config._d) {
+      return;
+    }
+
+    var i = normalizeObjectUnits(config._i),
+    dayOrDate = i.day === undefined ? i.date : i.day;
+    config._a = map(
+    [i.year, i.month, dayOrDate, i.hour, i.minute, i.second, i.millisecond],
+    function (obj) {
+      return obj && parseInt(obj, 10);
+    });
+
+
+    configFromArray(config);
+  }
+
+  function createFromConfig(config) {
+    var res = new Moment(checkOverflow(prepareConfig(config)));
+    if (res._nextDay) {
+      // Adding is smart enough around DST
+      res.add(1, 'd');
+      res._nextDay = undefined;
+    }
+
+    return res;
+  }
+
+  function prepareConfig(config) {
+    var input = config._i,
+    format = config._f;
+
+    config._locale = config._locale || getLocale(config._l);
+
+    if (input === null || format === undefined && input === '') {
+      return createInvalid({ nullInput: true });
+    }
+
+    if (typeof input === 'string') {
+      config._i = input = config._locale.preparse(input);
+    }
+
+    if (isMoment(input)) {
+      return new Moment(checkOverflow(input));
+    } else if (isDate(input)) {
+      config._d = input;
+    } else if (isArray(format)) {
+      configFromStringAndArray(config);
+    } else if (format) {
+      configFromStringAndFormat(config);
+    } else {
+      configFromInput(config);
+    }
+
+    if (!isValid(config)) {
+      config._d = null;
+    }
+
+    return config;
+  }
+
+  function configFromInput(config) {
+    var input = config._i;
+    if (isUndefined(input)) {
+      config._d = new Date(hooks.now());
+    } else if (isDate(input)) {
+      config._d = new Date(input.valueOf());
+    } else if (typeof input === 'string') {
+      configFromString(config);
+    } else if (isArray(input)) {
+      config._a = map(input.slice(0), function (obj) {
+        return parseInt(obj, 10);
       });
-    } }]);return Dbcrud;}();
+      configFromArray(config);
+    } else if (isObject(input)) {
+      configFromObject(config);
+    } else if (isNumber(input)) {
+      // from milliseconds
+      config._d = new Date(input);
+    } else {
+      hooks.createFromInputFallback(config);
+    }
+  }
+
+  function createLocalOrUTC(input, format, locale, strict, isUTC) {
+    var c = {};
+
+    if (format === true || format === false) {
+      strict = format;
+      format = undefined;
+    }
+
+    if (locale === true || locale === false) {
+      strict = locale;
+      locale = undefined;
+    }
+
+    if (
+    isObject(input) && isObjectEmpty(input) ||
+    isArray(input) && input.length === 0)
+    {
+      input = undefined;
+    }
+    // object construction must be done this way.
+    // https://github.com/moment/moment/issues/1423
+    c._isAMomentObject = true;
+    c._useUTC = c._isUTC = isUTC;
+    c._l = locale;
+    c._i = input;
+    c._f = format;
+    c._strict = strict;
+
+    return createFromConfig(c);
+  }
+
+  function createLocal(input, format, locale, strict) {
+    return createLocalOrUTC(input, format, locale, strict, false);
+  }
+
+  var prototypeMin = deprecate(
+  'moment().min is deprecated, use moment.max instead. http://momentjs.com/guides/#/warnings/min-max/',
+  function () {
+    var other = createLocal.apply(null, arguments);
+    if (this.isValid() && other.isValid()) {
+      return other < this ? this : other;
+    } else {
+      return createInvalid();
+    }
+  }),
+
+  prototypeMax = deprecate(
+  'moment().max is deprecated, use moment.min instead. http://momentjs.com/guides/#/warnings/min-max/',
+  function () {
+    var other = createLocal.apply(null, arguments);
+    if (this.isValid() && other.isValid()) {
+      return other > this ? this : other;
+    } else {
+      return createInvalid();
+    }
+  });
 
 
-module.exports = Dbcrud;
+  // Pick a moment m from moments so that m[fn](other) is true for all
+  // other. This relies on the function fn to be transitive.
+  //
+  // moments should either be an array of moment objects or an array, whose
+  // first element is an array of moment objects.
+  function pickBy(fn, moments) {
+    var res, i;
+    if (moments.length === 1 && isArray(moments[0])) {
+      moments = moments[0];
+    }
+    if (!moments.length) {
+      return createLocal();
+    }
+    res = moments[0];
+    for (i = 1; i < moments.length; ++i) {
+      if (!moments[i].isValid() || moments[i][fn](res)) {
+        res = moments[i];
+      }
+    }
+    return res;
+  }
+
+  // TODO: Use [].sort instead?
+  function min() {
+    var args = [].slice.call(arguments, 0);
+
+    return pickBy('isBefore', args);
+  }
+
+  function max() {
+    var args = [].slice.call(arguments, 0);
+
+    return pickBy('isAfter', args);
+  }
+
+  var now = function now() {
+    return Date.now ? Date.now() : +new Date();
+  };
+
+  var ordering = [
+  'year',
+  'quarter',
+  'month',
+  'week',
+  'day',
+  'hour',
+  'minute',
+  'second',
+  'millisecond'];
+
+
+  function isDurationValid(m) {
+    var key,
+    unitHasDecimal = false,
+    i;
+    for (key in m) {
+      if (
+      hasOwnProp(m, key) &&
+      !(
+      indexOf.call(ordering, key) !== -1 && (
+      m[key] == null || !isNaN(m[key]))))
+
+      {
+        return false;
+      }
+    }
+
+    for (i = 0; i < ordering.length; ++i) {
+      if (m[ordering[i]]) {
+        if (unitHasDecimal) {
+          return false; // only allow non-integers for smallest unit
+        }
+        if (parseFloat(m[ordering[i]]) !== toInt(m[ordering[i]])) {
+          unitHasDecimal = true;
+        }
+      }
+    }
+
+    return true;
+  }
+
+  function isValid$1() {
+    return this._isValid;
+  }
+
+  function createInvalid$1() {
+    return createDuration(NaN);
+  }
+
+  function Duration(duration) {
+    var normalizedInput = normalizeObjectUnits(duration),
+    years = normalizedInput.year || 0,
+    quarters = normalizedInput.quarter || 0,
+    months = normalizedInput.month || 0,
+    weeks = normalizedInput.week || normalizedInput.isoWeek || 0,
+    days = normalizedInput.day || 0,
+    hours = normalizedInput.hour || 0,
+    minutes = normalizedInput.minute || 0,
+    seconds = normalizedInput.second || 0,
+    milliseconds = normalizedInput.millisecond || 0;
+
+    this._isValid = isDurationValid(normalizedInput);
+
+    // representation for dateAddRemove
+    this._milliseconds =
+    +milliseconds +
+    seconds * 1e3 + // 1000
+    minutes * 6e4 + // 1000 * 60
+    hours * 1000 * 60 * 60; //using 1000 * 60 * 60 instead of 36e5 to avoid floating point rounding errors https://github.com/moment/moment/issues/2978
+    // Because of dateAddRemove treats 24 hours as different from a
+    // day when working around DST, we need to store them separately
+    this._days = +days + weeks * 7;
+    // It is impossible to translate months into days without knowing
+    // which months you are are talking about, so we have to store
+    // it separately.
+    this._months = +months + quarters * 3 + years * 12;
+
+    this._data = {};
+
+    this._locale = getLocale();
+
+    this._bubble();
+  }
+
+  function isDuration(obj) {
+    return obj instanceof Duration;
+  }
+
+  function absRound(number) {
+    if (number < 0) {
+      return Math.round(-1 * number) * -1;
+    } else {
+      return Math.round(number);
+    }
+  }
+
+  // compare two arrays, return the number of differences
+  function compareArrays(array1, array2, dontConvert) {
+    var len = Math.min(array1.length, array2.length),
+    lengthDiff = Math.abs(array1.length - array2.length),
+    diffs = 0,
+    i;
+    for (i = 0; i < len; i++) {
+      if (
+      dontConvert && array1[i] !== array2[i] ||
+      !dontConvert && toInt(array1[i]) !== toInt(array2[i]))
+      {
+        diffs++;
+      }
+    }
+    return diffs + lengthDiff;
+  }
+
+  // FORMATTING
+
+  function offset(token, separator) {
+    addFormatToken(token, 0, 0, function () {
+      var offset = this.utcOffset(),
+      sign = '+';
+      if (offset < 0) {
+        offset = -offset;
+        sign = '-';
+      }
+      return (
+        sign +
+        zeroFill(~~(offset / 60), 2) +
+        separator +
+        zeroFill(~~offset % 60, 2));
+
+    });
+  }
+
+  offset('Z', ':');
+  offset('ZZ', '');
+
+  // PARSING
+
+  addRegexToken('Z', matchShortOffset);
+  addRegexToken('ZZ', matchShortOffset);
+  addParseToken(['Z', 'ZZ'], function (input, array, config) {
+    config._useUTC = true;
+    config._tzm = offsetFromString(matchShortOffset, input);
+  });
+
+  // HELPERS
+
+  // timezone chunker
+  // '+10:00' > ['10',  '00']
+  // '-1530'  > ['-15', '30']
+  var chunkOffset = /([\+\-]|\d\d)/gi;
+
+  function offsetFromString(matcher, string) {
+    var matches = (string || '').match(matcher),
+    chunk,
+    parts,
+    minutes;
+
+    if (matches === null) {
+      return null;
+    }
+
+    chunk = matches[matches.length - 1] || [];
+    parts = (chunk + '').match(chunkOffset) || ['-', 0, 0];
+    minutes = +(parts[1] * 60) + toInt(parts[2]);
+
+    return minutes === 0 ? 0 : parts[0] === '+' ? minutes : -minutes;
+  }
+
+  // Return a moment from input, that is local/utc/zone equivalent to model.
+  function cloneWithOffset(input, model) {
+    var res, diff;
+    if (model._isUTC) {
+      res = model.clone();
+      diff =
+      (isMoment(input) || isDate(input) ?
+      input.valueOf() :
+      createLocal(input).valueOf()) - res.valueOf();
+      // Use low-level api, because this fn is low-level api.
+      res._d.setTime(res._d.valueOf() + diff);
+      hooks.updateOffset(res, false);
+      return res;
+    } else {
+      return createLocal(input).local();
+    }
+  }
+
+  function getDateOffset(m) {
+    // On Firefox.24 Date#getTimezoneOffset returns a floating point.
+    // https://github.com/moment/moment/pull/1871
+    return -Math.round(m._d.getTimezoneOffset());
+  }
+
+  // HOOKS
+
+  // This function will be called whenever a moment is mutated.
+  // It is intended to keep the offset in sync with the timezone.
+  hooks.updateOffset = function () {};
+
+  // MOMENTS
+
+  // keepLocalTime = true means only change the timezone, without
+  // affecting the local hour. So 5:31:26 +0300 --[utcOffset(2, true)]-->
+  // 5:31:26 +0200 It is possible that 5:31:26 doesn't exist with offset
+  // +0200, so we adjust the time as needed, to be valid.
+  //
+  // Keeping the time actually adds/subtracts (one hour)
+  // from the actual represented time. That is why we call updateOffset
+  // a second time. In case it wants us to change the offset again
+  // _changeInProgress == true case, then we have to adjust, because
+  // there is no such time in the given timezone.
+  function getSetOffset(input, keepLocalTime, keepMinutes) {
+    var offset = this._offset || 0,
+    localAdjust;
+    if (!this.isValid()) {
+      return input != null ? this : NaN;
+    }
+    if (input != null) {
+      if (typeof input === 'string') {
+        input = offsetFromString(matchShortOffset, input);
+        if (input === null) {
+          return this;
+        }
+      } else if (Math.abs(input) < 16 && !keepMinutes) {
+        input = input * 60;
+      }
+      if (!this._isUTC && keepLocalTime) {
+        localAdjust = getDateOffset(this);
+      }
+      this._offset = input;
+      this._isUTC = true;
+      if (localAdjust != null) {
+        this.add(localAdjust, 'm');
+      }
+      if (offset !== input) {
+        if (!keepLocalTime || this._changeInProgress) {
+          addSubtract(
+          this,
+          createDuration(input - offset, 'm'),
+          1,
+          false);
+
+        } else if (!this._changeInProgress) {
+          this._changeInProgress = true;
+          hooks.updateOffset(this, true);
+          this._changeInProgress = null;
+        }
+      }
+      return this;
+    } else {
+      return this._isUTC ? offset : getDateOffset(this);
+    }
+  }
+
+  function getSetZone(input, keepLocalTime) {
+    if (input != null) {
+      if (typeof input !== 'string') {
+        input = -input;
+      }
+
+      this.utcOffset(input, keepLocalTime);
+
+      return this;
+    } else {
+      return -this.utcOffset();
+    }
+  }
+
+  function setOffsetToUTC(keepLocalTime) {
+    return this.utcOffset(0, keepLocalTime);
+  }
+
+  function setOffsetToLocal(keepLocalTime) {
+    if (this._isUTC) {
+      this.utcOffset(0, keepLocalTime);
+      this._isUTC = false;
+
+      if (keepLocalTime) {
+        this.subtract(getDateOffset(this), 'm');
+      }
+    }
+    return this;
+  }
+
+  function setOffsetToParsedOffset() {
+    if (this._tzm != null) {
+      this.utcOffset(this._tzm, false, true);
+    } else if (typeof this._i === 'string') {
+      var tZone = offsetFromString(matchOffset, this._i);
+      if (tZone != null) {
+        this.utcOffset(tZone);
+      } else {
+        this.utcOffset(0, true);
+      }
+    }
+    return this;
+  }
+
+  function hasAlignedHourOffset(input) {
+    if (!this.isValid()) {
+      return false;
+    }
+    input = input ? createLocal(input).utcOffset() : 0;
+
+    return (this.utcOffset() - input) % 60 === 0;
+  }
+
+  function isDaylightSavingTime() {
+    return (
+      this.utcOffset() > this.clone().month(0).utcOffset() ||
+      this.utcOffset() > this.clone().month(5).utcOffset());
+
+  }
+
+  function isDaylightSavingTimeShifted() {
+    if (!isUndefined(this._isDSTShifted)) {
+      return this._isDSTShifted;
+    }
+
+    var c = {},
+    other;
+
+    copyConfig(c, this);
+    c = prepareConfig(c);
+
+    if (c._a) {
+      other = c._isUTC ? createUTC(c._a) : createLocal(c._a);
+      this._isDSTShifted =
+      this.isValid() && compareArrays(c._a, other.toArray()) > 0;
+    } else {
+      this._isDSTShifted = false;
+    }
+
+    return this._isDSTShifted;
+  }
+
+  function isLocal() {
+    return this.isValid() ? !this._isUTC : false;
+  }
+
+  function isUtcOffset() {
+    return this.isValid() ? this._isUTC : false;
+  }
+
+  function isUtc() {
+    return this.isValid() ? this._isUTC && this._offset === 0 : false;
+  }
+
+  // ASP.NET json date format regex
+  var aspNetRegex = /^(-|\+)?(?:(\d*)[. ])?(\d+):(\d+)(?::(\d+)(\.\d*)?)?$/,
+  // from http://docs.closure-library.googlecode.com/git/closure_goog_date_date.js.source.html
+  // somewhat more in line with 4.4.3.2 2004 spec, but allows decimal anywhere
+  // and further modified to allow for strings containing both week and day
+  isoRegex = /^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/;
+
+  function createDuration(input, key) {
+    var duration = input,
+    // matching against regexp is expensive, do it on demand
+    match = null,
+    sign,
+    ret,
+    diffRes;
+
+    if (isDuration(input)) {
+      duration = {
+        ms: input._milliseconds,
+        d: input._days,
+        M: input._months };
+
+    } else if (isNumber(input) || !isNaN(+input)) {
+      duration = {};
+      if (key) {
+        duration[key] = +input;
+      } else {
+        duration.milliseconds = +input;
+      }
+    } else if (match = aspNetRegex.exec(input)) {
+      sign = match[1] === '-' ? -1 : 1;
+      duration = {
+        y: 0,
+        d: toInt(match[DATE]) * sign,
+        h: toInt(match[HOUR]) * sign,
+        m: toInt(match[MINUTE]) * sign,
+        s: toInt(match[SECOND]) * sign,
+        ms: toInt(absRound(match[MILLISECOND] * 1000)) * sign // the millisecond decimal point is included in the match
+      };
+    } else if (match = isoRegex.exec(input)) {
+      sign = match[1] === '-' ? -1 : 1;
+      duration = {
+        y: parseIso(match[2], sign),
+        M: parseIso(match[3], sign),
+        w: parseIso(match[4], sign),
+        d: parseIso(match[5], sign),
+        h: parseIso(match[6], sign),
+        m: parseIso(match[7], sign),
+        s: parseIso(match[8], sign) };
+
+    } else if (duration == null) {
+      // checks for null or undefined
+      duration = {};
+    } else if (
+    typeof duration === 'object' && (
+    'from' in duration || 'to' in duration))
+    {
+      diffRes = momentsDifference(
+      createLocal(duration.from),
+      createLocal(duration.to));
+
+
+      duration = {};
+      duration.ms = diffRes.milliseconds;
+      duration.M = diffRes.months;
+    }
+
+    ret = new Duration(duration);
+
+    if (isDuration(input) && hasOwnProp(input, '_locale')) {
+      ret._locale = input._locale;
+    }
+
+    if (isDuration(input) && hasOwnProp(input, '_isValid')) {
+      ret._isValid = input._isValid;
+    }
+
+    return ret;
+  }
+
+  createDuration.fn = Duration.prototype;
+  createDuration.invalid = createInvalid$1;
+
+  function parseIso(inp, sign) {
+    // We'd normally use ~~inp for this, but unfortunately it also
+    // converts floats to ints.
+    // inp may be undefined, so careful calling replace on it.
+    var res = inp && parseFloat(inp.replace(',', '.'));
+    // apply sign while we're at it
+    return (isNaN(res) ? 0 : res) * sign;
+  }
+
+  function positiveMomentsDifference(base, other) {
+    var res = {};
+
+    res.months =
+    other.month() - base.month() + (other.year() - base.year()) * 12;
+    if (base.clone().add(res.months, 'M').isAfter(other)) {
+      --res.months;
+    }
+
+    res.milliseconds = +other - +base.clone().add(res.months, 'M');
+
+    return res;
+  }
+
+  function momentsDifference(base, other) {
+    var res;
+    if (!(base.isValid() && other.isValid())) {
+      return { milliseconds: 0, months: 0 };
+    }
+
+    other = cloneWithOffset(other, base);
+    if (base.isBefore(other)) {
+      res = positiveMomentsDifference(base, other);
+    } else {
+      res = positiveMomentsDifference(other, base);
+      res.milliseconds = -res.milliseconds;
+      res.months = -res.months;
+    }
+
+    return res;
+  }
+
+  // TODO: remove 'name' arg after deprecation is removed
+  function createAdder(direction, name) {
+    return function (val, period) {
+      var dur, tmp;
+      //invert the arguments, but complain about it
+      if (period !== null && !isNaN(+period)) {
+        deprecateSimple(
+        name,
+        'moment().' +
+        name +
+        '(period, number) is deprecated. Please use moment().' +
+        name +
+        '(number, period). ' +
+        'See http://momentjs.com/guides/#/warnings/add-inverted-param/ for more info.');
+
+        tmp = val;
+        val = period;
+        period = tmp;
+      }
+
+      dur = createDuration(val, period);
+      addSubtract(this, dur, direction);
+      return this;
+    };
+  }
+
+  function addSubtract(mom, duration, isAdding, updateOffset) {
+    var milliseconds = duration._milliseconds,
+    days = absRound(duration._days),
+    months = absRound(duration._months);
+
+    if (!mom.isValid()) {
+      // No op
+      return;
+    }
+
+    updateOffset = updateOffset == null ? true : updateOffset;
+
+    if (months) {
+      setMonth(mom, get(mom, 'Month') + months * isAdding);
+    }
+    if (days) {
+      set$1(mom, 'Date', get(mom, 'Date') + days * isAdding);
+    }
+    if (milliseconds) {
+      mom._d.setTime(mom._d.valueOf() + milliseconds * isAdding);
+    }
+    if (updateOffset) {
+      hooks.updateOffset(mom, days || months);
+    }
+  }
+
+  var add = createAdder(1, 'add'),
+  subtract = createAdder(-1, 'subtract');
+
+  function isString(input) {
+    return typeof input === 'string' || input instanceof String;
+  }
+
+  // type MomentInput = Moment | Date | string | number | (number | string)[] | MomentInputObject | void; // null | undefined
+  function isMomentInput(input) {
+    return (
+      isMoment(input) ||
+      isDate(input) ||
+      isString(input) ||
+      isNumber(input) ||
+      isNumberOrStringArray(input) ||
+      isMomentInputObject(input) ||
+      input === null ||
+      input === undefined);
+
+  }
+
+  function isMomentInputObject(input) {
+    var objectTest = isObject(input) && !isObjectEmpty(input),
+    propertyTest = false,
+    properties = [
+    'years',
+    'year',
+    'y',
+    'months',
+    'month',
+    'M',
+    'days',
+    'day',
+    'd',
+    'dates',
+    'date',
+    'D',
+    'hours',
+    'hour',
+    'h',
+    'minutes',
+    'minute',
+    'm',
+    'seconds',
+    'second',
+    's',
+    'milliseconds',
+    'millisecond',
+    'ms'],
+
+    i,
+    property;
+
+    for (i = 0; i < properties.length; i += 1) {
+      property = properties[i];
+      propertyTest = propertyTest || hasOwnProp(input, property);
+    }
+
+    return objectTest && propertyTest;
+  }
+
+  function isNumberOrStringArray(input) {
+    var arrayTest = isArray(input),
+    dataTypeTest = false;
+    if (arrayTest) {
+      dataTypeTest =
+      input.filter(function (item) {
+        return !isNumber(item) && isString(input);
+      }).length === 0;
+    }
+    return arrayTest && dataTypeTest;
+  }
+
+  function isCalendarSpec(input) {
+    var objectTest = isObject(input) && !isObjectEmpty(input),
+    propertyTest = false,
+    properties = [
+    'sameDay',
+    'nextDay',
+    'lastDay',
+    'nextWeek',
+    'lastWeek',
+    'sameElse'],
+
+    i,
+    property;
+
+    for (i = 0; i < properties.length; i += 1) {
+      property = properties[i];
+      propertyTest = propertyTest || hasOwnProp(input, property);
+    }
+
+    return objectTest && propertyTest;
+  }
+
+  function getCalendarFormat(myMoment, now) {
+    var diff = myMoment.diff(now, 'days', true);
+    return diff < -6 ?
+    'sameElse' :
+    diff < -1 ?
+    'lastWeek' :
+    diff < 0 ?
+    'lastDay' :
+    diff < 1 ?
+    'sameDay' :
+    diff < 2 ?
+    'nextDay' :
+    diff < 7 ?
+    'nextWeek' :
+    'sameElse';
+  }
+
+  function calendar$1(time, formats) {
+    // Support for single parameter, formats only overload to the calendar function
+    if (arguments.length === 1) {
+      if (!arguments[0]) {
+        time = undefined;
+        formats = undefined;
+      } else if (isMomentInput(arguments[0])) {
+        time = arguments[0];
+        formats = undefined;
+      } else if (isCalendarSpec(arguments[0])) {
+        formats = arguments[0];
+        time = undefined;
+      }
+    }
+    // We want to compare the start of today, vs this.
+    // Getting start-of-today depends on whether we're local/utc/offset or not.
+    var now = time || createLocal(),
+    sod = cloneWithOffset(now, this).startOf('day'),
+    format = hooks.calendarFormat(this, sod) || 'sameElse',
+    output =
+    formats && (
+    isFunction(formats[format]) ?
+    formats[format].call(this, now) :
+    formats[format]);
+
+    return this.format(
+    output || this.localeData().calendar(format, this, createLocal(now)));
+
+  }
+
+  function clone() {
+    return new Moment(this);
+  }
+
+  function isAfter(input, units) {
+    var localInput = isMoment(input) ? input : createLocal(input);
+    if (!(this.isValid() && localInput.isValid())) {
+      return false;
+    }
+    units = normalizeUnits(units) || 'millisecond';
+    if (units === 'millisecond') {
+      return this.valueOf() > localInput.valueOf();
+    } else {
+      return localInput.valueOf() < this.clone().startOf(units).valueOf();
+    }
+  }
+
+  function isBefore(input, units) {
+    var localInput = isMoment(input) ? input : createLocal(input);
+    if (!(this.isValid() && localInput.isValid())) {
+      return false;
+    }
+    units = normalizeUnits(units) || 'millisecond';
+    if (units === 'millisecond') {
+      return this.valueOf() < localInput.valueOf();
+    } else {
+      return this.clone().endOf(units).valueOf() < localInput.valueOf();
+    }
+  }
+
+  function isBetween(from, to, units, inclusivity) {
+    var localFrom = isMoment(from) ? from : createLocal(from),
+    localTo = isMoment(to) ? to : createLocal(to);
+    if (!(this.isValid() && localFrom.isValid() && localTo.isValid())) {
+      return false;
+    }
+    inclusivity = inclusivity || '()';
+    return (
+      (inclusivity[0] === '(' ?
+      this.isAfter(localFrom, units) :
+      !this.isBefore(localFrom, units)) && (
+      inclusivity[1] === ')' ?
+      this.isBefore(localTo, units) :
+      !this.isAfter(localTo, units)));
+
+  }
+
+  function isSame(input, units) {
+    var localInput = isMoment(input) ? input : createLocal(input),
+    inputMs;
+    if (!(this.isValid() && localInput.isValid())) {
+      return false;
+    }
+    units = normalizeUnits(units) || 'millisecond';
+    if (units === 'millisecond') {
+      return this.valueOf() === localInput.valueOf();
+    } else {
+      inputMs = localInput.valueOf();
+      return (
+        this.clone().startOf(units).valueOf() <= inputMs &&
+        inputMs <= this.clone().endOf(units).valueOf());
+
+    }
+  }
+
+  function isSameOrAfter(input, units) {
+    return this.isSame(input, units) || this.isAfter(input, units);
+  }
+
+  function isSameOrBefore(input, units) {
+    return this.isSame(input, units) || this.isBefore(input, units);
+  }
+
+  function diff(input, units, asFloat) {
+    var that, zoneDelta, output;
+
+    if (!this.isValid()) {
+      return NaN;
+    }
+
+    that = cloneWithOffset(input, this);
+
+    if (!that.isValid()) {
+      return NaN;
+    }
+
+    zoneDelta = (that.utcOffset() - this.utcOffset()) * 6e4;
+
+    units = normalizeUnits(units);
+
+    switch (units) {
+      case 'year':
+        output = monthDiff(this, that) / 12;
+        break;
+      case 'month':
+        output = monthDiff(this, that);
+        break;
+      case 'quarter':
+        output = monthDiff(this, that) / 3;
+        break;
+      case 'second':
+        output = (this - that) / 1e3;
+        break; // 1000
+      case 'minute':
+        output = (this - that) / 6e4;
+        break; // 1000 * 60
+      case 'hour':
+        output = (this - that) / 36e5;
+        break; // 1000 * 60 * 60
+      case 'day':
+        output = (this - that - zoneDelta) / 864e5;
+        break; // 1000 * 60 * 60 * 24, negate dst
+      case 'week':
+        output = (this - that - zoneDelta) / 6048e5;
+        break; // 1000 * 60 * 60 * 24 * 7, negate dst
+      default:
+        output = this - that;}
+
+
+    return asFloat ? output : absFloor(output);
+  }
+
+  function monthDiff(a, b) {
+    if (a.date() < b.date()) {
+      // end-of-month calculations work correct when the start month has more
+      // days than the end month.
+      return -monthDiff(b, a);
+    }
+    // difference in months
+    var wholeMonthDiff = (b.year() - a.year()) * 12 + (b.month() - a.month()),
+    // b is in (anchor - 1 month, anchor + 1 month)
+    anchor = a.clone().add(wholeMonthDiff, 'months'),
+    anchor2,
+    adjust;
+
+    if (b - anchor < 0) {
+      anchor2 = a.clone().add(wholeMonthDiff - 1, 'months');
+      // linear across the month
+      adjust = (b - anchor) / (anchor - anchor2);
+    } else {
+      anchor2 = a.clone().add(wholeMonthDiff + 1, 'months');
+      // linear across the month
+      adjust = (b - anchor) / (anchor2 - anchor);
+    }
+
+    //check for negative zero, return zero if negative zero
+    return -(wholeMonthDiff + adjust) || 0;
+  }
+
+  hooks.defaultFormat = 'YYYY-MM-DDTHH:mm:ssZ';
+  hooks.defaultFormatUtc = 'YYYY-MM-DDTHH:mm:ss[Z]';
+
+  function toString() {
+    return this.clone().locale('en').format('ddd MMM DD YYYY HH:mm:ss [GMT]ZZ');
+  }
+
+  function toISOString(keepOffset) {
+    if (!this.isValid()) {
+      return null;
+    }
+    var utc = keepOffset !== true,
+    m = utc ? this.clone().utc() : this;
+    if (m.year() < 0 || m.year() > 9999) {
+      return formatMoment(
+      m,
+      utc ?
+      'YYYYYY-MM-DD[T]HH:mm:ss.SSS[Z]' :
+      'YYYYYY-MM-DD[T]HH:mm:ss.SSSZ');
+
+    }
+    if (isFunction(Date.prototype.toISOString)) {
+      // native implementation is ~50x faster, use it when we can
+      if (utc) {
+        return this.toDate().toISOString();
+      } else {
+        return new Date(this.valueOf() + this.utcOffset() * 60 * 1000).
+        toISOString().
+        replace('Z', formatMoment(m, 'Z'));
+      }
+    }
+    return formatMoment(
+    m,
+    utc ? 'YYYY-MM-DD[T]HH:mm:ss.SSS[Z]' : 'YYYY-MM-DD[T]HH:mm:ss.SSSZ');
+
+  }
+
+  /**
+     * Return a human readable representation of a moment that can
+     * also be evaluated to get a new moment which is the same
+     *
+     * @link https://nodejs.org/dist/latest/docs/api/util.html#util_custom_inspect_function_on_objects
+     */
+  function inspect() {
+    if (!this.isValid()) {
+      return 'moment.invalid(/* ' + this._i + ' */)';
+    }
+    var func = 'moment',
+    zone = '',
+    prefix,
+    year,
+    datetime,
+    suffix;
+    if (!this.isLocal()) {
+      func = this.utcOffset() === 0 ? 'moment.utc' : 'moment.parseZone';
+      zone = 'Z';
+    }
+    prefix = '[' + func + '("]';
+    year = 0 <= this.year() && this.year() <= 9999 ? 'YYYY' : 'YYYYYY';
+    datetime = '-MM-DD[T]HH:mm:ss.SSS';
+    suffix = zone + '[")]';
+
+    return this.format(prefix + year + datetime + suffix);
+  }
+
+  function format(inputString) {
+    if (!inputString) {
+      inputString = this.isUtc() ?
+      hooks.defaultFormatUtc :
+      hooks.defaultFormat;
+    }
+    var output = formatMoment(this, inputString);
+    return this.localeData().postformat(output);
+  }
+
+  function from(time, withoutSuffix) {
+    if (
+    this.isValid() && (
+    isMoment(time) && time.isValid() || createLocal(time).isValid()))
+    {
+      return createDuration({ to: this, from: time }).
+      locale(this.locale()).
+      humanize(!withoutSuffix);
+    } else {
+      return this.localeData().invalidDate();
+    }
+  }
+
+  function fromNow(withoutSuffix) {
+    return this.from(createLocal(), withoutSuffix);
+  }
+
+  function to(time, withoutSuffix) {
+    if (
+    this.isValid() && (
+    isMoment(time) && time.isValid() || createLocal(time).isValid()))
+    {
+      return createDuration({ from: this, to: time }).
+      locale(this.locale()).
+      humanize(!withoutSuffix);
+    } else {
+      return this.localeData().invalidDate();
+    }
+  }
+
+  function toNow(withoutSuffix) {
+    return this.to(createLocal(), withoutSuffix);
+  }
+
+  // If passed a locale key, it will set the locale for this
+  // instance.  Otherwise, it will return the locale configuration
+  // variables for this instance.
+  function locale(key) {
+    var newLocaleData;
+
+    if (key === undefined) {
+      return this._locale._abbr;
+    } else {
+      newLocaleData = getLocale(key);
+      if (newLocaleData != null) {
+        this._locale = newLocaleData;
+      }
+      return this;
+    }
+  }
+
+  var lang = deprecate(
+  'moment().lang() is deprecated. Instead, use moment().localeData() to get the language configuration. Use moment().locale() to change languages.',
+  function (key) {
+    if (key === undefined) {
+      return this.localeData();
+    } else {
+      return this.locale(key);
+    }
+  });
+
+
+  function localeData() {
+    return this._locale;
+  }
+
+  var MS_PER_SECOND = 1000,
+  MS_PER_MINUTE = 60 * MS_PER_SECOND,
+  MS_PER_HOUR = 60 * MS_PER_MINUTE,
+  MS_PER_400_YEARS = (365 * 400 + 97) * 24 * MS_PER_HOUR;
+
+  // actual modulo - handles negative numbers (for dates before 1970):
+  function mod$1(dividend, divisor) {
+    return (dividend % divisor + divisor) % divisor;
+  }
+
+  function localStartOfDate(y, m, d) {
+    // the date constructor remaps years 0-99 to 1900-1999
+    if (y < 100 && y >= 0) {
+      // preserve leap years using a full 400 year cycle, then reset
+      return new Date(y + 400, m, d) - MS_PER_400_YEARS;
+    } else {
+      return new Date(y, m, d).valueOf();
+    }
+  }
+
+  function utcStartOfDate(y, m, d) {
+    // Date.UTC remaps years 0-99 to 1900-1999
+    if (y < 100 && y >= 0) {
+      // preserve leap years using a full 400 year cycle, then reset
+      return Date.UTC(y + 400, m, d) - MS_PER_400_YEARS;
+    } else {
+      return Date.UTC(y, m, d);
+    }
+  }
+
+  function startOf(units) {
+    var time, startOfDate;
+    units = normalizeUnits(units);
+    if (units === undefined || units === 'millisecond' || !this.isValid()) {
+      return this;
+    }
+
+    startOfDate = this._isUTC ? utcStartOfDate : localStartOfDate;
+
+    switch (units) {
+      case 'year':
+        time = startOfDate(this.year(), 0, 1);
+        break;
+      case 'quarter':
+        time = startOfDate(
+        this.year(),
+        this.month() - this.month() % 3,
+        1);
+
+        break;
+      case 'month':
+        time = startOfDate(this.year(), this.month(), 1);
+        break;
+      case 'week':
+        time = startOfDate(
+        this.year(),
+        this.month(),
+        this.date() - this.weekday());
+
+        break;
+      case 'isoWeek':
+        time = startOfDate(
+        this.year(),
+        this.month(),
+        this.date() - (this.isoWeekday() - 1));
+
+        break;
+      case 'day':
+      case 'date':
+        time = startOfDate(this.year(), this.month(), this.date());
+        break;
+      case 'hour':
+        time = this._d.valueOf();
+        time -= mod$1(
+        time + (this._isUTC ? 0 : this.utcOffset() * MS_PER_MINUTE),
+        MS_PER_HOUR);
+
+        break;
+      case 'minute':
+        time = this._d.valueOf();
+        time -= mod$1(time, MS_PER_MINUTE);
+        break;
+      case 'second':
+        time = this._d.valueOf();
+        time -= mod$1(time, MS_PER_SECOND);
+        break;}
+
+
+    this._d.setTime(time);
+    hooks.updateOffset(this, true);
+    return this;
+  }
+
+  function endOf(units) {
+    var time, startOfDate;
+    units = normalizeUnits(units);
+    if (units === undefined || units === 'millisecond' || !this.isValid()) {
+      return this;
+    }
+
+    startOfDate = this._isUTC ? utcStartOfDate : localStartOfDate;
+
+    switch (units) {
+      case 'year':
+        time = startOfDate(this.year() + 1, 0, 1) - 1;
+        break;
+      case 'quarter':
+        time =
+        startOfDate(
+        this.year(),
+        this.month() - this.month() % 3 + 3,
+        1) -
+        1;
+        break;
+      case 'month':
+        time = startOfDate(this.year(), this.month() + 1, 1) - 1;
+        break;
+      case 'week':
+        time =
+        startOfDate(
+        this.year(),
+        this.month(),
+        this.date() - this.weekday() + 7) -
+        1;
+        break;
+      case 'isoWeek':
+        time =
+        startOfDate(
+        this.year(),
+        this.month(),
+        this.date() - (this.isoWeekday() - 1) + 7) -
+        1;
+        break;
+      case 'day':
+      case 'date':
+        time = startOfDate(this.year(), this.month(), this.date() + 1) - 1;
+        break;
+      case 'hour':
+        time = this._d.valueOf();
+        time +=
+        MS_PER_HOUR -
+        mod$1(
+        time + (this._isUTC ? 0 : this.utcOffset() * MS_PER_MINUTE),
+        MS_PER_HOUR) -
+
+        1;
+        break;
+      case 'minute':
+        time = this._d.valueOf();
+        time += MS_PER_MINUTE - mod$1(time, MS_PER_MINUTE) - 1;
+        break;
+      case 'second':
+        time = this._d.valueOf();
+        time += MS_PER_SECOND - mod$1(time, MS_PER_SECOND) - 1;
+        break;}
+
+
+    this._d.setTime(time);
+    hooks.updateOffset(this, true);
+    return this;
+  }
+
+  function valueOf() {
+    return this._d.valueOf() - (this._offset || 0) * 60000;
+  }
+
+  function unix() {
+    return Math.floor(this.valueOf() / 1000);
+  }
+
+  function toDate() {
+    return new Date(this.valueOf());
+  }
+
+  function toArray() {
+    var m = this;
+    return [
+    m.year(),
+    m.month(),
+    m.date(),
+    m.hour(),
+    m.minute(),
+    m.second(),
+    m.millisecond()];
+
+  }
+
+  function toObject() {
+    var m = this;
+    return {
+      years: m.year(),
+      months: m.month(),
+      date: m.date(),
+      hours: m.hours(),
+      minutes: m.minutes(),
+      seconds: m.seconds(),
+      milliseconds: m.milliseconds() };
+
+  }
+
+  function toJSON() {
+    // new Date(NaN).toJSON() === null
+    return this.isValid() ? this.toISOString() : null;
+  }
+
+  function isValid$2() {
+    return isValid(this);
+  }
+
+  function parsingFlags() {
+    return extend({}, getParsingFlags(this));
+  }
+
+  function invalidAt() {
+    return getParsingFlags(this).overflow;
+  }
+
+  function creationData() {
+    return {
+      input: this._i,
+      format: this._f,
+      locale: this._locale,
+      isUTC: this._isUTC,
+      strict: this._strict };
+
+  }
+
+  addFormatToken('N', 0, 0, 'eraAbbr');
+  addFormatToken('NN', 0, 0, 'eraAbbr');
+  addFormatToken('NNN', 0, 0, 'eraAbbr');
+  addFormatToken('NNNN', 0, 0, 'eraName');
+  addFormatToken('NNNNN', 0, 0, 'eraNarrow');
+
+  addFormatToken('y', ['y', 1], 'yo', 'eraYear');
+  addFormatToken('y', ['yy', 2], 0, 'eraYear');
+  addFormatToken('y', ['yyy', 3], 0, 'eraYear');
+  addFormatToken('y', ['yyyy', 4], 0, 'eraYear');
+
+  addRegexToken('N', matchEraAbbr);
+  addRegexToken('NN', matchEraAbbr);
+  addRegexToken('NNN', matchEraAbbr);
+  addRegexToken('NNNN', matchEraName);
+  addRegexToken('NNNNN', matchEraNarrow);
+
+  addParseToken(['N', 'NN', 'NNN', 'NNNN', 'NNNNN'], function (
+  input,
+  array,
+  config,
+  token)
+  {
+    var era = config._locale.erasParse(input, token, config._strict);
+    if (era) {
+      getParsingFlags(config).era = era;
+    } else {
+      getParsingFlags(config).invalidEra = input;
+    }
+  });
+
+  addRegexToken('y', matchUnsigned);
+  addRegexToken('yy', matchUnsigned);
+  addRegexToken('yyy', matchUnsigned);
+  addRegexToken('yyyy', matchUnsigned);
+  addRegexToken('yo', matchEraYearOrdinal);
+
+  addParseToken(['y', 'yy', 'yyy', 'yyyy'], YEAR);
+  addParseToken(['yo'], function (input, array, config, token) {
+    var match;
+    if (config._locale._eraYearOrdinalRegex) {
+      match = input.match(config._locale._eraYearOrdinalRegex);
+    }
+
+    if (config._locale.eraYearOrdinalParse) {
+      array[YEAR] = config._locale.eraYearOrdinalParse(input, match);
+    } else {
+      array[YEAR] = parseInt(input, 10);
+    }
+  });
+
+  function localeEras(m, format) {
+    var i,
+    l,
+    date,
+    eras = this._eras || getLocale('en')._eras;
+    for (i = 0, l = eras.length; i < l; ++i) {
+      switch (typeof eras[i].since) {
+        case 'string':
+          // truncate time
+          date = hooks(eras[i].since).startOf('day');
+          eras[i].since = date.valueOf();
+          break;}
+
+
+      switch (typeof eras[i].until) {
+        case 'undefined':
+          eras[i].until = +Infinity;
+          break;
+        case 'string':
+          // truncate time
+          date = hooks(eras[i].until).startOf('day').valueOf();
+          eras[i].until = date.valueOf();
+          break;}
+
+    }
+    return eras;
+  }
+
+  function localeErasParse(eraName, format, strict) {
+    var i,
+    l,
+    eras = this.eras(),
+    name,
+    abbr,
+    narrow;
+    eraName = eraName.toUpperCase();
+
+    for (i = 0, l = eras.length; i < l; ++i) {
+      name = eras[i].name.toUpperCase();
+      abbr = eras[i].abbr.toUpperCase();
+      narrow = eras[i].narrow.toUpperCase();
+
+      if (strict) {
+        switch (format) {
+          case 'N':
+          case 'NN':
+          case 'NNN':
+            if (abbr === eraName) {
+              return eras[i];
+            }
+            break;
+
+          case 'NNNN':
+            if (name === eraName) {
+              return eras[i];
+            }
+            break;
+
+          case 'NNNNN':
+            if (narrow === eraName) {
+              return eras[i];
+            }
+            break;}
+
+      } else if ([name, abbr, narrow].indexOf(eraName) >= 0) {
+        return eras[i];
+      }
+    }
+  }
+
+  function localeErasConvertYear(era, year) {
+    var dir = era.since <= era.until ? +1 : -1;
+    if (year === undefined) {
+      return hooks(era.since).year();
+    } else {
+      return hooks(era.since).year() + (year - era.offset) * dir;
+    }
+  }
+
+  function getEraName() {
+    var i,
+    l,
+    val,
+    eras = this.localeData().eras();
+    for (i = 0, l = eras.length; i < l; ++i) {
+      // truncate time
+      val = this.clone().startOf('day').valueOf();
+
+      if (eras[i].since <= val && val <= eras[i].until) {
+        return eras[i].name;
+      }
+      if (eras[i].until <= val && val <= eras[i].since) {
+        return eras[i].name;
+      }
+    }
+
+    return '';
+  }
+
+  function getEraNarrow() {
+    var i,
+    l,
+    val,
+    eras = this.localeData().eras();
+    for (i = 0, l = eras.length; i < l; ++i) {
+      // truncate time
+      val = this.clone().startOf('day').valueOf();
+
+      if (eras[i].since <= val && val <= eras[i].until) {
+        return eras[i].narrow;
+      }
+      if (eras[i].until <= val && val <= eras[i].since) {
+        return eras[i].narrow;
+      }
+    }
+
+    return '';
+  }
+
+  function getEraAbbr() {
+    var i,
+    l,
+    val,
+    eras = this.localeData().eras();
+    for (i = 0, l = eras.length; i < l; ++i) {
+      // truncate time
+      val = this.clone().startOf('day').valueOf();
+
+      if (eras[i].since <= val && val <= eras[i].until) {
+        return eras[i].abbr;
+      }
+      if (eras[i].until <= val && val <= eras[i].since) {
+        return eras[i].abbr;
+      }
+    }
+
+    return '';
+  }
+
+  function getEraYear() {
+    var i,
+    l,
+    dir,
+    val,
+    eras = this.localeData().eras();
+    for (i = 0, l = eras.length; i < l; ++i) {
+      dir = eras[i].since <= eras[i].until ? +1 : -1;
+
+      // truncate time
+      val = this.clone().startOf('day').valueOf();
+
+      if (
+      eras[i].since <= val && val <= eras[i].until ||
+      eras[i].until <= val && val <= eras[i].since)
+      {
+        return (
+          (this.year() - hooks(eras[i].since).year()) * dir +
+          eras[i].offset);
+
+      }
+    }
+
+    return this.year();
+  }
+
+  function erasNameRegex(isStrict) {
+    if (!hasOwnProp(this, '_erasNameRegex')) {
+      computeErasParse.call(this);
+    }
+    return isStrict ? this._erasNameRegex : this._erasRegex;
+  }
+
+  function erasAbbrRegex(isStrict) {
+    if (!hasOwnProp(this, '_erasAbbrRegex')) {
+      computeErasParse.call(this);
+    }
+    return isStrict ? this._erasAbbrRegex : this._erasRegex;
+  }
+
+  function erasNarrowRegex(isStrict) {
+    if (!hasOwnProp(this, '_erasNarrowRegex')) {
+      computeErasParse.call(this);
+    }
+    return isStrict ? this._erasNarrowRegex : this._erasRegex;
+  }
+
+  function matchEraAbbr(isStrict, locale) {
+    return locale.erasAbbrRegex(isStrict);
+  }
+
+  function matchEraName(isStrict, locale) {
+    return locale.erasNameRegex(isStrict);
+  }
+
+  function matchEraNarrow(isStrict, locale) {
+    return locale.erasNarrowRegex(isStrict);
+  }
+
+  function matchEraYearOrdinal(isStrict, locale) {
+    return locale._eraYearOrdinalRegex || matchUnsigned;
+  }
+
+  function computeErasParse() {
+    var abbrPieces = [],
+    namePieces = [],
+    narrowPieces = [],
+    mixedPieces = [],
+    i,
+    l,
+    eras = this.eras();
+
+    for (i = 0, l = eras.length; i < l; ++i) {
+      namePieces.push(regexEscape(eras[i].name));
+      abbrPieces.push(regexEscape(eras[i].abbr));
+      narrowPieces.push(regexEscape(eras[i].narrow));
+
+      mixedPieces.push(regexEscape(eras[i].name));
+      mixedPieces.push(regexEscape(eras[i].abbr));
+      mixedPieces.push(regexEscape(eras[i].narrow));
+    }
+
+    this._erasRegex = new RegExp('^(' + mixedPieces.join('|') + ')', 'i');
+    this._erasNameRegex = new RegExp('^(' + namePieces.join('|') + ')', 'i');
+    this._erasAbbrRegex = new RegExp('^(' + abbrPieces.join('|') + ')', 'i');
+    this._erasNarrowRegex = new RegExp(
+    '^(' + narrowPieces.join('|') + ')',
+    'i');
+
+  }
+
+  // FORMATTING
+
+  addFormatToken(0, ['gg', 2], 0, function () {
+    return this.weekYear() % 100;
+  });
+
+  addFormatToken(0, ['GG', 2], 0, function () {
+    return this.isoWeekYear() % 100;
+  });
+
+  function addWeekYearFormatToken(token, getter) {
+    addFormatToken(0, [token, token.length], 0, getter);
+  }
+
+  addWeekYearFormatToken('gggg', 'weekYear');
+  addWeekYearFormatToken('ggggg', 'weekYear');
+  addWeekYearFormatToken('GGGG', 'isoWeekYear');
+  addWeekYearFormatToken('GGGGG', 'isoWeekYear');
+
+  // ALIASES
+
+  addUnitAlias('weekYear', 'gg');
+  addUnitAlias('isoWeekYear', 'GG');
+
+  // PRIORITY
+
+  addUnitPriority('weekYear', 1);
+  addUnitPriority('isoWeekYear', 1);
+
+  // PARSING
+
+  addRegexToken('G', matchSigned);
+  addRegexToken('g', matchSigned);
+  addRegexToken('GG', match1to2, match2);
+  addRegexToken('gg', match1to2, match2);
+  addRegexToken('GGGG', match1to4, match4);
+  addRegexToken('gggg', match1to4, match4);
+  addRegexToken('GGGGG', match1to6, match6);
+  addRegexToken('ggggg', match1to6, match6);
+
+  addWeekParseToken(['gggg', 'ggggg', 'GGGG', 'GGGGG'], function (
+  input,
+  week,
+  config,
+  token)
+  {
+    week[token.substr(0, 2)] = toInt(input);
+  });
+
+  addWeekParseToken(['gg', 'GG'], function (input, week, config, token) {
+    week[token] = hooks.parseTwoDigitYear(input);
+  });
+
+  // MOMENTS
+
+  function getSetWeekYear(input) {
+    return getSetWeekYearHelper.call(
+    this,
+    input,
+    this.week(),
+    this.weekday(),
+    this.localeData()._week.dow,
+    this.localeData()._week.doy);
+
+  }
+
+  function getSetISOWeekYear(input) {
+    return getSetWeekYearHelper.call(
+    this,
+    input,
+    this.isoWeek(),
+    this.isoWeekday(),
+    1,
+    4);
+
+  }
+
+  function getISOWeeksInYear() {
+    return weeksInYear(this.year(), 1, 4);
+  }
+
+  function getISOWeeksInISOWeekYear() {
+    return weeksInYear(this.isoWeekYear(), 1, 4);
+  }
+
+  function getWeeksInYear() {
+    var weekInfo = this.localeData()._week;
+    return weeksInYear(this.year(), weekInfo.dow, weekInfo.doy);
+  }
+
+  function getWeeksInWeekYear() {
+    var weekInfo = this.localeData()._week;
+    return weeksInYear(this.weekYear(), weekInfo.dow, weekInfo.doy);
+  }
+
+  function getSetWeekYearHelper(input, week, weekday, dow, doy) {
+    var weeksTarget;
+    if (input == null) {
+      return weekOfYear(this, dow, doy).year;
+    } else {
+      weeksTarget = weeksInYear(input, dow, doy);
+      if (week > weeksTarget) {
+        week = weeksTarget;
+      }
+      return setWeekAll.call(this, input, week, weekday, dow, doy);
+    }
+  }
+
+  function setWeekAll(weekYear, week, weekday, dow, doy) {
+    var dayOfYearData = dayOfYearFromWeeks(weekYear, week, weekday, dow, doy),
+    date = createUTCDate(dayOfYearData.year, 0, dayOfYearData.dayOfYear);
+
+    this.year(date.getUTCFullYear());
+    this.month(date.getUTCMonth());
+    this.date(date.getUTCDate());
+    return this;
+  }
+
+  // FORMATTING
+
+  addFormatToken('Q', 0, 'Qo', 'quarter');
+
+  // ALIASES
+
+  addUnitAlias('quarter', 'Q');
+
+  // PRIORITY
+
+  addUnitPriority('quarter', 7);
+
+  // PARSING
+
+  addRegexToken('Q', match1);
+  addParseToken('Q', function (input, array) {
+    array[MONTH] = (toInt(input) - 1) * 3;
+  });
+
+  // MOMENTS
+
+  function getSetQuarter(input) {
+    return input == null ?
+    Math.ceil((this.month() + 1) / 3) :
+    this.month((input - 1) * 3 + this.month() % 3);
+  }
+
+  // FORMATTING
+
+  addFormatToken('D', ['DD', 2], 'Do', 'date');
+
+  // ALIASES
+
+  addUnitAlias('date', 'D');
+
+  // PRIORITY
+  addUnitPriority('date', 9);
+
+  // PARSING
+
+  addRegexToken('D', match1to2);
+  addRegexToken('DD', match1to2, match2);
+  addRegexToken('Do', function (isStrict, locale) {
+    // TODO: Remove "ordinalParse" fallback in next major release.
+    return isStrict ?
+    locale._dayOfMonthOrdinalParse || locale._ordinalParse :
+    locale._dayOfMonthOrdinalParseLenient;
+  });
+
+  addParseToken(['D', 'DD'], DATE);
+  addParseToken('Do', function (input, array) {
+    array[DATE] = toInt(input.match(match1to2)[0]);
+  });
+
+  // MOMENTS
+
+  var getSetDayOfMonth = makeGetSet('Date', true);
+
+  // FORMATTING
+
+  addFormatToken('DDD', ['DDDD', 3], 'DDDo', 'dayOfYear');
+
+  // ALIASES
+
+  addUnitAlias('dayOfYear', 'DDD');
+
+  // PRIORITY
+  addUnitPriority('dayOfYear', 4);
+
+  // PARSING
+
+  addRegexToken('DDD', match1to3);
+  addRegexToken('DDDD', match3);
+  addParseToken(['DDD', 'DDDD'], function (input, array, config) {
+    config._dayOfYear = toInt(input);
+  });
+
+  // HELPERS
+
+  // MOMENTS
+
+  function getSetDayOfYear(input) {
+    var dayOfYear =
+    Math.round(
+    (this.clone().startOf('day') - this.clone().startOf('year')) / 864e5) +
+    1;
+    return input == null ? dayOfYear : this.add(input - dayOfYear, 'd');
+  }
+
+  // FORMATTING
+
+  addFormatToken('m', ['mm', 2], 0, 'minute');
+
+  // ALIASES
+
+  addUnitAlias('minute', 'm');
+
+  // PRIORITY
+
+  addUnitPriority('minute', 14);
+
+  // PARSING
+
+  addRegexToken('m', match1to2);
+  addRegexToken('mm', match1to2, match2);
+  addParseToken(['m', 'mm'], MINUTE);
+
+  // MOMENTS
+
+  var getSetMinute = makeGetSet('Minutes', false);
+
+  // FORMATTING
+
+  addFormatToken('s', ['ss', 2], 0, 'second');
+
+  // ALIASES
+
+  addUnitAlias('second', 's');
+
+  // PRIORITY
+
+  addUnitPriority('second', 15);
+
+  // PARSING
+
+  addRegexToken('s', match1to2);
+  addRegexToken('ss', match1to2, match2);
+  addParseToken(['s', 'ss'], SECOND);
+
+  // MOMENTS
+
+  var getSetSecond = makeGetSet('Seconds', false);
+
+  // FORMATTING
+
+  addFormatToken('S', 0, 0, function () {
+    return ~~(this.millisecond() / 100);
+  });
+
+  addFormatToken(0, ['SS', 2], 0, function () {
+    return ~~(this.millisecond() / 10);
+  });
+
+  addFormatToken(0, ['SSS', 3], 0, 'millisecond');
+  addFormatToken(0, ['SSSS', 4], 0, function () {
+    return this.millisecond() * 10;
+  });
+  addFormatToken(0, ['SSSSS', 5], 0, function () {
+    return this.millisecond() * 100;
+  });
+  addFormatToken(0, ['SSSSSS', 6], 0, function () {
+    return this.millisecond() * 1000;
+  });
+  addFormatToken(0, ['SSSSSSS', 7], 0, function () {
+    return this.millisecond() * 10000;
+  });
+  addFormatToken(0, ['SSSSSSSS', 8], 0, function () {
+    return this.millisecond() * 100000;
+  });
+  addFormatToken(0, ['SSSSSSSSS', 9], 0, function () {
+    return this.millisecond() * 1000000;
+  });
+
+  // ALIASES
+
+  addUnitAlias('millisecond', 'ms');
+
+  // PRIORITY
+
+  addUnitPriority('millisecond', 16);
+
+  // PARSING
+
+  addRegexToken('S', match1to3, match1);
+  addRegexToken('SS', match1to3, match2);
+  addRegexToken('SSS', match1to3, match3);
+
+  var token, getSetMillisecond;
+  for (token = 'SSSS'; token.length <= 9; token += 'S') {
+    addRegexToken(token, matchUnsigned);
+  }
+
+  function parseMs(input, array) {
+    array[MILLISECOND] = toInt(('0.' + input) * 1000);
+  }
+
+  for (token = 'S'; token.length <= 9; token += 'S') {
+    addParseToken(token, parseMs);
+  }
+
+  getSetMillisecond = makeGetSet('Milliseconds', false);
+
+  // FORMATTING
+
+  addFormatToken('z', 0, 0, 'zoneAbbr');
+  addFormatToken('zz', 0, 0, 'zoneName');
+
+  // MOMENTS
+
+  function getZoneAbbr() {
+    return this._isUTC ? 'UTC' : '';
+  }
+
+  function getZoneName() {
+    return this._isUTC ? 'Coordinated Universal Time' : '';
+  }
+
+  var proto = Moment.prototype;
+
+  proto.add = add;
+  proto.calendar = calendar$1;
+  proto.clone = clone;
+  proto.diff = diff;
+  proto.endOf = endOf;
+  proto.format = format;
+  proto.from = from;
+  proto.fromNow = fromNow;
+  proto.to = to;
+  proto.toNow = toNow;
+  proto.get = stringGet;
+  proto.invalidAt = invalidAt;
+  proto.isAfter = isAfter;
+  proto.isBefore = isBefore;
+  proto.isBetween = isBetween;
+  proto.isSame = isSame;
+  proto.isSameOrAfter = isSameOrAfter;
+  proto.isSameOrBefore = isSameOrBefore;
+  proto.isValid = isValid$2;
+  proto.lang = lang;
+  proto.locale = locale;
+  proto.localeData = localeData;
+  proto.max = prototypeMax;
+  proto.min = prototypeMin;
+  proto.parsingFlags = parsingFlags;
+  proto.set = stringSet;
+  proto.startOf = startOf;
+  proto.subtract = subtract;
+  proto.toArray = toArray;
+  proto.toObject = toObject;
+  proto.toDate = toDate;
+  proto.toISOString = toISOString;
+  proto.inspect = inspect;
+  if (typeof Symbol !== 'undefined' && Symbol.for != null) {
+    proto[Symbol.for('nodejs.util.inspect.custom')] = function () {
+      return 'Moment<' + this.format() + '>';
+    };
+  }
+  proto.toJSON = toJSON;
+  proto.toString = toString;
+  proto.unix = unix;
+  proto.valueOf = valueOf;
+  proto.creationData = creationData;
+  proto.eraName = getEraName;
+  proto.eraNarrow = getEraNarrow;
+  proto.eraAbbr = getEraAbbr;
+  proto.eraYear = getEraYear;
+  proto.year = getSetYear;
+  proto.isLeapYear = getIsLeapYear;
+  proto.weekYear = getSetWeekYear;
+  proto.isoWeekYear = getSetISOWeekYear;
+  proto.quarter = proto.quarters = getSetQuarter;
+  proto.month = getSetMonth;
+  proto.daysInMonth = getDaysInMonth;
+  proto.week = proto.weeks = getSetWeek;
+  proto.isoWeek = proto.isoWeeks = getSetISOWeek;
+  proto.weeksInYear = getWeeksInYear;
+  proto.weeksInWeekYear = getWeeksInWeekYear;
+  proto.isoWeeksInYear = getISOWeeksInYear;
+  proto.isoWeeksInISOWeekYear = getISOWeeksInISOWeekYear;
+  proto.date = getSetDayOfMonth;
+  proto.day = proto.days = getSetDayOfWeek;
+  proto.weekday = getSetLocaleDayOfWeek;
+  proto.isoWeekday = getSetISODayOfWeek;
+  proto.dayOfYear = getSetDayOfYear;
+  proto.hour = proto.hours = getSetHour;
+  proto.minute = proto.minutes = getSetMinute;
+  proto.second = proto.seconds = getSetSecond;
+  proto.millisecond = proto.milliseconds = getSetMillisecond;
+  proto.utcOffset = getSetOffset;
+  proto.utc = setOffsetToUTC;
+  proto.local = setOffsetToLocal;
+  proto.parseZone = setOffsetToParsedOffset;
+  proto.hasAlignedHourOffset = hasAlignedHourOffset;
+  proto.isDST = isDaylightSavingTime;
+  proto.isLocal = isLocal;
+  proto.isUtcOffset = isUtcOffset;
+  proto.isUtc = isUtc;
+  proto.isUTC = isUtc;
+  proto.zoneAbbr = getZoneAbbr;
+  proto.zoneName = getZoneName;
+  proto.dates = deprecate(
+  'dates accessor is deprecated. Use date instead.',
+  getSetDayOfMonth);
+
+  proto.months = deprecate(
+  'months accessor is deprecated. Use month instead',
+  getSetMonth);
+
+  proto.years = deprecate(
+  'years accessor is deprecated. Use year instead',
+  getSetYear);
+
+  proto.zone = deprecate(
+  'moment().zone is deprecated, use moment().utcOffset instead. http://momentjs.com/guides/#/warnings/zone/',
+  getSetZone);
+
+  proto.isDSTShifted = deprecate(
+  'isDSTShifted is deprecated. See http://momentjs.com/guides/#/warnings/dst-shifted/ for more information',
+  isDaylightSavingTimeShifted);
+
+
+  function createUnix(input) {
+    return createLocal(input * 1000);
+  }
+
+  function createInZone() {
+    return createLocal.apply(null, arguments).parseZone();
+  }
+
+  function preParsePostFormat(string) {
+    return string;
+  }
+
+  var proto$1 = Locale.prototype;
+
+  proto$1.calendar = calendar;
+  proto$1.longDateFormat = longDateFormat;
+  proto$1.invalidDate = invalidDate;
+  proto$1.ordinal = ordinal;
+  proto$1.preparse = preParsePostFormat;
+  proto$1.postformat = preParsePostFormat;
+  proto$1.relativeTime = relativeTime;
+  proto$1.pastFuture = pastFuture;
+  proto$1.set = set;
+  proto$1.eras = localeEras;
+  proto$1.erasParse = localeErasParse;
+  proto$1.erasConvertYear = localeErasConvertYear;
+  proto$1.erasAbbrRegex = erasAbbrRegex;
+  proto$1.erasNameRegex = erasNameRegex;
+  proto$1.erasNarrowRegex = erasNarrowRegex;
+
+  proto$1.months = localeMonths;
+  proto$1.monthsShort = localeMonthsShort;
+  proto$1.monthsParse = localeMonthsParse;
+  proto$1.monthsRegex = monthsRegex;
+  proto$1.monthsShortRegex = monthsShortRegex;
+  proto$1.week = localeWeek;
+  proto$1.firstDayOfYear = localeFirstDayOfYear;
+  proto$1.firstDayOfWeek = localeFirstDayOfWeek;
+
+  proto$1.weekdays = localeWeekdays;
+  proto$1.weekdaysMin = localeWeekdaysMin;
+  proto$1.weekdaysShort = localeWeekdaysShort;
+  proto$1.weekdaysParse = localeWeekdaysParse;
+
+  proto$1.weekdaysRegex = weekdaysRegex;
+  proto$1.weekdaysShortRegex = weekdaysShortRegex;
+  proto$1.weekdaysMinRegex = weekdaysMinRegex;
+
+  proto$1.isPM = localeIsPM;
+  proto$1.meridiem = localeMeridiem;
+
+  function get$1(format, index, field, setter) {
+    var locale = getLocale(),
+    utc = createUTC().set(setter, index);
+    return locale[field](utc, format);
+  }
+
+  function listMonthsImpl(format, index, field) {
+    if (isNumber(format)) {
+      index = format;
+      format = undefined;
+    }
+
+    format = format || '';
+
+    if (index != null) {
+      return get$1(format, index, field, 'month');
+    }
+
+    var i,
+    out = [];
+    for (i = 0; i < 12; i++) {
+      out[i] = get$1(format, i, field, 'month');
+    }
+    return out;
+  }
+
+  // ()
+  // (5)
+  // (fmt, 5)
+  // (fmt)
+  // (true)
+  // (true, 5)
+  // (true, fmt, 5)
+  // (true, fmt)
+  function listWeekdaysImpl(localeSorted, format, index, field) {
+    if (typeof localeSorted === 'boolean') {
+      if (isNumber(format)) {
+        index = format;
+        format = undefined;
+      }
+
+      format = format || '';
+    } else {
+      format = localeSorted;
+      index = format;
+      localeSorted = false;
+
+      if (isNumber(format)) {
+        index = format;
+        format = undefined;
+      }
+
+      format = format || '';
+    }
+
+    var locale = getLocale(),
+    shift = localeSorted ? locale._week.dow : 0,
+    i,
+    out = [];
+
+    if (index != null) {
+      return get$1(format, (index + shift) % 7, field, 'day');
+    }
+
+    for (i = 0; i < 7; i++) {
+      out[i] = get$1(format, (i + shift) % 7, field, 'day');
+    }
+    return out;
+  }
+
+  function listMonths(format, index) {
+    return listMonthsImpl(format, index, 'months');
+  }
+
+  function listMonthsShort(format, index) {
+    return listMonthsImpl(format, index, 'monthsShort');
+  }
+
+  function listWeekdays(localeSorted, format, index) {
+    return listWeekdaysImpl(localeSorted, format, index, 'weekdays');
+  }
+
+  function listWeekdaysShort(localeSorted, format, index) {
+    return listWeekdaysImpl(localeSorted, format, index, 'weekdaysShort');
+  }
+
+  function listWeekdaysMin(localeSorted, format, index) {
+    return listWeekdaysImpl(localeSorted, format, index, 'weekdaysMin');
+  }
+
+  getSetGlobalLocale('en', {
+    eras: [
+    {
+      since: '0001-01-01',
+      until: +Infinity,
+      offset: 1,
+      name: 'Anno Domini',
+      narrow: 'AD',
+      abbr: 'AD' },
+
+    {
+      since: '0000-12-31',
+      until: -Infinity,
+      offset: 1,
+      name: 'Before Christ',
+      narrow: 'BC',
+      abbr: 'BC' }],
+
+
+    dayOfMonthOrdinalParse: /\d{1,2}(th|st|nd|rd)/,
+    ordinal: function ordinal(number) {
+      var b = number % 10,
+      output =
+      toInt(number % 100 / 10) === 1 ?
+      'th' :
+      b === 1 ?
+      'st' :
+      b === 2 ?
+      'nd' :
+      b === 3 ?
+      'rd' :
+      'th';
+      return number + output;
+    } });
+
+
+  // Side effect imports
+
+  hooks.lang = deprecate(
+  'moment.lang is deprecated. Use moment.locale instead.',
+  getSetGlobalLocale);
+
+  hooks.langData = deprecate(
+  'moment.langData is deprecated. Use moment.localeData instead.',
+  getLocale);
+
+
+  var mathAbs = Math.abs;
+
+  function abs() {
+    var data = this._data;
+
+    this._milliseconds = mathAbs(this._milliseconds);
+    this._days = mathAbs(this._days);
+    this._months = mathAbs(this._months);
+
+    data.milliseconds = mathAbs(data.milliseconds);
+    data.seconds = mathAbs(data.seconds);
+    data.minutes = mathAbs(data.minutes);
+    data.hours = mathAbs(data.hours);
+    data.months = mathAbs(data.months);
+    data.years = mathAbs(data.years);
+
+    return this;
+  }
+
+  function addSubtract$1(duration, input, value, direction) {
+    var other = createDuration(input, value);
+
+    duration._milliseconds += direction * other._milliseconds;
+    duration._days += direction * other._days;
+    duration._months += direction * other._months;
+
+    return duration._bubble();
+  }
+
+  // supports only 2.0-style add(1, 's') or add(duration)
+  function add$1(input, value) {
+    return addSubtract$1(this, input, value, 1);
+  }
+
+  // supports only 2.0-style subtract(1, 's') or subtract(duration)
+  function subtract$1(input, value) {
+    return addSubtract$1(this, input, value, -1);
+  }
+
+  function absCeil(number) {
+    if (number < 0) {
+      return Math.floor(number);
+    } else {
+      return Math.ceil(number);
+    }
+  }
+
+  function bubble() {
+    var milliseconds = this._milliseconds,
+    days = this._days,
+    months = this._months,
+    data = this._data,
+    seconds,
+    minutes,
+    hours,
+    years,
+    monthsFromDays;
+
+    // if we have a mix of positive and negative values, bubble down first
+    // check: https://github.com/moment/moment/issues/2166
+    if (
+    !(
+    milliseconds >= 0 && days >= 0 && months >= 0 ||
+    milliseconds <= 0 && days <= 0 && months <= 0))
+
+    {
+      milliseconds += absCeil(monthsToDays(months) + days) * 864e5;
+      days = 0;
+      months = 0;
+    }
+
+    // The following code bubbles up values, see the tests for
+    // examples of what that means.
+    data.milliseconds = milliseconds % 1000;
+
+    seconds = absFloor(milliseconds / 1000);
+    data.seconds = seconds % 60;
+
+    minutes = absFloor(seconds / 60);
+    data.minutes = minutes % 60;
+
+    hours = absFloor(minutes / 60);
+    data.hours = hours % 24;
+
+    days += absFloor(hours / 24);
+
+    // convert days to months
+    monthsFromDays = absFloor(daysToMonths(days));
+    months += monthsFromDays;
+    days -= absCeil(monthsToDays(monthsFromDays));
+
+    // 12 months -> 1 year
+    years = absFloor(months / 12);
+    months %= 12;
+
+    data.days = days;
+    data.months = months;
+    data.years = years;
+
+    return this;
+  }
+
+  function daysToMonths(days) {
+    // 400 years have 146097 days (taking into account leap year rules)
+    // 400 years have 12 months === 4800
+    return days * 4800 / 146097;
+  }
+
+  function monthsToDays(months) {
+    // the reverse of daysToMonths
+    return months * 146097 / 4800;
+  }
+
+  function as(units) {
+    if (!this.isValid()) {
+      return NaN;
+    }
+    var days,
+    months,
+    milliseconds = this._milliseconds;
+
+    units = normalizeUnits(units);
+
+    if (units === 'month' || units === 'quarter' || units === 'year') {
+      days = this._days + milliseconds / 864e5;
+      months = this._months + daysToMonths(days);
+      switch (units) {
+        case 'month':
+          return months;
+        case 'quarter':
+          return months / 3;
+        case 'year':
+          return months / 12;}
+
+    } else {
+      // handle milliseconds separately because of floating point math errors (issue #1867)
+      days = this._days + Math.round(monthsToDays(this._months));
+      switch (units) {
+        case 'week':
+          return days / 7 + milliseconds / 6048e5;
+        case 'day':
+          return days + milliseconds / 864e5;
+        case 'hour':
+          return days * 24 + milliseconds / 36e5;
+        case 'minute':
+          return days * 1440 + milliseconds / 6e4;
+        case 'second':
+          return days * 86400 + milliseconds / 1000;
+        // Math.floor prevents floating point math errors here
+        case 'millisecond':
+          return Math.floor(days * 864e5) + milliseconds;
+        default:
+          throw new Error('Unknown unit ' + units);}
+
+    }
+  }
+
+  // TODO: Use this.as('ms')?
+  function valueOf$1() {
+    if (!this.isValid()) {
+      return NaN;
+    }
+    return (
+      this._milliseconds +
+      this._days * 864e5 +
+      this._months % 12 * 2592e6 +
+      toInt(this._months / 12) * 31536e6);
+
+  }
+
+  function makeAs(alias) {
+    return function () {
+      return this.as(alias);
+    };
+  }
+
+  var asMilliseconds = makeAs('ms'),
+  asSeconds = makeAs('s'),
+  asMinutes = makeAs('m'),
+  asHours = makeAs('h'),
+  asDays = makeAs('d'),
+  asWeeks = makeAs('w'),
+  asMonths = makeAs('M'),
+  asQuarters = makeAs('Q'),
+  asYears = makeAs('y');
+
+  function clone$1() {
+    return createDuration(this);
+  }
+
+  function get$2(units) {
+    units = normalizeUnits(units);
+    return this.isValid() ? this[units + 's']() : NaN;
+  }
+
+  function makeGetter(name) {
+    return function () {
+      return this.isValid() ? this._data[name] : NaN;
+    };
+  }
+
+  var milliseconds = makeGetter('milliseconds'),
+  seconds = makeGetter('seconds'),
+  minutes = makeGetter('minutes'),
+  hours = makeGetter('hours'),
+  days = makeGetter('days'),
+  months = makeGetter('months'),
+  years = makeGetter('years');
+
+  function weeks() {
+    return absFloor(this.days() / 7);
+  }
+
+  var round = Math.round,
+  thresholds = {
+    ss: 44, // a few seconds to seconds
+    s: 45, // seconds to minute
+    m: 45, // minutes to hour
+    h: 22, // hours to day
+    d: 26, // days to month/week
+    w: null, // weeks to month
+    M: 11 // months to year
+  };
+
+  // helper function for moment.fn.from, moment.fn.fromNow, and moment.duration.fn.humanize
+  function substituteTimeAgo(string, number, withoutSuffix, isFuture, locale) {
+    return locale.relativeTime(number || 1, !!withoutSuffix, string, isFuture);
+  }
+
+  function relativeTime$1(posNegDuration, withoutSuffix, thresholds, locale) {
+    var duration = createDuration(posNegDuration).abs(),
+    seconds = round(duration.as('s')),
+    minutes = round(duration.as('m')),
+    hours = round(duration.as('h')),
+    days = round(duration.as('d')),
+    months = round(duration.as('M')),
+    weeks = round(duration.as('w')),
+    years = round(duration.as('y')),
+    a =
+    seconds <= thresholds.ss && ['s', seconds] ||
+    seconds < thresholds.s && ['ss', seconds] ||
+    minutes <= 1 && ['m'] ||
+    minutes < thresholds.m && ['mm', minutes] ||
+    hours <= 1 && ['h'] ||
+    hours < thresholds.h && ['hh', hours] ||
+    days <= 1 && ['d'] ||
+    days < thresholds.d && ['dd', days];
+
+    if (thresholds.w != null) {
+      a =
+      a ||
+      weeks <= 1 && ['w'] ||
+      weeks < thresholds.w && ['ww', weeks];
+    }
+    a = a ||
+    months <= 1 && ['M'] ||
+    months < thresholds.M && ['MM', months] ||
+    years <= 1 && ['y'] || ['yy', years];
+
+    a[2] = withoutSuffix;
+    a[3] = +posNegDuration > 0;
+    a[4] = locale;
+    return substituteTimeAgo.apply(null, a);
+  }
+
+  // This function allows you to set the rounding function for relative time strings
+  function getSetRelativeTimeRounding(roundingFunction) {
+    if (roundingFunction === undefined) {
+      return round;
+    }
+    if (typeof roundingFunction === 'function') {
+      round = roundingFunction;
+      return true;
+    }
+    return false;
+  }
+
+  // This function allows you to set a threshold for relative time strings
+  function getSetRelativeTimeThreshold(threshold, limit) {
+    if (thresholds[threshold] === undefined) {
+      return false;
+    }
+    if (limit === undefined) {
+      return thresholds[threshold];
+    }
+    thresholds[threshold] = limit;
+    if (threshold === 's') {
+      thresholds.ss = limit - 1;
+    }
+    return true;
+  }
+
+  function humanize(argWithSuffix, argThresholds) {
+    if (!this.isValid()) {
+      return this.localeData().invalidDate();
+    }
+
+    var withSuffix = false,
+    th = thresholds,
+    locale,
+    output;
+
+    if (typeof argWithSuffix === 'object') {
+      argThresholds = argWithSuffix;
+      argWithSuffix = false;
+    }
+    if (typeof argWithSuffix === 'boolean') {
+      withSuffix = argWithSuffix;
+    }
+    if (typeof argThresholds === 'object') {
+      th = Object.assign({}, thresholds, argThresholds);
+      if (argThresholds.s != null && argThresholds.ss == null) {
+        th.ss = argThresholds.s - 1;
+      }
+    }
+
+    locale = this.localeData();
+    output = relativeTime$1(this, !withSuffix, th, locale);
+
+    if (withSuffix) {
+      output = locale.pastFuture(+this, output);
+    }
+
+    return locale.postformat(output);
+  }
+
+  var abs$1 = Math.abs;
+
+  function sign(x) {
+    return (x > 0) - (x < 0) || +x;
+  }
+
+  function toISOString$1() {
+    // for ISO strings we do not use the normal bubbling rules:
+    //  * milliseconds bubble up until they become hours
+    //  * days do not bubble at all
+    //  * months bubble up until they become years
+    // This is because there is no context-free conversion between hours and days
+    // (think of clock changes)
+    // and also not between days and months (28-31 days per month)
+    if (!this.isValid()) {
+      return this.localeData().invalidDate();
+    }
+
+    var seconds = abs$1(this._milliseconds) / 1000,
+    days = abs$1(this._days),
+    months = abs$1(this._months),
+    minutes,
+    hours,
+    years,
+    s,
+    total = this.asSeconds(),
+    totalSign,
+    ymSign,
+    daysSign,
+    hmsSign;
+
+    if (!total) {
+      // this is the same as C#'s (Noda) and python (isodate)...
+      // but not other JS (goog.date)
+      return 'P0D';
+    }
+
+    // 3600 seconds -> 60 minutes -> 1 hour
+    minutes = absFloor(seconds / 60);
+    hours = absFloor(minutes / 60);
+    seconds %= 60;
+    minutes %= 60;
+
+    // 12 months -> 1 year
+    years = absFloor(months / 12);
+    months %= 12;
+
+    // inspired by https://github.com/dordille/moment-isoduration/blob/master/moment.isoduration.js
+    s = seconds ? seconds.toFixed(3).replace(/\.?0+$/, '') : '';
+
+    totalSign = total < 0 ? '-' : '';
+    ymSign = sign(this._months) !== sign(total) ? '-' : '';
+    daysSign = sign(this._days) !== sign(total) ? '-' : '';
+    hmsSign = sign(this._milliseconds) !== sign(total) ? '-' : '';
+
+    return (
+      totalSign +
+      'P' + (
+      years ? ymSign + years + 'Y' : '') + (
+      months ? ymSign + months + 'M' : '') + (
+      days ? daysSign + days + 'D' : '') + (
+      hours || minutes || seconds ? 'T' : '') + (
+      hours ? hmsSign + hours + 'H' : '') + (
+      minutes ? hmsSign + minutes + 'M' : '') + (
+      seconds ? hmsSign + s + 'S' : ''));
+
+  }
+
+  var proto$2 = Duration.prototype;
+
+  proto$2.isValid = isValid$1;
+  proto$2.abs = abs;
+  proto$2.add = add$1;
+  proto$2.subtract = subtract$1;
+  proto$2.as = as;
+  proto$2.asMilliseconds = asMilliseconds;
+  proto$2.asSeconds = asSeconds;
+  proto$2.asMinutes = asMinutes;
+  proto$2.asHours = asHours;
+  proto$2.asDays = asDays;
+  proto$2.asWeeks = asWeeks;
+  proto$2.asMonths = asMonths;
+  proto$2.asQuarters = asQuarters;
+  proto$2.asYears = asYears;
+  proto$2.valueOf = valueOf$1;
+  proto$2._bubble = bubble;
+  proto$2.clone = clone$1;
+  proto$2.get = get$2;
+  proto$2.milliseconds = milliseconds;
+  proto$2.seconds = seconds;
+  proto$2.minutes = minutes;
+  proto$2.hours = hours;
+  proto$2.days = days;
+  proto$2.weeks = weeks;
+  proto$2.months = months;
+  proto$2.years = years;
+  proto$2.humanize = humanize;
+  proto$2.toISOString = toISOString$1;
+  proto$2.toString = toISOString$1;
+  proto$2.toJSON = toISOString$1;
+  proto$2.locale = locale;
+  proto$2.localeData = localeData;
+
+  proto$2.toIsoString = deprecate(
+  'toIsoString() is deprecated. Please use toISOString() instead (notice the capitals)',
+  toISOString$1);
+
+  proto$2.lang = lang;
+
+  // FORMATTING
+
+  addFormatToken('X', 0, 0, 'unix');
+  addFormatToken('x', 0, 0, 'valueOf');
+
+  // PARSING
+
+  addRegexToken('x', matchSigned);
+  addRegexToken('X', matchTimestamp);
+  addParseToken('X', function (input, array, config) {
+    config._d = new Date(parseFloat(input) * 1000);
+  });
+  addParseToken('x', function (input, array, config) {
+    config._d = new Date(toInt(input));
+  });
+
+  //! moment.js
+
+  hooks.version = '2.29.1';
+
+  setHookCallback(createLocal);
+
+  hooks.fn = proto;
+  hooks.min = min;
+  hooks.max = max;
+  hooks.now = now;
+  hooks.utc = createUTC;
+  hooks.unix = createUnix;
+  hooks.months = listMonths;
+  hooks.isDate = isDate;
+  hooks.locale = getSetGlobalLocale;
+  hooks.invalid = createInvalid;
+  hooks.duration = createDuration;
+  hooks.isMoment = isMoment;
+  hooks.weekdays = listWeekdays;
+  hooks.parseZone = createInZone;
+  hooks.localeData = getLocale;
+  hooks.isDuration = isDuration;
+  hooks.monthsShort = listMonthsShort;
+  hooks.weekdaysMin = listWeekdaysMin;
+  hooks.defineLocale = defineLocale;
+  hooks.updateLocale = updateLocale;
+  hooks.locales = listLocales;
+  hooks.weekdaysShort = listWeekdaysShort;
+  hooks.normalizeUnits = normalizeUnits;
+  hooks.relativeTimeRounding = getSetRelativeTimeRounding;
+  hooks.relativeTimeThreshold = getSetRelativeTimeThreshold;
+  hooks.calendarFormat = getCalendarFormat;
+  hooks.prototype = proto;
+
+  // currently HTML5 input type only supports 24-hour formats
+  hooks.HTML5_FMT = {
+    DATETIME_LOCAL: 'YYYY-MM-DDTHH:mm', // <input type="datetime-local" />
+    DATETIME_LOCAL_SECONDS: 'YYYY-MM-DDTHH:mm:ss', // <input type="datetime-local" step="1" />
+    DATETIME_LOCAL_MS: 'YYYY-MM-DDTHH:mm:ss.SSS', // <input type="datetime-local" step="0.001" />
+    DATE: 'YYYY-MM-DD', // <input type="date" />
+    TIME: 'HH:mm', // <input type="time" />
+    TIME_SECONDS: 'HH:mm:ss', // <input type="time" step="1" />
+    TIME_MS: 'HH:mm:ss.SSS', // <input type="time" step="0.001" />
+    WEEK: 'GGGG-[W]WW', // <input type="week" />
+    MONTH: 'YYYY-MM' // <input type="month" />
+  };
+
+  return hooks;
+
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! (webpack)/buildin/module.js */ 51)(module)))
 
 /***/ }),
-
-/***/ 49:
-/*!********************************************************************!*\
-  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/config/total.js ***!
-  \********************************************************************/
+/* 51 */
+/*!***********************************!*\
+  !*** (webpack)/buildin/module.js ***!
+  \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;} // 计算确诊、治愈、死亡   每一个的总和的类
-var _console = console,log = _console.log;var
-Total = /*#__PURE__*/function () {"use strict";
-  function Total(type) {_classCallCheck(this, Total);
-    this.type = type;
-  }
+module.exports = function(module) {
+	if (!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if (!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
 
-  // uniapp类里的静态方法 static 不生效
-  _createClass(Total, [{ key: "sum", value: function sum() {var _this = this;
-      return new Promise(function (resolve, reject) {
-        // 抽出 data 和时间重组一个数组
-        var typearr = _this.type.map(function (item) {
-          var data = item.data;
-          var times = item.time;
-          return { data: data, times: times };
-        });
-        // log('重组的数组')
-        // log(typearr)
-        // 取出键值对的 value值
-        var objList = typearr.map(function (item) {
-          // 取出对象的value值用es7的 Object.values()
-          return Object.values(item.data);
-        });
-        // log('value值')
-        // log(objList)
-        // 合并返回的value值push进一个新的数组
-        var arrList = [];
-        objList.forEach(function (item) {
-          arrList.push.apply(arrList, _toConsumableArray(item));
-        });
-        // log('合并的value值')
-        // log(arrList)
-        // 计算 arrList 里的数字总和
-        var sumdata = arrList.reduce(function (prev, cur) {
-          return prev + cur;
-        });
-        // 法二
-        // let numdata = 0
-        // arrList.forEach((item) => {
-        // 	numdata += item
-        // })
-        // log(numdata)
-        // log('新增总数')
-        // log(sumdata)
-
-
-        // 取出上传时间
-        var startTime = typearr.map(function (item) {
-          var times = item.times;
-          return times;
-        });
-        var result = { startTime: startTime, sumdata: sumdata };
-        resolve(result);
-      });
-    } }]);return Total;}();
-
-
-module.exports = Total;
 
 /***/ }),
-
-/***/ 50:
+/* 52 */
 /*!*********************************************************************************************!*\
-  !*** ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator/index.js ***!
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale sync ^\.\/.*$ ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! regenerator-runtime */ 51);
+var map = {
+	"./af": 53,
+	"./af.js": 53,
+	"./ar": 54,
+	"./ar-dz": 55,
+	"./ar-dz.js": 55,
+	"./ar-kw": 56,
+	"./ar-kw.js": 56,
+	"./ar-ly": 57,
+	"./ar-ly.js": 57,
+	"./ar-ma": 58,
+	"./ar-ma.js": 58,
+	"./ar-sa": 59,
+	"./ar-sa.js": 59,
+	"./ar-tn": 60,
+	"./ar-tn.js": 60,
+	"./ar.js": 54,
+	"./az": 61,
+	"./az.js": 61,
+	"./be": 62,
+	"./be.js": 62,
+	"./bg": 63,
+	"./bg.js": 63,
+	"./bm": 64,
+	"./bm.js": 64,
+	"./bn": 65,
+	"./bn-bd": 66,
+	"./bn-bd.js": 66,
+	"./bn.js": 65,
+	"./bo": 67,
+	"./bo.js": 67,
+	"./br": 68,
+	"./br.js": 68,
+	"./bs": 69,
+	"./bs.js": 69,
+	"./ca": 70,
+	"./ca.js": 70,
+	"./cs": 71,
+	"./cs.js": 71,
+	"./cv": 72,
+	"./cv.js": 72,
+	"./cy": 73,
+	"./cy.js": 73,
+	"./da": 74,
+	"./da.js": 74,
+	"./de": 75,
+	"./de-at": 76,
+	"./de-at.js": 76,
+	"./de-ch": 77,
+	"./de-ch.js": 77,
+	"./de.js": 75,
+	"./dv": 78,
+	"./dv.js": 78,
+	"./el": 79,
+	"./el.js": 79,
+	"./en-au": 80,
+	"./en-au.js": 80,
+	"./en-ca": 81,
+	"./en-ca.js": 81,
+	"./en-gb": 82,
+	"./en-gb.js": 82,
+	"./en-ie": 83,
+	"./en-ie.js": 83,
+	"./en-il": 84,
+	"./en-il.js": 84,
+	"./en-in": 85,
+	"./en-in.js": 85,
+	"./en-nz": 86,
+	"./en-nz.js": 86,
+	"./en-sg": 87,
+	"./en-sg.js": 87,
+	"./eo": 88,
+	"./eo.js": 88,
+	"./es": 89,
+	"./es-do": 90,
+	"./es-do.js": 90,
+	"./es-mx": 91,
+	"./es-mx.js": 91,
+	"./es-us": 92,
+	"./es-us.js": 92,
+	"./es.js": 89,
+	"./et": 93,
+	"./et.js": 93,
+	"./eu": 94,
+	"./eu.js": 94,
+	"./fa": 95,
+	"./fa.js": 95,
+	"./fi": 96,
+	"./fi.js": 96,
+	"./fil": 97,
+	"./fil.js": 97,
+	"./fo": 98,
+	"./fo.js": 98,
+	"./fr": 99,
+	"./fr-ca": 100,
+	"./fr-ca.js": 100,
+	"./fr-ch": 101,
+	"./fr-ch.js": 101,
+	"./fr.js": 99,
+	"./fy": 102,
+	"./fy.js": 102,
+	"./ga": 103,
+	"./ga.js": 103,
+	"./gd": 104,
+	"./gd.js": 104,
+	"./gl": 105,
+	"./gl.js": 105,
+	"./gom-deva": 106,
+	"./gom-deva.js": 106,
+	"./gom-latn": 107,
+	"./gom-latn.js": 107,
+	"./gu": 108,
+	"./gu.js": 108,
+	"./he": 109,
+	"./he.js": 109,
+	"./hi": 110,
+	"./hi.js": 110,
+	"./hr": 111,
+	"./hr.js": 111,
+	"./hu": 112,
+	"./hu.js": 112,
+	"./hy-am": 113,
+	"./hy-am.js": 113,
+	"./id": 114,
+	"./id.js": 114,
+	"./is": 115,
+	"./is.js": 115,
+	"./it": 116,
+	"./it-ch": 117,
+	"./it-ch.js": 117,
+	"./it.js": 116,
+	"./ja": 118,
+	"./ja.js": 118,
+	"./jv": 119,
+	"./jv.js": 119,
+	"./ka": 120,
+	"./ka.js": 120,
+	"./kk": 121,
+	"./kk.js": 121,
+	"./km": 122,
+	"./km.js": 122,
+	"./kn": 123,
+	"./kn.js": 123,
+	"./ko": 124,
+	"./ko.js": 124,
+	"./ku": 125,
+	"./ku.js": 125,
+	"./ky": 126,
+	"./ky.js": 126,
+	"./lb": 127,
+	"./lb.js": 127,
+	"./lo": 128,
+	"./lo.js": 128,
+	"./lt": 129,
+	"./lt.js": 129,
+	"./lv": 130,
+	"./lv.js": 130,
+	"./me": 131,
+	"./me.js": 131,
+	"./mi": 132,
+	"./mi.js": 132,
+	"./mk": 133,
+	"./mk.js": 133,
+	"./ml": 134,
+	"./ml.js": 134,
+	"./mn": 135,
+	"./mn.js": 135,
+	"./mr": 136,
+	"./mr.js": 136,
+	"./ms": 137,
+	"./ms-my": 138,
+	"./ms-my.js": 138,
+	"./ms.js": 137,
+	"./mt": 139,
+	"./mt.js": 139,
+	"./my": 140,
+	"./my.js": 140,
+	"./nb": 141,
+	"./nb.js": 141,
+	"./ne": 142,
+	"./ne.js": 142,
+	"./nl": 143,
+	"./nl-be": 144,
+	"./nl-be.js": 144,
+	"./nl.js": 143,
+	"./nn": 145,
+	"./nn.js": 145,
+	"./oc-lnc": 146,
+	"./oc-lnc.js": 146,
+	"./pa-in": 147,
+	"./pa-in.js": 147,
+	"./pl": 148,
+	"./pl.js": 148,
+	"./pt": 149,
+	"./pt-br": 150,
+	"./pt-br.js": 150,
+	"./pt.js": 149,
+	"./ro": 151,
+	"./ro.js": 151,
+	"./ru": 152,
+	"./ru.js": 152,
+	"./sd": 153,
+	"./sd.js": 153,
+	"./se": 154,
+	"./se.js": 154,
+	"./si": 155,
+	"./si.js": 155,
+	"./sk": 156,
+	"./sk.js": 156,
+	"./sl": 157,
+	"./sl.js": 157,
+	"./sq": 158,
+	"./sq.js": 158,
+	"./sr": 159,
+	"./sr-cyrl": 160,
+	"./sr-cyrl.js": 160,
+	"./sr.js": 159,
+	"./ss": 161,
+	"./ss.js": 161,
+	"./sv": 162,
+	"./sv.js": 162,
+	"./sw": 163,
+	"./sw.js": 163,
+	"./ta": 164,
+	"./ta.js": 164,
+	"./te": 165,
+	"./te.js": 165,
+	"./tet": 166,
+	"./tet.js": 166,
+	"./tg": 167,
+	"./tg.js": 167,
+	"./th": 168,
+	"./th.js": 168,
+	"./tk": 169,
+	"./tk.js": 169,
+	"./tl-ph": 170,
+	"./tl-ph.js": 170,
+	"./tlh": 171,
+	"./tlh.js": 171,
+	"./tr": 172,
+	"./tr.js": 172,
+	"./tzl": 173,
+	"./tzl.js": 173,
+	"./tzm": 174,
+	"./tzm-latn": 175,
+	"./tzm-latn.js": 175,
+	"./tzm.js": 174,
+	"./ug-cn": 176,
+	"./ug-cn.js": 176,
+	"./uk": 177,
+	"./uk.js": 177,
+	"./ur": 178,
+	"./ur.js": 178,
+	"./uz": 179,
+	"./uz-latn": 180,
+	"./uz-latn.js": 180,
+	"./uz.js": 179,
+	"./vi": 181,
+	"./vi.js": 181,
+	"./x-pseudo": 182,
+	"./x-pseudo.js": 182,
+	"./yo": 183,
+	"./yo.js": 183,
+	"./zh-cn": 184,
+	"./zh-cn.js": 184,
+	"./zh-hk": 185,
+	"./zh-hk.js": 185,
+	"./zh-mo": 186,
+	"./zh-mo.js": 186,
+	"./zh-tw": 187,
+	"./zh-tw.js": 187
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	var id = map[req];
+	if(!(id + 1)) { // check for number or string
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return id;
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = 52;
 
 /***/ }),
-
-/***/ 51:
-/*!************************************************************!*\
-  !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
-  \************************************************************/
+/* 53 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/af.js ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/**
- * Copyright (c) 2014-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
+//! moment.js locale configuration
+//! locale : Afrikaans [af]
+//! author : Werner Mollentze : https://github.com/wernerm
 
-// This method of obtaining a reference to the global object needs to be
-// kept identical to the way it is obtained in runtime.js
-var g = (function() {
-  return this || (typeof self === "object" && self);
-})() || Function("return this")();
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
 
-// Use `getOwnPropertyNames` because not all browsers support calling
-// `hasOwnProperty` on the global `self` object in a worker. See #183.
-var hadRuntime = g.regeneratorRuntime &&
-  Object.getOwnPropertyNames(g).indexOf("regeneratorRuntime") >= 0;
+  //! moment.js locale configuration
 
-// Save the old regeneratorRuntime in case it needs to be restored later.
-var oldRuntime = hadRuntime && g.regeneratorRuntime;
+  var af = moment.defineLocale('af', {
+    months: 'Januarie_Februarie_Maart_April_Mei_Junie_Julie_Augustus_September_Oktober_November_Desember'.split(
+    '_'),
 
-// Force reevalutation of runtime.js.
-g.regeneratorRuntime = undefined;
+    monthsShort: 'Jan_Feb_Mrt_Apr_Mei_Jun_Jul_Aug_Sep_Okt_Nov_Des'.split('_'),
+    weekdays: 'Sondag_Maandag_Dinsdag_Woensdag_Donderdag_Vrydag_Saterdag'.split(
+    '_'),
 
-module.exports = __webpack_require__(/*! ./runtime */ 52);
+    weekdaysShort: 'Son_Maa_Din_Woe_Don_Vry_Sat'.split('_'),
+    weekdaysMin: 'So_Ma_Di_Wo_Do_Vr_Sa'.split('_'),
+    meridiemParse: /vm|nm/i,
+    isPM: function isPM(input) {
+      return /^nm$/i.test(input);
+    },
+    meridiem: function meridiem(hours, minutes, isLower) {
+      if (hours < 12) {
+        return isLower ? 'vm' : 'VM';
+      } else {
+        return isLower ? 'nm' : 'NM';
+      }
+    },
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd, D MMMM YYYY HH:mm' },
 
-if (hadRuntime) {
-  // Restore the original runtime.
-  g.regeneratorRuntime = oldRuntime;
-} else {
-  // Remove the global property added by runtime.js.
-  try {
-    delete g.regeneratorRuntime;
-  } catch(e) {
-    g.regeneratorRuntime = undefined;
-  }
-}
+    calendar: {
+      sameDay: '[Vandag om] LT',
+      nextDay: '[Môre om] LT',
+      nextWeek: 'dddd [om] LT',
+      lastDay: '[Gister om] LT',
+      lastWeek: '[Laas] dddd [om] LT',
+      sameElse: 'L' },
 
+    relativeTime: {
+      future: 'oor %s',
+      past: '%s gelede',
+      s: "'n paar sekondes",
+      ss: '%d sekondes',
+      m: "'n minuut",
+      mm: '%d minute',
+      h: "'n uur",
+      hh: '%d ure',
+      d: "'n dag",
+      dd: '%d dae',
+      M: "'n maand",
+      MM: '%d maande',
+      y: "'n jaar",
+      yy: '%d jaar' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(ste|de)/,
+    ordinal: function ordinal(number) {
+      return (
+        number + (
+        number === 1 || number === 8 || number >= 20 ? 'ste' : 'de'));
+      // Thanks to Joris Röling : https://github.com/jjupiter
+    },
+    week: {
+      dow: 1, // Maandag is die eerste dag van die week.
+      doy: 4 // Die week wat die 4de Januarie bevat is die eerste week van die jaar.
+    } });
+
+
+  return af;
+
+});
 
 /***/ }),
-
-/***/ 52:
-/*!*****************************************************!*\
-  !*** ./node_modules/regenerator-runtime/runtime.js ***!
-  \*****************************************************/
+/* 54 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ar.js ***!
+  \*************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-/**
- * Copyright (c) 2014-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
+//! moment.js locale configuration
+//! locale : Arabic [ar]
+//! author : Abdel Said: https://github.com/abdelsaid
+//! author : Ahmed Elkhatib
+//! author : forabi https://github.com/forabi
 
-!(function(global) {
-  "use strict";
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
 
-  var Op = Object.prototype;
-  var hasOwn = Op.hasOwnProperty;
-  var undefined; // More compressible than void 0.
-  var $Symbol = typeof Symbol === "function" ? Symbol : {};
-  var iteratorSymbol = $Symbol.iterator || "@@iterator";
-  var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
-  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+  //! moment.js locale configuration
 
-  var inModule = typeof module === "object";
-  var runtime = global.regeneratorRuntime;
-  if (runtime) {
-    if (inModule) {
-      // If regeneratorRuntime is defined globally and we're in a module,
-      // make the exports object identical to regeneratorRuntime.
-      module.exports = runtime;
-    }
-    // Don't bother evaluating the rest of this file if the runtime was
-    // already defined globally.
-    return;
-  }
+  var symbolMap = {
+    1: '١',
+    2: '٢',
+    3: '٣',
+    4: '٤',
+    5: '٥',
+    6: '٦',
+    7: '٧',
+    8: '٨',
+    9: '٩',
+    0: '٠' },
 
-  // Define the runtime globally (as expected by generated code) as either
-  // module.exports (if we're in a module) or a new, empty object.
-  runtime = global.regeneratorRuntime = inModule ? module.exports : {};
+  numberMap = {
+    '١': '1',
+    '٢': '2',
+    '٣': '3',
+    '٤': '4',
+    '٥': '5',
+    '٦': '6',
+    '٧': '7',
+    '٨': '8',
+    '٩': '9',
+    '٠': '0' },
 
-  function wrap(innerFn, outerFn, self, tryLocsList) {
-    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
-    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
-    var generator = Object.create(protoGenerator.prototype);
-    var context = new Context(tryLocsList || []);
+  pluralForm = function pluralForm(n) {
+    return n === 0 ?
+    0 :
+    n === 1 ?
+    1 :
+    n === 2 ?
+    2 :
+    n % 100 >= 3 && n % 100 <= 10 ?
+    3 :
+    n % 100 >= 11 ?
+    4 :
+    5;
+  },
+  plurals = {
+    s: [
+    'أقل من ثانية',
+    'ثانية واحدة',
+    ['ثانيتان', 'ثانيتين'],
+    '%d ثوان',
+    '%d ثانية',
+    '%d ثانية'],
 
-    // The ._invoke method unifies the implementations of the .next,
-    // .throw, and .return methods.
-    generator._invoke = makeInvokeMethod(innerFn, self, context);
+    m: [
+    'أقل من دقيقة',
+    'دقيقة واحدة',
+    ['دقيقتان', 'دقيقتين'],
+    '%d دقائق',
+    '%d دقيقة',
+    '%d دقيقة'],
 
-    return generator;
-  }
-  runtime.wrap = wrap;
+    h: [
+    'أقل من ساعة',
+    'ساعة واحدة',
+    ['ساعتان', 'ساعتين'],
+    '%d ساعات',
+    '%d ساعة',
+    '%d ساعة'],
 
-  // Try/catch helper to minimize deoptimizations. Returns a completion
-  // record like context.tryEntries[i].completion. This interface could
-  // have been (and was previously) designed to take a closure to be
-  // invoked without arguments, but in all the cases we care about we
-  // already have an existing method we want to call, so there's no need
-  // to create a new function object. We can even get away with assuming
-  // the method takes exactly one argument, since that happens to be true
-  // in every case, so we don't have to touch the arguments object. The
-  // only additional allocation required is the completion record, which
-  // has a stable shape and so hopefully should be cheap to allocate.
-  function tryCatch(fn, obj, arg) {
-    try {
-      return { type: "normal", arg: fn.call(obj, arg) };
-    } catch (err) {
-      return { type: "throw", arg: err };
-    }
-  }
+    d: [
+    'أقل من يوم',
+    'يوم واحد',
+    ['يومان', 'يومين'],
+    '%d أيام',
+    '%d يومًا',
+    '%d يوم'],
 
-  var GenStateSuspendedStart = "suspendedStart";
-  var GenStateSuspendedYield = "suspendedYield";
-  var GenStateExecuting = "executing";
-  var GenStateCompleted = "completed";
+    M: [
+    'أقل من شهر',
+    'شهر واحد',
+    ['شهران', 'شهرين'],
+    '%d أشهر',
+    '%d شهرا',
+    '%d شهر'],
 
-  // Returning this object from the innerFn has the same effect as
-  // breaking out of the dispatch switch statement.
-  var ContinueSentinel = {};
+    y: [
+    'أقل من عام',
+    'عام واحد',
+    ['عامان', 'عامين'],
+    '%d أعوام',
+    '%d عامًا',
+    '%d عام'] },
 
-  // Dummy constructor functions that we use as the .constructor and
-  // .constructor.prototype properties for functions that return Generator
-  // objects. For full spec compliance, you may wish to configure your
-  // minifier not to mangle the names of these two functions.
-  function Generator() {}
-  function GeneratorFunction() {}
-  function GeneratorFunctionPrototype() {}
 
-  // This is a polyfill for %IteratorPrototype% for environments that
-  // don't natively support it.
-  var IteratorPrototype = {};
-  IteratorPrototype[iteratorSymbol] = function () {
-    return this;
-  };
-
-  var getProto = Object.getPrototypeOf;
-  var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
-  if (NativeIteratorPrototype &&
-      NativeIteratorPrototype !== Op &&
-      hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
-    // This environment has a native %IteratorPrototype%; use it instead
-    // of the polyfill.
-    IteratorPrototype = NativeIteratorPrototype;
-  }
-
-  var Gp = GeneratorFunctionPrototype.prototype =
-    Generator.prototype = Object.create(IteratorPrototype);
-  GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
-  GeneratorFunctionPrototype.constructor = GeneratorFunction;
-  GeneratorFunctionPrototype[toStringTagSymbol] =
-    GeneratorFunction.displayName = "GeneratorFunction";
-
-  // Helper for defining the .next, .throw, and .return methods of the
-  // Iterator interface in terms of a single ._invoke method.
-  function defineIteratorMethods(prototype) {
-    ["next", "throw", "return"].forEach(function(method) {
-      prototype[method] = function(arg) {
-        return this._invoke(method, arg);
-      };
-    });
-  }
-
-  runtime.isGeneratorFunction = function(genFun) {
-    var ctor = typeof genFun === "function" && genFun.constructor;
-    return ctor
-      ? ctor === GeneratorFunction ||
-        // For the native GeneratorFunction constructor, the best we can
-        // do is to check its .name property.
-        (ctor.displayName || ctor.name) === "GeneratorFunction"
-      : false;
-  };
-
-  runtime.mark = function(genFun) {
-    if (Object.setPrototypeOf) {
-      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
-    } else {
-      genFun.__proto__ = GeneratorFunctionPrototype;
-      if (!(toStringTagSymbol in genFun)) {
-        genFun[toStringTagSymbol] = "GeneratorFunction";
+  pluralize = function pluralize(u) {
+    return function (number, withoutSuffix, string, isFuture) {
+      var f = pluralForm(number),
+      str = plurals[u][pluralForm(number)];
+      if (f === 2) {
+        str = str[withoutSuffix ? 0 : 1];
       }
-    }
-    genFun.prototype = Object.create(Gp);
-    return genFun;
-  };
+      return str.replace(/%d/i, number);
+    };
+  },
+  months = [
+  'يناير',
+  'فبراير',
+  'مارس',
+  'أبريل',
+  'مايو',
+  'يونيو',
+  'يوليو',
+  'أغسطس',
+  'سبتمبر',
+  'أكتوبر',
+  'نوفمبر',
+  'ديسمبر'];
 
-  // Within the body of any async function, `await x` is transformed to
-  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
-  // `hasOwn.call(value, "__await")` to determine if the yielded value is
-  // meant to be awaited.
-  runtime.awrap = function(arg) {
-    return { __await: arg };
-  };
 
-  function AsyncIterator(generator) {
-    function invoke(method, arg, resolve, reject) {
-      var record = tryCatch(generator[method], generator, arg);
-      if (record.type === "throw") {
-        reject(record.arg);
+  var ar = moment.defineLocale('ar', {
+    months: months,
+    monthsShort: months,
+    weekdays: 'الأحد_الإثنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت'.split('_'),
+    weekdaysShort: 'أحد_إثنين_ثلاثاء_أربعاء_خميس_جمعة_سبت'.split('_'),
+    weekdaysMin: 'ح_ن_ث_ر_خ_ج_س'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: "D/\u200FM/\u200FYYYY",
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd D MMMM YYYY HH:mm' },
+
+    meridiemParse: /ص|م/,
+    isPM: function isPM(input) {
+      return 'م' === input;
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 12) {
+        return 'ص';
       } else {
-        var result = record.arg;
-        var value = result.value;
-        if (value &&
-            typeof value === "object" &&
-            hasOwn.call(value, "__await")) {
-          return Promise.resolve(value.__await).then(function(value) {
-            invoke("next", value, resolve, reject);
-          }, function(err) {
-            invoke("throw", err, resolve, reject);
-          });
-        }
-
-        return Promise.resolve(value).then(function(unwrapped) {
-          // When a yielded Promise is resolved, its final value becomes
-          // the .value of the Promise<{value,done}> result for the
-          // current iteration.
-          result.value = unwrapped;
-          resolve(result);
-        }, function(error) {
-          // If a rejected Promise was yielded, throw the rejection back
-          // into the async generator function so it can be handled there.
-          return invoke("throw", error, resolve, reject);
-        });
+        return 'م';
       }
-    }
+    },
+    calendar: {
+      sameDay: '[اليوم عند الساعة] LT',
+      nextDay: '[غدًا عند الساعة] LT',
+      nextWeek: 'dddd [عند الساعة] LT',
+      lastDay: '[أمس عند الساعة] LT',
+      lastWeek: 'dddd [عند الساعة] LT',
+      sameElse: 'L' },
 
-    var previousPromise;
+    relativeTime: {
+      future: 'بعد %s',
+      past: 'منذ %s',
+      s: pluralize('s'),
+      ss: pluralize('s'),
+      m: pluralize('m'),
+      mm: pluralize('m'),
+      h: pluralize('h'),
+      hh: pluralize('h'),
+      d: pluralize('d'),
+      dd: pluralize('d'),
+      M: pluralize('M'),
+      MM: pluralize('M'),
+      y: pluralize('y'),
+      yy: pluralize('y') },
 
-    function enqueue(method, arg) {
-      function callInvokeWithMethodAndArg() {
-        return new Promise(function(resolve, reject) {
-          invoke(method, arg, resolve, reject);
-        });
+    preparse: function preparse(string) {
+      return string.
+      replace(/[١٢٣٤٥٦٧٨٩٠]/g, function (match) {
+        return numberMap[match];
+      }).
+      replace(/،/g, ',');
+    },
+    postformat: function postformat(string) {
+      return string.
+      replace(/\d/g, function (match) {
+        return symbolMap[match];
+      }).
+      replace(/,/g, '،');
+    },
+    week: {
+      dow: 6, // Saturday is the first day of the week.
+      doy: 12 // The week that contains Jan 12th is the first week of the year.
+    } });
+
+
+  return ar;
+
+});
+
+/***/ }),
+/* 55 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ar-dz.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Arabic (Algeria) [ar-dz]
+//! author : Amine Roukh: https://github.com/Amine27
+//! author : Abdel Said: https://github.com/abdelsaid
+//! author : Ahmed Elkhatib
+//! author : forabi https://github.com/forabi
+//! author : Noureddine LOUAHEDJ : https://github.com/noureddinem
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var pluralForm = function pluralForm(n) {
+    return n === 0 ?
+    0 :
+    n === 1 ?
+    1 :
+    n === 2 ?
+    2 :
+    n % 100 >= 3 && n % 100 <= 10 ?
+    3 :
+    n % 100 >= 11 ?
+    4 :
+    5;
+  },
+  plurals = {
+    s: [
+    'أقل من ثانية',
+    'ثانية واحدة',
+    ['ثانيتان', 'ثانيتين'],
+    '%d ثوان',
+    '%d ثانية',
+    '%d ثانية'],
+
+    m: [
+    'أقل من دقيقة',
+    'دقيقة واحدة',
+    ['دقيقتان', 'دقيقتين'],
+    '%d دقائق',
+    '%d دقيقة',
+    '%d دقيقة'],
+
+    h: [
+    'أقل من ساعة',
+    'ساعة واحدة',
+    ['ساعتان', 'ساعتين'],
+    '%d ساعات',
+    '%d ساعة',
+    '%d ساعة'],
+
+    d: [
+    'أقل من يوم',
+    'يوم واحد',
+    ['يومان', 'يومين'],
+    '%d أيام',
+    '%d يومًا',
+    '%d يوم'],
+
+    M: [
+    'أقل من شهر',
+    'شهر واحد',
+    ['شهران', 'شهرين'],
+    '%d أشهر',
+    '%d شهرا',
+    '%d شهر'],
+
+    y: [
+    'أقل من عام',
+    'عام واحد',
+    ['عامان', 'عامين'],
+    '%d أعوام',
+    '%d عامًا',
+    '%d عام'] },
+
+
+  pluralize = function pluralize(u) {
+    return function (number, withoutSuffix, string, isFuture) {
+      var f = pluralForm(number),
+      str = plurals[u][pluralForm(number)];
+      if (f === 2) {
+        str = str[withoutSuffix ? 0 : 1];
       }
-
-      return previousPromise =
-        // If enqueue has been called before, then we want to wait until
-        // all previous Promises have been resolved before calling invoke,
-        // so that results are always delivered in the correct order. If
-        // enqueue has not been called before, then it is important to
-        // call invoke immediately, without waiting on a callback to fire,
-        // so that the async generator function has the opportunity to do
-        // any necessary setup in a predictable way. This predictability
-        // is why the Promise constructor synchronously invokes its
-        // executor callback, and why async functions synchronously
-        // execute code before the first await. Since we implement simple
-        // async functions in terms of async generators, it is especially
-        // important to get this right, even though it requires care.
-        previousPromise ? previousPromise.then(
-          callInvokeWithMethodAndArg,
-          // Avoid propagating failures to Promises returned by later
-          // invocations of the iterator.
-          callInvokeWithMethodAndArg
-        ) : callInvokeWithMethodAndArg();
-    }
-
-    // Define the unified helper method that is used to implement .next,
-    // .throw, and .return (see defineIteratorMethods).
-    this._invoke = enqueue;
-  }
-
-  defineIteratorMethods(AsyncIterator.prototype);
-  AsyncIterator.prototype[asyncIteratorSymbol] = function () {
-    return this;
-  };
-  runtime.AsyncIterator = AsyncIterator;
-
-  // Note that simple async functions are implemented on top of
-  // AsyncIterator objects; they just return a Promise for the value of
-  // the final result produced by the iterator.
-  runtime.async = function(innerFn, outerFn, self, tryLocsList) {
-    var iter = new AsyncIterator(
-      wrap(innerFn, outerFn, self, tryLocsList)
-    );
-
-    return runtime.isGeneratorFunction(outerFn)
-      ? iter // If outerFn is a generator, return the full iterator.
-      : iter.next().then(function(result) {
-          return result.done ? result.value : iter.next();
-        });
-  };
-
-  function makeInvokeMethod(innerFn, self, context) {
-    var state = GenStateSuspendedStart;
-
-    return function invoke(method, arg) {
-      if (state === GenStateExecuting) {
-        throw new Error("Generator is already running");
-      }
-
-      if (state === GenStateCompleted) {
-        if (method === "throw") {
-          throw arg;
-        }
-
-        // Be forgiving, per 25.3.3.3.3 of the spec:
-        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
-        return doneResult();
-      }
-
-      context.method = method;
-      context.arg = arg;
-
-      while (true) {
-        var delegate = context.delegate;
-        if (delegate) {
-          var delegateResult = maybeInvokeDelegate(delegate, context);
-          if (delegateResult) {
-            if (delegateResult === ContinueSentinel) continue;
-            return delegateResult;
-          }
-        }
-
-        if (context.method === "next") {
-          // Setting context._sent for legacy support of Babel's
-          // function.sent implementation.
-          context.sent = context._sent = context.arg;
-
-        } else if (context.method === "throw") {
-          if (state === GenStateSuspendedStart) {
-            state = GenStateCompleted;
-            throw context.arg;
-          }
-
-          context.dispatchException(context.arg);
-
-        } else if (context.method === "return") {
-          context.abrupt("return", context.arg);
-        }
-
-        state = GenStateExecuting;
-
-        var record = tryCatch(innerFn, self, context);
-        if (record.type === "normal") {
-          // If an exception is thrown from innerFn, we leave state ===
-          // GenStateExecuting and loop back for another invocation.
-          state = context.done
-            ? GenStateCompleted
-            : GenStateSuspendedYield;
-
-          if (record.arg === ContinueSentinel) {
-            continue;
-          }
-
-          return {
-            value: record.arg,
-            done: context.done
-          };
-
-        } else if (record.type === "throw") {
-          state = GenStateCompleted;
-          // Dispatch the exception by looping back around to the
-          // context.dispatchException(context.arg) call above.
-          context.method = "throw";
-          context.arg = record.arg;
-        }
-      }
+      return str.replace(/%d/i, number);
     };
+  },
+  months = [
+  'جانفي',
+  'فيفري',
+  'مارس',
+  'أفريل',
+  'ماي',
+  'جوان',
+  'جويلية',
+  'أوت',
+  'سبتمبر',
+  'أكتوبر',
+  'نوفمبر',
+  'ديسمبر'];
+
+
+  var arDz = moment.defineLocale('ar-dz', {
+    months: months,
+    monthsShort: months,
+    weekdays: 'الأحد_الإثنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت'.split('_'),
+    weekdaysShort: 'أحد_إثنين_ثلاثاء_أربعاء_خميس_جمعة_سبت'.split('_'),
+    weekdaysMin: 'ح_ن_ث_ر_خ_ج_س'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: "D/\u200FM/\u200FYYYY",
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd D MMMM YYYY HH:mm' },
+
+    meridiemParse: /ص|م/,
+    isPM: function isPM(input) {
+      return 'م' === input;
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 12) {
+        return 'ص';
+      } else {
+        return 'م';
+      }
+    },
+    calendar: {
+      sameDay: '[اليوم عند الساعة] LT',
+      nextDay: '[غدًا عند الساعة] LT',
+      nextWeek: 'dddd [عند الساعة] LT',
+      lastDay: '[أمس عند الساعة] LT',
+      lastWeek: 'dddd [عند الساعة] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'بعد %s',
+      past: 'منذ %s',
+      s: pluralize('s'),
+      ss: pluralize('s'),
+      m: pluralize('m'),
+      mm: pluralize('m'),
+      h: pluralize('h'),
+      hh: pluralize('h'),
+      d: pluralize('d'),
+      dd: pluralize('d'),
+      M: pluralize('M'),
+      MM: pluralize('M'),
+      y: pluralize('y'),
+      yy: pluralize('y') },
+
+    postformat: function postformat(string) {
+      return string.replace(/,/g, '،');
+    },
+    week: {
+      dow: 0, // Sunday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return arDz;
+
+});
+
+/***/ }),
+/* 56 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ar-kw.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Arabic (Kuwait) [ar-kw]
+//! author : Nusret Parlak: https://github.com/nusretparlak
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var arKw = moment.defineLocale('ar-kw', {
+    months: 'يناير_فبراير_مارس_أبريل_ماي_يونيو_يوليوز_غشت_شتنبر_أكتوبر_نونبر_دجنبر'.split(
+    '_'),
+
+    monthsShort: 'يناير_فبراير_مارس_أبريل_ماي_يونيو_يوليوز_غشت_شتنبر_أكتوبر_نونبر_دجنبر'.split(
+    '_'),
+
+    weekdays: 'الأحد_الإتنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت'.split('_'),
+    weekdaysShort: 'احد_اتنين_ثلاثاء_اربعاء_خميس_جمعة_سبت'.split('_'),
+    weekdaysMin: 'ح_ن_ث_ر_خ_ج_س'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[اليوم على الساعة] LT',
+      nextDay: '[غدا على الساعة] LT',
+      nextWeek: 'dddd [على الساعة] LT',
+      lastDay: '[أمس على الساعة] LT',
+      lastWeek: 'dddd [على الساعة] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'في %s',
+      past: 'منذ %s',
+      s: 'ثوان',
+      ss: '%d ثانية',
+      m: 'دقيقة',
+      mm: '%d دقائق',
+      h: 'ساعة',
+      hh: '%d ساعات',
+      d: 'يوم',
+      dd: '%d أيام',
+      M: 'شهر',
+      MM: '%d أشهر',
+      y: 'سنة',
+      yy: '%d سنوات' },
+
+    week: {
+      dow: 0, // Sunday is the first day of the week.
+      doy: 12 // The week that contains Jan 12th is the first week of the year.
+    } });
+
+
+  return arKw;
+
+});
+
+/***/ }),
+/* 57 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ar-ly.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Arabic (Lybia) [ar-ly]
+//! author : Ali Hmer: https://github.com/kikoanis
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var symbolMap = {
+    1: '1',
+    2: '2',
+    3: '3',
+    4: '4',
+    5: '5',
+    6: '6',
+    7: '7',
+    8: '8',
+    9: '9',
+    0: '0' },
+
+  pluralForm = function pluralForm(n) {
+    return n === 0 ?
+    0 :
+    n === 1 ?
+    1 :
+    n === 2 ?
+    2 :
+    n % 100 >= 3 && n % 100 <= 10 ?
+    3 :
+    n % 100 >= 11 ?
+    4 :
+    5;
+  },
+  plurals = {
+    s: [
+    'أقل من ثانية',
+    'ثانية واحدة',
+    ['ثانيتان', 'ثانيتين'],
+    '%d ثوان',
+    '%d ثانية',
+    '%d ثانية'],
+
+    m: [
+    'أقل من دقيقة',
+    'دقيقة واحدة',
+    ['دقيقتان', 'دقيقتين'],
+    '%d دقائق',
+    '%d دقيقة',
+    '%d دقيقة'],
+
+    h: [
+    'أقل من ساعة',
+    'ساعة واحدة',
+    ['ساعتان', 'ساعتين'],
+    '%d ساعات',
+    '%d ساعة',
+    '%d ساعة'],
+
+    d: [
+    'أقل من يوم',
+    'يوم واحد',
+    ['يومان', 'يومين'],
+    '%d أيام',
+    '%d يومًا',
+    '%d يوم'],
+
+    M: [
+    'أقل من شهر',
+    'شهر واحد',
+    ['شهران', 'شهرين'],
+    '%d أشهر',
+    '%d شهرا',
+    '%d شهر'],
+
+    y: [
+    'أقل من عام',
+    'عام واحد',
+    ['عامان', 'عامين'],
+    '%d أعوام',
+    '%d عامًا',
+    '%d عام'] },
+
+
+  pluralize = function pluralize(u) {
+    return function (number, withoutSuffix, string, isFuture) {
+      var f = pluralForm(number),
+      str = plurals[u][pluralForm(number)];
+      if (f === 2) {
+        str = str[withoutSuffix ? 0 : 1];
+      }
+      return str.replace(/%d/i, number);
+    };
+  },
+  months = [
+  'يناير',
+  'فبراير',
+  'مارس',
+  'أبريل',
+  'مايو',
+  'يونيو',
+  'يوليو',
+  'أغسطس',
+  'سبتمبر',
+  'أكتوبر',
+  'نوفمبر',
+  'ديسمبر'];
+
+
+  var arLy = moment.defineLocale('ar-ly', {
+    months: months,
+    monthsShort: months,
+    weekdays: 'الأحد_الإثنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت'.split('_'),
+    weekdaysShort: 'أحد_إثنين_ثلاثاء_أربعاء_خميس_جمعة_سبت'.split('_'),
+    weekdaysMin: 'ح_ن_ث_ر_خ_ج_س'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: "D/\u200FM/\u200FYYYY",
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd D MMMM YYYY HH:mm' },
+
+    meridiemParse: /ص|م/,
+    isPM: function isPM(input) {
+      return 'م' === input;
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 12) {
+        return 'ص';
+      } else {
+        return 'م';
+      }
+    },
+    calendar: {
+      sameDay: '[اليوم عند الساعة] LT',
+      nextDay: '[غدًا عند الساعة] LT',
+      nextWeek: 'dddd [عند الساعة] LT',
+      lastDay: '[أمس عند الساعة] LT',
+      lastWeek: 'dddd [عند الساعة] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'بعد %s',
+      past: 'منذ %s',
+      s: pluralize('s'),
+      ss: pluralize('s'),
+      m: pluralize('m'),
+      mm: pluralize('m'),
+      h: pluralize('h'),
+      hh: pluralize('h'),
+      d: pluralize('d'),
+      dd: pluralize('d'),
+      M: pluralize('M'),
+      MM: pluralize('M'),
+      y: pluralize('y'),
+      yy: pluralize('y') },
+
+    preparse: function preparse(string) {
+      return string.replace(/،/g, ',');
+    },
+    postformat: function postformat(string) {
+      return string.
+      replace(/\d/g, function (match) {
+        return symbolMap[match];
+      }).
+      replace(/,/g, '،');
+    },
+    week: {
+      dow: 6, // Saturday is the first day of the week.
+      doy: 12 // The week that contains Jan 12th is the first week of the year.
+    } });
+
+
+  return arLy;
+
+});
+
+/***/ }),
+/* 58 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ar-ma.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Arabic (Morocco) [ar-ma]
+//! author : ElFadili Yassine : https://github.com/ElFadiliY
+//! author : Abdel Said : https://github.com/abdelsaid
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var arMa = moment.defineLocale('ar-ma', {
+    months: 'يناير_فبراير_مارس_أبريل_ماي_يونيو_يوليوز_غشت_شتنبر_أكتوبر_نونبر_دجنبر'.split(
+    '_'),
+
+    monthsShort: 'يناير_فبراير_مارس_أبريل_ماي_يونيو_يوليوز_غشت_شتنبر_أكتوبر_نونبر_دجنبر'.split(
+    '_'),
+
+    weekdays: 'الأحد_الإثنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت'.split('_'),
+    weekdaysShort: 'احد_اثنين_ثلاثاء_اربعاء_خميس_جمعة_سبت'.split('_'),
+    weekdaysMin: 'ح_ن_ث_ر_خ_ج_س'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[اليوم على الساعة] LT',
+      nextDay: '[غدا على الساعة] LT',
+      nextWeek: 'dddd [على الساعة] LT',
+      lastDay: '[أمس على الساعة] LT',
+      lastWeek: 'dddd [على الساعة] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'في %s',
+      past: 'منذ %s',
+      s: 'ثوان',
+      ss: '%d ثانية',
+      m: 'دقيقة',
+      mm: '%d دقائق',
+      h: 'ساعة',
+      hh: '%d ساعات',
+      d: 'يوم',
+      dd: '%d أيام',
+      M: 'شهر',
+      MM: '%d أشهر',
+      y: 'سنة',
+      yy: '%d سنوات' },
+
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return arMa;
+
+});
+
+/***/ }),
+/* 59 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ar-sa.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Arabic (Saudi Arabia) [ar-sa]
+//! author : Suhail Alkowaileet : https://github.com/xsoh
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var symbolMap = {
+    1: '١',
+    2: '٢',
+    3: '٣',
+    4: '٤',
+    5: '٥',
+    6: '٦',
+    7: '٧',
+    8: '٨',
+    9: '٩',
+    0: '٠' },
+
+  numberMap = {
+    '١': '1',
+    '٢': '2',
+    '٣': '3',
+    '٤': '4',
+    '٥': '5',
+    '٦': '6',
+    '٧': '7',
+    '٨': '8',
+    '٩': '9',
+    '٠': '0' };
+
+
+  var arSa = moment.defineLocale('ar-sa', {
+    months: 'يناير_فبراير_مارس_أبريل_مايو_يونيو_يوليو_أغسطس_سبتمبر_أكتوبر_نوفمبر_ديسمبر'.split(
+    '_'),
+
+    monthsShort: 'يناير_فبراير_مارس_أبريل_مايو_يونيو_يوليو_أغسطس_سبتمبر_أكتوبر_نوفمبر_ديسمبر'.split(
+    '_'),
+
+    weekdays: 'الأحد_الإثنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت'.split('_'),
+    weekdaysShort: 'أحد_إثنين_ثلاثاء_أربعاء_خميس_جمعة_سبت'.split('_'),
+    weekdaysMin: 'ح_ن_ث_ر_خ_ج_س'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd D MMMM YYYY HH:mm' },
+
+    meridiemParse: /ص|م/,
+    isPM: function isPM(input) {
+      return 'م' === input;
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 12) {
+        return 'ص';
+      } else {
+        return 'م';
+      }
+    },
+    calendar: {
+      sameDay: '[اليوم على الساعة] LT',
+      nextDay: '[غدا على الساعة] LT',
+      nextWeek: 'dddd [على الساعة] LT',
+      lastDay: '[أمس على الساعة] LT',
+      lastWeek: 'dddd [على الساعة] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'في %s',
+      past: 'منذ %s',
+      s: 'ثوان',
+      ss: '%d ثانية',
+      m: 'دقيقة',
+      mm: '%d دقائق',
+      h: 'ساعة',
+      hh: '%d ساعات',
+      d: 'يوم',
+      dd: '%d أيام',
+      M: 'شهر',
+      MM: '%d أشهر',
+      y: 'سنة',
+      yy: '%d سنوات' },
+
+    preparse: function preparse(string) {
+      return string.
+      replace(/[١٢٣٤٥٦٧٨٩٠]/g, function (match) {
+        return numberMap[match];
+      }).
+      replace(/،/g, ',');
+    },
+    postformat: function postformat(string) {
+      return string.
+      replace(/\d/g, function (match) {
+        return symbolMap[match];
+      }).
+      replace(/,/g, '،');
+    },
+    week: {
+      dow: 0, // Sunday is the first day of the week.
+      doy: 6 // The week that contains Jan 6th is the first week of the year.
+    } });
+
+
+  return arSa;
+
+});
+
+/***/ }),
+/* 60 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ar-tn.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale  :  Arabic (Tunisia) [ar-tn]
+//! author : Nader Toukabri : https://github.com/naderio
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var arTn = moment.defineLocale('ar-tn', {
+    months: 'جانفي_فيفري_مارس_أفريل_ماي_جوان_جويلية_أوت_سبتمبر_أكتوبر_نوفمبر_ديسمبر'.split(
+    '_'),
+
+    monthsShort: 'جانفي_فيفري_مارس_أفريل_ماي_جوان_جويلية_أوت_سبتمبر_أكتوبر_نوفمبر_ديسمبر'.split(
+    '_'),
+
+    weekdays: 'الأحد_الإثنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت'.split('_'),
+    weekdaysShort: 'أحد_إثنين_ثلاثاء_أربعاء_خميس_جمعة_سبت'.split('_'),
+    weekdaysMin: 'ح_ن_ث_ر_خ_ج_س'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[اليوم على الساعة] LT',
+      nextDay: '[غدا على الساعة] LT',
+      nextWeek: 'dddd [على الساعة] LT',
+      lastDay: '[أمس على الساعة] LT',
+      lastWeek: 'dddd [على الساعة] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'في %s',
+      past: 'منذ %s',
+      s: 'ثوان',
+      ss: '%d ثانية',
+      m: 'دقيقة',
+      mm: '%d دقائق',
+      h: 'ساعة',
+      hh: '%d ساعات',
+      d: 'يوم',
+      dd: '%d أيام',
+      M: 'شهر',
+      MM: '%d أشهر',
+      y: 'سنة',
+      yy: '%d سنوات' },
+
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return arTn;
+
+});
+
+/***/ }),
+/* 61 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/az.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Azerbaijani [az]
+//! author : topchiyev : https://github.com/topchiyev
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var suffixes = {
+    1: '-inci',
+    5: '-inci',
+    8: '-inci',
+    70: '-inci',
+    80: '-inci',
+    2: '-nci',
+    7: '-nci',
+    20: '-nci',
+    50: '-nci',
+    3: '-üncü',
+    4: '-üncü',
+    100: '-üncü',
+    6: '-ncı',
+    9: '-uncu',
+    10: '-uncu',
+    30: '-uncu',
+    60: '-ıncı',
+    90: '-ıncı' };
+
+
+  var az = moment.defineLocale('az', {
+    months: 'yanvar_fevral_mart_aprel_may_iyun_iyul_avqust_sentyabr_oktyabr_noyabr_dekabr'.split(
+    '_'),
+
+    monthsShort: 'yan_fev_mar_apr_may_iyn_iyl_avq_sen_okt_noy_dek'.split('_'),
+    weekdays: 'Bazar_Bazar ertəsi_Çərşənbə axşamı_Çərşənbə_Cümə axşamı_Cümə_Şənbə'.split(
+    '_'),
+
+    weekdaysShort: 'Baz_BzE_ÇAx_Çər_CAx_Cüm_Şən'.split('_'),
+    weekdaysMin: 'Bz_BE_ÇA_Çə_CA_Cü_Şə'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd, D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[bugün saat] LT',
+      nextDay: '[sabah saat] LT',
+      nextWeek: '[gələn həftə] dddd [saat] LT',
+      lastDay: '[dünən] LT',
+      lastWeek: '[keçən həftə] dddd [saat] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s sonra',
+      past: '%s əvvəl',
+      s: 'bir neçə saniyə',
+      ss: '%d saniyə',
+      m: 'bir dəqiqə',
+      mm: '%d dəqiqə',
+      h: 'bir saat',
+      hh: '%d saat',
+      d: 'bir gün',
+      dd: '%d gün',
+      M: 'bir ay',
+      MM: '%d ay',
+      y: 'bir il',
+      yy: '%d il' },
+
+    meridiemParse: /gecə|səhər|gündüz|axşam/,
+    isPM: function isPM(input) {
+      return /^(gündüz|axşam)$/.test(input);
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 4) {
+        return 'gecə';
+      } else if (hour < 12) {
+        return 'səhər';
+      } else if (hour < 17) {
+        return 'gündüz';
+      } else {
+        return 'axşam';
+      }
+    },
+    dayOfMonthOrdinalParse: /\d{1,2}-(ıncı|inci|nci|üncü|ncı|uncu)/,
+    ordinal: function ordinal(number) {
+      if (number === 0) {
+        // special case for zero
+        return number + '-ıncı';
+      }
+      var a = number % 10,
+      b = number % 100 - a,
+      c = number >= 100 ? 100 : null;
+      return number + (suffixes[a] || suffixes[b] || suffixes[c]);
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 7 // The week that contains Jan 7th is the first week of the year.
+    } });
+
+
+  return az;
+
+});
+
+/***/ }),
+/* 62 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/be.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Belarusian [be]
+//! author : Dmitry Demidov : https://github.com/demidov91
+//! author: Praleska: http://praleska.pro/
+//! Author : Menelion Elensúle : https://github.com/Oire
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  function plural(word, num) {
+    var forms = word.split('_');
+    return num % 10 === 1 && num % 100 !== 11 ?
+    forms[0] :
+    num % 10 >= 2 && num % 10 <= 4 && (num % 100 < 10 || num % 100 >= 20) ?
+    forms[1] :
+    forms[2];
+  }
+  function relativeTimeWithPlural(number, withoutSuffix, key) {
+    var format = {
+      ss: withoutSuffix ? 'секунда_секунды_секунд' : 'секунду_секунды_секунд',
+      mm: withoutSuffix ? 'хвіліна_хвіліны_хвілін' : 'хвіліну_хвіліны_хвілін',
+      hh: withoutSuffix ? 'гадзіна_гадзіны_гадзін' : 'гадзіну_гадзіны_гадзін',
+      dd: 'дзень_дні_дзён',
+      MM: 'месяц_месяцы_месяцаў',
+      yy: 'год_гады_гадоў' };
+
+    if (key === 'm') {
+      return withoutSuffix ? 'хвіліна' : 'хвіліну';
+    } else if (key === 'h') {
+      return withoutSuffix ? 'гадзіна' : 'гадзіну';
+    } else {
+      return number + ' ' + plural(format[key], +number);
+    }
   }
 
-  // Call delegate.iterator[context.method](context.arg) and handle the
-  // result, either by returning a { value, done } result from the
-  // delegate iterator, or by modifying context.method and context.arg,
-  // setting context.delegate to null, and returning the ContinueSentinel.
-  function maybeInvokeDelegate(delegate, context) {
-    var method = delegate.iterator[context.method];
-    if (method === undefined) {
-      // A .throw or .return when the delegate iterator has no .throw
-      // method always terminates the yield* loop.
-      context.delegate = null;
+  var be = moment.defineLocale('be', {
+    months: {
+      format: 'студзеня_лютага_сакавіка_красавіка_траўня_чэрвеня_ліпеня_жніўня_верасня_кастрычніка_лістапада_снежня'.split(
+      '_'),
 
-      if (context.method === "throw") {
-        if (delegate.iterator.return) {
-          // If the delegate iterator has a return method, give it a
-          // chance to clean up.
-          context.method = "return";
-          context.arg = undefined;
-          maybeInvokeDelegate(delegate, context);
+      standalone: 'студзень_люты_сакавік_красавік_травень_чэрвень_ліпень_жнівень_верасень_кастрычнік_лістапад_снежань'.split(
+      '_') },
 
-          if (context.method === "throw") {
-            // If maybeInvokeDelegate(context) changed context.method from
-            // "return" to "throw", let that override the TypeError below.
-            return ContinueSentinel;
-          }
+
+    monthsShort: 'студ_лют_сак_крас_трав_чэрв_ліп_жнів_вер_каст_ліст_снеж'.split(
+    '_'),
+
+    weekdays: {
+      format: 'нядзелю_панядзелак_аўторак_сераду_чацвер_пятніцу_суботу'.split(
+      '_'),
+
+      standalone: 'нядзеля_панядзелак_аўторак_серада_чацвер_пятніца_субота'.split(
+      '_'),
+
+      isFormat: /\[ ?[Ууў] ?(?:мінулую|наступную)? ?\] ?dddd/ },
+
+    weekdaysShort: 'нд_пн_ат_ср_чц_пт_сб'.split('_'),
+    weekdaysMin: 'нд_пн_ат_ср_чц_пт_сб'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'D MMMM YYYY г.',
+      LLL: 'D MMMM YYYY г., HH:mm',
+      LLLL: 'dddd, D MMMM YYYY г., HH:mm' },
+
+    calendar: {
+      sameDay: '[Сёння ў] LT',
+      nextDay: '[Заўтра ў] LT',
+      lastDay: '[Учора ў] LT',
+      nextWeek: function nextWeek() {
+        return '[У] dddd [ў] LT';
+      },
+      lastWeek: function lastWeek() {
+        switch (this.day()) {
+          case 0:
+          case 3:
+          case 5:
+          case 6:
+            return '[У мінулую] dddd [ў] LT';
+          case 1:
+          case 2:
+          case 4:
+            return '[У мінулы] dddd [ў] LT';}
+
+      },
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'праз %s',
+      past: '%s таму',
+      s: 'некалькі секунд',
+      m: relativeTimeWithPlural,
+      mm: relativeTimeWithPlural,
+      h: relativeTimeWithPlural,
+      hh: relativeTimeWithPlural,
+      d: 'дзень',
+      dd: relativeTimeWithPlural,
+      M: 'месяц',
+      MM: relativeTimeWithPlural,
+      y: 'год',
+      yy: relativeTimeWithPlural },
+
+    meridiemParse: /ночы|раніцы|дня|вечара/,
+    isPM: function isPM(input) {
+      return /^(дня|вечара)$/.test(input);
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 4) {
+        return 'ночы';
+      } else if (hour < 12) {
+        return 'раніцы';
+      } else if (hour < 17) {
+        return 'дня';
+      } else {
+        return 'вечара';
+      }
+    },
+    dayOfMonthOrdinalParse: /\d{1,2}-(і|ы|га)/,
+    ordinal: function ordinal(number, period) {
+      switch (period) {
+        case 'M':
+        case 'd':
+        case 'DDD':
+        case 'w':
+        case 'W':
+          return (number % 10 === 2 || number % 10 === 3) &&
+          number % 100 !== 12 &&
+          number % 100 !== 13 ?
+          number + '-і' :
+          number + '-ы';
+        case 'D':
+          return number + '-га';
+        default:
+          return number;}
+
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 7 // The week that contains Jan 7th is the first week of the year.
+    } });
+
+
+  return be;
+
+});
+
+/***/ }),
+/* 63 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/bg.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Bulgarian [bg]
+//! author : Krasen Borisov : https://github.com/kraz
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var bg = moment.defineLocale('bg', {
+    months: 'януари_февруари_март_април_май_юни_юли_август_септември_октомври_ноември_декември'.split(
+    '_'),
+
+    monthsShort: 'яну_фев_мар_апр_май_юни_юли_авг_сеп_окт_ное_дек'.split('_'),
+    weekdays: 'неделя_понеделник_вторник_сряда_четвъртък_петък_събота'.split(
+    '_'),
+
+    weekdaysShort: 'нед_пон_вто_сря_чет_пет_съб'.split('_'),
+    weekdaysMin: 'нд_пн_вт_ср_чт_пт_сб'.split('_'),
+    longDateFormat: {
+      LT: 'H:mm',
+      LTS: 'H:mm:ss',
+      L: 'D.MM.YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY H:mm',
+      LLLL: 'dddd, D MMMM YYYY H:mm' },
+
+    calendar: {
+      sameDay: '[Днес в] LT',
+      nextDay: '[Утре в] LT',
+      nextWeek: 'dddd [в] LT',
+      lastDay: '[Вчера в] LT',
+      lastWeek: function lastWeek() {
+        switch (this.day()) {
+          case 0:
+          case 3:
+          case 6:
+            return '[Миналата] dddd [в] LT';
+          case 1:
+          case 2:
+          case 4:
+          case 5:
+            return '[Миналия] dddd [в] LT';}
+
+      },
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'след %s',
+      past: 'преди %s',
+      s: 'няколко секунди',
+      ss: '%d секунди',
+      m: 'минута',
+      mm: '%d минути',
+      h: 'час',
+      hh: '%d часа',
+      d: 'ден',
+      dd: '%d дена',
+      w: 'седмица',
+      ww: '%d седмици',
+      M: 'месец',
+      MM: '%d месеца',
+      y: 'година',
+      yy: '%d години' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}-(ев|ен|ти|ви|ри|ми)/,
+    ordinal: function ordinal(number) {
+      var lastDigit = number % 10,
+      last2Digits = number % 100;
+      if (number === 0) {
+        return number + '-ев';
+      } else if (last2Digits === 0) {
+        return number + '-ен';
+      } else if (last2Digits > 10 && last2Digits < 20) {
+        return number + '-ти';
+      } else if (lastDigit === 1) {
+        return number + '-ви';
+      } else if (lastDigit === 2) {
+        return number + '-ри';
+      } else if (lastDigit === 7 || lastDigit === 8) {
+        return number + '-ми';
+      } else {
+        return number + '-ти';
+      }
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 7 // The week that contains Jan 7th is the first week of the year.
+    } });
+
+
+  return bg;
+
+});
+
+/***/ }),
+/* 64 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/bm.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Bambara [bm]
+//! author : Estelle Comment : https://github.com/estellecomment
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var bm = moment.defineLocale('bm', {
+    months: 'Zanwuyekalo_Fewuruyekalo_Marisikalo_Awirilikalo_Mɛkalo_Zuwɛnkalo_Zuluyekalo_Utikalo_Sɛtanburukalo_ɔkutɔburukalo_Nowanburukalo_Desanburukalo'.split(
+    '_'),
+
+    monthsShort: 'Zan_Few_Mar_Awi_Mɛ_Zuw_Zul_Uti_Sɛt_ɔku_Now_Des'.split('_'),
+    weekdays: 'Kari_Ntɛnɛn_Tarata_Araba_Alamisa_Juma_Sibiri'.split('_'),
+    weekdaysShort: 'Kar_Ntɛ_Tar_Ara_Ala_Jum_Sib'.split('_'),
+    weekdaysMin: 'Ka_Nt_Ta_Ar_Al_Ju_Si'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'MMMM [tile] D [san] YYYY',
+      LLL: 'MMMM [tile] D [san] YYYY [lɛrɛ] HH:mm',
+      LLLL: 'dddd MMMM [tile] D [san] YYYY [lɛrɛ] HH:mm' },
+
+    calendar: {
+      sameDay: '[Bi lɛrɛ] LT',
+      nextDay: '[Sini lɛrɛ] LT',
+      nextWeek: 'dddd [don lɛrɛ] LT',
+      lastDay: '[Kunu lɛrɛ] LT',
+      lastWeek: 'dddd [tɛmɛnen lɛrɛ] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s kɔnɔ',
+      past: 'a bɛ %s bɔ',
+      s: 'sanga dama dama',
+      ss: 'sekondi %d',
+      m: 'miniti kelen',
+      mm: 'miniti %d',
+      h: 'lɛrɛ kelen',
+      hh: 'lɛrɛ %d',
+      d: 'tile kelen',
+      dd: 'tile %d',
+      M: 'kalo kelen',
+      MM: 'kalo %d',
+      y: 'san kelen',
+      yy: 'san %d' },
+
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return bm;
+
+});
+
+/***/ }),
+/* 65 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/bn.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Bengali [bn]
+//! author : Kaushik Gandhi : https://github.com/kaushikgandhi
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var symbolMap = {
+    1: '১',
+    2: '২',
+    3: '৩',
+    4: '৪',
+    5: '৫',
+    6: '৬',
+    7: '৭',
+    8: '৮',
+    9: '৯',
+    0: '০' },
+
+  numberMap = {
+    '১': '1',
+    '২': '2',
+    '৩': '3',
+    '৪': '4',
+    '৫': '5',
+    '৬': '6',
+    '৭': '7',
+    '৮': '8',
+    '৯': '9',
+    '০': '0' };
+
+
+  var bn = moment.defineLocale('bn', {
+    months: 'জানুয়ারি_ফেব্রুয়ারি_মার্চ_এপ্রিল_মে_জুন_জুলাই_আগস্ট_সেপ্টেম্বর_অক্টোবর_নভেম্বর_ডিসেম্বর'.split(
+    '_'),
+
+    monthsShort: 'জানু_ফেব্রু_মার্চ_এপ্রিল_মে_জুন_জুলাই_আগস্ট_সেপ্ট_অক্টো_নভে_ডিসে'.split(
+    '_'),
+
+    weekdays: 'রবিবার_সোমবার_মঙ্গলবার_বুধবার_বৃহস্পতিবার_শুক্রবার_শনিবার'.split(
+    '_'),
+
+    weekdaysShort: 'রবি_সোম_মঙ্গল_বুধ_বৃহস্পতি_শুক্র_শনি'.split('_'),
+    weekdaysMin: 'রবি_সোম_মঙ্গল_বুধ_বৃহ_শুক্র_শনি'.split('_'),
+    longDateFormat: {
+      LT: 'A h:mm সময়',
+      LTS: 'A h:mm:ss সময়',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY, A h:mm সময়',
+      LLLL: 'dddd, D MMMM YYYY, A h:mm সময়' },
+
+    calendar: {
+      sameDay: '[আজ] LT',
+      nextDay: '[আগামীকাল] LT',
+      nextWeek: 'dddd, LT',
+      lastDay: '[গতকাল] LT',
+      lastWeek: '[গত] dddd, LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s পরে',
+      past: '%s আগে',
+      s: 'কয়েক সেকেন্ড',
+      ss: '%d সেকেন্ড',
+      m: 'এক মিনিট',
+      mm: '%d মিনিট',
+      h: 'এক ঘন্টা',
+      hh: '%d ঘন্টা',
+      d: 'এক দিন',
+      dd: '%d দিন',
+      M: 'এক মাস',
+      MM: '%d মাস',
+      y: 'এক বছর',
+      yy: '%d বছর' },
+
+    preparse: function preparse(string) {
+      return string.replace(/[১২৩৪৫৬৭৮৯০]/g, function (match) {
+        return numberMap[match];
+      });
+    },
+    postformat: function postformat(string) {
+      return string.replace(/\d/g, function (match) {
+        return symbolMap[match];
+      });
+    },
+    meridiemParse: /রাত|সকাল|দুপুর|বিকাল|রাত/,
+    meridiemHour: function meridiemHour(hour, meridiem) {
+      if (hour === 12) {
+        hour = 0;
+      }
+      if (
+      meridiem === 'রাত' && hour >= 4 ||
+      meridiem === 'দুপুর' && hour < 5 ||
+      meridiem === 'বিকাল')
+      {
+        return hour + 12;
+      } else {
+        return hour;
+      }
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 4) {
+        return 'রাত';
+      } else if (hour < 10) {
+        return 'সকাল';
+      } else if (hour < 17) {
+        return 'দুপুর';
+      } else if (hour < 20) {
+        return 'বিকাল';
+      } else {
+        return 'রাত';
+      }
+    },
+    week: {
+      dow: 0, // Sunday is the first day of the week.
+      doy: 6 // The week that contains Jan 6th is the first week of the year.
+    } });
+
+
+  return bn;
+
+});
+
+/***/ }),
+/* 66 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/bn-bd.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Bengali (Bangladesh) [bn-bd]
+//! author : Asraf Hossain Patoary : https://github.com/ashwoolford
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var symbolMap = {
+    1: '১',
+    2: '২',
+    3: '৩',
+    4: '৪',
+    5: '৫',
+    6: '৬',
+    7: '৭',
+    8: '৮',
+    9: '৯',
+    0: '০' },
+
+  numberMap = {
+    '১': '1',
+    '২': '2',
+    '৩': '3',
+    '৪': '4',
+    '৫': '5',
+    '৬': '6',
+    '৭': '7',
+    '৮': '8',
+    '৯': '9',
+    '০': '0' };
+
+
+  var bnBd = moment.defineLocale('bn-bd', {
+    months: 'জানুয়ারি_ফেব্রুয়ারি_মার্চ_এপ্রিল_মে_জুন_জুলাই_আগস্ট_সেপ্টেম্বর_অক্টোবর_নভেম্বর_ডিসেম্বর'.split(
+    '_'),
+
+    monthsShort: 'জানু_ফেব্রু_মার্চ_এপ্রিল_মে_জুন_জুলাই_আগস্ট_সেপ্ট_অক্টো_নভে_ডিসে'.split(
+    '_'),
+
+    weekdays: 'রবিবার_সোমবার_মঙ্গলবার_বুধবার_বৃহস্পতিবার_শুক্রবার_শনিবার'.split(
+    '_'),
+
+    weekdaysShort: 'রবি_সোম_মঙ্গল_বুধ_বৃহস্পতি_শুক্র_শনি'.split('_'),
+    weekdaysMin: 'রবি_সোম_মঙ্গল_বুধ_বৃহ_শুক্র_শনি'.split('_'),
+    longDateFormat: {
+      LT: 'A h:mm সময়',
+      LTS: 'A h:mm:ss সময়',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY, A h:mm সময়',
+      LLLL: 'dddd, D MMMM YYYY, A h:mm সময়' },
+
+    calendar: {
+      sameDay: '[আজ] LT',
+      nextDay: '[আগামীকাল] LT',
+      nextWeek: 'dddd, LT',
+      lastDay: '[গতকাল] LT',
+      lastWeek: '[গত] dddd, LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s পরে',
+      past: '%s আগে',
+      s: 'কয়েক সেকেন্ড',
+      ss: '%d সেকেন্ড',
+      m: 'এক মিনিট',
+      mm: '%d মিনিট',
+      h: 'এক ঘন্টা',
+      hh: '%d ঘন্টা',
+      d: 'এক দিন',
+      dd: '%d দিন',
+      M: 'এক মাস',
+      MM: '%d মাস',
+      y: 'এক বছর',
+      yy: '%d বছর' },
+
+    preparse: function preparse(string) {
+      return string.replace(/[১২৩৪৫৬৭৮৯০]/g, function (match) {
+        return numberMap[match];
+      });
+    },
+    postformat: function postformat(string) {
+      return string.replace(/\d/g, function (match) {
+        return symbolMap[match];
+      });
+    },
+
+    meridiemParse: /রাত|ভোর|সকাল|দুপুর|বিকাল|সন্ধ্যা|রাত/,
+    meridiemHour: function meridiemHour(hour, meridiem) {
+      if (hour === 12) {
+        hour = 0;
+      }
+      if (meridiem === 'রাত') {
+        return hour < 4 ? hour : hour + 12;
+      } else if (meridiem === 'ভোর') {
+        return hour;
+      } else if (meridiem === 'সকাল') {
+        return hour;
+      } else if (meridiem === 'দুপুর') {
+        return hour >= 3 ? hour : hour + 12;
+      } else if (meridiem === 'বিকাল') {
+        return hour + 12;
+      } else if (meridiem === 'সন্ধ্যা') {
+        return hour + 12;
+      }
+    },
+
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 4) {
+        return 'রাত';
+      } else if (hour < 6) {
+        return 'ভোর';
+      } else if (hour < 12) {
+        return 'সকাল';
+      } else if (hour < 15) {
+        return 'দুপুর';
+      } else if (hour < 18) {
+        return 'বিকাল';
+      } else if (hour < 20) {
+        return 'সন্ধ্যা';
+      } else {
+        return 'রাত';
+      }
+    },
+    week: {
+      dow: 0, // Sunday is the first day of the week.
+      doy: 6 // The week that contains Jan 6th is the first week of the year.
+    } });
+
+
+  return bnBd;
+
+});
+
+/***/ }),
+/* 67 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/bo.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Tibetan [bo]
+//! author : Thupten N. Chakrishar : https://github.com/vajradog
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var symbolMap = {
+    1: '༡',
+    2: '༢',
+    3: '༣',
+    4: '༤',
+    5: '༥',
+    6: '༦',
+    7: '༧',
+    8: '༨',
+    9: '༩',
+    0: '༠' },
+
+  numberMap = {
+    '༡': '1',
+    '༢': '2',
+    '༣': '3',
+    '༤': '4',
+    '༥': '5',
+    '༦': '6',
+    '༧': '7',
+    '༨': '8',
+    '༩': '9',
+    '༠': '0' };
+
+
+  var bo = moment.defineLocale('bo', {
+    months: 'ཟླ་བ་དང་པོ_ཟླ་བ་གཉིས་པ_ཟླ་བ་གསུམ་པ_ཟླ་བ་བཞི་པ_ཟླ་བ་ལྔ་པ_ཟླ་བ་དྲུག་པ_ཟླ་བ་བདུན་པ_ཟླ་བ་བརྒྱད་པ_ཟླ་བ་དགུ་པ_ཟླ་བ་བཅུ་པ_ཟླ་བ་བཅུ་གཅིག་པ_ཟླ་བ་བཅུ་གཉིས་པ'.split(
+    '_'),
+
+    monthsShort: 'ཟླ་1_ཟླ་2_ཟླ་3_ཟླ་4_ཟླ་5_ཟླ་6_ཟླ་7_ཟླ་8_ཟླ་9_ཟླ་10_ཟླ་11_ཟླ་12'.split(
+    '_'),
+
+    monthsShortRegex: /^(ཟླ་\d{1,2})/,
+    monthsParseExact: true,
+    weekdays: 'གཟའ་ཉི་མ་_གཟའ་ཟླ་བ་_གཟའ་མིག་དམར་_གཟའ་ལྷག་པ་_གཟའ་ཕུར་བུ_གཟའ་པ་སངས་_གཟའ་སྤེན་པ་'.split(
+    '_'),
+
+    weekdaysShort: 'ཉི་མ་_ཟླ་བ་_མིག་དམར་_ལྷག་པ་_ཕུར་བུ_པ་སངས་_སྤེན་པ་'.split(
+    '_'),
+
+    weekdaysMin: 'ཉི_ཟླ_མིག_ལྷག_ཕུར_སངས_སྤེན'.split('_'),
+    longDateFormat: {
+      LT: 'A h:mm',
+      LTS: 'A h:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY, A h:mm',
+      LLLL: 'dddd, D MMMM YYYY, A h:mm' },
+
+    calendar: {
+      sameDay: '[དི་རིང] LT',
+      nextDay: '[སང་ཉིན] LT',
+      nextWeek: '[བདུན་ཕྲག་རྗེས་མ], LT',
+      lastDay: '[ཁ་སང] LT',
+      lastWeek: '[བདུན་ཕྲག་མཐའ་མ] dddd, LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s ལ་',
+      past: '%s སྔན་ལ',
+      s: 'ལམ་སང',
+      ss: '%d སྐར་ཆ།',
+      m: 'སྐར་མ་གཅིག',
+      mm: '%d སྐར་མ',
+      h: 'ཆུ་ཚོད་གཅིག',
+      hh: '%d ཆུ་ཚོད',
+      d: 'ཉིན་གཅིག',
+      dd: '%d ཉིན་',
+      M: 'ཟླ་བ་གཅིག',
+      MM: '%d ཟླ་བ',
+      y: 'ལོ་གཅིག',
+      yy: '%d ལོ' },
+
+    preparse: function preparse(string) {
+      return string.replace(/[༡༢༣༤༥༦༧༨༩༠]/g, function (match) {
+        return numberMap[match];
+      });
+    },
+    postformat: function postformat(string) {
+      return string.replace(/\d/g, function (match) {
+        return symbolMap[match];
+      });
+    },
+    meridiemParse: /མཚན་མོ|ཞོགས་ཀས|ཉིན་གུང|དགོང་དག|མཚན་མོ/,
+    meridiemHour: function meridiemHour(hour, meridiem) {
+      if (hour === 12) {
+        hour = 0;
+      }
+      if (
+      meridiem === 'མཚན་མོ' && hour >= 4 ||
+      meridiem === 'ཉིན་གུང' && hour < 5 ||
+      meridiem === 'དགོང་དག')
+      {
+        return hour + 12;
+      } else {
+        return hour;
+      }
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 4) {
+        return 'མཚན་མོ';
+      } else if (hour < 10) {
+        return 'ཞོགས་ཀས';
+      } else if (hour < 17) {
+        return 'ཉིན་གུང';
+      } else if (hour < 20) {
+        return 'དགོང་དག';
+      } else {
+        return 'མཚན་མོ';
+      }
+    },
+    week: {
+      dow: 0, // Sunday is the first day of the week.
+      doy: 6 // The week that contains Jan 6th is the first week of the year.
+    } });
+
+
+  return bo;
+
+});
+
+/***/ }),
+/* 68 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/br.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Breton [br]
+//! author : Jean-Baptiste Le Duigou : https://github.com/jbleduigou
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  function relativeTimeWithMutation(number, withoutSuffix, key) {
+    var format = {
+      mm: 'munutenn',
+      MM: 'miz',
+      dd: 'devezh' };
+
+    return number + ' ' + mutation(format[key], number);
+  }
+  function specialMutationForYears(number) {
+    switch (lastNumber(number)) {
+      case 1:
+      case 3:
+      case 4:
+      case 5:
+      case 9:
+        return number + ' bloaz';
+      default:
+        return number + ' vloaz';}
+
+  }
+  function lastNumber(number) {
+    if (number > 9) {
+      return lastNumber(number % 10);
+    }
+    return number;
+  }
+  function mutation(text, number) {
+    if (number === 2) {
+      return softMutation(text);
+    }
+    return text;
+  }
+  function softMutation(text) {
+    var mutationTable = {
+      m: 'v',
+      b: 'v',
+      d: 'z' };
+
+    if (mutationTable[text.charAt(0)] === undefined) {
+      return text;
+    }
+    return mutationTable[text.charAt(0)] + text.substring(1);
+  }
+
+  var monthsParse = [
+  /^gen/i,
+  /^c[ʼ\']hwe/i,
+  /^meu/i,
+  /^ebr/i,
+  /^mae/i,
+  /^(mez|eve)/i,
+  /^gou/i,
+  /^eos/i,
+  /^gwe/i,
+  /^her/i,
+  /^du/i,
+  /^ker/i],
+
+  monthsRegex = /^(genver|c[ʼ\']hwevrer|meurzh|ebrel|mae|mezheven|gouere|eost|gwengolo|here|du|kerzu|gen|c[ʼ\']hwe|meu|ebr|mae|eve|gou|eos|gwe|her|du|ker)/i,
+  monthsStrictRegex = /^(genver|c[ʼ\']hwevrer|meurzh|ebrel|mae|mezheven|gouere|eost|gwengolo|here|du|kerzu)/i,
+  monthsShortStrictRegex = /^(gen|c[ʼ\']hwe|meu|ebr|mae|eve|gou|eos|gwe|her|du|ker)/i,
+  fullWeekdaysParse = [
+  /^sul/i,
+  /^lun/i,
+  /^meurzh/i,
+  /^merc[ʼ\']her/i,
+  /^yaou/i,
+  /^gwener/i,
+  /^sadorn/i],
+
+  shortWeekdaysParse = [
+  /^Sul/i,
+  /^Lun/i,
+  /^Meu/i,
+  /^Mer/i,
+  /^Yao/i,
+  /^Gwe/i,
+  /^Sad/i],
+
+  minWeekdaysParse = [
+  /^Su/i,
+  /^Lu/i,
+  /^Me([^r]|$)/i,
+  /^Mer/i,
+  /^Ya/i,
+  /^Gw/i,
+  /^Sa/i];
+
+
+  var br = moment.defineLocale('br', {
+    months: 'Genver_Cʼhwevrer_Meurzh_Ebrel_Mae_Mezheven_Gouere_Eost_Gwengolo_Here_Du_Kerzu'.split(
+    '_'),
+
+    monthsShort: 'Gen_Cʼhwe_Meu_Ebr_Mae_Eve_Gou_Eos_Gwe_Her_Du_Ker'.split('_'),
+    weekdays: 'Sul_Lun_Meurzh_Mercʼher_Yaou_Gwener_Sadorn'.split('_'),
+    weekdaysShort: 'Sul_Lun_Meu_Mer_Yao_Gwe_Sad'.split('_'),
+    weekdaysMin: 'Su_Lu_Me_Mer_Ya_Gw_Sa'.split('_'),
+    weekdaysParse: minWeekdaysParse,
+    fullWeekdaysParse: fullWeekdaysParse,
+    shortWeekdaysParse: shortWeekdaysParse,
+    minWeekdaysParse: minWeekdaysParse,
+
+    monthsRegex: monthsRegex,
+    monthsShortRegex: monthsRegex,
+    monthsStrictRegex: monthsStrictRegex,
+    monthsShortStrictRegex: monthsShortStrictRegex,
+    monthsParse: monthsParse,
+    longMonthsParse: monthsParse,
+    shortMonthsParse: monthsParse,
+
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D [a viz] MMMM YYYY',
+      LLL: 'D [a viz] MMMM YYYY HH:mm',
+      LLLL: 'dddd, D [a viz] MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[Hiziv da] LT',
+      nextDay: '[Warcʼhoazh da] LT',
+      nextWeek: 'dddd [da] LT',
+      lastDay: '[Decʼh da] LT',
+      lastWeek: 'dddd [paset da] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'a-benn %s',
+      past: '%s ʼzo',
+      s: 'un nebeud segondennoù',
+      ss: '%d eilenn',
+      m: 'ur vunutenn',
+      mm: relativeTimeWithMutation,
+      h: 'un eur',
+      hh: '%d eur',
+      d: 'un devezh',
+      dd: relativeTimeWithMutation,
+      M: 'ur miz',
+      MM: relativeTimeWithMutation,
+      y: 'ur bloaz',
+      yy: specialMutationForYears },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(añ|vet)/,
+    ordinal: function ordinal(number) {
+      var output = number === 1 ? 'añ' : 'vet';
+      return number + output;
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    },
+    meridiemParse: /a.m.|g.m./, // goude merenn | a-raok merenn
+    isPM: function isPM(token) {
+      return token === 'g.m.';
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      return hour < 12 ? 'a.m.' : 'g.m.';
+    } });
+
+
+  return br;
+
+});
+
+/***/ }),
+/* 69 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/bs.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Bosnian [bs]
+//! author : Nedim Cholich : https://github.com/frontyard
+//! based on (hr) translation by Bojan Marković
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  function translate(number, withoutSuffix, key) {
+    var result = number + ' ';
+    switch (key) {
+      case 'ss':
+        if (number === 1) {
+          result += 'sekunda';
+        } else if (number === 2 || number === 3 || number === 4) {
+          result += 'sekunde';
+        } else {
+          result += 'sekundi';
         }
+        return result;
+      case 'm':
+        return withoutSuffix ? 'jedna minuta' : 'jedne minute';
+      case 'mm':
+        if (number === 1) {
+          result += 'minuta';
+        } else if (number === 2 || number === 3 || number === 4) {
+          result += 'minute';
+        } else {
+          result += 'minuta';
+        }
+        return result;
+      case 'h':
+        return withoutSuffix ? 'jedan sat' : 'jednog sata';
+      case 'hh':
+        if (number === 1) {
+          result += 'sat';
+        } else if (number === 2 || number === 3 || number === 4) {
+          result += 'sata';
+        } else {
+          result += 'sati';
+        }
+        return result;
+      case 'dd':
+        if (number === 1) {
+          result += 'dan';
+        } else {
+          result += 'dana';
+        }
+        return result;
+      case 'MM':
+        if (number === 1) {
+          result += 'mjesec';
+        } else if (number === 2 || number === 3 || number === 4) {
+          result += 'mjeseca';
+        } else {
+          result += 'mjeseci';
+        }
+        return result;
+      case 'yy':
+        if (number === 1) {
+          result += 'godina';
+        } else if (number === 2 || number === 3 || number === 4) {
+          result += 'godine';
+        } else {
+          result += 'godina';
+        }
+        return result;}
 
-        context.method = "throw";
-        context.arg = new TypeError(
-          "The iterator does not provide a 'throw' method");
+  }
+
+  var bs = moment.defineLocale('bs', {
+    months: 'januar_februar_mart_april_maj_juni_juli_august_septembar_oktobar_novembar_decembar'.split(
+    '_'),
+
+    monthsShort: 'jan._feb._mar._apr._maj._jun._jul._aug._sep._okt._nov._dec.'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'nedjelja_ponedjeljak_utorak_srijeda_četvrtak_petak_subota'.split(
+    '_'),
+
+    weekdaysShort: 'ned._pon._uto._sri._čet._pet._sub.'.split('_'),
+    weekdaysMin: 'ne_po_ut_sr_če_pe_su'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'H:mm',
+      LTS: 'H:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'D. MMMM YYYY',
+      LLL: 'D. MMMM YYYY H:mm',
+      LLLL: 'dddd, D. MMMM YYYY H:mm' },
+
+    calendar: {
+      sameDay: '[danas u] LT',
+      nextDay: '[sutra u] LT',
+      nextWeek: function nextWeek() {
+        switch (this.day()) {
+          case 0:
+            return '[u] [nedjelju] [u] LT';
+          case 3:
+            return '[u] [srijedu] [u] LT';
+          case 6:
+            return '[u] [subotu] [u] LT';
+          case 1:
+          case 2:
+          case 4:
+          case 5:
+            return '[u] dddd [u] LT';}
+
+      },
+      lastDay: '[jučer u] LT',
+      lastWeek: function lastWeek() {
+        switch (this.day()) {
+          case 0:
+          case 3:
+            return '[prošlu] dddd [u] LT';
+          case 6:
+            return '[prošle] [subote] [u] LT';
+          case 1:
+          case 2:
+          case 4:
+          case 5:
+            return '[prošli] dddd [u] LT';}
+
+      },
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'za %s',
+      past: 'prije %s',
+      s: 'par sekundi',
+      ss: translate,
+      m: translate,
+      mm: translate,
+      h: translate,
+      hh: translate,
+      d: 'dan',
+      dd: translate,
+      M: 'mjesec',
+      MM: translate,
+      y: 'godinu',
+      yy: translate },
+
+    dayOfMonthOrdinalParse: /\d{1,2}\./,
+    ordinal: '%d.',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 7 // The week that contains Jan 7th is the first week of the year.
+    } });
+
+
+  return bs;
+
+});
+
+/***/ }),
+/* 70 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ca.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Catalan [ca]
+//! author : Juan G. Hurtado : https://github.com/juanghurtado
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var ca = moment.defineLocale('ca', {
+    months: {
+      standalone: 'gener_febrer_març_abril_maig_juny_juliol_agost_setembre_octubre_novembre_desembre'.split(
+      '_'),
+
+      format: "de gener_de febrer_de març_d'abril_de maig_de juny_de juliol_d'agost_de setembre_d'octubre_de novembre_de desembre".split(
+      '_'),
+
+      isFormat: /D[oD]?(\s)+MMMM/ },
+
+    monthsShort: 'gen._febr._març_abr._maig_juny_jul._ag._set._oct._nov._des.'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'diumenge_dilluns_dimarts_dimecres_dijous_divendres_dissabte'.split(
+    '_'),
+
+    weekdaysShort: 'dg._dl._dt._dc._dj._dv._ds.'.split('_'),
+    weekdaysMin: 'dg_dl_dt_dc_dj_dv_ds'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'H:mm',
+      LTS: 'H:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM [de] YYYY',
+      ll: 'D MMM YYYY',
+      LLL: 'D MMMM [de] YYYY [a les] H:mm',
+      lll: 'D MMM YYYY, H:mm',
+      LLLL: 'dddd D MMMM [de] YYYY [a les] H:mm',
+      llll: 'ddd D MMM YYYY, H:mm' },
+
+    calendar: {
+      sameDay: function sameDay() {
+        return '[avui a ' + (this.hours() !== 1 ? 'les' : 'la') + '] LT';
+      },
+      nextDay: function nextDay() {
+        return '[demà a ' + (this.hours() !== 1 ? 'les' : 'la') + '] LT';
+      },
+      nextWeek: function nextWeek() {
+        return 'dddd [a ' + (this.hours() !== 1 ? 'les' : 'la') + '] LT';
+      },
+      lastDay: function lastDay() {
+        return '[ahir a ' + (this.hours() !== 1 ? 'les' : 'la') + '] LT';
+      },
+      lastWeek: function lastWeek() {
+        return (
+          '[el] dddd [passat a ' + (
+          this.hours() !== 1 ? 'les' : 'la') +
+          '] LT');
+
+      },
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: "d'aquí %s",
+      past: 'fa %s',
+      s: 'uns segons',
+      ss: '%d segons',
+      m: 'un minut',
+      mm: '%d minuts',
+      h: 'una hora',
+      hh: '%d hores',
+      d: 'un dia',
+      dd: '%d dies',
+      M: 'un mes',
+      MM: '%d mesos',
+      y: 'un any',
+      yy: '%d anys' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(r|n|t|è|a)/,
+    ordinal: function ordinal(number, period) {
+      var output =
+      number === 1 ?
+      'r' :
+      number === 2 ?
+      'n' :
+      number === 3 ?
+      'r' :
+      number === 4 ?
+      't' :
+      'è';
+      if (period === 'w' || period === 'W') {
+        output = 'a';
       }
+      return number + output;
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
 
-      return ContinueSentinel;
-    }
 
-    var record = tryCatch(method, delegate.iterator, context.arg);
+  return ca;
 
-    if (record.type === "throw") {
-      context.method = "throw";
-      context.arg = record.arg;
-      context.delegate = null;
-      return ContinueSentinel;
-    }
+});
 
-    var info = record.arg;
+/***/ }),
+/* 71 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/cs.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-    if (! info) {
-      context.method = "throw";
-      context.arg = new TypeError("iterator result is not an object");
-      context.delegate = null;
-      return ContinueSentinel;
-    }
+//! moment.js locale configuration
+//! locale : Czech [cs]
+//! author : petrbela : https://github.com/petrbela
 
-    if (info.done) {
-      // Assign the result of the finished delegate to the temporary
-      // variable specified by delegate.resultName (see delegateYield).
-      context[delegate.resultName] = info.value;
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
 
-      // Resume execution at the desired location (see delegateYield).
-      context.next = delegate.nextLoc;
+  //! moment.js locale configuration
 
-      // If context.method was "throw" but the delegate handled the
-      // exception, let the outer generator proceed normally. If
-      // context.method was "next", forget context.arg since it has been
-      // "consumed" by the delegate iterator. If context.method was
-      // "return", allow the original .return call to continue in the
-      // outer generator.
-      if (context.method !== "return") {
-        context.method = "next";
-        context.arg = undefined;
+  var months = 'leden_únor_březen_duben_květen_červen_červenec_srpen_září_říjen_listopad_prosinec'.split(
+  '_'),
+
+  monthsShort = 'led_úno_bře_dub_kvě_čvn_čvc_srp_zář_říj_lis_pro'.split('_'),
+  monthsParse = [
+  /^led/i,
+  /^úno/i,
+  /^bře/i,
+  /^dub/i,
+  /^kvě/i,
+  /^(čvn|červen$|června)/i,
+  /^(čvc|červenec|července)/i,
+  /^srp/i,
+  /^zář/i,
+  /^říj/i,
+  /^lis/i,
+  /^pro/i],
+
+  // NOTE: 'červen' is substring of 'červenec'; therefore 'červenec' must precede 'červen' in the regex to be fully matched.
+  // Otherwise parser matches '1. červenec' as '1. červen' + 'ec'.
+  monthsRegex = /^(leden|únor|březen|duben|květen|červenec|července|červen|června|srpen|září|říjen|listopad|prosinec|led|úno|bře|dub|kvě|čvn|čvc|srp|zář|říj|lis|pro)/i;
+
+  function plural(n) {
+    return n > 1 && n < 5 && ~~(n / 10) !== 1;
+  }
+  function translate(number, withoutSuffix, key, isFuture) {
+    var result = number + ' ';
+    switch (key) {
+      case 's': // a few seconds / in a few seconds / a few seconds ago
+        return withoutSuffix || isFuture ? 'pár sekund' : 'pár sekundami';
+      case 'ss': // 9 seconds / in 9 seconds / 9 seconds ago
+        if (withoutSuffix || isFuture) {
+          return result + (plural(number) ? 'sekundy' : 'sekund');
+        } else {
+          return result + 'sekundami';
+        }
+      case 'm': // a minute / in a minute / a minute ago
+        return withoutSuffix ? 'minuta' : isFuture ? 'minutu' : 'minutou';
+      case 'mm': // 9 minutes / in 9 minutes / 9 minutes ago
+        if (withoutSuffix || isFuture) {
+          return result + (plural(number) ? 'minuty' : 'minut');
+        } else {
+          return result + 'minutami';
+        }
+      case 'h': // an hour / in an hour / an hour ago
+        return withoutSuffix ? 'hodina' : isFuture ? 'hodinu' : 'hodinou';
+      case 'hh': // 9 hours / in 9 hours / 9 hours ago
+        if (withoutSuffix || isFuture) {
+          return result + (plural(number) ? 'hodiny' : 'hodin');
+        } else {
+          return result + 'hodinami';
+        }
+      case 'd': // a day / in a day / a day ago
+        return withoutSuffix || isFuture ? 'den' : 'dnem';
+      case 'dd': // 9 days / in 9 days / 9 days ago
+        if (withoutSuffix || isFuture) {
+          return result + (plural(number) ? 'dny' : 'dní');
+        } else {
+          return result + 'dny';
+        }
+      case 'M': // a month / in a month / a month ago
+        return withoutSuffix || isFuture ? 'měsíc' : 'měsícem';
+      case 'MM': // 9 months / in 9 months / 9 months ago
+        if (withoutSuffix || isFuture) {
+          return result + (plural(number) ? 'měsíce' : 'měsíců');
+        } else {
+          return result + 'měsíci';
+        }
+      case 'y': // a year / in a year / a year ago
+        return withoutSuffix || isFuture ? 'rok' : 'rokem';
+      case 'yy': // 9 years / in 9 years / 9 years ago
+        if (withoutSuffix || isFuture) {
+          return result + (plural(number) ? 'roky' : 'let');
+        } else {
+          return result + 'lety';
+        }}
+
+  }
+
+  var cs = moment.defineLocale('cs', {
+    months: months,
+    monthsShort: monthsShort,
+    monthsRegex: monthsRegex,
+    monthsShortRegex: monthsRegex,
+    // NOTE: 'červen' is substring of 'červenec'; therefore 'červenec' must precede 'červen' in the regex to be fully matched.
+    // Otherwise parser matches '1. červenec' as '1. červen' + 'ec'.
+    monthsStrictRegex: /^(leden|ledna|února|únor|březen|března|duben|dubna|květen|května|červenec|července|červen|června|srpen|srpna|září|říjen|října|listopadu|listopad|prosinec|prosince)/i,
+    monthsShortStrictRegex: /^(led|úno|bře|dub|kvě|čvn|čvc|srp|zář|říj|lis|pro)/i,
+    monthsParse: monthsParse,
+    longMonthsParse: monthsParse,
+    shortMonthsParse: monthsParse,
+    weekdays: 'neděle_pondělí_úterý_středa_čtvrtek_pátek_sobota'.split('_'),
+    weekdaysShort: 'ne_po_út_st_čt_pá_so'.split('_'),
+    weekdaysMin: 'ne_po_út_st_čt_pá_so'.split('_'),
+    longDateFormat: {
+      LT: 'H:mm',
+      LTS: 'H:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'D. MMMM YYYY',
+      LLL: 'D. MMMM YYYY H:mm',
+      LLLL: 'dddd D. MMMM YYYY H:mm',
+      l: 'D. M. YYYY' },
+
+    calendar: {
+      sameDay: '[dnes v] LT',
+      nextDay: '[zítra v] LT',
+      nextWeek: function nextWeek() {
+        switch (this.day()) {
+          case 0:
+            return '[v neděli v] LT';
+          case 1:
+          case 2:
+            return '[v] dddd [v] LT';
+          case 3:
+            return '[ve středu v] LT';
+          case 4:
+            return '[ve čtvrtek v] LT';
+          case 5:
+            return '[v pátek v] LT';
+          case 6:
+            return '[v sobotu v] LT';}
+
+      },
+      lastDay: '[včera v] LT',
+      lastWeek: function lastWeek() {
+        switch (this.day()) {
+          case 0:
+            return '[minulou neděli v] LT';
+          case 1:
+          case 2:
+            return '[minulé] dddd [v] LT';
+          case 3:
+            return '[minulou středu v] LT';
+          case 4:
+          case 5:
+            return '[minulý] dddd [v] LT';
+          case 6:
+            return '[minulou sobotu v] LT';}
+
+      },
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'za %s',
+      past: 'před %s',
+      s: translate,
+      ss: translate,
+      m: translate,
+      mm: translate,
+      h: translate,
+      hh: translate,
+      d: translate,
+      dd: translate,
+      M: translate,
+      MM: translate,
+      y: translate,
+      yy: translate },
+
+    dayOfMonthOrdinalParse: /\d{1,2}\./,
+    ordinal: '%d.',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return cs;
+
+});
+
+/***/ }),
+/* 72 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/cv.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Chuvash [cv]
+//! author : Anatoly Mironov : https://github.com/mirontoli
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var cv = moment.defineLocale('cv', {
+    months: 'кӑрлач_нарӑс_пуш_ака_май_ҫӗртме_утӑ_ҫурла_авӑн_юпа_чӳк_раштав'.split(
+    '_'),
+
+    monthsShort: 'кӑр_нар_пуш_ака_май_ҫӗр_утӑ_ҫур_авн_юпа_чӳк_раш'.split('_'),
+    weekdays: 'вырсарникун_тунтикун_ытларикун_юнкун_кӗҫнерникун_эрнекун_шӑматкун'.split(
+    '_'),
+
+    weekdaysShort: 'выр_тун_ытл_юн_кӗҫ_эрн_шӑм'.split('_'),
+    weekdaysMin: 'вр_тн_ыт_юн_кҫ_эр_шм'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD-MM-YYYY',
+      LL: 'YYYY [ҫулхи] MMMM [уйӑхӗн] D[-мӗшӗ]',
+      LLL: 'YYYY [ҫулхи] MMMM [уйӑхӗн] D[-мӗшӗ], HH:mm',
+      LLLL: 'dddd, YYYY [ҫулхи] MMMM [уйӑхӗн] D[-мӗшӗ], HH:mm' },
+
+    calendar: {
+      sameDay: '[Паян] LT [сехетре]',
+      nextDay: '[Ыран] LT [сехетре]',
+      lastDay: '[Ӗнер] LT [сехетре]',
+      nextWeek: '[Ҫитес] dddd LT [сехетре]',
+      lastWeek: '[Иртнӗ] dddd LT [сехетре]',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: function future(output) {
+        var affix = /сехет$/i.exec(output) ?
+        'рен' :
+        /ҫул$/i.exec(output) ?
+        'тан' :
+        'ран';
+        return output + affix;
+      },
+      past: '%s каялла',
+      s: 'пӗр-ик ҫеккунт',
+      ss: '%d ҫеккунт',
+      m: 'пӗр минут',
+      mm: '%d минут',
+      h: 'пӗр сехет',
+      hh: '%d сехет',
+      d: 'пӗр кун',
+      dd: '%d кун',
+      M: 'пӗр уйӑх',
+      MM: '%d уйӑх',
+      y: 'пӗр ҫул',
+      yy: '%d ҫул' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}-мӗш/,
+    ordinal: '%d-мӗш',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 7 // The week that contains Jan 7th is the first week of the year.
+    } });
+
+
+  return cv;
+
+});
+
+/***/ }),
+/* 73 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/cy.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Welsh [cy]
+//! author : Robert Allen : https://github.com/robgallen
+//! author : https://github.com/ryangreaves
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var cy = moment.defineLocale('cy', {
+    months: 'Ionawr_Chwefror_Mawrth_Ebrill_Mai_Mehefin_Gorffennaf_Awst_Medi_Hydref_Tachwedd_Rhagfyr'.split(
+    '_'),
+
+    monthsShort: 'Ion_Chwe_Maw_Ebr_Mai_Meh_Gor_Aws_Med_Hyd_Tach_Rhag'.split(
+    '_'),
+
+    weekdays: 'Dydd Sul_Dydd Llun_Dydd Mawrth_Dydd Mercher_Dydd Iau_Dydd Gwener_Dydd Sadwrn'.split(
+    '_'),
+
+    weekdaysShort: 'Sul_Llun_Maw_Mer_Iau_Gwe_Sad'.split('_'),
+    weekdaysMin: 'Su_Ll_Ma_Me_Ia_Gw_Sa'.split('_'),
+    weekdaysParseExact: true,
+    // time formats are the same as en-gb
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd, D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[Heddiw am] LT',
+      nextDay: '[Yfory am] LT',
+      nextWeek: 'dddd [am] LT',
+      lastDay: '[Ddoe am] LT',
+      lastWeek: 'dddd [diwethaf am] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'mewn %s',
+      past: '%s yn ôl',
+      s: 'ychydig eiliadau',
+      ss: '%d eiliad',
+      m: 'munud',
+      mm: '%d munud',
+      h: 'awr',
+      hh: '%d awr',
+      d: 'diwrnod',
+      dd: '%d diwrnod',
+      M: 'mis',
+      MM: '%d mis',
+      y: 'blwyddyn',
+      yy: '%d flynedd' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(fed|ain|af|il|ydd|ed|eg)/,
+    // traditional ordinal numbers above 31 are not commonly used in colloquial Welsh
+    ordinal: function ordinal(number) {
+      var b = number,
+      output = '',
+      lookup = [
+      '',
+      'af',
+      'il',
+      'ydd',
+      'ydd',
+      'ed',
+      'ed',
+      'ed',
+      'fed',
+      'fed',
+      'fed', // 1af to 10fed
+      'eg',
+      'fed',
+      'eg',
+      'eg',
+      'fed',
+      'eg',
+      'eg',
+      'fed',
+      'eg',
+      'fed' // 11eg to 20fed
+      ];
+      if (b > 20) {
+        if (b === 40 || b === 50 || b === 60 || b === 80 || b === 100) {
+          output = 'fed'; // not 30ain, 70ain or 90ain
+        } else {
+          output = 'ain';
+        }
+      } else if (b > 0) {
+        output = lookup[b];
       }
+      return number + output;
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return cy;
+
+});
+
+/***/ }),
+/* 74 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/da.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Danish [da]
+//! author : Ulrik Nielsen : https://github.com/mrbase
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var da = moment.defineLocale('da', {
+    months: 'januar_februar_marts_april_maj_juni_juli_august_september_oktober_november_december'.split(
+    '_'),
+
+    monthsShort: 'jan_feb_mar_apr_maj_jun_jul_aug_sep_okt_nov_dec'.split('_'),
+    weekdays: 'søndag_mandag_tirsdag_onsdag_torsdag_fredag_lørdag'.split('_'),
+    weekdaysShort: 'søn_man_tir_ons_tor_fre_lør'.split('_'),
+    weekdaysMin: 'sø_ma_ti_on_to_fr_lø'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'D. MMMM YYYY',
+      LLL: 'D. MMMM YYYY HH:mm',
+      LLLL: 'dddd [d.] D. MMMM YYYY [kl.] HH:mm' },
+
+    calendar: {
+      sameDay: '[i dag kl.] LT',
+      nextDay: '[i morgen kl.] LT',
+      nextWeek: 'på dddd [kl.] LT',
+      lastDay: '[i går kl.] LT',
+      lastWeek: '[i] dddd[s kl.] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'om %s',
+      past: '%s siden',
+      s: 'få sekunder',
+      ss: '%d sekunder',
+      m: 'et minut',
+      mm: '%d minutter',
+      h: 'en time',
+      hh: '%d timer',
+      d: 'en dag',
+      dd: '%d dage',
+      M: 'en måned',
+      MM: '%d måneder',
+      y: 'et år',
+      yy: '%d år' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}\./,
+    ordinal: '%d.',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return da;
+
+});
+
+/***/ }),
+/* 75 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/de.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : German [de]
+//! author : lluchs : https://github.com/lluchs
+//! author: Menelion Elensúle: https://github.com/Oire
+//! author : Mikolaj Dadela : https://github.com/mik01aj
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  function processRelativeTime(number, withoutSuffix, key, isFuture) {
+    var format = {
+      m: ['eine Minute', 'einer Minute'],
+      h: ['eine Stunde', 'einer Stunde'],
+      d: ['ein Tag', 'einem Tag'],
+      dd: [number + ' Tage', number + ' Tagen'],
+      w: ['eine Woche', 'einer Woche'],
+      M: ['ein Monat', 'einem Monat'],
+      MM: [number + ' Monate', number + ' Monaten'],
+      y: ['ein Jahr', 'einem Jahr'],
+      yy: [number + ' Jahre', number + ' Jahren'] };
+
+    return withoutSuffix ? format[key][0] : format[key][1];
+  }
+
+  var de = moment.defineLocale('de', {
+    months: 'Januar_Februar_März_April_Mai_Juni_Juli_August_September_Oktober_November_Dezember'.split(
+    '_'),
+
+    monthsShort: 'Jan._Feb._März_Apr._Mai_Juni_Juli_Aug._Sep._Okt._Nov._Dez.'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'Sonntag_Montag_Dienstag_Mittwoch_Donnerstag_Freitag_Samstag'.split(
+    '_'),
+
+    weekdaysShort: 'So._Mo._Di._Mi._Do._Fr._Sa.'.split('_'),
+    weekdaysMin: 'So_Mo_Di_Mi_Do_Fr_Sa'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'D. MMMM YYYY',
+      LLL: 'D. MMMM YYYY HH:mm',
+      LLLL: 'dddd, D. MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[heute um] LT [Uhr]',
+      sameElse: 'L',
+      nextDay: '[morgen um] LT [Uhr]',
+      nextWeek: 'dddd [um] LT [Uhr]',
+      lastDay: '[gestern um] LT [Uhr]',
+      lastWeek: '[letzten] dddd [um] LT [Uhr]' },
+
+    relativeTime: {
+      future: 'in %s',
+      past: 'vor %s',
+      s: 'ein paar Sekunden',
+      ss: '%d Sekunden',
+      m: processRelativeTime,
+      mm: '%d Minuten',
+      h: processRelativeTime,
+      hh: '%d Stunden',
+      d: processRelativeTime,
+      dd: processRelativeTime,
+      w: processRelativeTime,
+      ww: '%d Wochen',
+      M: processRelativeTime,
+      MM: processRelativeTime,
+      y: processRelativeTime,
+      yy: processRelativeTime },
+
+    dayOfMonthOrdinalParse: /\d{1,2}\./,
+    ordinal: '%d.',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return de;
+
+});
+
+/***/ }),
+/* 76 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/de-at.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : German (Austria) [de-at]
+//! author : lluchs : https://github.com/lluchs
+//! author: Menelion Elensúle: https://github.com/Oire
+//! author : Martin Groller : https://github.com/MadMG
+//! author : Mikolaj Dadela : https://github.com/mik01aj
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  function processRelativeTime(number, withoutSuffix, key, isFuture) {
+    var format = {
+      m: ['eine Minute', 'einer Minute'],
+      h: ['eine Stunde', 'einer Stunde'],
+      d: ['ein Tag', 'einem Tag'],
+      dd: [number + ' Tage', number + ' Tagen'],
+      w: ['eine Woche', 'einer Woche'],
+      M: ['ein Monat', 'einem Monat'],
+      MM: [number + ' Monate', number + ' Monaten'],
+      y: ['ein Jahr', 'einem Jahr'],
+      yy: [number + ' Jahre', number + ' Jahren'] };
+
+    return withoutSuffix ? format[key][0] : format[key][1];
+  }
+
+  var deAt = moment.defineLocale('de-at', {
+    months: 'Jänner_Februar_März_April_Mai_Juni_Juli_August_September_Oktober_November_Dezember'.split(
+    '_'),
+
+    monthsShort: 'Jän._Feb._März_Apr._Mai_Juni_Juli_Aug._Sep._Okt._Nov._Dez.'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'Sonntag_Montag_Dienstag_Mittwoch_Donnerstag_Freitag_Samstag'.split(
+    '_'),
+
+    weekdaysShort: 'So._Mo._Di._Mi._Do._Fr._Sa.'.split('_'),
+    weekdaysMin: 'So_Mo_Di_Mi_Do_Fr_Sa'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'D. MMMM YYYY',
+      LLL: 'D. MMMM YYYY HH:mm',
+      LLLL: 'dddd, D. MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[heute um] LT [Uhr]',
+      sameElse: 'L',
+      nextDay: '[morgen um] LT [Uhr]',
+      nextWeek: 'dddd [um] LT [Uhr]',
+      lastDay: '[gestern um] LT [Uhr]',
+      lastWeek: '[letzten] dddd [um] LT [Uhr]' },
+
+    relativeTime: {
+      future: 'in %s',
+      past: 'vor %s',
+      s: 'ein paar Sekunden',
+      ss: '%d Sekunden',
+      m: processRelativeTime,
+      mm: '%d Minuten',
+      h: processRelativeTime,
+      hh: '%d Stunden',
+      d: processRelativeTime,
+      dd: processRelativeTime,
+      w: processRelativeTime,
+      ww: '%d Wochen',
+      M: processRelativeTime,
+      MM: processRelativeTime,
+      y: processRelativeTime,
+      yy: processRelativeTime },
+
+    dayOfMonthOrdinalParse: /\d{1,2}\./,
+    ordinal: '%d.',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return deAt;
+
+});
+
+/***/ }),
+/* 77 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/de-ch.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : German (Switzerland) [de-ch]
+//! author : sschueller : https://github.com/sschueller
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  function processRelativeTime(number, withoutSuffix, key, isFuture) {
+    var format = {
+      m: ['eine Minute', 'einer Minute'],
+      h: ['eine Stunde', 'einer Stunde'],
+      d: ['ein Tag', 'einem Tag'],
+      dd: [number + ' Tage', number + ' Tagen'],
+      w: ['eine Woche', 'einer Woche'],
+      M: ['ein Monat', 'einem Monat'],
+      MM: [number + ' Monate', number + ' Monaten'],
+      y: ['ein Jahr', 'einem Jahr'],
+      yy: [number + ' Jahre', number + ' Jahren'] };
+
+    return withoutSuffix ? format[key][0] : format[key][1];
+  }
+
+  var deCh = moment.defineLocale('de-ch', {
+    months: 'Januar_Februar_März_April_Mai_Juni_Juli_August_September_Oktober_November_Dezember'.split(
+    '_'),
+
+    monthsShort: 'Jan._Feb._März_Apr._Mai_Juni_Juli_Aug._Sep._Okt._Nov._Dez.'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'Sonntag_Montag_Dienstag_Mittwoch_Donnerstag_Freitag_Samstag'.split(
+    '_'),
+
+    weekdaysShort: 'So_Mo_Di_Mi_Do_Fr_Sa'.split('_'),
+    weekdaysMin: 'So_Mo_Di_Mi_Do_Fr_Sa'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'D. MMMM YYYY',
+      LLL: 'D. MMMM YYYY HH:mm',
+      LLLL: 'dddd, D. MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[heute um] LT [Uhr]',
+      sameElse: 'L',
+      nextDay: '[morgen um] LT [Uhr]',
+      nextWeek: 'dddd [um] LT [Uhr]',
+      lastDay: '[gestern um] LT [Uhr]',
+      lastWeek: '[letzten] dddd [um] LT [Uhr]' },
+
+    relativeTime: {
+      future: 'in %s',
+      past: 'vor %s',
+      s: 'ein paar Sekunden',
+      ss: '%d Sekunden',
+      m: processRelativeTime,
+      mm: '%d Minuten',
+      h: processRelativeTime,
+      hh: '%d Stunden',
+      d: processRelativeTime,
+      dd: processRelativeTime,
+      w: processRelativeTime,
+      ww: '%d Wochen',
+      M: processRelativeTime,
+      MM: processRelativeTime,
+      y: processRelativeTime,
+      yy: processRelativeTime },
+
+    dayOfMonthOrdinalParse: /\d{1,2}\./,
+    ordinal: '%d.',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return deCh;
+
+});
+
+/***/ }),
+/* 78 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/dv.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Maldivian [dv]
+//! author : Jawish Hameed : https://github.com/jawish
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var months = [
+  'ޖެނުއަރީ',
+  'ފެބްރުއަރީ',
+  'މާރިޗު',
+  'އޭޕްރީލު',
+  'މޭ',
+  'ޖޫން',
+  'ޖުލައި',
+  'އޯގަސްޓު',
+  'ސެޕްޓެމްބަރު',
+  'އޮކްޓޯބަރު',
+  'ނޮވެމްބަރު',
+  'ޑިސެމްބަރު'],
+
+  weekdays = [
+  'އާދިއްތަ',
+  'ހޯމަ',
+  'އަންގާރަ',
+  'ބުދަ',
+  'ބުރާސްފަތި',
+  'ހުކުރު',
+  'ހޮނިހިރު'];
+
+
+  var dv = moment.defineLocale('dv', {
+    months: months,
+    monthsShort: months,
+    weekdays: weekdays,
+    weekdaysShort: weekdays,
+    weekdaysMin: 'އާދި_ހޯމަ_އަން_ބުދަ_ބުރާ_ހުކު_ހޮނި'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'D/M/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd D MMMM YYYY HH:mm' },
+
+    meridiemParse: /މކ|މފ/,
+    isPM: function isPM(input) {
+      return 'މފ' === input;
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 12) {
+        return 'މކ';
+      } else {
+        return 'މފ';
+      }
+    },
+    calendar: {
+      sameDay: '[މިއަދު] LT',
+      nextDay: '[މާދަމާ] LT',
+      nextWeek: 'dddd LT',
+      lastDay: '[އިއްޔެ] LT',
+      lastWeek: '[ފާއިތުވި] dddd LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'ތެރޭގައި %s',
+      past: 'ކުރިން %s',
+      s: 'ސިކުންތުކޮޅެއް',
+      ss: 'd% ސިކުންތު',
+      m: 'މިނިޓެއް',
+      mm: 'މިނިޓު %d',
+      h: 'ގަޑިއިރެއް',
+      hh: 'ގަޑިއިރު %d',
+      d: 'ދުވަހެއް',
+      dd: 'ދުވަސް %d',
+      M: 'މަހެއް',
+      MM: 'މަސް %d',
+      y: 'އަހަރެއް',
+      yy: 'އަހަރު %d' },
+
+    preparse: function preparse(string) {
+      return string.replace(/،/g, ',');
+    },
+    postformat: function postformat(string) {
+      return string.replace(/,/g, '،');
+    },
+    week: {
+      dow: 7, // Sunday is the first day of the week.
+      doy: 12 // The week that contains Jan 12th is the first week of the year.
+    } });
+
+
+  return dv;
+
+});
+
+/***/ }),
+/* 79 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/el.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Greek [el]
+//! author : Aggelos Karalias : https://github.com/mehiel
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  function isFunction(input) {
+    return (
+      typeof Function !== 'undefined' && input instanceof Function ||
+      Object.prototype.toString.call(input) === '[object Function]');
+
+  }
+
+  var el = moment.defineLocale('el', {
+    monthsNominativeEl: 'Ιανουάριος_Φεβρουάριος_Μάρτιος_Απρίλιος_Μάιος_Ιούνιος_Ιούλιος_Αύγουστος_Σεπτέμβριος_Οκτώβριος_Νοέμβριος_Δεκέμβριος'.split(
+    '_'),
+
+    monthsGenitiveEl: 'Ιανουαρίου_Φεβρουαρίου_Μαρτίου_Απριλίου_Μαΐου_Ιουνίου_Ιουλίου_Αυγούστου_Σεπτεμβρίου_Οκτωβρίου_Νοεμβρίου_Δεκεμβρίου'.split(
+    '_'),
+
+    months: function months(momentToFormat, format) {
+      if (!momentToFormat) {
+        return this._monthsNominativeEl;
+      } else if (
+      typeof format === 'string' &&
+      /D/.test(format.substring(0, format.indexOf('MMMM'))))
+      {
+        // if there is a day number before 'MMMM'
+        return this._monthsGenitiveEl[momentToFormat.month()];
+      } else {
+        return this._monthsNominativeEl[momentToFormat.month()];
+      }
+    },
+    monthsShort: 'Ιαν_Φεβ_Μαρ_Απρ_Μαϊ_Ιουν_Ιουλ_Αυγ_Σεπ_Οκτ_Νοε_Δεκ'.split('_'),
+    weekdays: 'Κυριακή_Δευτέρα_Τρίτη_Τετάρτη_Πέμπτη_Παρασκευή_Σάββατο'.split(
+    '_'),
+
+    weekdaysShort: 'Κυρ_Δευ_Τρι_Τετ_Πεμ_Παρ_Σαβ'.split('_'),
+    weekdaysMin: 'Κυ_Δε_Τρ_Τε_Πε_Πα_Σα'.split('_'),
+    meridiem: function meridiem(hours, minutes, isLower) {
+      if (hours > 11) {
+        return isLower ? 'μμ' : 'ΜΜ';
+      } else {
+        return isLower ? 'πμ' : 'ΠΜ';
+      }
+    },
+    isPM: function isPM(input) {
+      return (input + '').toLowerCase()[0] === 'μ';
+    },
+    meridiemParse: /[ΠΜ]\.?Μ?\.?/i,
+    longDateFormat: {
+      LT: 'h:mm A',
+      LTS: 'h:mm:ss A',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY h:mm A',
+      LLLL: 'dddd, D MMMM YYYY h:mm A' },
+
+    calendarEl: {
+      sameDay: '[Σήμερα {}] LT',
+      nextDay: '[Αύριο {}] LT',
+      nextWeek: 'dddd [{}] LT',
+      lastDay: '[Χθες {}] LT',
+      lastWeek: function lastWeek() {
+        switch (this.day()) {
+          case 6:
+            return '[το προηγούμενο] dddd [{}] LT';
+          default:
+            return '[την προηγούμενη] dddd [{}] LT';}
+
+      },
+      sameElse: 'L' },
+
+    calendar: function calendar(key, mom) {
+      var output = this._calendarEl[key],
+      hours = mom && mom.hours();
+      if (isFunction(output)) {
+        output = output.apply(mom);
+      }
+      return output.replace('{}', hours % 12 === 1 ? 'στη' : 'στις');
+    },
+    relativeTime: {
+      future: 'σε %s',
+      past: '%s πριν',
+      s: 'λίγα δευτερόλεπτα',
+      ss: '%d δευτερόλεπτα',
+      m: 'ένα λεπτό',
+      mm: '%d λεπτά',
+      h: 'μία ώρα',
+      hh: '%d ώρες',
+      d: 'μία μέρα',
+      dd: '%d μέρες',
+      M: 'ένας μήνας',
+      MM: '%d μήνες',
+      y: 'ένας χρόνος',
+      yy: '%d χρόνια' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}η/,
+    ordinal: '%dη',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4st is the first week of the year.
+    } });
+
+
+  return el;
+
+});
+
+/***/ }),
+/* 80 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/en-au.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : English (Australia) [en-au]
+//! author : Jared Morse : https://github.com/jarcoal
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var enAu = moment.defineLocale('en-au', {
+    months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split(
+    '_'),
+
+    monthsShort: 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_'),
+    weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split(
+    '_'),
+
+    weekdaysShort: 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_'),
+    weekdaysMin: 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_'),
+    longDateFormat: {
+      LT: 'h:mm A',
+      LTS: 'h:mm:ss A',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY h:mm A',
+      LLLL: 'dddd, D MMMM YYYY h:mm A' },
+
+    calendar: {
+      sameDay: '[Today at] LT',
+      nextDay: '[Tomorrow at] LT',
+      nextWeek: 'dddd [at] LT',
+      lastDay: '[Yesterday at] LT',
+      lastWeek: '[Last] dddd [at] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'in %s',
+      past: '%s ago',
+      s: 'a few seconds',
+      ss: '%d seconds',
+      m: 'a minute',
+      mm: '%d minutes',
+      h: 'an hour',
+      hh: '%d hours',
+      d: 'a day',
+      dd: '%d days',
+      M: 'a month',
+      MM: '%d months',
+      y: 'a year',
+      yy: '%d years' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(st|nd|rd|th)/,
+    ordinal: function ordinal(number) {
+      var b = number % 10,
+      output =
+      ~~(number % 100 / 10) === 1 ?
+      'th' :
+      b === 1 ?
+      'st' :
+      b === 2 ?
+      'nd' :
+      b === 3 ?
+      'rd' :
+      'th';
+      return number + output;
+    },
+    week: {
+      dow: 0, // Sunday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return enAu;
+
+});
+
+/***/ }),
+/* 81 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/en-ca.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : English (Canada) [en-ca]
+//! author : Jonathan Abourbih : https://github.com/jonbca
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var enCa = moment.defineLocale('en-ca', {
+    months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split(
+    '_'),
+
+    monthsShort: 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_'),
+    weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split(
+    '_'),
+
+    weekdaysShort: 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_'),
+    weekdaysMin: 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_'),
+    longDateFormat: {
+      LT: 'h:mm A',
+      LTS: 'h:mm:ss A',
+      L: 'YYYY-MM-DD',
+      LL: 'MMMM D, YYYY',
+      LLL: 'MMMM D, YYYY h:mm A',
+      LLLL: 'dddd, MMMM D, YYYY h:mm A' },
+
+    calendar: {
+      sameDay: '[Today at] LT',
+      nextDay: '[Tomorrow at] LT',
+      nextWeek: 'dddd [at] LT',
+      lastDay: '[Yesterday at] LT',
+      lastWeek: '[Last] dddd [at] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'in %s',
+      past: '%s ago',
+      s: 'a few seconds',
+      ss: '%d seconds',
+      m: 'a minute',
+      mm: '%d minutes',
+      h: 'an hour',
+      hh: '%d hours',
+      d: 'a day',
+      dd: '%d days',
+      M: 'a month',
+      MM: '%d months',
+      y: 'a year',
+      yy: '%d years' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(st|nd|rd|th)/,
+    ordinal: function ordinal(number) {
+      var b = number % 10,
+      output =
+      ~~(number % 100 / 10) === 1 ?
+      'th' :
+      b === 1 ?
+      'st' :
+      b === 2 ?
+      'nd' :
+      b === 3 ?
+      'rd' :
+      'th';
+      return number + output;
+    } });
+
+
+  return enCa;
+
+});
+
+/***/ }),
+/* 82 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/en-gb.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : English (United Kingdom) [en-gb]
+//! author : Chris Gedrim : https://github.com/chrisgedrim
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var enGb = moment.defineLocale('en-gb', {
+    months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split(
+    '_'),
+
+    monthsShort: 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_'),
+    weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split(
+    '_'),
+
+    weekdaysShort: 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_'),
+    weekdaysMin: 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd, D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[Today at] LT',
+      nextDay: '[Tomorrow at] LT',
+      nextWeek: 'dddd [at] LT',
+      lastDay: '[Yesterday at] LT',
+      lastWeek: '[Last] dddd [at] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'in %s',
+      past: '%s ago',
+      s: 'a few seconds',
+      ss: '%d seconds',
+      m: 'a minute',
+      mm: '%d minutes',
+      h: 'an hour',
+      hh: '%d hours',
+      d: 'a day',
+      dd: '%d days',
+      M: 'a month',
+      MM: '%d months',
+      y: 'a year',
+      yy: '%d years' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(st|nd|rd|th)/,
+    ordinal: function ordinal(number) {
+      var b = number % 10,
+      output =
+      ~~(number % 100 / 10) === 1 ?
+      'th' :
+      b === 1 ?
+      'st' :
+      b === 2 ?
+      'nd' :
+      b === 3 ?
+      'rd' :
+      'th';
+      return number + output;
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return enGb;
+
+});
+
+/***/ }),
+/* 83 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/en-ie.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : English (Ireland) [en-ie]
+//! author : Chris Cartlidge : https://github.com/chriscartlidge
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var enIe = moment.defineLocale('en-ie', {
+    months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split(
+    '_'),
+
+    monthsShort: 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_'),
+    weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split(
+    '_'),
+
+    weekdaysShort: 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_'),
+    weekdaysMin: 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[Today at] LT',
+      nextDay: '[Tomorrow at] LT',
+      nextWeek: 'dddd [at] LT',
+      lastDay: '[Yesterday at] LT',
+      lastWeek: '[Last] dddd [at] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'in %s',
+      past: '%s ago',
+      s: 'a few seconds',
+      ss: '%d seconds',
+      m: 'a minute',
+      mm: '%d minutes',
+      h: 'an hour',
+      hh: '%d hours',
+      d: 'a day',
+      dd: '%d days',
+      M: 'a month',
+      MM: '%d months',
+      y: 'a year',
+      yy: '%d years' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(st|nd|rd|th)/,
+    ordinal: function ordinal(number) {
+      var b = number % 10,
+      output =
+      ~~(number % 100 / 10) === 1 ?
+      'th' :
+      b === 1 ?
+      'st' :
+      b === 2 ?
+      'nd' :
+      b === 3 ?
+      'rd' :
+      'th';
+      return number + output;
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return enIe;
+
+});
+
+/***/ }),
+/* 84 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/en-il.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : English (Israel) [en-il]
+//! author : Chris Gedrim : https://github.com/chrisgedrim
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var enIl = moment.defineLocale('en-il', {
+    months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split(
+    '_'),
+
+    monthsShort: 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_'),
+    weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split(
+    '_'),
+
+    weekdaysShort: 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_'),
+    weekdaysMin: 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd, D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[Today at] LT',
+      nextDay: '[Tomorrow at] LT',
+      nextWeek: 'dddd [at] LT',
+      lastDay: '[Yesterday at] LT',
+      lastWeek: '[Last] dddd [at] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'in %s',
+      past: '%s ago',
+      s: 'a few seconds',
+      ss: '%d seconds',
+      m: 'a minute',
+      mm: '%d minutes',
+      h: 'an hour',
+      hh: '%d hours',
+      d: 'a day',
+      dd: '%d days',
+      M: 'a month',
+      MM: '%d months',
+      y: 'a year',
+      yy: '%d years' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(st|nd|rd|th)/,
+    ordinal: function ordinal(number) {
+      var b = number % 10,
+      output =
+      ~~(number % 100 / 10) === 1 ?
+      'th' :
+      b === 1 ?
+      'st' :
+      b === 2 ?
+      'nd' :
+      b === 3 ?
+      'rd' :
+      'th';
+      return number + output;
+    } });
+
+
+  return enIl;
+
+});
+
+/***/ }),
+/* 85 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/en-in.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : English (India) [en-in]
+//! author : Jatin Agrawal : https://github.com/jatinag22
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var enIn = moment.defineLocale('en-in', {
+    months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split(
+    '_'),
+
+    monthsShort: 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_'),
+    weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split(
+    '_'),
+
+    weekdaysShort: 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_'),
+    weekdaysMin: 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_'),
+    longDateFormat: {
+      LT: 'h:mm A',
+      LTS: 'h:mm:ss A',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY h:mm A',
+      LLLL: 'dddd, D MMMM YYYY h:mm A' },
+
+    calendar: {
+      sameDay: '[Today at] LT',
+      nextDay: '[Tomorrow at] LT',
+      nextWeek: 'dddd [at] LT',
+      lastDay: '[Yesterday at] LT',
+      lastWeek: '[Last] dddd [at] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'in %s',
+      past: '%s ago',
+      s: 'a few seconds',
+      ss: '%d seconds',
+      m: 'a minute',
+      mm: '%d minutes',
+      h: 'an hour',
+      hh: '%d hours',
+      d: 'a day',
+      dd: '%d days',
+      M: 'a month',
+      MM: '%d months',
+      y: 'a year',
+      yy: '%d years' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(st|nd|rd|th)/,
+    ordinal: function ordinal(number) {
+      var b = number % 10,
+      output =
+      ~~(number % 100 / 10) === 1 ?
+      'th' :
+      b === 1 ?
+      'st' :
+      b === 2 ?
+      'nd' :
+      b === 3 ?
+      'rd' :
+      'th';
+      return number + output;
+    },
+    week: {
+      dow: 0, // Sunday is the first day of the week.
+      doy: 6 // The week that contains Jan 1st is the first week of the year.
+    } });
+
+
+  return enIn;
+
+});
+
+/***/ }),
+/* 86 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/en-nz.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : English (New Zealand) [en-nz]
+//! author : Luke McGregor : https://github.com/lukemcgregor
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var enNz = moment.defineLocale('en-nz', {
+    months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split(
+    '_'),
+
+    monthsShort: 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_'),
+    weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split(
+    '_'),
+
+    weekdaysShort: 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_'),
+    weekdaysMin: 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_'),
+    longDateFormat: {
+      LT: 'h:mm A',
+      LTS: 'h:mm:ss A',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY h:mm A',
+      LLLL: 'dddd, D MMMM YYYY h:mm A' },
+
+    calendar: {
+      sameDay: '[Today at] LT',
+      nextDay: '[Tomorrow at] LT',
+      nextWeek: 'dddd [at] LT',
+      lastDay: '[Yesterday at] LT',
+      lastWeek: '[Last] dddd [at] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'in %s',
+      past: '%s ago',
+      s: 'a few seconds',
+      ss: '%d seconds',
+      m: 'a minute',
+      mm: '%d minutes',
+      h: 'an hour',
+      hh: '%d hours',
+      d: 'a day',
+      dd: '%d days',
+      M: 'a month',
+      MM: '%d months',
+      y: 'a year',
+      yy: '%d years' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(st|nd|rd|th)/,
+    ordinal: function ordinal(number) {
+      var b = number % 10,
+      output =
+      ~~(number % 100 / 10) === 1 ?
+      'th' :
+      b === 1 ?
+      'st' :
+      b === 2 ?
+      'nd' :
+      b === 3 ?
+      'rd' :
+      'th';
+      return number + output;
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return enNz;
+
+});
+
+/***/ }),
+/* 87 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/en-sg.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : English (Singapore) [en-sg]
+//! author : Matthew Castrillon-Madrigal : https://github.com/techdimension
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var enSg = moment.defineLocale('en-sg', {
+    months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split(
+    '_'),
+
+    monthsShort: 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_'),
+    weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split(
+    '_'),
+
+    weekdaysShort: 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_'),
+    weekdaysMin: 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd, D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[Today at] LT',
+      nextDay: '[Tomorrow at] LT',
+      nextWeek: 'dddd [at] LT',
+      lastDay: '[Yesterday at] LT',
+      lastWeek: '[Last] dddd [at] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'in %s',
+      past: '%s ago',
+      s: 'a few seconds',
+      ss: '%d seconds',
+      m: 'a minute',
+      mm: '%d minutes',
+      h: 'an hour',
+      hh: '%d hours',
+      d: 'a day',
+      dd: '%d days',
+      M: 'a month',
+      MM: '%d months',
+      y: 'a year',
+      yy: '%d years' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(st|nd|rd|th)/,
+    ordinal: function ordinal(number) {
+      var b = number % 10,
+      output =
+      ~~(number % 100 / 10) === 1 ?
+      'th' :
+      b === 1 ?
+      'st' :
+      b === 2 ?
+      'nd' :
+      b === 3 ?
+      'rd' :
+      'th';
+      return number + output;
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return enSg;
+
+});
+
+/***/ }),
+/* 88 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/eo.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Esperanto [eo]
+//! author : Colin Dean : https://github.com/colindean
+//! author : Mia Nordentoft Imperatori : https://github.com/miestasmia
+//! comment : miestasmia corrected the translation by colindean
+//! comment : Vivakvo corrected the translation by colindean and miestasmia
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var eo = moment.defineLocale('eo', {
+    months: 'januaro_februaro_marto_aprilo_majo_junio_julio_aŭgusto_septembro_oktobro_novembro_decembro'.split(
+    '_'),
+
+    monthsShort: 'jan_feb_mart_apr_maj_jun_jul_aŭg_sept_okt_nov_dec'.split('_'),
+    weekdays: 'dimanĉo_lundo_mardo_merkredo_ĵaŭdo_vendredo_sabato'.split('_'),
+    weekdaysShort: 'dim_lun_mard_merk_ĵaŭ_ven_sab'.split('_'),
+    weekdaysMin: 'di_lu_ma_me_ĵa_ve_sa'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'YYYY-MM-DD',
+      LL: '[la] D[-an de] MMMM, YYYY',
+      LLL: '[la] D[-an de] MMMM, YYYY HH:mm',
+      LLLL: 'dddd[n], [la] D[-an de] MMMM, YYYY HH:mm',
+      llll: 'ddd, [la] D[-an de] MMM, YYYY HH:mm' },
+
+    meridiemParse: /[ap]\.t\.m/i,
+    isPM: function isPM(input) {
+      return input.charAt(0).toLowerCase() === 'p';
+    },
+    meridiem: function meridiem(hours, minutes, isLower) {
+      if (hours > 11) {
+        return isLower ? 'p.t.m.' : 'P.T.M.';
+      } else {
+        return isLower ? 'a.t.m.' : 'A.T.M.';
+      }
+    },
+    calendar: {
+      sameDay: '[Hodiaŭ je] LT',
+      nextDay: '[Morgaŭ je] LT',
+      nextWeek: 'dddd[n je] LT',
+      lastDay: '[Hieraŭ je] LT',
+      lastWeek: '[pasintan] dddd[n je] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'post %s',
+      past: 'antaŭ %s',
+      s: 'kelkaj sekundoj',
+      ss: '%d sekundoj',
+      m: 'unu minuto',
+      mm: '%d minutoj',
+      h: 'unu horo',
+      hh: '%d horoj',
+      d: 'unu tago', //ne 'diurno', ĉar estas uzita por proksimumo
+      dd: '%d tagoj',
+      M: 'unu monato',
+      MM: '%d monatoj',
+      y: 'unu jaro',
+      yy: '%d jaroj' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}a/,
+    ordinal: '%da',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 7 // The week that contains Jan 7th is the first week of the year.
+    } });
+
+
+  return eo;
+
+});
+
+/***/ }),
+/* 89 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/es.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Spanish [es]
+//! author : Julio Napurí : https://github.com/julionc
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var monthsShortDot = 'ene._feb._mar._abr._may._jun._jul._ago._sep._oct._nov._dic.'.split(
+  '_'),
+
+  _monthsShort = 'ene_feb_mar_abr_may_jun_jul_ago_sep_oct_nov_dic'.split('_'),
+  monthsParse = [
+  /^ene/i,
+  /^feb/i,
+  /^mar/i,
+  /^abr/i,
+  /^may/i,
+  /^jun/i,
+  /^jul/i,
+  /^ago/i,
+  /^sep/i,
+  /^oct/i,
+  /^nov/i,
+  /^dic/i],
+
+  monthsRegex = /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre|ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i;
+
+  var es = moment.defineLocale('es', {
+    months: 'enero_febrero_marzo_abril_mayo_junio_julio_agosto_septiembre_octubre_noviembre_diciembre'.split(
+    '_'),
+
+    monthsShort: function monthsShort(m, format) {
+      if (!m) {
+        return monthsShortDot;
+      } else if (/-MMM-/.test(format)) {
+        return _monthsShort[m.month()];
+      } else {
+        return monthsShortDot[m.month()];
+      }
+    },
+    monthsRegex: monthsRegex,
+    monthsShortRegex: monthsRegex,
+    monthsStrictRegex: /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)/i,
+    monthsShortStrictRegex: /^(ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i,
+    monthsParse: monthsParse,
+    longMonthsParse: monthsParse,
+    shortMonthsParse: monthsParse,
+    weekdays: 'domingo_lunes_martes_miércoles_jueves_viernes_sábado'.split('_'),
+    weekdaysShort: 'dom._lun._mar._mié._jue._vie._sáb.'.split('_'),
+    weekdaysMin: 'do_lu_ma_mi_ju_vi_sá'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'H:mm',
+      LTS: 'H:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D [de] MMMM [de] YYYY',
+      LLL: 'D [de] MMMM [de] YYYY H:mm',
+      LLLL: 'dddd, D [de] MMMM [de] YYYY H:mm' },
+
+    calendar: {
+      sameDay: function sameDay() {
+        return '[hoy a la' + (this.hours() !== 1 ? 's' : '') + '] LT';
+      },
+      nextDay: function nextDay() {
+        return '[mañana a la' + (this.hours() !== 1 ? 's' : '') + '] LT';
+      },
+      nextWeek: function nextWeek() {
+        return 'dddd [a la' + (this.hours() !== 1 ? 's' : '') + '] LT';
+      },
+      lastDay: function lastDay() {
+        return '[ayer a la' + (this.hours() !== 1 ? 's' : '') + '] LT';
+      },
+      lastWeek: function lastWeek() {
+        return (
+          '[el] dddd [pasado a la' + (
+          this.hours() !== 1 ? 's' : '') +
+          '] LT');
+
+      },
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'en %s',
+      past: 'hace %s',
+      s: 'unos segundos',
+      ss: '%d segundos',
+      m: 'un minuto',
+      mm: '%d minutos',
+      h: 'una hora',
+      hh: '%d horas',
+      d: 'un día',
+      dd: '%d días',
+      w: 'una semana',
+      ww: '%d semanas',
+      M: 'un mes',
+      MM: '%d meses',
+      y: 'un año',
+      yy: '%d años' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}º/,
+    ordinal: '%dº',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    },
+    invalidDate: 'Fecha inválida' });
+
+
+  return es;
+
+});
+
+/***/ }),
+/* 90 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/es-do.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Spanish (Dominican Republic) [es-do]
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var monthsShortDot = 'ene._feb._mar._abr._may._jun._jul._ago._sep._oct._nov._dic.'.split(
+  '_'),
+
+  _monthsShort = 'ene_feb_mar_abr_may_jun_jul_ago_sep_oct_nov_dic'.split('_'),
+  monthsParse = [
+  /^ene/i,
+  /^feb/i,
+  /^mar/i,
+  /^abr/i,
+  /^may/i,
+  /^jun/i,
+  /^jul/i,
+  /^ago/i,
+  /^sep/i,
+  /^oct/i,
+  /^nov/i,
+  /^dic/i],
+
+  monthsRegex = /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre|ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i;
+
+  var esDo = moment.defineLocale('es-do', {
+    months: 'enero_febrero_marzo_abril_mayo_junio_julio_agosto_septiembre_octubre_noviembre_diciembre'.split(
+    '_'),
+
+    monthsShort: function monthsShort(m, format) {
+      if (!m) {
+        return monthsShortDot;
+      } else if (/-MMM-/.test(format)) {
+        return _monthsShort[m.month()];
+      } else {
+        return monthsShortDot[m.month()];
+      }
+    },
+    monthsRegex: monthsRegex,
+    monthsShortRegex: monthsRegex,
+    monthsStrictRegex: /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)/i,
+    monthsShortStrictRegex: /^(ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i,
+    monthsParse: monthsParse,
+    longMonthsParse: monthsParse,
+    shortMonthsParse: monthsParse,
+    weekdays: 'domingo_lunes_martes_miércoles_jueves_viernes_sábado'.split('_'),
+    weekdaysShort: 'dom._lun._mar._mié._jue._vie._sáb.'.split('_'),
+    weekdaysMin: 'do_lu_ma_mi_ju_vi_sá'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'h:mm A',
+      LTS: 'h:mm:ss A',
+      L: 'DD/MM/YYYY',
+      LL: 'D [de] MMMM [de] YYYY',
+      LLL: 'D [de] MMMM [de] YYYY h:mm A',
+      LLLL: 'dddd, D [de] MMMM [de] YYYY h:mm A' },
+
+    calendar: {
+      sameDay: function sameDay() {
+        return '[hoy a la' + (this.hours() !== 1 ? 's' : '') + '] LT';
+      },
+      nextDay: function nextDay() {
+        return '[mañana a la' + (this.hours() !== 1 ? 's' : '') + '] LT';
+      },
+      nextWeek: function nextWeek() {
+        return 'dddd [a la' + (this.hours() !== 1 ? 's' : '') + '] LT';
+      },
+      lastDay: function lastDay() {
+        return '[ayer a la' + (this.hours() !== 1 ? 's' : '') + '] LT';
+      },
+      lastWeek: function lastWeek() {
+        return (
+          '[el] dddd [pasado a la' + (
+          this.hours() !== 1 ? 's' : '') +
+          '] LT');
+
+      },
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'en %s',
+      past: 'hace %s',
+      s: 'unos segundos',
+      ss: '%d segundos',
+      m: 'un minuto',
+      mm: '%d minutos',
+      h: 'una hora',
+      hh: '%d horas',
+      d: 'un día',
+      dd: '%d días',
+      w: 'una semana',
+      ww: '%d semanas',
+      M: 'un mes',
+      MM: '%d meses',
+      y: 'un año',
+      yy: '%d años' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}º/,
+    ordinal: '%dº',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return esDo;
+
+});
+
+/***/ }),
+/* 91 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/es-mx.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Spanish (Mexico) [es-mx]
+//! author : JC Franco : https://github.com/jcfranco
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var monthsShortDot = 'ene._feb._mar._abr._may._jun._jul._ago._sep._oct._nov._dic.'.split(
+  '_'),
+
+  _monthsShort = 'ene_feb_mar_abr_may_jun_jul_ago_sep_oct_nov_dic'.split('_'),
+  monthsParse = [
+  /^ene/i,
+  /^feb/i,
+  /^mar/i,
+  /^abr/i,
+  /^may/i,
+  /^jun/i,
+  /^jul/i,
+  /^ago/i,
+  /^sep/i,
+  /^oct/i,
+  /^nov/i,
+  /^dic/i],
+
+  monthsRegex = /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre|ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i;
+
+  var esMx = moment.defineLocale('es-mx', {
+    months: 'enero_febrero_marzo_abril_mayo_junio_julio_agosto_septiembre_octubre_noviembre_diciembre'.split(
+    '_'),
+
+    monthsShort: function monthsShort(m, format) {
+      if (!m) {
+        return monthsShortDot;
+      } else if (/-MMM-/.test(format)) {
+        return _monthsShort[m.month()];
+      } else {
+        return monthsShortDot[m.month()];
+      }
+    },
+    monthsRegex: monthsRegex,
+    monthsShortRegex: monthsRegex,
+    monthsStrictRegex: /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)/i,
+    monthsShortStrictRegex: /^(ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i,
+    monthsParse: monthsParse,
+    longMonthsParse: monthsParse,
+    shortMonthsParse: monthsParse,
+    weekdays: 'domingo_lunes_martes_miércoles_jueves_viernes_sábado'.split('_'),
+    weekdaysShort: 'dom._lun._mar._mié._jue._vie._sáb.'.split('_'),
+    weekdaysMin: 'do_lu_ma_mi_ju_vi_sá'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'H:mm',
+      LTS: 'H:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D [de] MMMM [de] YYYY',
+      LLL: 'D [de] MMMM [de] YYYY H:mm',
+      LLLL: 'dddd, D [de] MMMM [de] YYYY H:mm' },
+
+    calendar: {
+      sameDay: function sameDay() {
+        return '[hoy a la' + (this.hours() !== 1 ? 's' : '') + '] LT';
+      },
+      nextDay: function nextDay() {
+        return '[mañana a la' + (this.hours() !== 1 ? 's' : '') + '] LT';
+      },
+      nextWeek: function nextWeek() {
+        return 'dddd [a la' + (this.hours() !== 1 ? 's' : '') + '] LT';
+      },
+      lastDay: function lastDay() {
+        return '[ayer a la' + (this.hours() !== 1 ? 's' : '') + '] LT';
+      },
+      lastWeek: function lastWeek() {
+        return (
+          '[el] dddd [pasado a la' + (
+          this.hours() !== 1 ? 's' : '') +
+          '] LT');
+
+      },
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'en %s',
+      past: 'hace %s',
+      s: 'unos segundos',
+      ss: '%d segundos',
+      m: 'un minuto',
+      mm: '%d minutos',
+      h: 'una hora',
+      hh: '%d horas',
+      d: 'un día',
+      dd: '%d días',
+      w: 'una semana',
+      ww: '%d semanas',
+      M: 'un mes',
+      MM: '%d meses',
+      y: 'un año',
+      yy: '%d años' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}º/,
+    ordinal: '%dº',
+    week: {
+      dow: 0, // Sunday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    },
+    invalidDate: 'Fecha inválida' });
+
+
+  return esMx;
+
+});
+
+/***/ }),
+/* 92 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/es-us.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Spanish (United States) [es-us]
+//! author : bustta : https://github.com/bustta
+//! author : chrisrodz : https://github.com/chrisrodz
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var monthsShortDot = 'ene._feb._mar._abr._may._jun._jul._ago._sep._oct._nov._dic.'.split(
+  '_'),
+
+  _monthsShort = 'ene_feb_mar_abr_may_jun_jul_ago_sep_oct_nov_dic'.split('_'),
+  monthsParse = [
+  /^ene/i,
+  /^feb/i,
+  /^mar/i,
+  /^abr/i,
+  /^may/i,
+  /^jun/i,
+  /^jul/i,
+  /^ago/i,
+  /^sep/i,
+  /^oct/i,
+  /^nov/i,
+  /^dic/i],
+
+  monthsRegex = /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre|ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i;
+
+  var esUs = moment.defineLocale('es-us', {
+    months: 'enero_febrero_marzo_abril_mayo_junio_julio_agosto_septiembre_octubre_noviembre_diciembre'.split(
+    '_'),
+
+    monthsShort: function monthsShort(m, format) {
+      if (!m) {
+        return monthsShortDot;
+      } else if (/-MMM-/.test(format)) {
+        return _monthsShort[m.month()];
+      } else {
+        return monthsShortDot[m.month()];
+      }
+    },
+    monthsRegex: monthsRegex,
+    monthsShortRegex: monthsRegex,
+    monthsStrictRegex: /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)/i,
+    monthsShortStrictRegex: /^(ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i,
+    monthsParse: monthsParse,
+    longMonthsParse: monthsParse,
+    shortMonthsParse: monthsParse,
+    weekdays: 'domingo_lunes_martes_miércoles_jueves_viernes_sábado'.split('_'),
+    weekdaysShort: 'dom._lun._mar._mié._jue._vie._sáb.'.split('_'),
+    weekdaysMin: 'do_lu_ma_mi_ju_vi_sá'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'h:mm A',
+      LTS: 'h:mm:ss A',
+      L: 'MM/DD/YYYY',
+      LL: 'D [de] MMMM [de] YYYY',
+      LLL: 'D [de] MMMM [de] YYYY h:mm A',
+      LLLL: 'dddd, D [de] MMMM [de] YYYY h:mm A' },
+
+    calendar: {
+      sameDay: function sameDay() {
+        return '[hoy a la' + (this.hours() !== 1 ? 's' : '') + '] LT';
+      },
+      nextDay: function nextDay() {
+        return '[mañana a la' + (this.hours() !== 1 ? 's' : '') + '] LT';
+      },
+      nextWeek: function nextWeek() {
+        return 'dddd [a la' + (this.hours() !== 1 ? 's' : '') + '] LT';
+      },
+      lastDay: function lastDay() {
+        return '[ayer a la' + (this.hours() !== 1 ? 's' : '') + '] LT';
+      },
+      lastWeek: function lastWeek() {
+        return (
+          '[el] dddd [pasado a la' + (
+          this.hours() !== 1 ? 's' : '') +
+          '] LT');
+
+      },
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'en %s',
+      past: 'hace %s',
+      s: 'unos segundos',
+      ss: '%d segundos',
+      m: 'un minuto',
+      mm: '%d minutos',
+      h: 'una hora',
+      hh: '%d horas',
+      d: 'un día',
+      dd: '%d días',
+      w: 'una semana',
+      ww: '%d semanas',
+      M: 'un mes',
+      MM: '%d meses',
+      y: 'un año',
+      yy: '%d años' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}º/,
+    ordinal: '%dº',
+    week: {
+      dow: 0, // Sunday is the first day of the week.
+      doy: 6 // The week that contains Jan 6th is the first week of the year.
+    } });
+
+
+  return esUs;
+
+});
+
+/***/ }),
+/* 93 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/et.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Estonian [et]
+//! author : Henry Kehlmann : https://github.com/madhenry
+//! improvements : Illimar Tambek : https://github.com/ragulka
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  function processRelativeTime(number, withoutSuffix, key, isFuture) {
+    var format = {
+      s: ['mõne sekundi', 'mõni sekund', 'paar sekundit'],
+      ss: [number + 'sekundi', number + 'sekundit'],
+      m: ['ühe minuti', 'üks minut'],
+      mm: [number + ' minuti', number + ' minutit'],
+      h: ['ühe tunni', 'tund aega', 'üks tund'],
+      hh: [number + ' tunni', number + ' tundi'],
+      d: ['ühe päeva', 'üks päev'],
+      M: ['kuu aja', 'kuu aega', 'üks kuu'],
+      MM: [number + ' kuu', number + ' kuud'],
+      y: ['ühe aasta', 'aasta', 'üks aasta'],
+      yy: [number + ' aasta', number + ' aastat'] };
+
+    if (withoutSuffix) {
+      return format[key][2] ? format[key][2] : format[key][1];
+    }
+    return isFuture ? format[key][0] : format[key][1];
+  }
+
+  var et = moment.defineLocale('et', {
+    months: 'jaanuar_veebruar_märts_aprill_mai_juuni_juuli_august_september_oktoober_november_detsember'.split(
+    '_'),
+
+    monthsShort: 'jaan_veebr_märts_apr_mai_juuni_juuli_aug_sept_okt_nov_dets'.split(
+    '_'),
+
+    weekdays: 'pühapäev_esmaspäev_teisipäev_kolmapäev_neljapäev_reede_laupäev'.split(
+    '_'),
+
+    weekdaysShort: 'P_E_T_K_N_R_L'.split('_'),
+    weekdaysMin: 'P_E_T_K_N_R_L'.split('_'),
+    longDateFormat: {
+      LT: 'H:mm',
+      LTS: 'H:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'D. MMMM YYYY',
+      LLL: 'D. MMMM YYYY H:mm',
+      LLLL: 'dddd, D. MMMM YYYY H:mm' },
+
+    calendar: {
+      sameDay: '[Täna,] LT',
+      nextDay: '[Homme,] LT',
+      nextWeek: '[Järgmine] dddd LT',
+      lastDay: '[Eile,] LT',
+      lastWeek: '[Eelmine] dddd LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s pärast',
+      past: '%s tagasi',
+      s: processRelativeTime,
+      ss: processRelativeTime,
+      m: processRelativeTime,
+      mm: processRelativeTime,
+      h: processRelativeTime,
+      hh: processRelativeTime,
+      d: processRelativeTime,
+      dd: '%d päeva',
+      M: processRelativeTime,
+      MM: processRelativeTime,
+      y: processRelativeTime,
+      yy: processRelativeTime },
+
+    dayOfMonthOrdinalParse: /\d{1,2}\./,
+    ordinal: '%d.',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return et;
+
+});
+
+/***/ }),
+/* 94 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/eu.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Basque [eu]
+//! author : Eneko Illarramendi : https://github.com/eillarra
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var eu = moment.defineLocale('eu', {
+    months: 'urtarrila_otsaila_martxoa_apirila_maiatza_ekaina_uztaila_abuztua_iraila_urria_azaroa_abendua'.split(
+    '_'),
+
+    monthsShort: 'urt._ots._mar._api._mai._eka._uzt._abu._ira._urr._aza._abe.'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'igandea_astelehena_asteartea_asteazkena_osteguna_ostirala_larunbata'.split(
+    '_'),
+
+    weekdaysShort: 'ig._al._ar._az._og._ol._lr.'.split('_'),
+    weekdaysMin: 'ig_al_ar_az_og_ol_lr'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'YYYY-MM-DD',
+      LL: 'YYYY[ko] MMMM[ren] D[a]',
+      LLL: 'YYYY[ko] MMMM[ren] D[a] HH:mm',
+      LLLL: 'dddd, YYYY[ko] MMMM[ren] D[a] HH:mm',
+      l: 'YYYY-M-D',
+      ll: 'YYYY[ko] MMM D[a]',
+      lll: 'YYYY[ko] MMM D[a] HH:mm',
+      llll: 'ddd, YYYY[ko] MMM D[a] HH:mm' },
+
+    calendar: {
+      sameDay: '[gaur] LT[etan]',
+      nextDay: '[bihar] LT[etan]',
+      nextWeek: 'dddd LT[etan]',
+      lastDay: '[atzo] LT[etan]',
+      lastWeek: '[aurreko] dddd LT[etan]',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s barru',
+      past: 'duela %s',
+      s: 'segundo batzuk',
+      ss: '%d segundo',
+      m: 'minutu bat',
+      mm: '%d minutu',
+      h: 'ordu bat',
+      hh: '%d ordu',
+      d: 'egun bat',
+      dd: '%d egun',
+      M: 'hilabete bat',
+      MM: '%d hilabete',
+      y: 'urte bat',
+      yy: '%d urte' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}\./,
+    ordinal: '%d.',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 7 // The week that contains Jan 7th is the first week of the year.
+    } });
+
+
+  return eu;
+
+});
+
+/***/ }),
+/* 95 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/fa.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Persian [fa]
+//! author : Ebrahim Byagowi : https://github.com/ebraminio
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var symbolMap = {
+    1: '۱',
+    2: '۲',
+    3: '۳',
+    4: '۴',
+    5: '۵',
+    6: '۶',
+    7: '۷',
+    8: '۸',
+    9: '۹',
+    0: '۰' },
+
+  numberMap = {
+    '۱': '1',
+    '۲': '2',
+    '۳': '3',
+    '۴': '4',
+    '۵': '5',
+    '۶': '6',
+    '۷': '7',
+    '۸': '8',
+    '۹': '9',
+    '۰': '0' };
+
+
+  var fa = moment.defineLocale('fa', {
+    months: 'ژانویه_فوریه_مارس_آوریل_مه_ژوئن_ژوئیه_اوت_سپتامبر_اکتبر_نوامبر_دسامبر'.split(
+    '_'),
+
+    monthsShort: 'ژانویه_فوریه_مارس_آوریل_مه_ژوئن_ژوئیه_اوت_سپتامبر_اکتبر_نوامبر_دسامبر'.split(
+    '_'),
+
+    weekdays: "\u06CC\u06A9\u200C\u0634\u0646\u0628\u0647_\u062F\u0648\u0634\u0646\u0628\u0647_\u0633\u0647\u200C\u0634\u0646\u0628\u0647_\u0686\u0647\u0627\u0631\u0634\u0646\u0628\u0647_\u067E\u0646\u062C\u200C\u0634\u0646\u0628\u0647_\u062C\u0645\u0639\u0647_\u0634\u0646\u0628\u0647".split(
+    '_'),
+
+    weekdaysShort: "\u06CC\u06A9\u200C\u0634\u0646\u0628\u0647_\u062F\u0648\u0634\u0646\u0628\u0647_\u0633\u0647\u200C\u0634\u0646\u0628\u0647_\u0686\u0647\u0627\u0631\u0634\u0646\u0628\u0647_\u067E\u0646\u062C\u200C\u0634\u0646\u0628\u0647_\u062C\u0645\u0639\u0647_\u0634\u0646\u0628\u0647".split(
+    '_'),
+
+    weekdaysMin: 'ی_د_س_چ_پ_ج_ش'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd, D MMMM YYYY HH:mm' },
+
+    meridiemParse: /قبل از ظهر|بعد از ظهر/,
+    isPM: function isPM(input) {
+      return /بعد از ظهر/.test(input);
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 12) {
+        return 'قبل از ظهر';
+      } else {
+        return 'بعد از ظهر';
+      }
+    },
+    calendar: {
+      sameDay: '[امروز ساعت] LT',
+      nextDay: '[فردا ساعت] LT',
+      nextWeek: 'dddd [ساعت] LT',
+      lastDay: '[دیروز ساعت] LT',
+      lastWeek: 'dddd [پیش] [ساعت] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'در %s',
+      past: '%s پیش',
+      s: 'چند ثانیه',
+      ss: '%d ثانیه',
+      m: 'یک دقیقه',
+      mm: '%d دقیقه',
+      h: 'یک ساعت',
+      hh: '%d ساعت',
+      d: 'یک روز',
+      dd: '%d روز',
+      M: 'یک ماه',
+      MM: '%d ماه',
+      y: 'یک سال',
+      yy: '%d سال' },
+
+    preparse: function preparse(string) {
+      return string.
+      replace(/[۰-۹]/g, function (match) {
+        return numberMap[match];
+      }).
+      replace(/،/g, ',');
+    },
+    postformat: function postformat(string) {
+      return string.
+      replace(/\d/g, function (match) {
+        return symbolMap[match];
+      }).
+      replace(/,/g, '،');
+    },
+    dayOfMonthOrdinalParse: /\d{1,2}م/,
+    ordinal: '%dم',
+    week: {
+      dow: 6, // Saturday is the first day of the week.
+      doy: 12 // The week that contains Jan 12th is the first week of the year.
+    } });
+
+
+  return fa;
+
+});
+
+/***/ }),
+/* 96 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/fi.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Finnish [fi]
+//! author : Tarmo Aidantausta : https://github.com/bleadof
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var numbersPast = 'nolla yksi kaksi kolme neljä viisi kuusi seitsemän kahdeksan yhdeksän'.split(
+  ' '),
+
+  numbersFuture = [
+  'nolla',
+  'yhden',
+  'kahden',
+  'kolmen',
+  'neljän',
+  'viiden',
+  'kuuden',
+  numbersPast[7],
+  numbersPast[8],
+  numbersPast[9]];
+
+  function translate(number, withoutSuffix, key, isFuture) {
+    var result = '';
+    switch (key) {
+      case 's':
+        return isFuture ? 'muutaman sekunnin' : 'muutama sekunti';
+      case 'ss':
+        result = isFuture ? 'sekunnin' : 'sekuntia';
+        break;
+      case 'm':
+        return isFuture ? 'minuutin' : 'minuutti';
+      case 'mm':
+        result = isFuture ? 'minuutin' : 'minuuttia';
+        break;
+      case 'h':
+        return isFuture ? 'tunnin' : 'tunti';
+      case 'hh':
+        result = isFuture ? 'tunnin' : 'tuntia';
+        break;
+      case 'd':
+        return isFuture ? 'päivän' : 'päivä';
+      case 'dd':
+        result = isFuture ? 'päivän' : 'päivää';
+        break;
+      case 'M':
+        return isFuture ? 'kuukauden' : 'kuukausi';
+      case 'MM':
+        result = isFuture ? 'kuukauden' : 'kuukautta';
+        break;
+      case 'y':
+        return isFuture ? 'vuoden' : 'vuosi';
+      case 'yy':
+        result = isFuture ? 'vuoden' : 'vuotta';
+        break;}
+
+    result = verbalNumber(number, isFuture) + ' ' + result;
+    return result;
+  }
+  function verbalNumber(number, isFuture) {
+    return number < 10 ?
+    isFuture ?
+    numbersFuture[number] :
+    numbersPast[number] :
+    number;
+  }
+
+  var fi = moment.defineLocale('fi', {
+    months: 'tammikuu_helmikuu_maaliskuu_huhtikuu_toukokuu_kesäkuu_heinäkuu_elokuu_syyskuu_lokakuu_marraskuu_joulukuu'.split(
+    '_'),
+
+    monthsShort: 'tammi_helmi_maalis_huhti_touko_kesä_heinä_elo_syys_loka_marras_joulu'.split(
+    '_'),
+
+    weekdays: 'sunnuntai_maanantai_tiistai_keskiviikko_torstai_perjantai_lauantai'.split(
+    '_'),
+
+    weekdaysShort: 'su_ma_ti_ke_to_pe_la'.split('_'),
+    weekdaysMin: 'su_ma_ti_ke_to_pe_la'.split('_'),
+    longDateFormat: {
+      LT: 'HH.mm',
+      LTS: 'HH.mm.ss',
+      L: 'DD.MM.YYYY',
+      LL: 'Do MMMM[ta] YYYY',
+      LLL: 'Do MMMM[ta] YYYY, [klo] HH.mm',
+      LLLL: 'dddd, Do MMMM[ta] YYYY, [klo] HH.mm',
+      l: 'D.M.YYYY',
+      ll: 'Do MMM YYYY',
+      lll: 'Do MMM YYYY, [klo] HH.mm',
+      llll: 'ddd, Do MMM YYYY, [klo] HH.mm' },
+
+    calendar: {
+      sameDay: '[tänään] [klo] LT',
+      nextDay: '[huomenna] [klo] LT',
+      nextWeek: 'dddd [klo] LT',
+      lastDay: '[eilen] [klo] LT',
+      lastWeek: '[viime] dddd[na] [klo] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s päästä',
+      past: '%s sitten',
+      s: translate,
+      ss: translate,
+      m: translate,
+      mm: translate,
+      h: translate,
+      hh: translate,
+      d: translate,
+      dd: translate,
+      M: translate,
+      MM: translate,
+      y: translate,
+      yy: translate },
+
+    dayOfMonthOrdinalParse: /\d{1,2}\./,
+    ordinal: '%d.',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return fi;
+
+});
+
+/***/ }),
+/* 97 */
+/*!**************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/fil.js ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Filipino [fil]
+//! author : Dan Hagman : https://github.com/hagmandan
+//! author : Matthew Co : https://github.com/matthewdeeco
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var fil = moment.defineLocale('fil', {
+    months: 'Enero_Pebrero_Marso_Abril_Mayo_Hunyo_Hulyo_Agosto_Setyembre_Oktubre_Nobyembre_Disyembre'.split(
+    '_'),
+
+    monthsShort: 'Ene_Peb_Mar_Abr_May_Hun_Hul_Ago_Set_Okt_Nob_Dis'.split('_'),
+    weekdays: 'Linggo_Lunes_Martes_Miyerkules_Huwebes_Biyernes_Sabado'.split(
+    '_'),
+
+    weekdaysShort: 'Lin_Lun_Mar_Miy_Huw_Biy_Sab'.split('_'),
+    weekdaysMin: 'Li_Lu_Ma_Mi_Hu_Bi_Sab'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'MM/D/YYYY',
+      LL: 'MMMM D, YYYY',
+      LLL: 'MMMM D, YYYY HH:mm',
+      LLLL: 'dddd, MMMM DD, YYYY HH:mm' },
+
+    calendar: {
+      sameDay: 'LT [ngayong araw]',
+      nextDay: '[Bukas ng] LT',
+      nextWeek: 'LT [sa susunod na] dddd',
+      lastDay: 'LT [kahapon]',
+      lastWeek: 'LT [noong nakaraang] dddd',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'sa loob ng %s',
+      past: '%s ang nakalipas',
+      s: 'ilang segundo',
+      ss: '%d segundo',
+      m: 'isang minuto',
+      mm: '%d minuto',
+      h: 'isang oras',
+      hh: '%d oras',
+      d: 'isang araw',
+      dd: '%d araw',
+      M: 'isang buwan',
+      MM: '%d buwan',
+      y: 'isang taon',
+      yy: '%d taon' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}/,
+    ordinal: function ordinal(number) {
+      return number;
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return fil;
+
+});
+
+/***/ }),
+/* 98 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/fo.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Faroese [fo]
+//! author : Ragnar Johannesen : https://github.com/ragnar123
+//! author : Kristian Sakarisson : https://github.com/sakarisson
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var fo = moment.defineLocale('fo', {
+    months: 'januar_februar_mars_apríl_mai_juni_juli_august_september_oktober_november_desember'.split(
+    '_'),
+
+    monthsShort: 'jan_feb_mar_apr_mai_jun_jul_aug_sep_okt_nov_des'.split('_'),
+    weekdays: 'sunnudagur_mánadagur_týsdagur_mikudagur_hósdagur_fríggjadagur_leygardagur'.split(
+    '_'),
+
+    weekdaysShort: 'sun_mán_týs_mik_hós_frí_ley'.split('_'),
+    weekdaysMin: 'su_má_tý_mi_hó_fr_le'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd D. MMMM, YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[Í dag kl.] LT',
+      nextDay: '[Í morgin kl.] LT',
+      nextWeek: 'dddd [kl.] LT',
+      lastDay: '[Í gjár kl.] LT',
+      lastWeek: '[síðstu] dddd [kl] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'um %s',
+      past: '%s síðani',
+      s: 'fá sekund',
+      ss: '%d sekundir',
+      m: 'ein minuttur',
+      mm: '%d minuttir',
+      h: 'ein tími',
+      hh: '%d tímar',
+      d: 'ein dagur',
+      dd: '%d dagar',
+      M: 'ein mánaður',
+      MM: '%d mánaðir',
+      y: 'eitt ár',
+      yy: '%d ár' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}\./,
+    ordinal: '%d.',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return fo;
+
+});
+
+/***/ }),
+/* 99 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/fr.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : French [fr]
+//! author : John Fischer : https://github.com/jfroffice
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var monthsStrictRegex = /^(janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre)/i,
+  monthsShortStrictRegex = /(janv\.?|févr\.?|mars|avr\.?|mai|juin|juil\.?|août|sept\.?|oct\.?|nov\.?|déc\.?)/i,
+  monthsRegex = /(janv\.?|févr\.?|mars|avr\.?|mai|juin|juil\.?|août|sept\.?|oct\.?|nov\.?|déc\.?|janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre)/i,
+  monthsParse = [
+  /^janv/i,
+  /^févr/i,
+  /^mars/i,
+  /^avr/i,
+  /^mai/i,
+  /^juin/i,
+  /^juil/i,
+  /^août/i,
+  /^sept/i,
+  /^oct/i,
+  /^nov/i,
+  /^déc/i];
+
+
+  var fr = moment.defineLocale('fr', {
+    months: 'janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre'.split(
+    '_'),
+
+    monthsShort: 'janv._févr._mars_avr._mai_juin_juil._août_sept._oct._nov._déc.'.split(
+    '_'),
+
+    monthsRegex: monthsRegex,
+    monthsShortRegex: monthsRegex,
+    monthsStrictRegex: monthsStrictRegex,
+    monthsShortStrictRegex: monthsShortStrictRegex,
+    monthsParse: monthsParse,
+    longMonthsParse: monthsParse,
+    shortMonthsParse: monthsParse,
+    weekdays: 'dimanche_lundi_mardi_mercredi_jeudi_vendredi_samedi'.split('_'),
+    weekdaysShort: 'dim._lun._mar._mer._jeu._ven._sam.'.split('_'),
+    weekdaysMin: 'di_lu_ma_me_je_ve_sa'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[Aujourd’hui à] LT',
+      nextDay: '[Demain à] LT',
+      nextWeek: 'dddd [à] LT',
+      lastDay: '[Hier à] LT',
+      lastWeek: 'dddd [dernier à] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'dans %s',
+      past: 'il y a %s',
+      s: 'quelques secondes',
+      ss: '%d secondes',
+      m: 'une minute',
+      mm: '%d minutes',
+      h: 'une heure',
+      hh: '%d heures',
+      d: 'un jour',
+      dd: '%d jours',
+      w: 'une semaine',
+      ww: '%d semaines',
+      M: 'un mois',
+      MM: '%d mois',
+      y: 'un an',
+      yy: '%d ans' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(er|)/,
+    ordinal: function ordinal(number, period) {
+      switch (period) {
+        // TODO: Return 'e' when day of month > 1. Move this case inside
+        // block for masculine words below.
+        // See https://github.com/moment/moment/issues/3375
+        case 'D':
+          return number + (number === 1 ? 'er' : '');
+
+        // Words with masculine grammatical gender: mois, trimestre, jour
+        default:
+        case 'M':
+        case 'Q':
+        case 'DDD':
+        case 'd':
+          return number + (number === 1 ? 'er' : 'e');
+
+        // Words with feminine grammatical gender: semaine
+        case 'w':
+        case 'W':
+          return number + (number === 1 ? 're' : 'e');}
+
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return fr;
+
+});
+
+/***/ }),
+/* 100 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/fr-ca.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : French (Canada) [fr-ca]
+//! author : Jonathan Abourbih : https://github.com/jonbca
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var frCa = moment.defineLocale('fr-ca', {
+    months: 'janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre'.split(
+    '_'),
+
+    monthsShort: 'janv._févr._mars_avr._mai_juin_juil._août_sept._oct._nov._déc.'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'dimanche_lundi_mardi_mercredi_jeudi_vendredi_samedi'.split('_'),
+    weekdaysShort: 'dim._lun._mar._mer._jeu._ven._sam.'.split('_'),
+    weekdaysMin: 'di_lu_ma_me_je_ve_sa'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'YYYY-MM-DD',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[Aujourd’hui à] LT',
+      nextDay: '[Demain à] LT',
+      nextWeek: 'dddd [à] LT',
+      lastDay: '[Hier à] LT',
+      lastWeek: 'dddd [dernier à] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'dans %s',
+      past: 'il y a %s',
+      s: 'quelques secondes',
+      ss: '%d secondes',
+      m: 'une minute',
+      mm: '%d minutes',
+      h: 'une heure',
+      hh: '%d heures',
+      d: 'un jour',
+      dd: '%d jours',
+      M: 'un mois',
+      MM: '%d mois',
+      y: 'un an',
+      yy: '%d ans' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(er|e)/,
+    ordinal: function ordinal(number, period) {
+      switch (period) {
+        // Words with masculine grammatical gender: mois, trimestre, jour
+        default:
+        case 'M':
+        case 'Q':
+        case 'D':
+        case 'DDD':
+        case 'd':
+          return number + (number === 1 ? 'er' : 'e');
+
+        // Words with feminine grammatical gender: semaine
+        case 'w':
+        case 'W':
+          return number + (number === 1 ? 're' : 'e');}
+
+    } });
+
+
+  return frCa;
+
+});
+
+/***/ }),
+/* 101 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/fr-ch.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : French (Switzerland) [fr-ch]
+//! author : Gaspard Bucher : https://github.com/gaspard
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var frCh = moment.defineLocale('fr-ch', {
+    months: 'janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre'.split(
+    '_'),
+
+    monthsShort: 'janv._févr._mars_avr._mai_juin_juil._août_sept._oct._nov._déc.'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'dimanche_lundi_mardi_mercredi_jeudi_vendredi_samedi'.split('_'),
+    weekdaysShort: 'dim._lun._mar._mer._jeu._ven._sam.'.split('_'),
+    weekdaysMin: 'di_lu_ma_me_je_ve_sa'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[Aujourd’hui à] LT',
+      nextDay: '[Demain à] LT',
+      nextWeek: 'dddd [à] LT',
+      lastDay: '[Hier à] LT',
+      lastWeek: 'dddd [dernier à] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'dans %s',
+      past: 'il y a %s',
+      s: 'quelques secondes',
+      ss: '%d secondes',
+      m: 'une minute',
+      mm: '%d minutes',
+      h: 'une heure',
+      hh: '%d heures',
+      d: 'un jour',
+      dd: '%d jours',
+      M: 'un mois',
+      MM: '%d mois',
+      y: 'un an',
+      yy: '%d ans' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(er|e)/,
+    ordinal: function ordinal(number, period) {
+      switch (period) {
+        // Words with masculine grammatical gender: mois, trimestre, jour
+        default:
+        case 'M':
+        case 'Q':
+        case 'D':
+        case 'DDD':
+        case 'd':
+          return number + (number === 1 ? 'er' : 'e');
+
+        // Words with feminine grammatical gender: semaine
+        case 'w':
+        case 'W':
+          return number + (number === 1 ? 're' : 'e');}
+
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return frCh;
+
+});
+
+/***/ }),
+/* 102 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/fy.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Frisian [fy]
+//! author : Robin van der Vliet : https://github.com/robin0van0der0v
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var monthsShortWithDots = 'jan._feb._mrt._apr._mai_jun._jul._aug._sep._okt._nov._des.'.split(
+  '_'),
+
+  monthsShortWithoutDots = 'jan_feb_mrt_apr_mai_jun_jul_aug_sep_okt_nov_des'.split(
+  '_');
+
+
+  var fy = moment.defineLocale('fy', {
+    months: 'jannewaris_febrewaris_maart_april_maaie_juny_july_augustus_septimber_oktober_novimber_desimber'.split(
+    '_'),
+
+    monthsShort: function monthsShort(m, format) {
+      if (!m) {
+        return monthsShortWithDots;
+      } else if (/-MMM-/.test(format)) {
+        return monthsShortWithoutDots[m.month()];
+      } else {
+        return monthsShortWithDots[m.month()];
+      }
+    },
+    monthsParseExact: true,
+    weekdays: 'snein_moandei_tiisdei_woansdei_tongersdei_freed_sneon'.split(
+    '_'),
+
+    weekdaysShort: 'si._mo._ti._wo._to._fr._so.'.split('_'),
+    weekdaysMin: 'Si_Mo_Ti_Wo_To_Fr_So'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD-MM-YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[hjoed om] LT',
+      nextDay: '[moarn om] LT',
+      nextWeek: 'dddd [om] LT',
+      lastDay: '[juster om] LT',
+      lastWeek: '[ôfrûne] dddd [om] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'oer %s',
+      past: '%s lyn',
+      s: 'in pear sekonden',
+      ss: '%d sekonden',
+      m: 'ien minút',
+      mm: '%d minuten',
+      h: 'ien oere',
+      hh: '%d oeren',
+      d: 'ien dei',
+      dd: '%d dagen',
+      M: 'ien moanne',
+      MM: '%d moannen',
+      y: 'ien jier',
+      yy: '%d jierren' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(ste|de)/,
+    ordinal: function ordinal(number) {
+      return (
+        number + (
+        number === 1 || number === 8 || number >= 20 ? 'ste' : 'de'));
+
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return fy;
+
+});
+
+/***/ }),
+/* 103 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ga.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Irish or Irish Gaelic [ga]
+//! author : André Silva : https://github.com/askpt
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var months = [
+  'Eanáir',
+  'Feabhra',
+  'Márta',
+  'Aibreán',
+  'Bealtaine',
+  'Meitheamh',
+  'Iúil',
+  'Lúnasa',
+  'Meán Fómhair',
+  'Deireadh Fómhair',
+  'Samhain',
+  'Nollaig'],
+
+  monthsShort = [
+  'Ean',
+  'Feabh',
+  'Márt',
+  'Aib',
+  'Beal',
+  'Meith',
+  'Iúil',
+  'Lún',
+  'M.F.',
+  'D.F.',
+  'Samh',
+  'Noll'],
+
+  weekdays = [
+  'Dé Domhnaigh',
+  'Dé Luain',
+  'Dé Máirt',
+  'Dé Céadaoin',
+  'Déardaoin',
+  'Dé hAoine',
+  'Dé Sathairn'],
+
+  weekdaysShort = ['Domh', 'Luan', 'Máirt', 'Céad', 'Déar', 'Aoine', 'Sath'],
+  weekdaysMin = ['Do', 'Lu', 'Má', 'Cé', 'Dé', 'A', 'Sa'];
+
+  var ga = moment.defineLocale('ga', {
+    months: months,
+    monthsShort: monthsShort,
+    monthsParseExact: true,
+    weekdays: weekdays,
+    weekdaysShort: weekdaysShort,
+    weekdaysMin: weekdaysMin,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd, D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[Inniu ag] LT',
+      nextDay: '[Amárach ag] LT',
+      nextWeek: 'dddd [ag] LT',
+      lastDay: '[Inné ag] LT',
+      lastWeek: 'dddd [seo caite] [ag] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'i %s',
+      past: '%s ó shin',
+      s: 'cúpla soicind',
+      ss: '%d soicind',
+      m: 'nóiméad',
+      mm: '%d nóiméad',
+      h: 'uair an chloig',
+      hh: '%d uair an chloig',
+      d: 'lá',
+      dd: '%d lá',
+      M: 'mí',
+      MM: '%d míonna',
+      y: 'bliain',
+      yy: '%d bliain' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(d|na|mh)/,
+    ordinal: function ordinal(number) {
+      var output = number === 1 ? 'd' : number % 10 === 2 ? 'na' : 'mh';
+      return number + output;
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return ga;
+
+});
+
+/***/ }),
+/* 104 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/gd.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Scottish Gaelic [gd]
+//! author : Jon Ashdown : https://github.com/jonashdown
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var months = [
+  'Am Faoilleach',
+  'An Gearran',
+  'Am Màrt',
+  'An Giblean',
+  'An Cèitean',
+  'An t-Ògmhios',
+  'An t-Iuchar',
+  'An Lùnastal',
+  'An t-Sultain',
+  'An Dàmhair',
+  'An t-Samhain',
+  'An Dùbhlachd'],
+
+  monthsShort = [
+  'Faoi',
+  'Gear',
+  'Màrt',
+  'Gibl',
+  'Cèit',
+  'Ògmh',
+  'Iuch',
+  'Lùn',
+  'Sult',
+  'Dàmh',
+  'Samh',
+  'Dùbh'],
+
+  weekdays = [
+  'Didòmhnaich',
+  'Diluain',
+  'Dimàirt',
+  'Diciadain',
+  'Diardaoin',
+  'Dihaoine',
+  'Disathairne'],
+
+  weekdaysShort = ['Did', 'Dil', 'Dim', 'Dic', 'Dia', 'Dih', 'Dis'],
+  weekdaysMin = ['Dò', 'Lu', 'Mà', 'Ci', 'Ar', 'Ha', 'Sa'];
+
+  var gd = moment.defineLocale('gd', {
+    months: months,
+    monthsShort: monthsShort,
+    monthsParseExact: true,
+    weekdays: weekdays,
+    weekdaysShort: weekdaysShort,
+    weekdaysMin: weekdaysMin,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd, D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[An-diugh aig] LT',
+      nextDay: '[A-màireach aig] LT',
+      nextWeek: 'dddd [aig] LT',
+      lastDay: '[An-dè aig] LT',
+      lastWeek: 'dddd [seo chaidh] [aig] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'ann an %s',
+      past: 'bho chionn %s',
+      s: 'beagan diogan',
+      ss: '%d diogan',
+      m: 'mionaid',
+      mm: '%d mionaidean',
+      h: 'uair',
+      hh: '%d uairean',
+      d: 'latha',
+      dd: '%d latha',
+      M: 'mìos',
+      MM: '%d mìosan',
+      y: 'bliadhna',
+      yy: '%d bliadhna' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(d|na|mh)/,
+    ordinal: function ordinal(number) {
+      var output = number === 1 ? 'd' : number % 10 === 2 ? 'na' : 'mh';
+      return number + output;
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return gd;
+
+});
+
+/***/ }),
+/* 105 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/gl.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Galician [gl]
+//! author : Juan G. Hurtado : https://github.com/juanghurtado
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var gl = moment.defineLocale('gl', {
+    months: 'xaneiro_febreiro_marzo_abril_maio_xuño_xullo_agosto_setembro_outubro_novembro_decembro'.split(
+    '_'),
+
+    monthsShort: 'xan._feb._mar._abr._mai._xuñ._xul._ago._set._out._nov._dec.'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'domingo_luns_martes_mércores_xoves_venres_sábado'.split('_'),
+    weekdaysShort: 'dom._lun._mar._mér._xov._ven._sáb.'.split('_'),
+    weekdaysMin: 'do_lu_ma_mé_xo_ve_sá'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'H:mm',
+      LTS: 'H:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D [de] MMMM [de] YYYY',
+      LLL: 'D [de] MMMM [de] YYYY H:mm',
+      LLLL: 'dddd, D [de] MMMM [de] YYYY H:mm' },
+
+    calendar: {
+      sameDay: function sameDay() {
+        return '[hoxe ' + (this.hours() !== 1 ? 'ás' : 'á') + '] LT';
+      },
+      nextDay: function nextDay() {
+        return '[mañá ' + (this.hours() !== 1 ? 'ás' : 'á') + '] LT';
+      },
+      nextWeek: function nextWeek() {
+        return 'dddd [' + (this.hours() !== 1 ? 'ás' : 'a') + '] LT';
+      },
+      lastDay: function lastDay() {
+        return '[onte ' + (this.hours() !== 1 ? 'á' : 'a') + '] LT';
+      },
+      lastWeek: function lastWeek() {
+        return (
+          '[o] dddd [pasado ' + (this.hours() !== 1 ? 'ás' : 'a') + '] LT');
+
+      },
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: function future(str) {
+        if (str.indexOf('un') === 0) {
+          return 'n' + str;
+        }
+        return 'en ' + str;
+      },
+      past: 'hai %s',
+      s: 'uns segundos',
+      ss: '%d segundos',
+      m: 'un minuto',
+      mm: '%d minutos',
+      h: 'unha hora',
+      hh: '%d horas',
+      d: 'un día',
+      dd: '%d días',
+      M: 'un mes',
+      MM: '%d meses',
+      y: 'un ano',
+      yy: '%d anos' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}º/,
+    ordinal: '%dº',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return gl;
+
+});
+
+/***/ }),
+/* 106 */
+/*!*******************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/gom-deva.js ***!
+  \*******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Konkani Devanagari script [gom-deva]
+//! author : The Discoverer : https://github.com/WikiDiscoverer
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  function processRelativeTime(number, withoutSuffix, key, isFuture) {
+    var format = {
+      s: ['थोडया सॅकंडांनी', 'थोडे सॅकंड'],
+      ss: [number + ' सॅकंडांनी', number + ' सॅकंड'],
+      m: ['एका मिणटान', 'एक मिनूट'],
+      mm: [number + ' मिणटांनी', number + ' मिणटां'],
+      h: ['एका वरान', 'एक वर'],
+      hh: [number + ' वरांनी', number + ' वरां'],
+      d: ['एका दिसान', 'एक दीस'],
+      dd: [number + ' दिसांनी', number + ' दीस'],
+      M: ['एका म्हयन्यान', 'एक म्हयनो'],
+      MM: [number + ' म्हयन्यानी', number + ' म्हयने'],
+      y: ['एका वर्सान', 'एक वर्स'],
+      yy: [number + ' वर्सांनी', number + ' वर्सां'] };
+
+    return isFuture ? format[key][0] : format[key][1];
+  }
+
+  var gomDeva = moment.defineLocale('gom-deva', {
+    months: {
+      standalone: 'जानेवारी_फेब्रुवारी_मार्च_एप्रील_मे_जून_जुलय_ऑगस्ट_सप्टेंबर_ऑक्टोबर_नोव्हेंबर_डिसेंबर'.split(
+      '_'),
+
+      format: 'जानेवारीच्या_फेब्रुवारीच्या_मार्चाच्या_एप्रीलाच्या_मेयाच्या_जूनाच्या_जुलयाच्या_ऑगस्टाच्या_सप्टेंबराच्या_ऑक्टोबराच्या_नोव्हेंबराच्या_डिसेंबराच्या'.split(
+      '_'),
+
+      isFormat: /MMMM(\s)+D[oD]?/ },
+
+    monthsShort: 'जाने._फेब्रु._मार्च_एप्री._मे_जून_जुल._ऑग._सप्टें._ऑक्टो._नोव्हें._डिसें.'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'आयतार_सोमार_मंगळार_बुधवार_बिरेस्तार_सुक्रार_शेनवार'.split('_'),
+    weekdaysShort: 'आयत._सोम._मंगळ._बुध._ब्रेस्त._सुक्र._शेन.'.split('_'),
+    weekdaysMin: 'आ_सो_मं_बु_ब्रे_सु_शे'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'A h:mm [वाजतां]',
+      LTS: 'A h:mm:ss [वाजतां]',
+      L: 'DD-MM-YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY A h:mm [वाजतां]',
+      LLLL: 'dddd, MMMM Do, YYYY, A h:mm [वाजतां]',
+      llll: 'ddd, D MMM YYYY, A h:mm [वाजतां]' },
+
+    calendar: {
+      sameDay: '[आयज] LT',
+      nextDay: '[फाल्यां] LT',
+      nextWeek: '[फुडलो] dddd[,] LT',
+      lastDay: '[काल] LT',
+      lastWeek: '[फाटलो] dddd[,] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s',
+      past: '%s आदीं',
+      s: processRelativeTime,
+      ss: processRelativeTime,
+      m: processRelativeTime,
+      mm: processRelativeTime,
+      h: processRelativeTime,
+      hh: processRelativeTime,
+      d: processRelativeTime,
+      dd: processRelativeTime,
+      M: processRelativeTime,
+      MM: processRelativeTime,
+      y: processRelativeTime,
+      yy: processRelativeTime },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(वेर)/,
+    ordinal: function ordinal(number, period) {
+      switch (period) {
+        // the ordinal 'वेर' only applies to day of the month
+        case 'D':
+          return number + 'वेर';
+        default:
+        case 'M':
+        case 'Q':
+        case 'DDD':
+        case 'd':
+        case 'w':
+        case 'W':
+          return number;}
+
+    },
+    week: {
+      dow: 0, // Sunday is the first day of the week
+      doy: 3 // The week that contains Jan 4th is the first week of the year (7 + 0 - 4)
+    },
+    meridiemParse: /राती|सकाळीं|दनपारां|सांजे/,
+    meridiemHour: function meridiemHour(hour, meridiem) {
+      if (hour === 12) {
+        hour = 0;
+      }
+      if (meridiem === 'राती') {
+        return hour < 4 ? hour : hour + 12;
+      } else if (meridiem === 'सकाळीं') {
+        return hour;
+      } else if (meridiem === 'दनपारां') {
+        return hour > 12 ? hour : hour + 12;
+      } else if (meridiem === 'सांजे') {
+        return hour + 12;
+      }
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 4) {
+        return 'राती';
+      } else if (hour < 12) {
+        return 'सकाळीं';
+      } else if (hour < 16) {
+        return 'दनपारां';
+      } else if (hour < 20) {
+        return 'सांजे';
+      } else {
+        return 'राती';
+      }
+    } });
+
+
+  return gomDeva;
+
+});
+
+/***/ }),
+/* 107 */
+/*!*******************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/gom-latn.js ***!
+  \*******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Konkani Latin script [gom-latn]
+//! author : The Discoverer : https://github.com/WikiDiscoverer
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  function processRelativeTime(number, withoutSuffix, key, isFuture) {
+    var format = {
+      s: ['thoddea sekondamni', 'thodde sekond'],
+      ss: [number + ' sekondamni', number + ' sekond'],
+      m: ['eka mintan', 'ek minut'],
+      mm: [number + ' mintamni', number + ' mintam'],
+      h: ['eka voran', 'ek vor'],
+      hh: [number + ' voramni', number + ' voram'],
+      d: ['eka disan', 'ek dis'],
+      dd: [number + ' disamni', number + ' dis'],
+      M: ['eka mhoinean', 'ek mhoino'],
+      MM: [number + ' mhoineamni', number + ' mhoine'],
+      y: ['eka vorsan', 'ek voros'],
+      yy: [number + ' vorsamni', number + ' vorsam'] };
+
+    return isFuture ? format[key][0] : format[key][1];
+  }
+
+  var gomLatn = moment.defineLocale('gom-latn', {
+    months: {
+      standalone: 'Janer_Febrer_Mars_Abril_Mai_Jun_Julai_Agost_Setembr_Otubr_Novembr_Dezembr'.split(
+      '_'),
+
+      format: 'Janerachea_Febrerachea_Marsachea_Abrilachea_Maiachea_Junachea_Julaiachea_Agostachea_Setembrachea_Otubrachea_Novembrachea_Dezembrachea'.split(
+      '_'),
+
+      isFormat: /MMMM(\s)+D[oD]?/ },
+
+    monthsShort: 'Jan._Feb._Mars_Abr._Mai_Jun_Jul._Ago._Set._Otu._Nov._Dez.'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: "Aitar_Somar_Mongllar_Budhvar_Birestar_Sukrar_Son'var".split('_'),
+    weekdaysShort: 'Ait._Som._Mon._Bud._Bre._Suk._Son.'.split('_'),
+    weekdaysMin: 'Ai_Sm_Mo_Bu_Br_Su_Sn'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'A h:mm [vazta]',
+      LTS: 'A h:mm:ss [vazta]',
+      L: 'DD-MM-YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY A h:mm [vazta]',
+      LLLL: 'dddd, MMMM Do, YYYY, A h:mm [vazta]',
+      llll: 'ddd, D MMM YYYY, A h:mm [vazta]' },
+
+    calendar: {
+      sameDay: '[Aiz] LT',
+      nextDay: '[Faleam] LT',
+      nextWeek: '[Fuddlo] dddd[,] LT',
+      lastDay: '[Kal] LT',
+      lastWeek: '[Fattlo] dddd[,] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s',
+      past: '%s adim',
+      s: processRelativeTime,
+      ss: processRelativeTime,
+      m: processRelativeTime,
+      mm: processRelativeTime,
+      h: processRelativeTime,
+      hh: processRelativeTime,
+      d: processRelativeTime,
+      dd: processRelativeTime,
+      M: processRelativeTime,
+      MM: processRelativeTime,
+      y: processRelativeTime,
+      yy: processRelativeTime },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(er)/,
+    ordinal: function ordinal(number, period) {
+      switch (period) {
+        // the ordinal 'er' only applies to day of the month
+        case 'D':
+          return number + 'er';
+        default:
+        case 'M':
+        case 'Q':
+        case 'DDD':
+        case 'd':
+        case 'w':
+        case 'W':
+          return number;}
+
+    },
+    week: {
+      dow: 0, // Sunday is the first day of the week
+      doy: 3 // The week that contains Jan 4th is the first week of the year (7 + 0 - 4)
+    },
+    meridiemParse: /rati|sokallim|donparam|sanje/,
+    meridiemHour: function meridiemHour(hour, meridiem) {
+      if (hour === 12) {
+        hour = 0;
+      }
+      if (meridiem === 'rati') {
+        return hour < 4 ? hour : hour + 12;
+      } else if (meridiem === 'sokallim') {
+        return hour;
+      } else if (meridiem === 'donparam') {
+        return hour > 12 ? hour : hour + 12;
+      } else if (meridiem === 'sanje') {
+        return hour + 12;
+      }
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 4) {
+        return 'rati';
+      } else if (hour < 12) {
+        return 'sokallim';
+      } else if (hour < 16) {
+        return 'donparam';
+      } else if (hour < 20) {
+        return 'sanje';
+      } else {
+        return 'rati';
+      }
+    } });
+
+
+  return gomLatn;
+
+});
+
+/***/ }),
+/* 108 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/gu.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Gujarati [gu]
+//! author : Kaushik Thanki : https://github.com/Kaushik1987
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var symbolMap = {
+    1: '૧',
+    2: '૨',
+    3: '૩',
+    4: '૪',
+    5: '૫',
+    6: '૬',
+    7: '૭',
+    8: '૮',
+    9: '૯',
+    0: '૦' },
+
+  numberMap = {
+    '૧': '1',
+    '૨': '2',
+    '૩': '3',
+    '૪': '4',
+    '૫': '5',
+    '૬': '6',
+    '૭': '7',
+    '૮': '8',
+    '૯': '9',
+    '૦': '0' };
+
+
+  var gu = moment.defineLocale('gu', {
+    months: 'જાન્યુઆરી_ફેબ્રુઆરી_માર્ચ_એપ્રિલ_મે_જૂન_જુલાઈ_ઑગસ્ટ_સપ્ટેમ્બર_ઑક્ટ્બર_નવેમ્બર_ડિસેમ્બર'.split(
+    '_'),
+
+    monthsShort: 'જાન્યુ._ફેબ્રુ._માર્ચ_એપ્રિ._મે_જૂન_જુલા._ઑગ._સપ્ટે._ઑક્ટ્._નવે._ડિસે.'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'રવિવાર_સોમવાર_મંગળવાર_બુધ્વાર_ગુરુવાર_શુક્રવાર_શનિવાર'.split(
+    '_'),
+
+    weekdaysShort: 'રવિ_સોમ_મંગળ_બુધ્_ગુરુ_શુક્ર_શનિ'.split('_'),
+    weekdaysMin: 'ર_સો_મં_બુ_ગુ_શુ_શ'.split('_'),
+    longDateFormat: {
+      LT: 'A h:mm વાગ્યે',
+      LTS: 'A h:mm:ss વાગ્યે',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY, A h:mm વાગ્યે',
+      LLLL: 'dddd, D MMMM YYYY, A h:mm વાગ્યે' },
+
+    calendar: {
+      sameDay: '[આજ] LT',
+      nextDay: '[કાલે] LT',
+      nextWeek: 'dddd, LT',
+      lastDay: '[ગઇકાલે] LT',
+      lastWeek: '[પાછલા] dddd, LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s મા',
+      past: '%s પહેલા',
+      s: 'અમુક પળો',
+      ss: '%d સેકંડ',
+      m: 'એક મિનિટ',
+      mm: '%d મિનિટ',
+      h: 'એક કલાક',
+      hh: '%d કલાક',
+      d: 'એક દિવસ',
+      dd: '%d દિવસ',
+      M: 'એક મહિનો',
+      MM: '%d મહિનો',
+      y: 'એક વર્ષ',
+      yy: '%d વર્ષ' },
+
+    preparse: function preparse(string) {
+      return string.replace(/[૧૨૩૪૫૬૭૮૯૦]/g, function (match) {
+        return numberMap[match];
+      });
+    },
+    postformat: function postformat(string) {
+      return string.replace(/\d/g, function (match) {
+        return symbolMap[match];
+      });
+    },
+    // Gujarati notation for meridiems are quite fuzzy in practice. While there exists
+    // a rigid notion of a 'Pahar' it is not used as rigidly in modern Gujarati.
+    meridiemParse: /રાત|બપોર|સવાર|સાંજ/,
+    meridiemHour: function meridiemHour(hour, meridiem) {
+      if (hour === 12) {
+        hour = 0;
+      }
+      if (meridiem === 'રાત') {
+        return hour < 4 ? hour : hour + 12;
+      } else if (meridiem === 'સવાર') {
+        return hour;
+      } else if (meridiem === 'બપોર') {
+        return hour >= 10 ? hour : hour + 12;
+      } else if (meridiem === 'સાંજ') {
+        return hour + 12;
+      }
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 4) {
+        return 'રાત';
+      } else if (hour < 10) {
+        return 'સવાર';
+      } else if (hour < 17) {
+        return 'બપોર';
+      } else if (hour < 20) {
+        return 'સાંજ';
+      } else {
+        return 'રાત';
+      }
+    },
+    week: {
+      dow: 0, // Sunday is the first day of the week.
+      doy: 6 // The week that contains Jan 6th is the first week of the year.
+    } });
+
+
+  return gu;
+
+});
+
+/***/ }),
+/* 109 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/he.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Hebrew [he]
+//! author : Tomer Cohen : https://github.com/tomer
+//! author : Moshe Simantov : https://github.com/DevelopmentIL
+//! author : Tal Ater : https://github.com/TalAter
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var he = moment.defineLocale('he', {
+    months: 'ינואר_פברואר_מרץ_אפריל_מאי_יוני_יולי_אוגוסט_ספטמבר_אוקטובר_נובמבר_דצמבר'.split(
+    '_'),
+
+    monthsShort: 'ינו׳_פבר׳_מרץ_אפר׳_מאי_יוני_יולי_אוג׳_ספט׳_אוק׳_נוב׳_דצמ׳'.split(
+    '_'),
+
+    weekdays: 'ראשון_שני_שלישי_רביעי_חמישי_שישי_שבת'.split('_'),
+    weekdaysShort: 'א׳_ב׳_ג׳_ד׳_ה׳_ו׳_ש׳'.split('_'),
+    weekdaysMin: 'א_ב_ג_ד_ה_ו_ש'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D [ב]MMMM YYYY',
+      LLL: 'D [ב]MMMM YYYY HH:mm',
+      LLLL: 'dddd, D [ב]MMMM YYYY HH:mm',
+      l: 'D/M/YYYY',
+      ll: 'D MMM YYYY',
+      lll: 'D MMM YYYY HH:mm',
+      llll: 'ddd, D MMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[היום ב־]LT',
+      nextDay: '[מחר ב־]LT',
+      nextWeek: 'dddd [בשעה] LT',
+      lastDay: '[אתמול ב־]LT',
+      lastWeek: '[ביום] dddd [האחרון בשעה] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'בעוד %s',
+      past: 'לפני %s',
+      s: 'מספר שניות',
+      ss: '%d שניות',
+      m: 'דקה',
+      mm: '%d דקות',
+      h: 'שעה',
+      hh: function hh(number) {
+        if (number === 2) {
+          return 'שעתיים';
+        }
+        return number + ' שעות';
+      },
+      d: 'יום',
+      dd: function dd(number) {
+        if (number === 2) {
+          return 'יומיים';
+        }
+        return number + ' ימים';
+      },
+      M: 'חודש',
+      MM: function MM(number) {
+        if (number === 2) {
+          return 'חודשיים';
+        }
+        return number + ' חודשים';
+      },
+      y: 'שנה',
+      yy: function yy(number) {
+        if (number === 2) {
+          return 'שנתיים';
+        } else if (number % 10 === 0 && number !== 10) {
+          return number + ' שנה';
+        }
+        return number + ' שנים';
+      } },
+
+    meridiemParse: /אחה"צ|לפנה"צ|אחרי הצהריים|לפני הצהריים|לפנות בוקר|בבוקר|בערב/i,
+    isPM: function isPM(input) {
+      return /^(אחה"צ|אחרי הצהריים|בערב)$/.test(input);
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 5) {
+        return 'לפנות בוקר';
+      } else if (hour < 10) {
+        return 'בבוקר';
+      } else if (hour < 12) {
+        return isLower ? 'לפנה"צ' : 'לפני הצהריים';
+      } else if (hour < 18) {
+        return isLower ? 'אחה"צ' : 'אחרי הצהריים';
+      } else {
+        return 'בערב';
+      }
+    } });
+
+
+  return he;
+
+});
+
+/***/ }),
+/* 110 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/hi.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Hindi [hi]
+//! author : Mayank Singhal : https://github.com/mayanksinghal
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var symbolMap = {
+    1: '१',
+    2: '२',
+    3: '३',
+    4: '४',
+    5: '५',
+    6: '६',
+    7: '७',
+    8: '८',
+    9: '९',
+    0: '०' },
+
+  numberMap = {
+    '१': '1',
+    '२': '2',
+    '३': '3',
+    '४': '4',
+    '५': '5',
+    '६': '6',
+    '७': '7',
+    '८': '8',
+    '९': '9',
+    '०': '0' },
+
+  monthsParse = [
+  /^जन/i,
+  /^फ़र|फर/i,
+  /^मार्च/i,
+  /^अप्रै/i,
+  /^मई/i,
+  /^जून/i,
+  /^जुल/i,
+  /^अग/i,
+  /^सितं|सित/i,
+  /^अक्टू/i,
+  /^नव|नवं/i,
+  /^दिसं|दिस/i],
+
+  shortMonthsParse = [
+  /^जन/i,
+  /^फ़र/i,
+  /^मार्च/i,
+  /^अप्रै/i,
+  /^मई/i,
+  /^जून/i,
+  /^जुल/i,
+  /^अग/i,
+  /^सित/i,
+  /^अक्टू/i,
+  /^नव/i,
+  /^दिस/i];
+
+
+  var hi = moment.defineLocale('hi', {
+    months: {
+      format: 'जनवरी_फ़रवरी_मार्च_अप्रैल_मई_जून_जुलाई_अगस्त_सितम्बर_अक्टूबर_नवम्बर_दिसम्बर'.split(
+      '_'),
+
+      standalone: 'जनवरी_फरवरी_मार्च_अप्रैल_मई_जून_जुलाई_अगस्त_सितंबर_अक्टूबर_नवंबर_दिसंबर'.split(
+      '_') },
+
+
+    monthsShort: 'जन._फ़र._मार्च_अप्रै._मई_जून_जुल._अग._सित._अक्टू._नव._दिस.'.split(
+    '_'),
+
+    weekdays: 'रविवार_सोमवार_मंगलवार_बुधवार_गुरूवार_शुक्रवार_शनिवार'.split('_'),
+    weekdaysShort: 'रवि_सोम_मंगल_बुध_गुरू_शुक्र_शनि'.split('_'),
+    weekdaysMin: 'र_सो_मं_बु_गु_शु_श'.split('_'),
+    longDateFormat: {
+      LT: 'A h:mm बजे',
+      LTS: 'A h:mm:ss बजे',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY, A h:mm बजे',
+      LLLL: 'dddd, D MMMM YYYY, A h:mm बजे' },
+
+
+    monthsParse: monthsParse,
+    longMonthsParse: monthsParse,
+    shortMonthsParse: shortMonthsParse,
+
+    monthsRegex: /^(जनवरी|जन\.?|फ़रवरी|फरवरी|फ़र\.?|मार्च?|अप्रैल|अप्रै\.?|मई?|जून?|जुलाई|जुल\.?|अगस्त|अग\.?|सितम्बर|सितंबर|सित\.?|अक्टूबर|अक्टू\.?|नवम्बर|नवंबर|नव\.?|दिसम्बर|दिसंबर|दिस\.?)/i,
+
+    monthsShortRegex: /^(जनवरी|जन\.?|फ़रवरी|फरवरी|फ़र\.?|मार्च?|अप्रैल|अप्रै\.?|मई?|जून?|जुलाई|जुल\.?|अगस्त|अग\.?|सितम्बर|सितंबर|सित\.?|अक्टूबर|अक्टू\.?|नवम्बर|नवंबर|नव\.?|दिसम्बर|दिसंबर|दिस\.?)/i,
+
+    monthsStrictRegex: /^(जनवरी?|फ़रवरी|फरवरी?|मार्च?|अप्रैल?|मई?|जून?|जुलाई?|अगस्त?|सितम्बर|सितंबर|सित?\.?|अक्टूबर|अक्टू\.?|नवम्बर|नवंबर?|दिसम्बर|दिसंबर?)/i,
+
+    monthsShortStrictRegex: /^(जन\.?|फ़र\.?|मार्च?|अप्रै\.?|मई?|जून?|जुल\.?|अग\.?|सित\.?|अक्टू\.?|नव\.?|दिस\.?)/i,
+
+    calendar: {
+      sameDay: '[आज] LT',
+      nextDay: '[कल] LT',
+      nextWeek: 'dddd, LT',
+      lastDay: '[कल] LT',
+      lastWeek: '[पिछले] dddd, LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s में',
+      past: '%s पहले',
+      s: 'कुछ ही क्षण',
+      ss: '%d सेकंड',
+      m: 'एक मिनट',
+      mm: '%d मिनट',
+      h: 'एक घंटा',
+      hh: '%d घंटे',
+      d: 'एक दिन',
+      dd: '%d दिन',
+      M: 'एक महीने',
+      MM: '%d महीने',
+      y: 'एक वर्ष',
+      yy: '%d वर्ष' },
+
+    preparse: function preparse(string) {
+      return string.replace(/[१२३४५६७८९०]/g, function (match) {
+        return numberMap[match];
+      });
+    },
+    postformat: function postformat(string) {
+      return string.replace(/\d/g, function (match) {
+        return symbolMap[match];
+      });
+    },
+    // Hindi notation for meridiems are quite fuzzy in practice. While there exists
+    // a rigid notion of a 'Pahar' it is not used as rigidly in modern Hindi.
+    meridiemParse: /रात|सुबह|दोपहर|शाम/,
+    meridiemHour: function meridiemHour(hour, meridiem) {
+      if (hour === 12) {
+        hour = 0;
+      }
+      if (meridiem === 'रात') {
+        return hour < 4 ? hour : hour + 12;
+      } else if (meridiem === 'सुबह') {
+        return hour;
+      } else if (meridiem === 'दोपहर') {
+        return hour >= 10 ? hour : hour + 12;
+      } else if (meridiem === 'शाम') {
+        return hour + 12;
+      }
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 4) {
+        return 'रात';
+      } else if (hour < 10) {
+        return 'सुबह';
+      } else if (hour < 17) {
+        return 'दोपहर';
+      } else if (hour < 20) {
+        return 'शाम';
+      } else {
+        return 'रात';
+      }
+    },
+    week: {
+      dow: 0, // Sunday is the first day of the week.
+      doy: 6 // The week that contains Jan 6th is the first week of the year.
+    } });
+
+
+  return hi;
+
+});
+
+/***/ }),
+/* 111 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/hr.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Croatian [hr]
+//! author : Bojan Marković : https://github.com/bmarkovic
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  function translate(number, withoutSuffix, key) {
+    var result = number + ' ';
+    switch (key) {
+      case 'ss':
+        if (number === 1) {
+          result += 'sekunda';
+        } else if (number === 2 || number === 3 || number === 4) {
+          result += 'sekunde';
+        } else {
+          result += 'sekundi';
+        }
+        return result;
+      case 'm':
+        return withoutSuffix ? 'jedna minuta' : 'jedne minute';
+      case 'mm':
+        if (number === 1) {
+          result += 'minuta';
+        } else if (number === 2 || number === 3 || number === 4) {
+          result += 'minute';
+        } else {
+          result += 'minuta';
+        }
+        return result;
+      case 'h':
+        return withoutSuffix ? 'jedan sat' : 'jednog sata';
+      case 'hh':
+        if (number === 1) {
+          result += 'sat';
+        } else if (number === 2 || number === 3 || number === 4) {
+          result += 'sata';
+        } else {
+          result += 'sati';
+        }
+        return result;
+      case 'dd':
+        if (number === 1) {
+          result += 'dan';
+        } else {
+          result += 'dana';
+        }
+        return result;
+      case 'MM':
+        if (number === 1) {
+          result += 'mjesec';
+        } else if (number === 2 || number === 3 || number === 4) {
+          result += 'mjeseca';
+        } else {
+          result += 'mjeseci';
+        }
+        return result;
+      case 'yy':
+        if (number === 1) {
+          result += 'godina';
+        } else if (number === 2 || number === 3 || number === 4) {
+          result += 'godine';
+        } else {
+          result += 'godina';
+        }
+        return result;}
+
+  }
+
+  var hr = moment.defineLocale('hr', {
+    months: {
+      format: 'siječnja_veljače_ožujka_travnja_svibnja_lipnja_srpnja_kolovoza_rujna_listopada_studenoga_prosinca'.split(
+      '_'),
+
+      standalone: 'siječanj_veljača_ožujak_travanj_svibanj_lipanj_srpanj_kolovoz_rujan_listopad_studeni_prosinac'.split(
+      '_') },
+
+
+    monthsShort: 'sij._velj._ožu._tra._svi._lip._srp._kol._ruj._lis._stu._pro.'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'nedjelja_ponedjeljak_utorak_srijeda_četvrtak_petak_subota'.split(
+    '_'),
+
+    weekdaysShort: 'ned._pon._uto._sri._čet._pet._sub.'.split('_'),
+    weekdaysMin: 'ne_po_ut_sr_če_pe_su'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'H:mm',
+      LTS: 'H:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'Do MMMM YYYY',
+      LLL: 'Do MMMM YYYY H:mm',
+      LLLL: 'dddd, Do MMMM YYYY H:mm' },
+
+    calendar: {
+      sameDay: '[danas u] LT',
+      nextDay: '[sutra u] LT',
+      nextWeek: function nextWeek() {
+        switch (this.day()) {
+          case 0:
+            return '[u] [nedjelju] [u] LT';
+          case 3:
+            return '[u] [srijedu] [u] LT';
+          case 6:
+            return '[u] [subotu] [u] LT';
+          case 1:
+          case 2:
+          case 4:
+          case 5:
+            return '[u] dddd [u] LT';}
+
+      },
+      lastDay: '[jučer u] LT',
+      lastWeek: function lastWeek() {
+        switch (this.day()) {
+          case 0:
+            return '[prošlu] [nedjelju] [u] LT';
+          case 3:
+            return '[prošlu] [srijedu] [u] LT';
+          case 6:
+            return '[prošle] [subote] [u] LT';
+          case 1:
+          case 2:
+          case 4:
+          case 5:
+            return '[prošli] dddd [u] LT';}
+
+      },
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'za %s',
+      past: 'prije %s',
+      s: 'par sekundi',
+      ss: translate,
+      m: translate,
+      mm: translate,
+      h: translate,
+      hh: translate,
+      d: 'dan',
+      dd: translate,
+      M: 'mjesec',
+      MM: translate,
+      y: 'godinu',
+      yy: translate },
+
+    dayOfMonthOrdinalParse: /\d{1,2}\./,
+    ordinal: '%d.',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 7 // The week that contains Jan 7th is the first week of the year.
+    } });
+
+
+  return hr;
+
+});
+
+/***/ }),
+/* 112 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/hu.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Hungarian [hu]
+//! author : Adam Brunner : https://github.com/adambrunner
+//! author : Peter Viszt  : https://github.com/passatgt
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var weekEndings = 'vasárnap hétfőn kedden szerdán csütörtökön pénteken szombaton'.split(
+  ' ');
+
+  function translate(number, withoutSuffix, key, isFuture) {
+    var num = number;
+    switch (key) {
+      case 's':
+        return isFuture || withoutSuffix ?
+        'néhány másodperc' :
+        'néhány másodperce';
+      case 'ss':
+        return num + (isFuture || withoutSuffix) ?
+        ' másodperc' :
+        ' másodperce';
+      case 'm':
+        return 'egy' + (isFuture || withoutSuffix ? ' perc' : ' perce');
+      case 'mm':
+        return num + (isFuture || withoutSuffix ? ' perc' : ' perce');
+      case 'h':
+        return 'egy' + (isFuture || withoutSuffix ? ' óra' : ' órája');
+      case 'hh':
+        return num + (isFuture || withoutSuffix ? ' óra' : ' órája');
+      case 'd':
+        return 'egy' + (isFuture || withoutSuffix ? ' nap' : ' napja');
+      case 'dd':
+        return num + (isFuture || withoutSuffix ? ' nap' : ' napja');
+      case 'M':
+        return 'egy' + (isFuture || withoutSuffix ? ' hónap' : ' hónapja');
+      case 'MM':
+        return num + (isFuture || withoutSuffix ? ' hónap' : ' hónapja');
+      case 'y':
+        return 'egy' + (isFuture || withoutSuffix ? ' év' : ' éve');
+      case 'yy':
+        return num + (isFuture || withoutSuffix ? ' év' : ' éve');}
+
+    return '';
+  }
+  function week(isFuture) {
+    return (
+      (isFuture ? '' : '[múlt] ') +
+      '[' +
+      weekEndings[this.day()] +
+      '] LT[-kor]');
+
+  }
+
+  var hu = moment.defineLocale('hu', {
+    months: 'január_február_március_április_május_június_július_augusztus_szeptember_október_november_december'.split(
+    '_'),
+
+    monthsShort: 'jan._feb._márc._ápr._máj._jún._júl._aug._szept._okt._nov._dec.'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'vasárnap_hétfő_kedd_szerda_csütörtök_péntek_szombat'.split('_'),
+    weekdaysShort: 'vas_hét_kedd_sze_csüt_pén_szo'.split('_'),
+    weekdaysMin: 'v_h_k_sze_cs_p_szo'.split('_'),
+    longDateFormat: {
+      LT: 'H:mm',
+      LTS: 'H:mm:ss',
+      L: 'YYYY.MM.DD.',
+      LL: 'YYYY. MMMM D.',
+      LLL: 'YYYY. MMMM D. H:mm',
+      LLLL: 'YYYY. MMMM D., dddd H:mm' },
+
+    meridiemParse: /de|du/i,
+    isPM: function isPM(input) {
+      return input.charAt(1).toLowerCase() === 'u';
+    },
+    meridiem: function meridiem(hours, minutes, isLower) {
+      if (hours < 12) {
+        return isLower === true ? 'de' : 'DE';
+      } else {
+        return isLower === true ? 'du' : 'DU';
+      }
+    },
+    calendar: {
+      sameDay: '[ma] LT[-kor]',
+      nextDay: '[holnap] LT[-kor]',
+      nextWeek: function nextWeek() {
+        return week.call(this, true);
+      },
+      lastDay: '[tegnap] LT[-kor]',
+      lastWeek: function lastWeek() {
+        return week.call(this, false);
+      },
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s múlva',
+      past: '%s',
+      s: translate,
+      ss: translate,
+      m: translate,
+      mm: translate,
+      h: translate,
+      hh: translate,
+      d: translate,
+      dd: translate,
+      M: translate,
+      MM: translate,
+      y: translate,
+      yy: translate },
+
+    dayOfMonthOrdinalParse: /\d{1,2}\./,
+    ordinal: '%d.',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return hu;
+
+});
+
+/***/ }),
+/* 113 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/hy-am.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Armenian [hy-am]
+//! author : Armendarabyan : https://github.com/armendarabyan
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var hyAm = moment.defineLocale('hy-am', {
+    months: {
+      format: 'հունվարի_փետրվարի_մարտի_ապրիլի_մայիսի_հունիսի_հուլիսի_օգոստոսի_սեպտեմբերի_հոկտեմբերի_նոյեմբերի_դեկտեմբերի'.split(
+      '_'),
+
+      standalone: 'հունվար_փետրվար_մարտ_ապրիլ_մայիս_հունիս_հուլիս_օգոստոս_սեպտեմբեր_հոկտեմբեր_նոյեմբեր_դեկտեմբեր'.split(
+      '_') },
+
+
+    monthsShort: 'հնվ_փտր_մրտ_ապր_մյս_հնս_հլս_օգս_սպտ_հկտ_նմբ_դկտ'.split('_'),
+    weekdays: 'կիրակի_երկուշաբթի_երեքշաբթի_չորեքշաբթի_հինգշաբթի_ուրբաթ_շաբաթ'.split(
+    '_'),
+
+    weekdaysShort: 'կրկ_երկ_երք_չրք_հնգ_ուրբ_շբթ'.split('_'),
+    weekdaysMin: 'կրկ_երկ_երք_չրք_հնգ_ուրբ_շբթ'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'D MMMM YYYY թ.',
+      LLL: 'D MMMM YYYY թ., HH:mm',
+      LLLL: 'dddd, D MMMM YYYY թ., HH:mm' },
+
+    calendar: {
+      sameDay: '[այսօր] LT',
+      nextDay: '[վաղը] LT',
+      lastDay: '[երեկ] LT',
+      nextWeek: function nextWeek() {
+        return 'dddd [օրը ժամը] LT';
+      },
+      lastWeek: function lastWeek() {
+        return '[անցած] dddd [օրը ժամը] LT';
+      },
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s հետո',
+      past: '%s առաջ',
+      s: 'մի քանի վայրկյան',
+      ss: '%d վայրկյան',
+      m: 'րոպե',
+      mm: '%d րոպե',
+      h: 'ժամ',
+      hh: '%d ժամ',
+      d: 'օր',
+      dd: '%d օր',
+      M: 'ամիս',
+      MM: '%d ամիս',
+      y: 'տարի',
+      yy: '%d տարի' },
+
+    meridiemParse: /գիշերվա|առավոտվա|ցերեկվա|երեկոյան/,
+    isPM: function isPM(input) {
+      return /^(ցերեկվա|երեկոյան)$/.test(input);
+    },
+    meridiem: function meridiem(hour) {
+      if (hour < 4) {
+        return 'գիշերվա';
+      } else if (hour < 12) {
+        return 'առավոտվա';
+      } else if (hour < 17) {
+        return 'ցերեկվա';
+      } else {
+        return 'երեկոյան';
+      }
+    },
+    dayOfMonthOrdinalParse: /\d{1,2}|\d{1,2}-(ին|րդ)/,
+    ordinal: function ordinal(number, period) {
+      switch (period) {
+        case 'DDD':
+        case 'w':
+        case 'W':
+        case 'DDDo':
+          if (number === 1) {
+            return number + '-ին';
+          }
+          return number + '-րդ';
+        default:
+          return number;}
+
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 7 // The week that contains Jan 7th is the first week of the year.
+    } });
+
+
+  return hyAm;
+
+});
+
+/***/ }),
+/* 114 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/id.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Indonesian [id]
+//! author : Mohammad Satrio Utomo : https://github.com/tyok
+//! reference: http://id.wikisource.org/wiki/Pedoman_Umum_Ejaan_Bahasa_Indonesia_yang_Disempurnakan
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var id = moment.defineLocale('id', {
+    months: 'Januari_Februari_Maret_April_Mei_Juni_Juli_Agustus_September_Oktober_November_Desember'.split(
+    '_'),
+
+    monthsShort: 'Jan_Feb_Mar_Apr_Mei_Jun_Jul_Agt_Sep_Okt_Nov_Des'.split('_'),
+    weekdays: 'Minggu_Senin_Selasa_Rabu_Kamis_Jumat_Sabtu'.split('_'),
+    weekdaysShort: 'Min_Sen_Sel_Rab_Kam_Jum_Sab'.split('_'),
+    weekdaysMin: 'Mg_Sn_Sl_Rb_Km_Jm_Sb'.split('_'),
+    longDateFormat: {
+      LT: 'HH.mm',
+      LTS: 'HH.mm.ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY [pukul] HH.mm',
+      LLLL: 'dddd, D MMMM YYYY [pukul] HH.mm' },
+
+    meridiemParse: /pagi|siang|sore|malam/,
+    meridiemHour: function meridiemHour(hour, meridiem) {
+      if (hour === 12) {
+        hour = 0;
+      }
+      if (meridiem === 'pagi') {
+        return hour;
+      } else if (meridiem === 'siang') {
+        return hour >= 11 ? hour : hour + 12;
+      } else if (meridiem === 'sore' || meridiem === 'malam') {
+        return hour + 12;
+      }
+    },
+    meridiem: function meridiem(hours, minutes, isLower) {
+      if (hours < 11) {
+        return 'pagi';
+      } else if (hours < 15) {
+        return 'siang';
+      } else if (hours < 19) {
+        return 'sore';
+      } else {
+        return 'malam';
+      }
+    },
+    calendar: {
+      sameDay: '[Hari ini pukul] LT',
+      nextDay: '[Besok pukul] LT',
+      nextWeek: 'dddd [pukul] LT',
+      lastDay: '[Kemarin pukul] LT',
+      lastWeek: 'dddd [lalu pukul] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'dalam %s',
+      past: '%s yang lalu',
+      s: 'beberapa detik',
+      ss: '%d detik',
+      m: 'semenit',
+      mm: '%d menit',
+      h: 'sejam',
+      hh: '%d jam',
+      d: 'sehari',
+      dd: '%d hari',
+      M: 'sebulan',
+      MM: '%d bulan',
+      y: 'setahun',
+      yy: '%d tahun' },
+
+    week: {
+      dow: 0, // Sunday is the first day of the week.
+      doy: 6 // The week that contains Jan 6th is the first week of the year.
+    } });
+
+
+  return id;
+
+});
+
+/***/ }),
+/* 115 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/is.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Icelandic [is]
+//! author : Hinrik Örn Sigurðsson : https://github.com/hinrik
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  function plural(n) {
+    if (n % 100 === 11) {
+      return true;
+    } else if (n % 10 === 1) {
+      return false;
+    }
+    return true;
+  }
+  function translate(number, withoutSuffix, key, isFuture) {
+    var result = number + ' ';
+    switch (key) {
+      case 's':
+        return withoutSuffix || isFuture ?
+        'nokkrar sekúndur' :
+        'nokkrum sekúndum';
+      case 'ss':
+        if (plural(number)) {
+          return (
+            result + (
+            withoutSuffix || isFuture ? 'sekúndur' : 'sekúndum'));
+
+        }
+        return result + 'sekúnda';
+      case 'm':
+        return withoutSuffix ? 'mínúta' : 'mínútu';
+      case 'mm':
+        if (plural(number)) {
+          return (
+            result + (withoutSuffix || isFuture ? 'mínútur' : 'mínútum'));
+
+        } else if (withoutSuffix) {
+          return result + 'mínúta';
+        }
+        return result + 'mínútu';
+      case 'hh':
+        if (plural(number)) {
+          return (
+            result + (
+            withoutSuffix || isFuture ?
+            'klukkustundir' :
+            'klukkustundum'));
+
+        }
+        return result + 'klukkustund';
+      case 'd':
+        if (withoutSuffix) {
+          return 'dagur';
+        }
+        return isFuture ? 'dag' : 'degi';
+      case 'dd':
+        if (plural(number)) {
+          if (withoutSuffix) {
+            return result + 'dagar';
+          }
+          return result + (isFuture ? 'daga' : 'dögum');
+        } else if (withoutSuffix) {
+          return result + 'dagur';
+        }
+        return result + (isFuture ? 'dag' : 'degi');
+      case 'M':
+        if (withoutSuffix) {
+          return 'mánuður';
+        }
+        return isFuture ? 'mánuð' : 'mánuði';
+      case 'MM':
+        if (plural(number)) {
+          if (withoutSuffix) {
+            return result + 'mánuðir';
+          }
+          return result + (isFuture ? 'mánuði' : 'mánuðum');
+        } else if (withoutSuffix) {
+          return result + 'mánuður';
+        }
+        return result + (isFuture ? 'mánuð' : 'mánuði');
+      case 'y':
+        return withoutSuffix || isFuture ? 'ár' : 'ári';
+      case 'yy':
+        if (plural(number)) {
+          return result + (withoutSuffix || isFuture ? 'ár' : 'árum');
+        }
+        return result + (withoutSuffix || isFuture ? 'ár' : 'ári');}
+
+  }
+
+  var is = moment.defineLocale('is', {
+    months: 'janúar_febrúar_mars_apríl_maí_júní_júlí_ágúst_september_október_nóvember_desember'.split(
+    '_'),
+
+    monthsShort: 'jan_feb_mar_apr_maí_jún_júl_ágú_sep_okt_nóv_des'.split('_'),
+    weekdays: 'sunnudagur_mánudagur_þriðjudagur_miðvikudagur_fimmtudagur_föstudagur_laugardagur'.split(
+    '_'),
+
+    weekdaysShort: 'sun_mán_þri_mið_fim_fös_lau'.split('_'),
+    weekdaysMin: 'Su_Má_Þr_Mi_Fi_Fö_La'.split('_'),
+    longDateFormat: {
+      LT: 'H:mm',
+      LTS: 'H:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'D. MMMM YYYY',
+      LLL: 'D. MMMM YYYY [kl.] H:mm',
+      LLLL: 'dddd, D. MMMM YYYY [kl.] H:mm' },
+
+    calendar: {
+      sameDay: '[í dag kl.] LT',
+      nextDay: '[á morgun kl.] LT',
+      nextWeek: 'dddd [kl.] LT',
+      lastDay: '[í gær kl.] LT',
+      lastWeek: '[síðasta] dddd [kl.] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'eftir %s',
+      past: 'fyrir %s síðan',
+      s: translate,
+      ss: translate,
+      m: translate,
+      mm: translate,
+      h: 'klukkustund',
+      hh: translate,
+      d: translate,
+      dd: translate,
+      M: translate,
+      MM: translate,
+      y: translate,
+      yy: translate },
+
+    dayOfMonthOrdinalParse: /\d{1,2}\./,
+    ordinal: '%d.',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return is;
+
+});
+
+/***/ }),
+/* 116 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/it.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Italian [it]
+//! author : Lorenzo : https://github.com/aliem
+//! author: Mattia Larentis: https://github.com/nostalgiaz
+//! author: Marco : https://github.com/Manfre98
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var it = moment.defineLocale('it', {
+    months: 'gennaio_febbraio_marzo_aprile_maggio_giugno_luglio_agosto_settembre_ottobre_novembre_dicembre'.split(
+    '_'),
+
+    monthsShort: 'gen_feb_mar_apr_mag_giu_lug_ago_set_ott_nov_dic'.split('_'),
+    weekdays: 'domenica_lunedì_martedì_mercoledì_giovedì_venerdì_sabato'.split(
+    '_'),
+
+    weekdaysShort: 'dom_lun_mar_mer_gio_ven_sab'.split('_'),
+    weekdaysMin: 'do_lu_ma_me_gi_ve_sa'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: function sameDay() {
+        return (
+          '[Oggi a' + (
+          this.hours() > 1 ? 'lle ' : this.hours() === 0 ? ' ' : "ll'") +
+          ']LT');
+
+      },
+      nextDay: function nextDay() {
+        return (
+          '[Domani a' + (
+          this.hours() > 1 ? 'lle ' : this.hours() === 0 ? ' ' : "ll'") +
+          ']LT');
+
+      },
+      nextWeek: function nextWeek() {
+        return (
+          'dddd [a' + (
+          this.hours() > 1 ? 'lle ' : this.hours() === 0 ? ' ' : "ll'") +
+          ']LT');
+
+      },
+      lastDay: function lastDay() {
+        return (
+          '[Ieri a' + (
+          this.hours() > 1 ? 'lle ' : this.hours() === 0 ? ' ' : "ll'") +
+          ']LT');
+
+      },
+      lastWeek: function lastWeek() {
+        switch (this.day()) {
+          case 0:
+            return (
+              '[La scorsa] dddd [a' + (
+              this.hours() > 1 ?
+              'lle ' :
+              this.hours() === 0 ?
+              ' ' :
+              "ll'") +
+              ']LT');
+
+          default:
+            return (
+              '[Lo scorso] dddd [a' + (
+              this.hours() > 1 ?
+              'lle ' :
+              this.hours() === 0 ?
+              ' ' :
+              "ll'") +
+              ']LT');}
+
+
+      },
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'tra %s',
+      past: '%s fa',
+      s: 'alcuni secondi',
+      ss: '%d secondi',
+      m: 'un minuto',
+      mm: '%d minuti',
+      h: "un'ora",
+      hh: '%d ore',
+      d: 'un giorno',
+      dd: '%d giorni',
+      w: 'una settimana',
+      ww: '%d settimane',
+      M: 'un mese',
+      MM: '%d mesi',
+      y: 'un anno',
+      yy: '%d anni' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}º/,
+    ordinal: '%dº',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return it;
+
+});
+
+/***/ }),
+/* 117 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/it-ch.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Italian (Switzerland) [it-ch]
+//! author : xfh : https://github.com/xfh
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var itCh = moment.defineLocale('it-ch', {
+    months: 'gennaio_febbraio_marzo_aprile_maggio_giugno_luglio_agosto_settembre_ottobre_novembre_dicembre'.split(
+    '_'),
+
+    monthsShort: 'gen_feb_mar_apr_mag_giu_lug_ago_set_ott_nov_dic'.split('_'),
+    weekdays: 'domenica_lunedì_martedì_mercoledì_giovedì_venerdì_sabato'.split(
+    '_'),
+
+    weekdaysShort: 'dom_lun_mar_mer_gio_ven_sab'.split('_'),
+    weekdaysMin: 'do_lu_ma_me_gi_ve_sa'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[Oggi alle] LT',
+      nextDay: '[Domani alle] LT',
+      nextWeek: 'dddd [alle] LT',
+      lastDay: '[Ieri alle] LT',
+      lastWeek: function lastWeek() {
+        switch (this.day()) {
+          case 0:
+            return '[la scorsa] dddd [alle] LT';
+          default:
+            return '[lo scorso] dddd [alle] LT';}
+
+      },
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: function future(s) {
+        return (/^[0-9].+$/.test(s) ? 'tra' : 'in') + ' ' + s;
+      },
+      past: '%s fa',
+      s: 'alcuni secondi',
+      ss: '%d secondi',
+      m: 'un minuto',
+      mm: '%d minuti',
+      h: "un'ora",
+      hh: '%d ore',
+      d: 'un giorno',
+      dd: '%d giorni',
+      M: 'un mese',
+      MM: '%d mesi',
+      y: 'un anno',
+      yy: '%d anni' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}º/,
+    ordinal: '%dº',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return itCh;
+
+});
+
+/***/ }),
+/* 118 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ja.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Japanese [ja]
+//! author : LI Long : https://github.com/baryon
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var ja = moment.defineLocale('ja', {
+    eras: [
+    {
+      since: '2019-05-01',
+      offset: 1,
+      name: '令和',
+      narrow: '㋿',
+      abbr: 'R' },
+
+    {
+      since: '1989-01-08',
+      until: '2019-04-30',
+      offset: 1,
+      name: '平成',
+      narrow: '㍻',
+      abbr: 'H' },
+
+    {
+      since: '1926-12-25',
+      until: '1989-01-07',
+      offset: 1,
+      name: '昭和',
+      narrow: '㍼',
+      abbr: 'S' },
+
+    {
+      since: '1912-07-30',
+      until: '1926-12-24',
+      offset: 1,
+      name: '大正',
+      narrow: '㍽',
+      abbr: 'T' },
+
+    {
+      since: '1873-01-01',
+      until: '1912-07-29',
+      offset: 6,
+      name: '明治',
+      narrow: '㍾',
+      abbr: 'M' },
+
+    {
+      since: '0001-01-01',
+      until: '1873-12-31',
+      offset: 1,
+      name: '西暦',
+      narrow: 'AD',
+      abbr: 'AD' },
+
+    {
+      since: '0000-12-31',
+      until: -Infinity,
+      offset: 1,
+      name: '紀元前',
+      narrow: 'BC',
+      abbr: 'BC' }],
+
+
+    eraYearOrdinalRegex: /(元|\d+)年/,
+    eraYearOrdinalParse: function eraYearOrdinalParse(input, match) {
+      return match[1] === '元' ? 1 : parseInt(match[1] || input, 10);
+    },
+    months: '1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月'.split('_'),
+    monthsShort: '1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月'.split(
+    '_'),
+
+    weekdays: '日曜日_月曜日_火曜日_水曜日_木曜日_金曜日_土曜日'.split('_'),
+    weekdaysShort: '日_月_火_水_木_金_土'.split('_'),
+    weekdaysMin: '日_月_火_水_木_金_土'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'YYYY/MM/DD',
+      LL: 'YYYY年M月D日',
+      LLL: 'YYYY年M月D日 HH:mm',
+      LLLL: 'YYYY年M月D日 dddd HH:mm',
+      l: 'YYYY/MM/DD',
+      ll: 'YYYY年M月D日',
+      lll: 'YYYY年M月D日 HH:mm',
+      llll: 'YYYY年M月D日(ddd) HH:mm' },
+
+    meridiemParse: /午前|午後/i,
+    isPM: function isPM(input) {
+      return input === '午後';
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 12) {
+        return '午前';
+      } else {
+        return '午後';
+      }
+    },
+    calendar: {
+      sameDay: '[今日] LT',
+      nextDay: '[明日] LT',
+      nextWeek: function nextWeek(now) {
+        if (now.week() !== this.week()) {
+          return '[来週]dddd LT';
+        } else {
+          return 'dddd LT';
+        }
+      },
+      lastDay: '[昨日] LT',
+      lastWeek: function lastWeek(now) {
+        if (this.week() !== now.week()) {
+          return '[先週]dddd LT';
+        } else {
+          return 'dddd LT';
+        }
+      },
+      sameElse: 'L' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}日/,
+    ordinal: function ordinal(number, period) {
+      switch (period) {
+        case 'y':
+          return number === 1 ? '元年' : number + '年';
+        case 'd':
+        case 'D':
+        case 'DDD':
+          return number + '日';
+        default:
+          return number;}
+
+    },
+    relativeTime: {
+      future: '%s後',
+      past: '%s前',
+      s: '数秒',
+      ss: '%d秒',
+      m: '1分',
+      mm: '%d分',
+      h: '1時間',
+      hh: '%d時間',
+      d: '1日',
+      dd: '%d日',
+      M: '1ヶ月',
+      MM: '%dヶ月',
+      y: '1年',
+      yy: '%d年' } });
+
+
+
+  return ja;
+
+});
+
+/***/ }),
+/* 119 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/jv.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Javanese [jv]
+//! author : Rony Lantip : https://github.com/lantip
+//! reference: http://jv.wikipedia.org/wiki/Basa_Jawa
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var jv = moment.defineLocale('jv', {
+    months: 'Januari_Februari_Maret_April_Mei_Juni_Juli_Agustus_September_Oktober_Nopember_Desember'.split(
+    '_'),
+
+    monthsShort: 'Jan_Feb_Mar_Apr_Mei_Jun_Jul_Ags_Sep_Okt_Nop_Des'.split('_'),
+    weekdays: 'Minggu_Senen_Seloso_Rebu_Kemis_Jemuwah_Septu'.split('_'),
+    weekdaysShort: 'Min_Sen_Sel_Reb_Kem_Jem_Sep'.split('_'),
+    weekdaysMin: 'Mg_Sn_Sl_Rb_Km_Jm_Sp'.split('_'),
+    longDateFormat: {
+      LT: 'HH.mm',
+      LTS: 'HH.mm.ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY [pukul] HH.mm',
+      LLLL: 'dddd, D MMMM YYYY [pukul] HH.mm' },
+
+    meridiemParse: /enjing|siyang|sonten|ndalu/,
+    meridiemHour: function meridiemHour(hour, meridiem) {
+      if (hour === 12) {
+        hour = 0;
+      }
+      if (meridiem === 'enjing') {
+        return hour;
+      } else if (meridiem === 'siyang') {
+        return hour >= 11 ? hour : hour + 12;
+      } else if (meridiem === 'sonten' || meridiem === 'ndalu') {
+        return hour + 12;
+      }
+    },
+    meridiem: function meridiem(hours, minutes, isLower) {
+      if (hours < 11) {
+        return 'enjing';
+      } else if (hours < 15) {
+        return 'siyang';
+      } else if (hours < 19) {
+        return 'sonten';
+      } else {
+        return 'ndalu';
+      }
+    },
+    calendar: {
+      sameDay: '[Dinten puniko pukul] LT',
+      nextDay: '[Mbenjang pukul] LT',
+      nextWeek: 'dddd [pukul] LT',
+      lastDay: '[Kala wingi pukul] LT',
+      lastWeek: 'dddd [kepengker pukul] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'wonten ing %s',
+      past: '%s ingkang kepengker',
+      s: 'sawetawis detik',
+      ss: '%d detik',
+      m: 'setunggal menit',
+      mm: '%d menit',
+      h: 'setunggal jam',
+      hh: '%d jam',
+      d: 'sedinten',
+      dd: '%d dinten',
+      M: 'sewulan',
+      MM: '%d wulan',
+      y: 'setaun',
+      yy: '%d taun' },
+
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 7 // The week that contains Jan 7th is the first week of the year.
+    } });
+
+
+  return jv;
+
+});
+
+/***/ }),
+/* 120 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ka.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Georgian [ka]
+//! author : Irakli Janiashvili : https://github.com/IrakliJani
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var ka = moment.defineLocale('ka', {
+    months: 'იანვარი_თებერვალი_მარტი_აპრილი_მაისი_ივნისი_ივლისი_აგვისტო_სექტემბერი_ოქტომბერი_ნოემბერი_დეკემბერი'.split(
+    '_'),
+
+    monthsShort: 'იან_თებ_მარ_აპრ_მაი_ივნ_ივლ_აგვ_სექ_ოქტ_ნოე_დეკ'.split('_'),
+    weekdays: {
+      standalone: 'კვირა_ორშაბათი_სამშაბათი_ოთხშაბათი_ხუთშაბათი_პარასკევი_შაბათი'.split(
+      '_'),
+
+      format: 'კვირას_ორშაბათს_სამშაბათს_ოთხშაბათს_ხუთშაბათს_პარასკევს_შაბათს'.split(
+      '_'),
+
+      isFormat: /(წინა|შემდეგ)/ },
+
+    weekdaysShort: 'კვი_ორშ_სამ_ოთხ_ხუთ_პარ_შაბ'.split('_'),
+    weekdaysMin: 'კვ_ორ_სა_ოთ_ხუ_პა_შა'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd, D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[დღეს] LT[-ზე]',
+      nextDay: '[ხვალ] LT[-ზე]',
+      lastDay: '[გუშინ] LT[-ზე]',
+      nextWeek: '[შემდეგ] dddd LT[-ზე]',
+      lastWeek: '[წინა] dddd LT-ზე',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: function future(s) {
+        return s.replace(/(წამ|წუთ|საათ|წელ|დღ|თვ)(ი|ე)/, function (
+        $0,
+        $1,
+        $2)
+        {
+          return $2 === 'ი' ? $1 + 'ში' : $1 + $2 + 'ში';
+        });
+      },
+      past: function past(s) {
+        if (/(წამი|წუთი|საათი|დღე|თვე)/.test(s)) {
+          return s.replace(/(ი|ე)$/, 'ის წინ');
+        }
+        if (/წელი/.test(s)) {
+          return s.replace(/წელი$/, 'წლის წინ');
+        }
+        return s;
+      },
+      s: 'რამდენიმე წამი',
+      ss: '%d წამი',
+      m: 'წუთი',
+      mm: '%d წუთი',
+      h: 'საათი',
+      hh: '%d საათი',
+      d: 'დღე',
+      dd: '%d დღე',
+      M: 'თვე',
+      MM: '%d თვე',
+      y: 'წელი',
+      yy: '%d წელი' },
+
+    dayOfMonthOrdinalParse: /0|1-ლი|მე-\d{1,2}|\d{1,2}-ე/,
+    ordinal: function ordinal(number) {
+      if (number === 0) {
+        return number;
+      }
+      if (number === 1) {
+        return number + '-ლი';
+      }
+      if (
+      number < 20 ||
+      number <= 100 && number % 20 === 0 ||
+      number % 100 === 0)
+      {
+        return 'მე-' + number;
+      }
+      return number + '-ე';
+    },
+    week: {
+      dow: 1,
+      doy: 7 } });
+
+
+
+  return ka;
+
+});
+
+/***/ }),
+/* 121 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/kk.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Kazakh [kk]
+//! authors : Nurlan Rakhimzhanov : https://github.com/nurlan
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var suffixes = {
+    0: '-ші',
+    1: '-ші',
+    2: '-ші',
+    3: '-ші',
+    4: '-ші',
+    5: '-ші',
+    6: '-шы',
+    7: '-ші',
+    8: '-ші',
+    9: '-шы',
+    10: '-шы',
+    20: '-шы',
+    30: '-шы',
+    40: '-шы',
+    50: '-ші',
+    60: '-шы',
+    70: '-ші',
+    80: '-ші',
+    90: '-шы',
+    100: '-ші' };
+
+
+  var kk = moment.defineLocale('kk', {
+    months: 'қаңтар_ақпан_наурыз_сәуір_мамыр_маусым_шілде_тамыз_қыркүйек_қазан_қараша_желтоқсан'.split(
+    '_'),
+
+    monthsShort: 'қаң_ақп_нау_сәу_мам_мау_шіл_там_қыр_қаз_қар_жел'.split('_'),
+    weekdays: 'жексенбі_дүйсенбі_сейсенбі_сәрсенбі_бейсенбі_жұма_сенбі'.split(
+    '_'),
+
+    weekdaysShort: 'жек_дүй_сей_сәр_бей_жұм_сен'.split('_'),
+    weekdaysMin: 'жк_дй_сй_ср_бй_жм_сн'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd, D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[Бүгін сағат] LT',
+      nextDay: '[Ертең сағат] LT',
+      nextWeek: 'dddd [сағат] LT',
+      lastDay: '[Кеше сағат] LT',
+      lastWeek: '[Өткен аптаның] dddd [сағат] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s ішінде',
+      past: '%s бұрын',
+      s: 'бірнеше секунд',
+      ss: '%d секунд',
+      m: 'бір минут',
+      mm: '%d минут',
+      h: 'бір сағат',
+      hh: '%d сағат',
+      d: 'бір күн',
+      dd: '%d күн',
+      M: 'бір ай',
+      MM: '%d ай',
+      y: 'бір жыл',
+      yy: '%d жыл' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}-(ші|шы)/,
+    ordinal: function ordinal(number) {
+      var a = number % 10,
+      b = number >= 100 ? 100 : null;
+      return number + (suffixes[number] || suffixes[a] || suffixes[b]);
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 7 // The week that contains Jan 7th is the first week of the year.
+    } });
+
+
+  return kk;
+
+});
+
+/***/ }),
+/* 122 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/km.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Cambodian [km]
+//! author : Kruy Vanna : https://github.com/kruyvanna
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var symbolMap = {
+    1: '១',
+    2: '២',
+    3: '៣',
+    4: '៤',
+    5: '៥',
+    6: '៦',
+    7: '៧',
+    8: '៨',
+    9: '៩',
+    0: '០' },
+
+  numberMap = {
+    '១': '1',
+    '២': '2',
+    '៣': '3',
+    '៤': '4',
+    '៥': '5',
+    '៦': '6',
+    '៧': '7',
+    '៨': '8',
+    '៩': '9',
+    '០': '0' };
+
+
+  var km = moment.defineLocale('km', {
+    months: 'មករា_កុម្ភៈ_មីនា_មេសា_ឧសភា_មិថុនា_កក្កដា_សីហា_កញ្ញា_តុលា_វិច្ឆិកា_ធ្នូ'.split(
+    '_'),
+
+    monthsShort: 'មករា_កុម្ភៈ_មីនា_មេសា_ឧសភា_មិថុនា_កក្កដា_សីហា_កញ្ញា_តុលា_វិច្ឆិកា_ធ្នូ'.split(
+    '_'),
+
+    weekdays: 'អាទិត្យ_ច័ន្ទ_អង្គារ_ពុធ_ព្រហស្បតិ៍_សុក្រ_សៅរ៍'.split('_'),
+    weekdaysShort: 'អា_ច_អ_ព_ព្រ_សុ_ស'.split('_'),
+    weekdaysMin: 'អា_ច_អ_ព_ព្រ_សុ_ស'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd, D MMMM YYYY HH:mm' },
+
+    meridiemParse: /ព្រឹក|ល្ងាច/,
+    isPM: function isPM(input) {
+      return input === 'ល្ងាច';
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 12) {
+        return 'ព្រឹក';
+      } else {
+        return 'ល្ងាច';
+      }
+    },
+    calendar: {
+      sameDay: '[ថ្ងៃនេះ ម៉ោង] LT',
+      nextDay: '[ស្អែក ម៉ោង] LT',
+      nextWeek: 'dddd [ម៉ោង] LT',
+      lastDay: '[ម្សិលមិញ ម៉ោង] LT',
+      lastWeek: 'dddd [សប្តាហ៍មុន] [ម៉ោង] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%sទៀត',
+      past: '%sមុន',
+      s: 'ប៉ុន្មានវិនាទី',
+      ss: '%d វិនាទី',
+      m: 'មួយនាទី',
+      mm: '%d នាទី',
+      h: 'មួយម៉ោង',
+      hh: '%d ម៉ោង',
+      d: 'មួយថ្ងៃ',
+      dd: '%d ថ្ងៃ',
+      M: 'មួយខែ',
+      MM: '%d ខែ',
+      y: 'មួយឆ្នាំ',
+      yy: '%d ឆ្នាំ' },
+
+    dayOfMonthOrdinalParse: /ទី\d{1,2}/,
+    ordinal: 'ទី%d',
+    preparse: function preparse(string) {
+      return string.replace(/[១២៣៤៥៦៧៨៩០]/g, function (match) {
+        return numberMap[match];
+      });
+    },
+    postformat: function postformat(string) {
+      return string.replace(/\d/g, function (match) {
+        return symbolMap[match];
+      });
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return km;
+
+});
+
+/***/ }),
+/* 123 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/kn.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Kannada [kn]
+//! author : Rajeev Naik : https://github.com/rajeevnaikte
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var symbolMap = {
+    1: '೧',
+    2: '೨',
+    3: '೩',
+    4: '೪',
+    5: '೫',
+    6: '೬',
+    7: '೭',
+    8: '೮',
+    9: '೯',
+    0: '೦' },
+
+  numberMap = {
+    '೧': '1',
+    '೨': '2',
+    '೩': '3',
+    '೪': '4',
+    '೫': '5',
+    '೬': '6',
+    '೭': '7',
+    '೮': '8',
+    '೯': '9',
+    '೦': '0' };
+
+
+  var kn = moment.defineLocale('kn', {
+    months: 'ಜನವರಿ_ಫೆಬ್ರವರಿ_ಮಾರ್ಚ್_ಏಪ್ರಿಲ್_ಮೇ_ಜೂನ್_ಜುಲೈ_ಆಗಸ್ಟ್_ಸೆಪ್ಟೆಂಬರ್_ಅಕ್ಟೋಬರ್_ನವೆಂಬರ್_ಡಿಸೆಂಬರ್'.split(
+    '_'),
+
+    monthsShort: 'ಜನ_ಫೆಬ್ರ_ಮಾರ್ಚ್_ಏಪ್ರಿಲ್_ಮೇ_ಜೂನ್_ಜುಲೈ_ಆಗಸ್ಟ್_ಸೆಪ್ಟೆಂ_ಅಕ್ಟೋ_ನವೆಂ_ಡಿಸೆಂ'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'ಭಾನುವಾರ_ಸೋಮವಾರ_ಮಂಗಳವಾರ_ಬುಧವಾರ_ಗುರುವಾರ_ಶುಕ್ರವಾರ_ಶನಿವಾರ'.split(
+    '_'),
+
+    weekdaysShort: 'ಭಾನು_ಸೋಮ_ಮಂಗಳ_ಬುಧ_ಗುರು_ಶುಕ್ರ_ಶನಿ'.split('_'),
+    weekdaysMin: 'ಭಾ_ಸೋ_ಮಂ_ಬು_ಗು_ಶು_ಶ'.split('_'),
+    longDateFormat: {
+      LT: 'A h:mm',
+      LTS: 'A h:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY, A h:mm',
+      LLLL: 'dddd, D MMMM YYYY, A h:mm' },
+
+    calendar: {
+      sameDay: '[ಇಂದು] LT',
+      nextDay: '[ನಾಳೆ] LT',
+      nextWeek: 'dddd, LT',
+      lastDay: '[ನಿನ್ನೆ] LT',
+      lastWeek: '[ಕೊನೆಯ] dddd, LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s ನಂತರ',
+      past: '%s ಹಿಂದೆ',
+      s: 'ಕೆಲವು ಕ್ಷಣಗಳು',
+      ss: '%d ಸೆಕೆಂಡುಗಳು',
+      m: 'ಒಂದು ನಿಮಿಷ',
+      mm: '%d ನಿಮಿಷ',
+      h: 'ಒಂದು ಗಂಟೆ',
+      hh: '%d ಗಂಟೆ',
+      d: 'ಒಂದು ದಿನ',
+      dd: '%d ದಿನ',
+      M: 'ಒಂದು ತಿಂಗಳು',
+      MM: '%d ತಿಂಗಳು',
+      y: 'ಒಂದು ವರ್ಷ',
+      yy: '%d ವರ್ಷ' },
+
+    preparse: function preparse(string) {
+      return string.replace(/[೧೨೩೪೫೬೭೮೯೦]/g, function (match) {
+        return numberMap[match];
+      });
+    },
+    postformat: function postformat(string) {
+      return string.replace(/\d/g, function (match) {
+        return symbolMap[match];
+      });
+    },
+    meridiemParse: /ರಾತ್ರಿ|ಬೆಳಿಗ್ಗೆ|ಮಧ್ಯಾಹ್ನ|ಸಂಜೆ/,
+    meridiemHour: function meridiemHour(hour, meridiem) {
+      if (hour === 12) {
+        hour = 0;
+      }
+      if (meridiem === 'ರಾತ್ರಿ') {
+        return hour < 4 ? hour : hour + 12;
+      } else if (meridiem === 'ಬೆಳಿಗ್ಗೆ') {
+        return hour;
+      } else if (meridiem === 'ಮಧ್ಯಾಹ್ನ') {
+        return hour >= 10 ? hour : hour + 12;
+      } else if (meridiem === 'ಸಂಜೆ') {
+        return hour + 12;
+      }
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 4) {
+        return 'ರಾತ್ರಿ';
+      } else if (hour < 10) {
+        return 'ಬೆಳಿಗ್ಗೆ';
+      } else if (hour < 17) {
+        return 'ಮಧ್ಯಾಹ್ನ';
+      } else if (hour < 20) {
+        return 'ಸಂಜೆ';
+      } else {
+        return 'ರಾತ್ರಿ';
+      }
+    },
+    dayOfMonthOrdinalParse: /\d{1,2}(ನೇ)/,
+    ordinal: function ordinal(number) {
+      return number + 'ನೇ';
+    },
+    week: {
+      dow: 0, // Sunday is the first day of the week.
+      doy: 6 // The week that contains Jan 6th is the first week of the year.
+    } });
+
+
+  return kn;
+
+});
+
+/***/ }),
+/* 124 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ko.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Korean [ko]
+//! author : Kyungwook, Park : https://github.com/kyungw00k
+//! author : Jeeeyul Lee <jeeeyul@gmail.com>
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var ko = moment.defineLocale('ko', {
+    months: '1월_2월_3월_4월_5월_6월_7월_8월_9월_10월_11월_12월'.split('_'),
+    monthsShort: '1월_2월_3월_4월_5월_6월_7월_8월_9월_10월_11월_12월'.split(
+    '_'),
+
+    weekdays: '일요일_월요일_화요일_수요일_목요일_금요일_토요일'.split('_'),
+    weekdaysShort: '일_월_화_수_목_금_토'.split('_'),
+    weekdaysMin: '일_월_화_수_목_금_토'.split('_'),
+    longDateFormat: {
+      LT: 'A h:mm',
+      LTS: 'A h:mm:ss',
+      L: 'YYYY.MM.DD.',
+      LL: 'YYYY년 MMMM D일',
+      LLL: 'YYYY년 MMMM D일 A h:mm',
+      LLLL: 'YYYY년 MMMM D일 dddd A h:mm',
+      l: 'YYYY.MM.DD.',
+      ll: 'YYYY년 MMMM D일',
+      lll: 'YYYY년 MMMM D일 A h:mm',
+      llll: 'YYYY년 MMMM D일 dddd A h:mm' },
+
+    calendar: {
+      sameDay: '오늘 LT',
+      nextDay: '내일 LT',
+      nextWeek: 'dddd LT',
+      lastDay: '어제 LT',
+      lastWeek: '지난주 dddd LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s 후',
+      past: '%s 전',
+      s: '몇 초',
+      ss: '%d초',
+      m: '1분',
+      mm: '%d분',
+      h: '한 시간',
+      hh: '%d시간',
+      d: '하루',
+      dd: '%d일',
+      M: '한 달',
+      MM: '%d달',
+      y: '일 년',
+      yy: '%d년' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(일|월|주)/,
+    ordinal: function ordinal(number, period) {
+      switch (period) {
+        case 'd':
+        case 'D':
+        case 'DDD':
+          return number + '일';
+        case 'M':
+          return number + '월';
+        case 'w':
+        case 'W':
+          return number + '주';
+        default:
+          return number;}
+
+    },
+    meridiemParse: /오전|오후/,
+    isPM: function isPM(token) {
+      return token === '오후';
+    },
+    meridiem: function meridiem(hour, minute, isUpper) {
+      return hour < 12 ? '오전' : '오후';
+    } });
+
+
+  return ko;
+
+});
+
+/***/ }),
+/* 125 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ku.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Kurdish [ku]
+//! author : Shahram Mebashar : https://github.com/ShahramMebashar
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var symbolMap = {
+    1: '١',
+    2: '٢',
+    3: '٣',
+    4: '٤',
+    5: '٥',
+    6: '٦',
+    7: '٧',
+    8: '٨',
+    9: '٩',
+    0: '٠' },
+
+  numberMap = {
+    '١': '1',
+    '٢': '2',
+    '٣': '3',
+    '٤': '4',
+    '٥': '5',
+    '٦': '6',
+    '٧': '7',
+    '٨': '8',
+    '٩': '9',
+    '٠': '0' },
+
+  months = [
+  'کانونی دووەم',
+  'شوبات',
+  'ئازار',
+  'نیسان',
+  'ئایار',
+  'حوزەیران',
+  'تەمموز',
+  'ئاب',
+  'ئەیلوول',
+  'تشرینی یەكەم',
+  'تشرینی دووەم',
+  'كانونی یەکەم'];
+
+
+  var ku = moment.defineLocale('ku', {
+    months: months,
+    monthsShort: months,
+    weekdays: 'یه‌كشه‌ممه‌_دووشه‌ممه‌_سێشه‌ممه‌_چوارشه‌ممه‌_پێنجشه‌ممه‌_هه‌ینی_شه‌ممه‌'.split(
+    '_'),
+
+    weekdaysShort: 'یه‌كشه‌م_دووشه‌م_سێشه‌م_چوارشه‌م_پێنجشه‌م_هه‌ینی_شه‌ممه‌'.split(
+    '_'),
+
+    weekdaysMin: 'ی_د_س_چ_پ_ه_ش'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd, D MMMM YYYY HH:mm' },
+
+    meridiemParse: /ئێواره‌|به‌یانی/,
+    isPM: function isPM(input) {
+      return /ئێواره‌/.test(input);
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 12) {
+        return 'به‌یانی';
+      } else {
+        return 'ئێواره‌';
+      }
+    },
+    calendar: {
+      sameDay: '[ئه‌مرۆ كاتژمێر] LT',
+      nextDay: '[به‌یانی كاتژمێر] LT',
+      nextWeek: 'dddd [كاتژمێر] LT',
+      lastDay: '[دوێنێ كاتژمێر] LT',
+      lastWeek: 'dddd [كاتژمێر] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'له‌ %s',
+      past: '%s',
+      s: 'چه‌ند چركه‌یه‌ك',
+      ss: 'چركه‌ %d',
+      m: 'یه‌ك خوله‌ك',
+      mm: '%d خوله‌ك',
+      h: 'یه‌ك كاتژمێر',
+      hh: '%d كاتژمێر',
+      d: 'یه‌ك ڕۆژ',
+      dd: '%d ڕۆژ',
+      M: 'یه‌ك مانگ',
+      MM: '%d مانگ',
+      y: 'یه‌ك ساڵ',
+      yy: '%d ساڵ' },
+
+    preparse: function preparse(string) {
+      return string.
+      replace(/[١٢٣٤٥٦٧٨٩٠]/g, function (match) {
+        return numberMap[match];
+      }).
+      replace(/،/g, ',');
+    },
+    postformat: function postformat(string) {
+      return string.
+      replace(/\d/g, function (match) {
+        return symbolMap[match];
+      }).
+      replace(/,/g, '،');
+    },
+    week: {
+      dow: 6, // Saturday is the first day of the week.
+      doy: 12 // The week that contains Jan 12th is the first week of the year.
+    } });
+
+
+  return ku;
+
+});
+
+/***/ }),
+/* 126 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ky.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Kyrgyz [ky]
+//! author : Chyngyz Arystan uulu : https://github.com/chyngyz
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var suffixes = {
+    0: '-чү',
+    1: '-чи',
+    2: '-чи',
+    3: '-чү',
+    4: '-чү',
+    5: '-чи',
+    6: '-чы',
+    7: '-чи',
+    8: '-чи',
+    9: '-чу',
+    10: '-чу',
+    20: '-чы',
+    30: '-чу',
+    40: '-чы',
+    50: '-чү',
+    60: '-чы',
+    70: '-чи',
+    80: '-чи',
+    90: '-чу',
+    100: '-чү' };
+
+
+  var ky = moment.defineLocale('ky', {
+    months: 'январь_февраль_март_апрель_май_июнь_июль_август_сентябрь_октябрь_ноябрь_декабрь'.split(
+    '_'),
+
+    monthsShort: 'янв_фев_март_апр_май_июнь_июль_авг_сен_окт_ноя_дек'.split(
+    '_'),
+
+    weekdays: 'Жекшемби_Дүйшөмбү_Шейшемби_Шаршемби_Бейшемби_Жума_Ишемби'.split(
+    '_'),
+
+    weekdaysShort: 'Жек_Дүй_Шей_Шар_Бей_Жум_Ише'.split('_'),
+    weekdaysMin: 'Жк_Дй_Шй_Шр_Бй_Жм_Иш'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd, D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[Бүгүн саат] LT',
+      nextDay: '[Эртең саат] LT',
+      nextWeek: 'dddd [саат] LT',
+      lastDay: '[Кечээ саат] LT',
+      lastWeek: '[Өткөн аптанын] dddd [күнү] [саат] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s ичинде',
+      past: '%s мурун',
+      s: 'бирнече секунд',
+      ss: '%d секунд',
+      m: 'бир мүнөт',
+      mm: '%d мүнөт',
+      h: 'бир саат',
+      hh: '%d саат',
+      d: 'бир күн',
+      dd: '%d күн',
+      M: 'бир ай',
+      MM: '%d ай',
+      y: 'бир жыл',
+      yy: '%d жыл' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}-(чи|чы|чү|чу)/,
+    ordinal: function ordinal(number) {
+      var a = number % 10,
+      b = number >= 100 ? 100 : null;
+      return number + (suffixes[number] || suffixes[a] || suffixes[b]);
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 7 // The week that contains Jan 7th is the first week of the year.
+    } });
+
+
+  return ky;
+
+});
+
+/***/ }),
+/* 127 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/lb.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Luxembourgish [lb]
+//! author : mweimerskirch : https://github.com/mweimerskirch
+//! author : David Raison : https://github.com/kwisatz
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  function processRelativeTime(number, withoutSuffix, key, isFuture) {
+    var format = {
+      m: ['eng Minutt', 'enger Minutt'],
+      h: ['eng Stonn', 'enger Stonn'],
+      d: ['een Dag', 'engem Dag'],
+      M: ['ee Mount', 'engem Mount'],
+      y: ['ee Joer', 'engem Joer'] };
+
+    return withoutSuffix ? format[key][0] : format[key][1];
+  }
+  function processFutureTime(string) {
+    var number = string.substr(0, string.indexOf(' '));
+    if (eifelerRegelAppliesToNumber(number)) {
+      return 'a ' + string;
+    }
+    return 'an ' + string;
+  }
+  function processPastTime(string) {
+    var number = string.substr(0, string.indexOf(' '));
+    if (eifelerRegelAppliesToNumber(number)) {
+      return 'viru ' + string;
+    }
+    return 'virun ' + string;
+  }
+  /**
+     * Returns true if the word before the given number loses the '-n' ending.
+     * e.g. 'an 10 Deeg' but 'a 5 Deeg'
+     *
+     * @param number {integer}
+     * @returns {boolean}
+     */
+  function eifelerRegelAppliesToNumber(number) {
+    number = parseInt(number, 10);
+    if (isNaN(number)) {
+      return false;
+    }
+    if (number < 0) {
+      // Negative Number --> always true
+      return true;
+    } else if (number < 10) {
+      // Only 1 digit
+      if (4 <= number && number <= 7) {
+        return true;
+      }
+      return false;
+    } else if (number < 100) {
+      // 2 digits
+      var lastDigit = number % 10,
+      firstDigit = number / 10;
+      if (lastDigit === 0) {
+        return eifelerRegelAppliesToNumber(firstDigit);
+      }
+      return eifelerRegelAppliesToNumber(lastDigit);
+    } else if (number < 10000) {
+      // 3 or 4 digits --> recursively check first digit
+      while (number >= 10) {
+        number = number / 10;
+      }
+      return eifelerRegelAppliesToNumber(number);
+    } else {
+      // Anything larger than 4 digits: recursively check first n-3 digits
+      number = number / 1000;
+      return eifelerRegelAppliesToNumber(number);
+    }
+  }
+
+  var lb = moment.defineLocale('lb', {
+    months: 'Januar_Februar_Mäerz_Abrëll_Mee_Juni_Juli_August_September_Oktober_November_Dezember'.split(
+    '_'),
+
+    monthsShort: 'Jan._Febr._Mrz._Abr._Mee_Jun._Jul._Aug._Sept._Okt._Nov._Dez.'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'Sonndeg_Méindeg_Dënschdeg_Mëttwoch_Donneschdeg_Freideg_Samschdeg'.split(
+    '_'),
+
+    weekdaysShort: 'So._Mé._Dë._Më._Do._Fr._Sa.'.split('_'),
+    weekdaysMin: 'So_Mé_Dë_Më_Do_Fr_Sa'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'H:mm [Auer]',
+      LTS: 'H:mm:ss [Auer]',
+      L: 'DD.MM.YYYY',
+      LL: 'D. MMMM YYYY',
+      LLL: 'D. MMMM YYYY H:mm [Auer]',
+      LLLL: 'dddd, D. MMMM YYYY H:mm [Auer]' },
+
+    calendar: {
+      sameDay: '[Haut um] LT',
+      sameElse: 'L',
+      nextDay: '[Muer um] LT',
+      nextWeek: 'dddd [um] LT',
+      lastDay: '[Gëschter um] LT',
+      lastWeek: function lastWeek() {
+        // Different date string for 'Dënschdeg' (Tuesday) and 'Donneschdeg' (Thursday) due to phonological rule
+        switch (this.day()) {
+          case 2:
+          case 4:
+            return '[Leschten] dddd [um] LT';
+          default:
+            return '[Leschte] dddd [um] LT';}
+
+      } },
+
+    relativeTime: {
+      future: processFutureTime,
+      past: processPastTime,
+      s: 'e puer Sekonnen',
+      ss: '%d Sekonnen',
+      m: processRelativeTime,
+      mm: '%d Minutten',
+      h: processRelativeTime,
+      hh: '%d Stonnen',
+      d: processRelativeTime,
+      dd: '%d Deeg',
+      M: processRelativeTime,
+      MM: '%d Méint',
+      y: processRelativeTime,
+      yy: '%d Joer' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}\./,
+    ordinal: '%d.',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return lb;
+
+});
+
+/***/ }),
+/* 128 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/lo.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Lao [lo]
+//! author : Ryan Hart : https://github.com/ryanhart2
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var lo = moment.defineLocale('lo', {
+    months: 'ມັງກອນ_ກຸມພາ_ມີນາ_ເມສາ_ພຶດສະພາ_ມິຖຸນາ_ກໍລະກົດ_ສິງຫາ_ກັນຍາ_ຕຸລາ_ພະຈິກ_ທັນວາ'.split(
+    '_'),
+
+    monthsShort: 'ມັງກອນ_ກຸມພາ_ມີນາ_ເມສາ_ພຶດສະພາ_ມິຖຸນາ_ກໍລະກົດ_ສິງຫາ_ກັນຍາ_ຕຸລາ_ພະຈິກ_ທັນວາ'.split(
+    '_'),
+
+    weekdays: 'ອາທິດ_ຈັນ_ອັງຄານ_ພຸດ_ພະຫັດ_ສຸກ_ເສົາ'.split('_'),
+    weekdaysShort: 'ທິດ_ຈັນ_ອັງຄານ_ພຸດ_ພະຫັດ_ສຸກ_ເສົາ'.split('_'),
+    weekdaysMin: 'ທ_ຈ_ອຄ_ພ_ພຫ_ສກ_ສ'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'ວັນdddd D MMMM YYYY HH:mm' },
+
+    meridiemParse: /ຕອນເຊົ້າ|ຕອນແລງ/,
+    isPM: function isPM(input) {
+      return input === 'ຕອນແລງ';
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 12) {
+        return 'ຕອນເຊົ້າ';
+      } else {
+        return 'ຕອນແລງ';
+      }
+    },
+    calendar: {
+      sameDay: '[ມື້ນີ້ເວລາ] LT',
+      nextDay: '[ມື້ອື່ນເວລາ] LT',
+      nextWeek: '[ວັນ]dddd[ໜ້າເວລາ] LT',
+      lastDay: '[ມື້ວານນີ້ເວລາ] LT',
+      lastWeek: '[ວັນ]dddd[ແລ້ວນີ້ເວລາ] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'ອີກ %s',
+      past: '%sຜ່ານມາ',
+      s: 'ບໍ່ເທົ່າໃດວິນາທີ',
+      ss: '%d ວິນາທີ',
+      m: '1 ນາທີ',
+      mm: '%d ນາທີ',
+      h: '1 ຊົ່ວໂມງ',
+      hh: '%d ຊົ່ວໂມງ',
+      d: '1 ມື້',
+      dd: '%d ມື້',
+      M: '1 ເດືອນ',
+      MM: '%d ເດືອນ',
+      y: '1 ປີ',
+      yy: '%d ປີ' },
+
+    dayOfMonthOrdinalParse: /(ທີ່)\d{1,2}/,
+    ordinal: function ordinal(number) {
+      return 'ທີ່' + number;
+    } });
+
+
+  return lo;
+
+});
+
+/***/ }),
+/* 129 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/lt.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Lithuanian [lt]
+//! author : Mindaugas Mozūras : https://github.com/mmozuras
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var units = {
+    ss: 'sekundė_sekundžių_sekundes',
+    m: 'minutė_minutės_minutę',
+    mm: 'minutės_minučių_minutes',
+    h: 'valanda_valandos_valandą',
+    hh: 'valandos_valandų_valandas',
+    d: 'diena_dienos_dieną',
+    dd: 'dienos_dienų_dienas',
+    M: 'mėnuo_mėnesio_mėnesį',
+    MM: 'mėnesiai_mėnesių_mėnesius',
+    y: 'metai_metų_metus',
+    yy: 'metai_metų_metus' };
+
+  function translateSeconds(number, withoutSuffix, key, isFuture) {
+    if (withoutSuffix) {
+      return 'kelios sekundės';
+    } else {
+      return isFuture ? 'kelių sekundžių' : 'kelias sekundes';
+    }
+  }
+  function translateSingular(number, withoutSuffix, key, isFuture) {
+    return withoutSuffix ?
+    forms(key)[0] :
+    isFuture ?
+    forms(key)[1] :
+    forms(key)[2];
+  }
+  function special(number) {
+    return number % 10 === 0 || number > 10 && number < 20;
+  }
+  function forms(key) {
+    return units[key].split('_');
+  }
+  function translate(number, withoutSuffix, key, isFuture) {
+    var result = number + ' ';
+    if (number === 1) {
+      return (
+        result + translateSingular(number, withoutSuffix, key[0], isFuture));
+
+    } else if (withoutSuffix) {
+      return result + (special(number) ? forms(key)[1] : forms(key)[0]);
+    } else {
+      if (isFuture) {
+        return result + forms(key)[1];
+      } else {
+        return result + (special(number) ? forms(key)[1] : forms(key)[2]);
+      }
+    }
+  }
+  var lt = moment.defineLocale('lt', {
+    months: {
+      format: 'sausio_vasario_kovo_balandžio_gegužės_birželio_liepos_rugpjūčio_rugsėjo_spalio_lapkričio_gruodžio'.split(
+      '_'),
+
+      standalone: 'sausis_vasaris_kovas_balandis_gegužė_birželis_liepa_rugpjūtis_rugsėjis_spalis_lapkritis_gruodis'.split(
+      '_'),
+
+      isFormat: /D[oD]?(\[[^\[\]]*\]|\s)+MMMM?|MMMM?(\[[^\[\]]*\]|\s)+D[oD]?/ },
+
+    monthsShort: 'sau_vas_kov_bal_geg_bir_lie_rgp_rgs_spa_lap_grd'.split('_'),
+    weekdays: {
+      format: 'sekmadienį_pirmadienį_antradienį_trečiadienį_ketvirtadienį_penktadienį_šeštadienį'.split(
+      '_'),
+
+      standalone: 'sekmadienis_pirmadienis_antradienis_trečiadienis_ketvirtadienis_penktadienis_šeštadienis'.split(
+      '_'),
+
+      isFormat: /dddd HH:mm/ },
+
+    weekdaysShort: 'Sek_Pir_Ant_Tre_Ket_Pen_Šeš'.split('_'),
+    weekdaysMin: 'S_P_A_T_K_Pn_Š'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'YYYY-MM-DD',
+      LL: 'YYYY [m.] MMMM D [d.]',
+      LLL: 'YYYY [m.] MMMM D [d.], HH:mm [val.]',
+      LLLL: 'YYYY [m.] MMMM D [d.], dddd, HH:mm [val.]',
+      l: 'YYYY-MM-DD',
+      ll: 'YYYY [m.] MMMM D [d.]',
+      lll: 'YYYY [m.] MMMM D [d.], HH:mm [val.]',
+      llll: 'YYYY [m.] MMMM D [d.], ddd, HH:mm [val.]' },
+
+    calendar: {
+      sameDay: '[Šiandien] LT',
+      nextDay: '[Rytoj] LT',
+      nextWeek: 'dddd LT',
+      lastDay: '[Vakar] LT',
+      lastWeek: '[Praėjusį] dddd LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'po %s',
+      past: 'prieš %s',
+      s: translateSeconds,
+      ss: translate,
+      m: translateSingular,
+      mm: translate,
+      h: translateSingular,
+      hh: translate,
+      d: translateSingular,
+      dd: translate,
+      M: translateSingular,
+      MM: translate,
+      y: translateSingular,
+      yy: translate },
+
+    dayOfMonthOrdinalParse: /\d{1,2}-oji/,
+    ordinal: function ordinal(number) {
+      return number + '-oji';
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return lt;
+
+});
+
+/***/ }),
+/* 130 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/lv.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Latvian [lv]
+//! author : Kristaps Karlsons : https://github.com/skakri
+//! author : Jānis Elmeris : https://github.com/JanisE
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var units = {
+    ss: 'sekundes_sekundēm_sekunde_sekundes'.split('_'),
+    m: 'minūtes_minūtēm_minūte_minūtes'.split('_'),
+    mm: 'minūtes_minūtēm_minūte_minūtes'.split('_'),
+    h: 'stundas_stundām_stunda_stundas'.split('_'),
+    hh: 'stundas_stundām_stunda_stundas'.split('_'),
+    d: 'dienas_dienām_diena_dienas'.split('_'),
+    dd: 'dienas_dienām_diena_dienas'.split('_'),
+    M: 'mēneša_mēnešiem_mēnesis_mēneši'.split('_'),
+    MM: 'mēneša_mēnešiem_mēnesis_mēneši'.split('_'),
+    y: 'gada_gadiem_gads_gadi'.split('_'),
+    yy: 'gada_gadiem_gads_gadi'.split('_') };
+
+  /**
+                                               * @param withoutSuffix boolean true = a length of time; false = before/after a period of time.
+                                               */
+  function format(forms, number, withoutSuffix) {
+    if (withoutSuffix) {
+      // E.g. "21 minūte", "3 minūtes".
+      return number % 10 === 1 && number % 100 !== 11 ? forms[2] : forms[3];
+    } else {
+      // E.g. "21 minūtes" as in "pēc 21 minūtes".
+      // E.g. "3 minūtēm" as in "pēc 3 minūtēm".
+      return number % 10 === 1 && number % 100 !== 11 ? forms[0] : forms[1];
+    }
+  }
+  function relativeTimeWithPlural(number, withoutSuffix, key) {
+    return number + ' ' + format(units[key], number, withoutSuffix);
+  }
+  function relativeTimeWithSingular(number, withoutSuffix, key) {
+    return format(units[key], number, withoutSuffix);
+  }
+  function relativeSeconds(number, withoutSuffix) {
+    return withoutSuffix ? 'dažas sekundes' : 'dažām sekundēm';
+  }
+
+  var lv = moment.defineLocale('lv', {
+    months: 'janvāris_februāris_marts_aprīlis_maijs_jūnijs_jūlijs_augusts_septembris_oktobris_novembris_decembris'.split(
+    '_'),
+
+    monthsShort: 'jan_feb_mar_apr_mai_jūn_jūl_aug_sep_okt_nov_dec'.split('_'),
+    weekdays: 'svētdiena_pirmdiena_otrdiena_trešdiena_ceturtdiena_piektdiena_sestdiena'.split(
+    '_'),
+
+    weekdaysShort: 'Sv_P_O_T_C_Pk_S'.split('_'),
+    weekdaysMin: 'Sv_P_O_T_C_Pk_S'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD.MM.YYYY.',
+      LL: 'YYYY. [gada] D. MMMM',
+      LLL: 'YYYY. [gada] D. MMMM, HH:mm',
+      LLLL: 'YYYY. [gada] D. MMMM, dddd, HH:mm' },
+
+    calendar: {
+      sameDay: '[Šodien pulksten] LT',
+      nextDay: '[Rīt pulksten] LT',
+      nextWeek: 'dddd [pulksten] LT',
+      lastDay: '[Vakar pulksten] LT',
+      lastWeek: '[Pagājušā] dddd [pulksten] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'pēc %s',
+      past: 'pirms %s',
+      s: relativeSeconds,
+      ss: relativeTimeWithPlural,
+      m: relativeTimeWithSingular,
+      mm: relativeTimeWithPlural,
+      h: relativeTimeWithSingular,
+      hh: relativeTimeWithPlural,
+      d: relativeTimeWithSingular,
+      dd: relativeTimeWithPlural,
+      M: relativeTimeWithSingular,
+      MM: relativeTimeWithPlural,
+      y: relativeTimeWithSingular,
+      yy: relativeTimeWithPlural },
+
+    dayOfMonthOrdinalParse: /\d{1,2}\./,
+    ordinal: '%d.',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return lv;
+
+});
+
+/***/ }),
+/* 131 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/me.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Montenegrin [me]
+//! author : Miodrag Nikač <miodrag@restartit.me> : https://github.com/miodragnikac
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var translator = {
+    words: {
+      //Different grammatical cases
+      ss: ['sekund', 'sekunda', 'sekundi'],
+      m: ['jedan minut', 'jednog minuta'],
+      mm: ['minut', 'minuta', 'minuta'],
+      h: ['jedan sat', 'jednog sata'],
+      hh: ['sat', 'sata', 'sati'],
+      dd: ['dan', 'dana', 'dana'],
+      MM: ['mjesec', 'mjeseca', 'mjeseci'],
+      yy: ['godina', 'godine', 'godina'] },
+
+    correctGrammaticalCase: function correctGrammaticalCase(number, wordKey) {
+      return number === 1 ?
+      wordKey[0] :
+      number >= 2 && number <= 4 ?
+      wordKey[1] :
+      wordKey[2];
+    },
+    translate: function translate(number, withoutSuffix, key) {
+      var wordKey = translator.words[key];
+      if (key.length === 1) {
+        return withoutSuffix ? wordKey[0] : wordKey[1];
+      } else {
+        return (
+          number +
+          ' ' +
+          translator.correctGrammaticalCase(number, wordKey));
+
+      }
+    } };
+
+
+  var me = moment.defineLocale('me', {
+    months: 'januar_februar_mart_april_maj_jun_jul_avgust_septembar_oktobar_novembar_decembar'.split(
+    '_'),
+
+    monthsShort: 'jan._feb._mar._apr._maj_jun_jul_avg._sep._okt._nov._dec.'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'nedjelja_ponedjeljak_utorak_srijeda_četvrtak_petak_subota'.split(
+    '_'),
+
+    weekdaysShort: 'ned._pon._uto._sri._čet._pet._sub.'.split('_'),
+    weekdaysMin: 'ne_po_ut_sr_če_pe_su'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'H:mm',
+      LTS: 'H:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'D. MMMM YYYY',
+      LLL: 'D. MMMM YYYY H:mm',
+      LLLL: 'dddd, D. MMMM YYYY H:mm' },
+
+    calendar: {
+      sameDay: '[danas u] LT',
+      nextDay: '[sjutra u] LT',
+
+      nextWeek: function nextWeek() {
+        switch (this.day()) {
+          case 0:
+            return '[u] [nedjelju] [u] LT';
+          case 3:
+            return '[u] [srijedu] [u] LT';
+          case 6:
+            return '[u] [subotu] [u] LT';
+          case 1:
+          case 2:
+          case 4:
+          case 5:
+            return '[u] dddd [u] LT';}
+
+      },
+      lastDay: '[juče u] LT',
+      lastWeek: function lastWeek() {
+        var lastWeekDays = [
+        '[prošle] [nedjelje] [u] LT',
+        '[prošlog] [ponedjeljka] [u] LT',
+        '[prošlog] [utorka] [u] LT',
+        '[prošle] [srijede] [u] LT',
+        '[prošlog] [četvrtka] [u] LT',
+        '[prošlog] [petka] [u] LT',
+        '[prošle] [subote] [u] LT'];
+
+        return lastWeekDays[this.day()];
+      },
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'za %s',
+      past: 'prije %s',
+      s: 'nekoliko sekundi',
+      ss: translator.translate,
+      m: translator.translate,
+      mm: translator.translate,
+      h: translator.translate,
+      hh: translator.translate,
+      d: 'dan',
+      dd: translator.translate,
+      M: 'mjesec',
+      MM: translator.translate,
+      y: 'godinu',
+      yy: translator.translate },
+
+    dayOfMonthOrdinalParse: /\d{1,2}\./,
+    ordinal: '%d.',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 7 // The week that contains Jan 7th is the first week of the year.
+    } });
+
+
+  return me;
+
+});
+
+/***/ }),
+/* 132 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/mi.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Maori [mi]
+//! author : John Corrigan <robbiecloset@gmail.com> : https://github.com/johnideal
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var mi = moment.defineLocale('mi', {
+    months: 'Kohi-tāte_Hui-tanguru_Poutū-te-rangi_Paenga-whāwhā_Haratua_Pipiri_Hōngoingoi_Here-turi-kōkā_Mahuru_Whiringa-ā-nuku_Whiringa-ā-rangi_Hakihea'.split(
+    '_'),
+
+    monthsShort: 'Kohi_Hui_Pou_Pae_Hara_Pipi_Hōngoi_Here_Mahu_Whi-nu_Whi-ra_Haki'.split(
+    '_'),
+
+    monthsRegex: /(?:['a-z\u0101\u014D\u016B]+\-?){1,3}/i,
+    monthsStrictRegex: /(?:['a-z\u0101\u014D\u016B]+\-?){1,3}/i,
+    monthsShortRegex: /(?:['a-z\u0101\u014D\u016B]+\-?){1,3}/i,
+    monthsShortStrictRegex: /(?:['a-z\u0101\u014D\u016B]+\-?){1,2}/i,
+    weekdays: 'Rātapu_Mane_Tūrei_Wenerei_Tāite_Paraire_Hātarei'.split('_'),
+    weekdaysShort: 'Ta_Ma_Tū_We_Tāi_Pa_Hā'.split('_'),
+    weekdaysMin: 'Ta_Ma_Tū_We_Tāi_Pa_Hā'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY [i] HH:mm',
+      LLLL: 'dddd, D MMMM YYYY [i] HH:mm' },
+
+    calendar: {
+      sameDay: '[i teie mahana, i] LT',
+      nextDay: '[apopo i] LT',
+      nextWeek: 'dddd [i] LT',
+      lastDay: '[inanahi i] LT',
+      lastWeek: 'dddd [whakamutunga i] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'i roto i %s',
+      past: '%s i mua',
+      s: 'te hēkona ruarua',
+      ss: '%d hēkona',
+      m: 'he meneti',
+      mm: '%d meneti',
+      h: 'te haora',
+      hh: '%d haora',
+      d: 'he ra',
+      dd: '%d ra',
+      M: 'he marama',
+      MM: '%d marama',
+      y: 'he tau',
+      yy: '%d tau' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}º/,
+    ordinal: '%dº',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return mi;
+
+});
+
+/***/ }),
+/* 133 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/mk.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Macedonian [mk]
+//! author : Borislav Mickov : https://github.com/B0k0
+//! author : Sashko Todorov : https://github.com/bkyceh
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var mk = moment.defineLocale('mk', {
+    months: 'јануари_февруари_март_април_мај_јуни_јули_август_септември_октомври_ноември_декември'.split(
+    '_'),
+
+    monthsShort: 'јан_фев_мар_апр_мај_јун_јул_авг_сеп_окт_ное_дек'.split('_'),
+    weekdays: 'недела_понеделник_вторник_среда_четврток_петок_сабота'.split(
+    '_'),
+
+    weekdaysShort: 'нед_пон_вто_сре_чет_пет_саб'.split('_'),
+    weekdaysMin: 'нe_пo_вт_ср_че_пе_сa'.split('_'),
+    longDateFormat: {
+      LT: 'H:mm',
+      LTS: 'H:mm:ss',
+      L: 'D.MM.YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY H:mm',
+      LLLL: 'dddd, D MMMM YYYY H:mm' },
+
+    calendar: {
+      sameDay: '[Денес во] LT',
+      nextDay: '[Утре во] LT',
+      nextWeek: '[Во] dddd [во] LT',
+      lastDay: '[Вчера во] LT',
+      lastWeek: function lastWeek() {
+        switch (this.day()) {
+          case 0:
+          case 3:
+          case 6:
+            return '[Изминатата] dddd [во] LT';
+          case 1:
+          case 2:
+          case 4:
+          case 5:
+            return '[Изминатиот] dddd [во] LT';}
+
+      },
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'за %s',
+      past: 'пред %s',
+      s: 'неколку секунди',
+      ss: '%d секунди',
+      m: 'една минута',
+      mm: '%d минути',
+      h: 'еден час',
+      hh: '%d часа',
+      d: 'еден ден',
+      dd: '%d дена',
+      M: 'еден месец',
+      MM: '%d месеци',
+      y: 'една година',
+      yy: '%d години' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}-(ев|ен|ти|ви|ри|ми)/,
+    ordinal: function ordinal(number) {
+      var lastDigit = number % 10,
+      last2Digits = number % 100;
+      if (number === 0) {
+        return number + '-ев';
+      } else if (last2Digits === 0) {
+        return number + '-ен';
+      } else if (last2Digits > 10 && last2Digits < 20) {
+        return number + '-ти';
+      } else if (lastDigit === 1) {
+        return number + '-ви';
+      } else if (lastDigit === 2) {
+        return number + '-ри';
+      } else if (lastDigit === 7 || lastDigit === 8) {
+        return number + '-ми';
+      } else {
+        return number + '-ти';
+      }
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 7 // The week that contains Jan 7th is the first week of the year.
+    } });
+
+
+  return mk;
+
+});
+
+/***/ }),
+/* 134 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ml.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Malayalam [ml]
+//! author : Floyd Pink : https://github.com/floydpink
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var ml = moment.defineLocale('ml', {
+    months: 'ജനുവരി_ഫെബ്രുവരി_മാർച്ച്_ഏപ്രിൽ_മേയ്_ജൂൺ_ജൂലൈ_ഓഗസ്റ്റ്_സെപ്റ്റംബർ_ഒക്ടോബർ_നവംബർ_ഡിസംബർ'.split(
+    '_'),
+
+    monthsShort: 'ജനു._ഫെബ്രു._മാർ._ഏപ്രി._മേയ്_ജൂൺ_ജൂലൈ._ഓഗ._സെപ്റ്റ._ഒക്ടോ._നവം._ഡിസം.'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'ഞായറാഴ്ച_തിങ്കളാഴ്ച_ചൊവ്വാഴ്ച_ബുധനാഴ്ച_വ്യാഴാഴ്ച_വെള്ളിയാഴ്ച_ശനിയാഴ്ച'.split(
+    '_'),
+
+    weekdaysShort: 'ഞായർ_തിങ്കൾ_ചൊവ്വ_ബുധൻ_വ്യാഴം_വെള്ളി_ശനി'.split('_'),
+    weekdaysMin: 'ഞാ_തി_ചൊ_ബു_വ്യാ_വെ_ശ'.split('_'),
+    longDateFormat: {
+      LT: 'A h:mm -നു',
+      LTS: 'A h:mm:ss -നു',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY, A h:mm -നു',
+      LLLL: 'dddd, D MMMM YYYY, A h:mm -നു' },
+
+    calendar: {
+      sameDay: '[ഇന്ന്] LT',
+      nextDay: '[നാളെ] LT',
+      nextWeek: 'dddd, LT',
+      lastDay: '[ഇന്നലെ] LT',
+      lastWeek: '[കഴിഞ്ഞ] dddd, LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s കഴിഞ്ഞ്',
+      past: '%s മുൻപ്',
+      s: 'അൽപ നിമിഷങ്ങൾ',
+      ss: '%d സെക്കൻഡ്',
+      m: 'ഒരു മിനിറ്റ്',
+      mm: '%d മിനിറ്റ്',
+      h: 'ഒരു മണിക്കൂർ',
+      hh: '%d മണിക്കൂർ',
+      d: 'ഒരു ദിവസം',
+      dd: '%d ദിവസം',
+      M: 'ഒരു മാസം',
+      MM: '%d മാസം',
+      y: 'ഒരു വർഷം',
+      yy: '%d വർഷം' },
+
+    meridiemParse: /രാത്രി|രാവിലെ|ഉച്ച കഴിഞ്ഞ്|വൈകുന്നേരം|രാത്രി/i,
+    meridiemHour: function meridiemHour(hour, meridiem) {
+      if (hour === 12) {
+        hour = 0;
+      }
+      if (
+      meridiem === 'രാത്രി' && hour >= 4 ||
+      meridiem === 'ഉച്ച കഴിഞ്ഞ്' ||
+      meridiem === 'വൈകുന്നേരം')
+      {
+        return hour + 12;
+      } else {
+        return hour;
+      }
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 4) {
+        return 'രാത്രി';
+      } else if (hour < 12) {
+        return 'രാവിലെ';
+      } else if (hour < 17) {
+        return 'ഉച്ച കഴിഞ്ഞ്';
+      } else if (hour < 20) {
+        return 'വൈകുന്നേരം';
+      } else {
+        return 'രാത്രി';
+      }
+    } });
+
+
+  return ml;
+
+});
+
+/***/ }),
+/* 135 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/mn.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Mongolian [mn]
+//! author : Javkhlantugs Nyamdorj : https://github.com/javkhaanj7
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  function translate(number, withoutSuffix, key, isFuture) {
+    switch (key) {
+      case 's':
+        return withoutSuffix ? 'хэдхэн секунд' : 'хэдхэн секундын';
+      case 'ss':
+        return number + (withoutSuffix ? ' секунд' : ' секундын');
+      case 'm':
+      case 'mm':
+        return number + (withoutSuffix ? ' минут' : ' минутын');
+      case 'h':
+      case 'hh':
+        return number + (withoutSuffix ? ' цаг' : ' цагийн');
+      case 'd':
+      case 'dd':
+        return number + (withoutSuffix ? ' өдөр' : ' өдрийн');
+      case 'M':
+      case 'MM':
+        return number + (withoutSuffix ? ' сар' : ' сарын');
+      case 'y':
+      case 'yy':
+        return number + (withoutSuffix ? ' жил' : ' жилийн');
+      default:
+        return number;}
+
+  }
+
+  var mn = moment.defineLocale('mn', {
+    months: 'Нэгдүгээр сар_Хоёрдугаар сар_Гуравдугаар сар_Дөрөвдүгээр сар_Тавдугаар сар_Зургадугаар сар_Долдугаар сар_Наймдугаар сар_Есдүгээр сар_Аравдугаар сар_Арван нэгдүгээр сар_Арван хоёрдугаар сар'.split(
+    '_'),
+
+    monthsShort: '1 сар_2 сар_3 сар_4 сар_5 сар_6 сар_7 сар_8 сар_9 сар_10 сар_11 сар_12 сар'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'Ням_Даваа_Мягмар_Лхагва_Пүрэв_Баасан_Бямба'.split('_'),
+    weekdaysShort: 'Ням_Дав_Мяг_Лха_Пүр_Баа_Бям'.split('_'),
+    weekdaysMin: 'Ня_Да_Мя_Лх_Пү_Ба_Бя'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'YYYY-MM-DD',
+      LL: 'YYYY оны MMMMын D',
+      LLL: 'YYYY оны MMMMын D HH:mm',
+      LLLL: 'dddd, YYYY оны MMMMын D HH:mm' },
+
+    meridiemParse: /ҮӨ|ҮХ/i,
+    isPM: function isPM(input) {
+      return input === 'ҮХ';
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 12) {
+        return 'ҮӨ';
+      } else {
+        return 'ҮХ';
+      }
+    },
+    calendar: {
+      sameDay: '[Өнөөдөр] LT',
+      nextDay: '[Маргааш] LT',
+      nextWeek: '[Ирэх] dddd LT',
+      lastDay: '[Өчигдөр] LT',
+      lastWeek: '[Өнгөрсөн] dddd LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s дараа',
+      past: '%s өмнө',
+      s: translate,
+      ss: translate,
+      m: translate,
+      mm: translate,
+      h: translate,
+      hh: translate,
+      d: translate,
+      dd: translate,
+      M: translate,
+      MM: translate,
+      y: translate,
+      yy: translate },
+
+    dayOfMonthOrdinalParse: /\d{1,2} өдөр/,
+    ordinal: function ordinal(number, period) {
+      switch (period) {
+        case 'd':
+        case 'D':
+        case 'DDD':
+          return number + ' өдөр';
+        default:
+          return number;}
+
+    } });
+
+
+  return mn;
+
+});
+
+/***/ }),
+/* 136 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/mr.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Marathi [mr]
+//! author : Harshad Kale : https://github.com/kalehv
+//! author : Vivek Athalye : https://github.com/vnathalye
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var symbolMap = {
+    1: '१',
+    2: '२',
+    3: '३',
+    4: '४',
+    5: '५',
+    6: '६',
+    7: '७',
+    8: '८',
+    9: '९',
+    0: '०' },
+
+  numberMap = {
+    '१': '1',
+    '२': '2',
+    '३': '3',
+    '४': '4',
+    '५': '5',
+    '६': '6',
+    '७': '7',
+    '८': '8',
+    '९': '9',
+    '०': '0' };
+
+
+  function relativeTimeMr(number, withoutSuffix, string, isFuture) {
+    var output = '';
+    if (withoutSuffix) {
+      switch (string) {
+        case 's':
+          output = 'काही सेकंद';
+          break;
+        case 'ss':
+          output = '%d सेकंद';
+          break;
+        case 'm':
+          output = 'एक मिनिट';
+          break;
+        case 'mm':
+          output = '%d मिनिटे';
+          break;
+        case 'h':
+          output = 'एक तास';
+          break;
+        case 'hh':
+          output = '%d तास';
+          break;
+        case 'd':
+          output = 'एक दिवस';
+          break;
+        case 'dd':
+          output = '%d दिवस';
+          break;
+        case 'M':
+          output = 'एक महिना';
+          break;
+        case 'MM':
+          output = '%d महिने';
+          break;
+        case 'y':
+          output = 'एक वर्ष';
+          break;
+        case 'yy':
+          output = '%d वर्षे';
+          break;}
 
     } else {
-      // Re-yield the result returned by the delegate method.
-      return info;
-    }
-
-    // The delegate iterator is finished, so forget it and continue with
-    // the outer generator.
-    context.delegate = null;
-    return ContinueSentinel;
-  }
-
-  // Define Generator.prototype.{next,throw,return} in terms of the
-  // unified ._invoke helper method.
-  defineIteratorMethods(Gp);
-
-  Gp[toStringTagSymbol] = "Generator";
-
-  // A Generator should always return itself as the iterator object when the
-  // @@iterator function is called on it. Some browsers' implementations of the
-  // iterator prototype chain incorrectly implement this, causing the Generator
-  // object to not be returned from this call. This ensures that doesn't happen.
-  // See https://github.com/facebook/regenerator/issues/274 for more details.
-  Gp[iteratorSymbol] = function() {
-    return this;
-  };
-
-  Gp.toString = function() {
-    return "[object Generator]";
-  };
-
-  function pushTryEntry(locs) {
-    var entry = { tryLoc: locs[0] };
-
-    if (1 in locs) {
-      entry.catchLoc = locs[1];
-    }
-
-    if (2 in locs) {
-      entry.finallyLoc = locs[2];
-      entry.afterLoc = locs[3];
-    }
-
-    this.tryEntries.push(entry);
-  }
-
-  function resetTryEntry(entry) {
-    var record = entry.completion || {};
-    record.type = "normal";
-    delete record.arg;
-    entry.completion = record;
-  }
-
-  function Context(tryLocsList) {
-    // The root entry object (effectively a try statement without a catch
-    // or a finally block) gives us a place to store values thrown from
-    // locations where there is no enclosing try statement.
-    this.tryEntries = [{ tryLoc: "root" }];
-    tryLocsList.forEach(pushTryEntry, this);
-    this.reset(true);
-  }
-
-  runtime.keys = function(object) {
-    var keys = [];
-    for (var key in object) {
-      keys.push(key);
-    }
-    keys.reverse();
-
-    // Rather than returning an object with a next method, we keep
-    // things simple and return the next function itself.
-    return function next() {
-      while (keys.length) {
-        var key = keys.pop();
-        if (key in object) {
-          next.value = key;
-          next.done = false;
-          return next;
-        }
-      }
-
-      // To avoid creating an additional object, we just hang the .value
-      // and .done properties off the next function object itself. This
-      // also ensures that the minifier will not anonymize the function.
-      next.done = true;
-      return next;
-    };
-  };
-
-  function values(iterable) {
-    if (iterable) {
-      var iteratorMethod = iterable[iteratorSymbol];
-      if (iteratorMethod) {
-        return iteratorMethod.call(iterable);
-      }
-
-      if (typeof iterable.next === "function") {
-        return iterable;
-      }
-
-      if (!isNaN(iterable.length)) {
-        var i = -1, next = function next() {
-          while (++i < iterable.length) {
-            if (hasOwn.call(iterable, i)) {
-              next.value = iterable[i];
-              next.done = false;
-              return next;
-            }
-          }
-
-          next.value = undefined;
-          next.done = true;
-
-          return next;
-        };
-
-        return next.next = next;
-      }
-    }
-
-    // Return an iterator with no values.
-    return { next: doneResult };
-  }
-  runtime.values = values;
-
-  function doneResult() {
-    return { value: undefined, done: true };
-  }
-
-  Context.prototype = {
-    constructor: Context,
-
-    reset: function(skipTempReset) {
-      this.prev = 0;
-      this.next = 0;
-      // Resetting context._sent for legacy support of Babel's
-      // function.sent implementation.
-      this.sent = this._sent = undefined;
-      this.done = false;
-      this.delegate = null;
-
-      this.method = "next";
-      this.arg = undefined;
-
-      this.tryEntries.forEach(resetTryEntry);
-
-      if (!skipTempReset) {
-        for (var name in this) {
-          // Not sure about the optimal order of these conditions:
-          if (name.charAt(0) === "t" &&
-              hasOwn.call(this, name) &&
-              !isNaN(+name.slice(1))) {
-            this[name] = undefined;
-          }
-        }
-      }
-    },
-
-    stop: function() {
-      this.done = true;
-
-      var rootEntry = this.tryEntries[0];
-      var rootRecord = rootEntry.completion;
-      if (rootRecord.type === "throw") {
-        throw rootRecord.arg;
-      }
-
-      return this.rval;
-    },
-
-    dispatchException: function(exception) {
-      if (this.done) {
-        throw exception;
-      }
-
-      var context = this;
-      function handle(loc, caught) {
-        record.type = "throw";
-        record.arg = exception;
-        context.next = loc;
-
-        if (caught) {
-          // If the dispatched exception was caught by a catch block,
-          // then let that catch block handle the exception normally.
-          context.method = "next";
-          context.arg = undefined;
-        }
-
-        return !! caught;
-      }
-
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        var record = entry.completion;
-
-        if (entry.tryLoc === "root") {
-          // Exception thrown outside of any try block that could handle
-          // it, so set the completion value of the entire function to
-          // throw the exception.
-          return handle("end");
-        }
-
-        if (entry.tryLoc <= this.prev) {
-          var hasCatch = hasOwn.call(entry, "catchLoc");
-          var hasFinally = hasOwn.call(entry, "finallyLoc");
-
-          if (hasCatch && hasFinally) {
-            if (this.prev < entry.catchLoc) {
-              return handle(entry.catchLoc, true);
-            } else if (this.prev < entry.finallyLoc) {
-              return handle(entry.finallyLoc);
-            }
-
-          } else if (hasCatch) {
-            if (this.prev < entry.catchLoc) {
-              return handle(entry.catchLoc, true);
-            }
-
-          } else if (hasFinally) {
-            if (this.prev < entry.finallyLoc) {
-              return handle(entry.finallyLoc);
-            }
-
-          } else {
-            throw new Error("try statement without catch or finally");
-          }
-        }
-      }
-    },
-
-    abrupt: function(type, arg) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.tryLoc <= this.prev &&
-            hasOwn.call(entry, "finallyLoc") &&
-            this.prev < entry.finallyLoc) {
-          var finallyEntry = entry;
+      switch (string) {
+        case 's':
+          output = 'काही सेकंदां';
           break;
-        }
-      }
+        case 'ss':
+          output = '%d सेकंदां';
+          break;
+        case 'm':
+          output = 'एका मिनिटा';
+          break;
+        case 'mm':
+          output = '%d मिनिटां';
+          break;
+        case 'h':
+          output = 'एका तासा';
+          break;
+        case 'hh':
+          output = '%d तासां';
+          break;
+        case 'd':
+          output = 'एका दिवसा';
+          break;
+        case 'dd':
+          output = '%d दिवसां';
+          break;
+        case 'M':
+          output = 'एका महिन्या';
+          break;
+        case 'MM':
+          output = '%d महिन्यां';
+          break;
+        case 'y':
+          output = 'एका वर्षा';
+          break;
+        case 'yy':
+          output = '%d वर्षां';
+          break;}
 
-      if (finallyEntry &&
-          (type === "break" ||
-           type === "continue") &&
-          finallyEntry.tryLoc <= arg &&
-          arg <= finallyEntry.finallyLoc) {
-        // Ignore the finally entry if control is not jumping to a
-        // location outside the try/catch block.
-        finallyEntry = null;
-      }
-
-      var record = finallyEntry ? finallyEntry.completion : {};
-      record.type = type;
-      record.arg = arg;
-
-      if (finallyEntry) {
-        this.method = "next";
-        this.next = finallyEntry.finallyLoc;
-        return ContinueSentinel;
-      }
-
-      return this.complete(record);
-    },
-
-    complete: function(record, afterLoc) {
-      if (record.type === "throw") {
-        throw record.arg;
-      }
-
-      if (record.type === "break" ||
-          record.type === "continue") {
-        this.next = record.arg;
-      } else if (record.type === "return") {
-        this.rval = this.arg = record.arg;
-        this.method = "return";
-        this.next = "end";
-      } else if (record.type === "normal" && afterLoc) {
-        this.next = afterLoc;
-      }
-
-      return ContinueSentinel;
-    },
-
-    finish: function(finallyLoc) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.finallyLoc === finallyLoc) {
-          this.complete(entry.completion, entry.afterLoc);
-          resetTryEntry(entry);
-          return ContinueSentinel;
-        }
-      }
-    },
-
-    "catch": function(tryLoc) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.tryLoc === tryLoc) {
-          var record = entry.completion;
-          if (record.type === "throw") {
-            var thrown = record.arg;
-            resetTryEntry(entry);
-          }
-          return thrown;
-        }
-      }
-
-      // The context.catch method must only be called with a location
-      // argument that corresponds to a known catch block.
-      throw new Error("illegal catch attempt");
-    },
-
-    delegateYield: function(iterable, resultName, nextLoc) {
-      this.delegate = {
-        iterator: values(iterable),
-        resultName: resultName,
-        nextLoc: nextLoc
-      };
-
-      if (this.method === "next") {
-        // Deliberately forget the last sent value so that we don't
-        // accidentally pass it on to the delegate.
-        this.arg = undefined;
-      }
-
-      return ContinueSentinel;
     }
-  };
-})(
-  // In sloppy mode, unbound `this` refers to the global object, fallback to
-  // Function constructor if we're in global strict mode. That is sadly a form
-  // of indirect eval which violates Content Security Policy.
-  (function() {
-    return this || (typeof self === "object" && self);
-  })() || Function("return this")()
-);
+    return output.replace(/%d/i, number);
+  }
 
+  var mr = moment.defineLocale('mr', {
+    months: 'जानेवारी_फेब्रुवारी_मार्च_एप्रिल_मे_जून_जुलै_ऑगस्ट_सप्टेंबर_ऑक्टोबर_नोव्हेंबर_डिसेंबर'.split(
+    '_'),
+
+    monthsShort: 'जाने._फेब्रु._मार्च._एप्रि._मे._जून._जुलै._ऑग._सप्टें._ऑक्टो._नोव्हें._डिसें.'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'रविवार_सोमवार_मंगळवार_बुधवार_गुरूवार_शुक्रवार_शनिवार'.split('_'),
+    weekdaysShort: 'रवि_सोम_मंगळ_बुध_गुरू_शुक्र_शनि'.split('_'),
+    weekdaysMin: 'र_सो_मं_बु_गु_शु_श'.split('_'),
+    longDateFormat: {
+      LT: 'A h:mm वाजता',
+      LTS: 'A h:mm:ss वाजता',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY, A h:mm वाजता',
+      LLLL: 'dddd, D MMMM YYYY, A h:mm वाजता' },
+
+    calendar: {
+      sameDay: '[आज] LT',
+      nextDay: '[उद्या] LT',
+      nextWeek: 'dddd, LT',
+      lastDay: '[काल] LT',
+      lastWeek: '[मागील] dddd, LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%sमध्ये',
+      past: '%sपूर्वी',
+      s: relativeTimeMr,
+      ss: relativeTimeMr,
+      m: relativeTimeMr,
+      mm: relativeTimeMr,
+      h: relativeTimeMr,
+      hh: relativeTimeMr,
+      d: relativeTimeMr,
+      dd: relativeTimeMr,
+      M: relativeTimeMr,
+      MM: relativeTimeMr,
+      y: relativeTimeMr,
+      yy: relativeTimeMr },
+
+    preparse: function preparse(string) {
+      return string.replace(/[१२३४५६७८९०]/g, function (match) {
+        return numberMap[match];
+      });
+    },
+    postformat: function postformat(string) {
+      return string.replace(/\d/g, function (match) {
+        return symbolMap[match];
+      });
+    },
+    meridiemParse: /पहाटे|सकाळी|दुपारी|सायंकाळी|रात्री/,
+    meridiemHour: function meridiemHour(hour, meridiem) {
+      if (hour === 12) {
+        hour = 0;
+      }
+      if (meridiem === 'पहाटे' || meridiem === 'सकाळी') {
+        return hour;
+      } else if (
+      meridiem === 'दुपारी' ||
+      meridiem === 'सायंकाळी' ||
+      meridiem === 'रात्री')
+      {
+        return hour >= 12 ? hour : hour + 12;
+      }
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour >= 0 && hour < 6) {
+        return 'पहाटे';
+      } else if (hour < 12) {
+        return 'सकाळी';
+      } else if (hour < 17) {
+        return 'दुपारी';
+      } else if (hour < 20) {
+        return 'सायंकाळी';
+      } else {
+        return 'रात्री';
+      }
+    },
+    week: {
+      dow: 0, // Sunday is the first day of the week.
+      doy: 6 // The week that contains Jan 6th is the first week of the year.
+    } });
+
+
+  return mr;
+
+});
+
+/***/ }),
+/* 137 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ms.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Malay [ms]
+//! author : Weldan Jamili : https://github.com/weldan
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var ms = moment.defineLocale('ms', {
+    months: 'Januari_Februari_Mac_April_Mei_Jun_Julai_Ogos_September_Oktober_November_Disember'.split(
+    '_'),
+
+    monthsShort: 'Jan_Feb_Mac_Apr_Mei_Jun_Jul_Ogs_Sep_Okt_Nov_Dis'.split('_'),
+    weekdays: 'Ahad_Isnin_Selasa_Rabu_Khamis_Jumaat_Sabtu'.split('_'),
+    weekdaysShort: 'Ahd_Isn_Sel_Rab_Kha_Jum_Sab'.split('_'),
+    weekdaysMin: 'Ah_Is_Sl_Rb_Km_Jm_Sb'.split('_'),
+    longDateFormat: {
+      LT: 'HH.mm',
+      LTS: 'HH.mm.ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY [pukul] HH.mm',
+      LLLL: 'dddd, D MMMM YYYY [pukul] HH.mm' },
+
+    meridiemParse: /pagi|tengahari|petang|malam/,
+    meridiemHour: function meridiemHour(hour, meridiem) {
+      if (hour === 12) {
+        hour = 0;
+      }
+      if (meridiem === 'pagi') {
+        return hour;
+      } else if (meridiem === 'tengahari') {
+        return hour >= 11 ? hour : hour + 12;
+      } else if (meridiem === 'petang' || meridiem === 'malam') {
+        return hour + 12;
+      }
+    },
+    meridiem: function meridiem(hours, minutes, isLower) {
+      if (hours < 11) {
+        return 'pagi';
+      } else if (hours < 15) {
+        return 'tengahari';
+      } else if (hours < 19) {
+        return 'petang';
+      } else {
+        return 'malam';
+      }
+    },
+    calendar: {
+      sameDay: '[Hari ini pukul] LT',
+      nextDay: '[Esok pukul] LT',
+      nextWeek: 'dddd [pukul] LT',
+      lastDay: '[Kelmarin pukul] LT',
+      lastWeek: 'dddd [lepas pukul] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'dalam %s',
+      past: '%s yang lepas',
+      s: 'beberapa saat',
+      ss: '%d saat',
+      m: 'seminit',
+      mm: '%d minit',
+      h: 'sejam',
+      hh: '%d jam',
+      d: 'sehari',
+      dd: '%d hari',
+      M: 'sebulan',
+      MM: '%d bulan',
+      y: 'setahun',
+      yy: '%d tahun' },
+
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 7 // The week that contains Jan 7th is the first week of the year.
+    } });
+
+
+  return ms;
+
+});
+
+/***/ }),
+/* 138 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ms-my.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Malay [ms-my]
+//! note : DEPRECATED, the correct one is [ms]
+//! author : Weldan Jamili : https://github.com/weldan
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var msMy = moment.defineLocale('ms-my', {
+    months: 'Januari_Februari_Mac_April_Mei_Jun_Julai_Ogos_September_Oktober_November_Disember'.split(
+    '_'),
+
+    monthsShort: 'Jan_Feb_Mac_Apr_Mei_Jun_Jul_Ogs_Sep_Okt_Nov_Dis'.split('_'),
+    weekdays: 'Ahad_Isnin_Selasa_Rabu_Khamis_Jumaat_Sabtu'.split('_'),
+    weekdaysShort: 'Ahd_Isn_Sel_Rab_Kha_Jum_Sab'.split('_'),
+    weekdaysMin: 'Ah_Is_Sl_Rb_Km_Jm_Sb'.split('_'),
+    longDateFormat: {
+      LT: 'HH.mm',
+      LTS: 'HH.mm.ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY [pukul] HH.mm',
+      LLLL: 'dddd, D MMMM YYYY [pukul] HH.mm' },
+
+    meridiemParse: /pagi|tengahari|petang|malam/,
+    meridiemHour: function meridiemHour(hour, meridiem) {
+      if (hour === 12) {
+        hour = 0;
+      }
+      if (meridiem === 'pagi') {
+        return hour;
+      } else if (meridiem === 'tengahari') {
+        return hour >= 11 ? hour : hour + 12;
+      } else if (meridiem === 'petang' || meridiem === 'malam') {
+        return hour + 12;
+      }
+    },
+    meridiem: function meridiem(hours, minutes, isLower) {
+      if (hours < 11) {
+        return 'pagi';
+      } else if (hours < 15) {
+        return 'tengahari';
+      } else if (hours < 19) {
+        return 'petang';
+      } else {
+        return 'malam';
+      }
+    },
+    calendar: {
+      sameDay: '[Hari ini pukul] LT',
+      nextDay: '[Esok pukul] LT',
+      nextWeek: 'dddd [pukul] LT',
+      lastDay: '[Kelmarin pukul] LT',
+      lastWeek: 'dddd [lepas pukul] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'dalam %s',
+      past: '%s yang lepas',
+      s: 'beberapa saat',
+      ss: '%d saat',
+      m: 'seminit',
+      mm: '%d minit',
+      h: 'sejam',
+      hh: '%d jam',
+      d: 'sehari',
+      dd: '%d hari',
+      M: 'sebulan',
+      MM: '%d bulan',
+      y: 'setahun',
+      yy: '%d tahun' },
+
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 7 // The week that contains Jan 7th is the first week of the year.
+    } });
+
+
+  return msMy;
+
+});
+
+/***/ }),
+/* 139 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/mt.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Maltese (Malta) [mt]
+//! author : Alessandro Maruccia : https://github.com/alesma
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var mt = moment.defineLocale('mt', {
+    months: 'Jannar_Frar_Marzu_April_Mejju_Ġunju_Lulju_Awwissu_Settembru_Ottubru_Novembru_Diċembru'.split(
+    '_'),
+
+    monthsShort: 'Jan_Fra_Mar_Apr_Mej_Ġun_Lul_Aww_Set_Ott_Nov_Diċ'.split('_'),
+    weekdays: 'Il-Ħadd_It-Tnejn_It-Tlieta_L-Erbgħa_Il-Ħamis_Il-Ġimgħa_Is-Sibt'.split(
+    '_'),
+
+    weekdaysShort: 'Ħad_Tne_Tli_Erb_Ħam_Ġim_Sib'.split('_'),
+    weekdaysMin: 'Ħa_Tn_Tl_Er_Ħa_Ġi_Si'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd, D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[Illum fil-]LT',
+      nextDay: '[Għada fil-]LT',
+      nextWeek: 'dddd [fil-]LT',
+      lastDay: '[Il-bieraħ fil-]LT',
+      lastWeek: 'dddd [li għadda] [fil-]LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'f’ %s',
+      past: '%s ilu',
+      s: 'ftit sekondi',
+      ss: '%d sekondi',
+      m: 'minuta',
+      mm: '%d minuti',
+      h: 'siegħa',
+      hh: '%d siegħat',
+      d: 'ġurnata',
+      dd: '%d ġranet',
+      M: 'xahar',
+      MM: '%d xhur',
+      y: 'sena',
+      yy: '%d sni' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}º/,
+    ordinal: '%dº',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return mt;
+
+});
+
+/***/ }),
+/* 140 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/my.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Burmese [my]
+//! author : Squar team, mysquar.com
+//! author : David Rossellat : https://github.com/gholadr
+//! author : Tin Aung Lin : https://github.com/thanyawzinmin
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var symbolMap = {
+    1: '၁',
+    2: '၂',
+    3: '၃',
+    4: '၄',
+    5: '၅',
+    6: '၆',
+    7: '၇',
+    8: '၈',
+    9: '၉',
+    0: '၀' },
+
+  numberMap = {
+    '၁': '1',
+    '၂': '2',
+    '၃': '3',
+    '၄': '4',
+    '၅': '5',
+    '၆': '6',
+    '၇': '7',
+    '၈': '8',
+    '၉': '9',
+    '၀': '0' };
+
+
+  var my = moment.defineLocale('my', {
+    months: 'ဇန်နဝါရီ_ဖေဖော်ဝါရီ_မတ်_ဧပြီ_မေ_ဇွန်_ဇူလိုင်_သြဂုတ်_စက်တင်ဘာ_အောက်တိုဘာ_နိုဝင်ဘာ_ဒီဇင်ဘာ'.split(
+    '_'),
+
+    monthsShort: 'ဇန်_ဖေ_မတ်_ပြီ_မေ_ဇွန်_လိုင်_သြ_စက်_အောက်_နို_ဒီ'.split('_'),
+    weekdays: 'တနင်္ဂနွေ_တနင်္လာ_အင်္ဂါ_ဗုဒ္ဓဟူး_ကြာသပတေး_သောကြာ_စနေ'.split(
+    '_'),
+
+    weekdaysShort: 'နွေ_လာ_ဂါ_ဟူး_ကြာ_သော_နေ'.split('_'),
+    weekdaysMin: 'နွေ_လာ_ဂါ_ဟူး_ကြာ_သော_နေ'.split('_'),
+
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[ယနေ.] LT [မှာ]',
+      nextDay: '[မနက်ဖြန်] LT [မှာ]',
+      nextWeek: 'dddd LT [မှာ]',
+      lastDay: '[မနေ.က] LT [မှာ]',
+      lastWeek: '[ပြီးခဲ့သော] dddd LT [မှာ]',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'လာမည့် %s မှာ',
+      past: 'လွန်ခဲ့သော %s က',
+      s: 'စက္ကန်.အနည်းငယ်',
+      ss: '%d စက္ကန့်',
+      m: 'တစ်မိနစ်',
+      mm: '%d မိနစ်',
+      h: 'တစ်နာရီ',
+      hh: '%d နာရီ',
+      d: 'တစ်ရက်',
+      dd: '%d ရက်',
+      M: 'တစ်လ',
+      MM: '%d လ',
+      y: 'တစ်နှစ်',
+      yy: '%d နှစ်' },
+
+    preparse: function preparse(string) {
+      return string.replace(/[၁၂၃၄၅၆၇၈၉၀]/g, function (match) {
+        return numberMap[match];
+      });
+    },
+    postformat: function postformat(string) {
+      return string.replace(/\d/g, function (match) {
+        return symbolMap[match];
+      });
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return my;
+
+});
+
+/***/ }),
+/* 141 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/nb.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Norwegian Bokmål [nb]
+//! authors : Espen Hovlandsdal : https://github.com/rexxars
+//!           Sigurd Gartmann : https://github.com/sigurdga
+//!           Stephen Ramthun : https://github.com/stephenramthun
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var nb = moment.defineLocale('nb', {
+    months: 'januar_februar_mars_april_mai_juni_juli_august_september_oktober_november_desember'.split(
+    '_'),
+
+    monthsShort: 'jan._feb._mars_apr._mai_juni_juli_aug._sep._okt._nov._des.'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'søndag_mandag_tirsdag_onsdag_torsdag_fredag_lørdag'.split('_'),
+    weekdaysShort: 'sø._ma._ti._on._to._fr._lø.'.split('_'),
+    weekdaysMin: 'sø_ma_ti_on_to_fr_lø'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'D. MMMM YYYY',
+      LLL: 'D. MMMM YYYY [kl.] HH:mm',
+      LLLL: 'dddd D. MMMM YYYY [kl.] HH:mm' },
+
+    calendar: {
+      sameDay: '[i dag kl.] LT',
+      nextDay: '[i morgen kl.] LT',
+      nextWeek: 'dddd [kl.] LT',
+      lastDay: '[i går kl.] LT',
+      lastWeek: '[forrige] dddd [kl.] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'om %s',
+      past: '%s siden',
+      s: 'noen sekunder',
+      ss: '%d sekunder',
+      m: 'ett minutt',
+      mm: '%d minutter',
+      h: 'en time',
+      hh: '%d timer',
+      d: 'en dag',
+      dd: '%d dager',
+      w: 'en uke',
+      ww: '%d uker',
+      M: 'en måned',
+      MM: '%d måneder',
+      y: 'ett år',
+      yy: '%d år' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}\./,
+    ordinal: '%d.',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return nb;
+
+});
+
+/***/ }),
+/* 142 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ne.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Nepalese [ne]
+//! author : suvash : https://github.com/suvash
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var symbolMap = {
+    1: '१',
+    2: '२',
+    3: '३',
+    4: '४',
+    5: '५',
+    6: '६',
+    7: '७',
+    8: '८',
+    9: '९',
+    0: '०' },
+
+  numberMap = {
+    '१': '1',
+    '२': '2',
+    '३': '3',
+    '४': '4',
+    '५': '5',
+    '६': '6',
+    '७': '7',
+    '८': '8',
+    '९': '9',
+    '०': '0' };
+
+
+  var ne = moment.defineLocale('ne', {
+    months: 'जनवरी_फेब्रुवरी_मार्च_अप्रिल_मई_जुन_जुलाई_अगष्ट_सेप्टेम्बर_अक्टोबर_नोभेम्बर_डिसेम्बर'.split(
+    '_'),
+
+    monthsShort: 'जन._फेब्रु._मार्च_अप्रि._मई_जुन_जुलाई._अग._सेप्ट._अक्टो._नोभे._डिसे.'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'आइतबार_सोमबार_मङ्गलबार_बुधबार_बिहिबार_शुक्रबार_शनिबार'.split(
+    '_'),
+
+    weekdaysShort: 'आइत._सोम._मङ्गल._बुध._बिहि._शुक्र._शनि.'.split('_'),
+    weekdaysMin: 'आ._सो._मं._बु._बि._शु._श.'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'Aको h:mm बजे',
+      LTS: 'Aको h:mm:ss बजे',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY, Aको h:mm बजे',
+      LLLL: 'dddd, D MMMM YYYY, Aको h:mm बजे' },
+
+    preparse: function preparse(string) {
+      return string.replace(/[१२३४५६७८९०]/g, function (match) {
+        return numberMap[match];
+      });
+    },
+    postformat: function postformat(string) {
+      return string.replace(/\d/g, function (match) {
+        return symbolMap[match];
+      });
+    },
+    meridiemParse: /राति|बिहान|दिउँसो|साँझ/,
+    meridiemHour: function meridiemHour(hour, meridiem) {
+      if (hour === 12) {
+        hour = 0;
+      }
+      if (meridiem === 'राति') {
+        return hour < 4 ? hour : hour + 12;
+      } else if (meridiem === 'बिहान') {
+        return hour;
+      } else if (meridiem === 'दिउँसो') {
+        return hour >= 10 ? hour : hour + 12;
+      } else if (meridiem === 'साँझ') {
+        return hour + 12;
+      }
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 3) {
+        return 'राति';
+      } else if (hour < 12) {
+        return 'बिहान';
+      } else if (hour < 16) {
+        return 'दिउँसो';
+      } else if (hour < 20) {
+        return 'साँझ';
+      } else {
+        return 'राति';
+      }
+    },
+    calendar: {
+      sameDay: '[आज] LT',
+      nextDay: '[भोलि] LT',
+      nextWeek: '[आउँदो] dddd[,] LT',
+      lastDay: '[हिजो] LT',
+      lastWeek: '[गएको] dddd[,] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%sमा',
+      past: '%s अगाडि',
+      s: 'केही क्षण',
+      ss: '%d सेकेण्ड',
+      m: 'एक मिनेट',
+      mm: '%d मिनेट',
+      h: 'एक घण्टा',
+      hh: '%d घण्टा',
+      d: 'एक दिन',
+      dd: '%d दिन',
+      M: 'एक महिना',
+      MM: '%d महिना',
+      y: 'एक बर्ष',
+      yy: '%d बर्ष' },
+
+    week: {
+      dow: 0, // Sunday is the first day of the week.
+      doy: 6 // The week that contains Jan 6th is the first week of the year.
+    } });
+
+
+  return ne;
+
+});
+
+/***/ }),
+/* 143 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/nl.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Dutch [nl]
+//! author : Joris Röling : https://github.com/jorisroling
+//! author : Jacob Middag : https://github.com/middagj
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var monthsShortWithDots = 'jan._feb._mrt._apr._mei_jun._jul._aug._sep._okt._nov._dec.'.split(
+  '_'),
+
+  monthsShortWithoutDots = 'jan_feb_mrt_apr_mei_jun_jul_aug_sep_okt_nov_dec'.split(
+  '_'),
+
+  monthsParse = [
+  /^jan/i,
+  /^feb/i,
+  /^maart|mrt.?$/i,
+  /^apr/i,
+  /^mei$/i,
+  /^jun[i.]?$/i,
+  /^jul[i.]?$/i,
+  /^aug/i,
+  /^sep/i,
+  /^okt/i,
+  /^nov/i,
+  /^dec/i],
+
+  monthsRegex = /^(januari|februari|maart|april|mei|ju[nl]i|augustus|september|oktober|november|december|jan\.?|feb\.?|mrt\.?|apr\.?|ju[nl]\.?|aug\.?|sep\.?|okt\.?|nov\.?|dec\.?)/i;
+
+  var nl = moment.defineLocale('nl', {
+    months: 'januari_februari_maart_april_mei_juni_juli_augustus_september_oktober_november_december'.split(
+    '_'),
+
+    monthsShort: function monthsShort(m, format) {
+      if (!m) {
+        return monthsShortWithDots;
+      } else if (/-MMM-/.test(format)) {
+        return monthsShortWithoutDots[m.month()];
+      } else {
+        return monthsShortWithDots[m.month()];
+      }
+    },
+
+    monthsRegex: monthsRegex,
+    monthsShortRegex: monthsRegex,
+    monthsStrictRegex: /^(januari|februari|maart|april|mei|ju[nl]i|augustus|september|oktober|november|december)/i,
+    monthsShortStrictRegex: /^(jan\.?|feb\.?|mrt\.?|apr\.?|mei|ju[nl]\.?|aug\.?|sep\.?|okt\.?|nov\.?|dec\.?)/i,
+
+    monthsParse: monthsParse,
+    longMonthsParse: monthsParse,
+    shortMonthsParse: monthsParse,
+
+    weekdays: 'zondag_maandag_dinsdag_woensdag_donderdag_vrijdag_zaterdag'.split(
+    '_'),
+
+    weekdaysShort: 'zo._ma._di._wo._do._vr._za.'.split('_'),
+    weekdaysMin: 'zo_ma_di_wo_do_vr_za'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD-MM-YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[vandaag om] LT',
+      nextDay: '[morgen om] LT',
+      nextWeek: 'dddd [om] LT',
+      lastDay: '[gisteren om] LT',
+      lastWeek: '[afgelopen] dddd [om] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'over %s',
+      past: '%s geleden',
+      s: 'een paar seconden',
+      ss: '%d seconden',
+      m: 'één minuut',
+      mm: '%d minuten',
+      h: 'één uur',
+      hh: '%d uur',
+      d: 'één dag',
+      dd: '%d dagen',
+      w: 'één week',
+      ww: '%d weken',
+      M: 'één maand',
+      MM: '%d maanden',
+      y: 'één jaar',
+      yy: '%d jaar' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(ste|de)/,
+    ordinal: function ordinal(number) {
+      return (
+        number + (
+        number === 1 || number === 8 || number >= 20 ? 'ste' : 'de'));
+
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return nl;
+
+});
+
+/***/ }),
+/* 144 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/nl-be.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Dutch (Belgium) [nl-be]
+//! author : Joris Röling : https://github.com/jorisroling
+//! author : Jacob Middag : https://github.com/middagj
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var monthsShortWithDots = 'jan._feb._mrt._apr._mei_jun._jul._aug._sep._okt._nov._dec.'.split(
+  '_'),
+
+  monthsShortWithoutDots = 'jan_feb_mrt_apr_mei_jun_jul_aug_sep_okt_nov_dec'.split(
+  '_'),
+
+  monthsParse = [
+  /^jan/i,
+  /^feb/i,
+  /^maart|mrt.?$/i,
+  /^apr/i,
+  /^mei$/i,
+  /^jun[i.]?$/i,
+  /^jul[i.]?$/i,
+  /^aug/i,
+  /^sep/i,
+  /^okt/i,
+  /^nov/i,
+  /^dec/i],
+
+  monthsRegex = /^(januari|februari|maart|april|mei|ju[nl]i|augustus|september|oktober|november|december|jan\.?|feb\.?|mrt\.?|apr\.?|ju[nl]\.?|aug\.?|sep\.?|okt\.?|nov\.?|dec\.?)/i;
+
+  var nlBe = moment.defineLocale('nl-be', {
+    months: 'januari_februari_maart_april_mei_juni_juli_augustus_september_oktober_november_december'.split(
+    '_'),
+
+    monthsShort: function monthsShort(m, format) {
+      if (!m) {
+        return monthsShortWithDots;
+      } else if (/-MMM-/.test(format)) {
+        return monthsShortWithoutDots[m.month()];
+      } else {
+        return monthsShortWithDots[m.month()];
+      }
+    },
+
+    monthsRegex: monthsRegex,
+    monthsShortRegex: monthsRegex,
+    monthsStrictRegex: /^(januari|februari|maart|april|mei|ju[nl]i|augustus|september|oktober|november|december)/i,
+    monthsShortStrictRegex: /^(jan\.?|feb\.?|mrt\.?|apr\.?|mei|ju[nl]\.?|aug\.?|sep\.?|okt\.?|nov\.?|dec\.?)/i,
+
+    monthsParse: monthsParse,
+    longMonthsParse: monthsParse,
+    shortMonthsParse: monthsParse,
+
+    weekdays: 'zondag_maandag_dinsdag_woensdag_donderdag_vrijdag_zaterdag'.split(
+    '_'),
+
+    weekdaysShort: 'zo._ma._di._wo._do._vr._za.'.split('_'),
+    weekdaysMin: 'zo_ma_di_wo_do_vr_za'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[vandaag om] LT',
+      nextDay: '[morgen om] LT',
+      nextWeek: 'dddd [om] LT',
+      lastDay: '[gisteren om] LT',
+      lastWeek: '[afgelopen] dddd [om] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'over %s',
+      past: '%s geleden',
+      s: 'een paar seconden',
+      ss: '%d seconden',
+      m: 'één minuut',
+      mm: '%d minuten',
+      h: 'één uur',
+      hh: '%d uur',
+      d: 'één dag',
+      dd: '%d dagen',
+      M: 'één maand',
+      MM: '%d maanden',
+      y: 'één jaar',
+      yy: '%d jaar' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(ste|de)/,
+    ordinal: function ordinal(number) {
+      return (
+        number + (
+        number === 1 || number === 8 || number >= 20 ? 'ste' : 'de'));
+
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return nlBe;
+
+});
+
+/***/ }),
+/* 145 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/nn.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Nynorsk [nn]
+//! authors : https://github.com/mechuwind
+//!           Stephen Ramthun : https://github.com/stephenramthun
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var nn = moment.defineLocale('nn', {
+    months: 'januar_februar_mars_april_mai_juni_juli_august_september_oktober_november_desember'.split(
+    '_'),
+
+    monthsShort: 'jan._feb._mars_apr._mai_juni_juli_aug._sep._okt._nov._des.'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'sundag_måndag_tysdag_onsdag_torsdag_fredag_laurdag'.split('_'),
+    weekdaysShort: 'su._må._ty._on._to._fr._lau.'.split('_'),
+    weekdaysMin: 'su_må_ty_on_to_fr_la'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'D. MMMM YYYY',
+      LLL: 'D. MMMM YYYY [kl.] H:mm',
+      LLLL: 'dddd D. MMMM YYYY [kl.] HH:mm' },
+
+    calendar: {
+      sameDay: '[I dag klokka] LT',
+      nextDay: '[I morgon klokka] LT',
+      nextWeek: 'dddd [klokka] LT',
+      lastDay: '[I går klokka] LT',
+      lastWeek: '[Føregåande] dddd [klokka] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'om %s',
+      past: '%s sidan',
+      s: 'nokre sekund',
+      ss: '%d sekund',
+      m: 'eit minutt',
+      mm: '%d minutt',
+      h: 'ein time',
+      hh: '%d timar',
+      d: 'ein dag',
+      dd: '%d dagar',
+      w: 'ei veke',
+      ww: '%d veker',
+      M: 'ein månad',
+      MM: '%d månader',
+      y: 'eit år',
+      yy: '%d år' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}\./,
+    ordinal: '%d.',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return nn;
+
+});
+
+/***/ }),
+/* 146 */
+/*!*****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/oc-lnc.js ***!
+  \*****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Occitan, lengadocian dialecte [oc-lnc]
+//! author : Quentin PAGÈS : https://github.com/Quenty31
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var ocLnc = moment.defineLocale('oc-lnc', {
+    months: {
+      standalone: 'genièr_febrièr_març_abril_mai_junh_julhet_agost_setembre_octòbre_novembre_decembre'.split(
+      '_'),
+
+      format: "de genièr_de febrièr_de març_d'abril_de mai_de junh_de julhet_d'agost_de setembre_d'octòbre_de novembre_de decembre".split(
+      '_'),
+
+      isFormat: /D[oD]?(\s)+MMMM/ },
+
+    monthsShort: 'gen._febr._març_abr._mai_junh_julh._ago._set._oct._nov._dec.'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'dimenge_diluns_dimars_dimècres_dijòus_divendres_dissabte'.split(
+    '_'),
+
+    weekdaysShort: 'dg._dl._dm._dc._dj._dv._ds.'.split('_'),
+    weekdaysMin: 'dg_dl_dm_dc_dj_dv_ds'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'H:mm',
+      LTS: 'H:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM [de] YYYY',
+      ll: 'D MMM YYYY',
+      LLL: 'D MMMM [de] YYYY [a] H:mm',
+      lll: 'D MMM YYYY, H:mm',
+      LLLL: 'dddd D MMMM [de] YYYY [a] H:mm',
+      llll: 'ddd D MMM YYYY, H:mm' },
+
+    calendar: {
+      sameDay: '[uèi a] LT',
+      nextDay: '[deman a] LT',
+      nextWeek: 'dddd [a] LT',
+      lastDay: '[ièr a] LT',
+      lastWeek: 'dddd [passat a] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: "d'aquí %s",
+      past: 'fa %s',
+      s: 'unas segondas',
+      ss: '%d segondas',
+      m: 'una minuta',
+      mm: '%d minutas',
+      h: 'una ora',
+      hh: '%d oras',
+      d: 'un jorn',
+      dd: '%d jorns',
+      M: 'un mes',
+      MM: '%d meses',
+      y: 'un an',
+      yy: '%d ans' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(r|n|t|è|a)/,
+    ordinal: function ordinal(number, period) {
+      var output =
+      number === 1 ?
+      'r' :
+      number === 2 ?
+      'n' :
+      number === 3 ?
+      'r' :
+      number === 4 ?
+      't' :
+      'è';
+      if (period === 'w' || period === 'W') {
+        output = 'a';
+      }
+      return number + output;
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 } });
+
+
+
+  return ocLnc;
+
+});
+
+/***/ }),
+/* 147 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/pa-in.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Punjabi (India) [pa-in]
+//! author : Harpreet Singh : https://github.com/harpreetkhalsagtbit
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var symbolMap = {
+    1: '੧',
+    2: '੨',
+    3: '੩',
+    4: '੪',
+    5: '੫',
+    6: '੬',
+    7: '੭',
+    8: '੮',
+    9: '੯',
+    0: '੦' },
+
+  numberMap = {
+    '੧': '1',
+    '੨': '2',
+    '੩': '3',
+    '੪': '4',
+    '੫': '5',
+    '੬': '6',
+    '੭': '7',
+    '੮': '8',
+    '੯': '9',
+    '੦': '0' };
+
+
+  var paIn = moment.defineLocale('pa-in', {
+    // There are months name as per Nanakshahi Calendar but they are not used as rigidly in modern Punjabi.
+    months: 'ਜਨਵਰੀ_ਫ਼ਰਵਰੀ_ਮਾਰਚ_ਅਪ੍ਰੈਲ_ਮਈ_ਜੂਨ_ਜੁਲਾਈ_ਅਗਸਤ_ਸਤੰਬਰ_ਅਕਤੂਬਰ_ਨਵੰਬਰ_ਦਸੰਬਰ'.split(
+    '_'),
+
+    monthsShort: 'ਜਨਵਰੀ_ਫ਼ਰਵਰੀ_ਮਾਰਚ_ਅਪ੍ਰੈਲ_ਮਈ_ਜੂਨ_ਜੁਲਾਈ_ਅਗਸਤ_ਸਤੰਬਰ_ਅਕਤੂਬਰ_ਨਵੰਬਰ_ਦਸੰਬਰ'.split(
+    '_'),
+
+    weekdays: 'ਐਤਵਾਰ_ਸੋਮਵਾਰ_ਮੰਗਲਵਾਰ_ਬੁਧਵਾਰ_ਵੀਰਵਾਰ_ਸ਼ੁੱਕਰਵਾਰ_ਸ਼ਨੀਚਰਵਾਰ'.split(
+    '_'),
+
+    weekdaysShort: 'ਐਤ_ਸੋਮ_ਮੰਗਲ_ਬੁਧ_ਵੀਰ_ਸ਼ੁਕਰ_ਸ਼ਨੀ'.split('_'),
+    weekdaysMin: 'ਐਤ_ਸੋਮ_ਮੰਗਲ_ਬੁਧ_ਵੀਰ_ਸ਼ੁਕਰ_ਸ਼ਨੀ'.split('_'),
+    longDateFormat: {
+      LT: 'A h:mm ਵਜੇ',
+      LTS: 'A h:mm:ss ਵਜੇ',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY, A h:mm ਵਜੇ',
+      LLLL: 'dddd, D MMMM YYYY, A h:mm ਵਜੇ' },
+
+    calendar: {
+      sameDay: '[ਅਜ] LT',
+      nextDay: '[ਕਲ] LT',
+      nextWeek: '[ਅਗਲਾ] dddd, LT',
+      lastDay: '[ਕਲ] LT',
+      lastWeek: '[ਪਿਛਲੇ] dddd, LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s ਵਿੱਚ',
+      past: '%s ਪਿਛਲੇ',
+      s: 'ਕੁਝ ਸਕਿੰਟ',
+      ss: '%d ਸਕਿੰਟ',
+      m: 'ਇਕ ਮਿੰਟ',
+      mm: '%d ਮਿੰਟ',
+      h: 'ਇੱਕ ਘੰਟਾ',
+      hh: '%d ਘੰਟੇ',
+      d: 'ਇੱਕ ਦਿਨ',
+      dd: '%d ਦਿਨ',
+      M: 'ਇੱਕ ਮਹੀਨਾ',
+      MM: '%d ਮਹੀਨੇ',
+      y: 'ਇੱਕ ਸਾਲ',
+      yy: '%d ਸਾਲ' },
+
+    preparse: function preparse(string) {
+      return string.replace(/[੧੨੩੪੫੬੭੮੯੦]/g, function (match) {
+        return numberMap[match];
+      });
+    },
+    postformat: function postformat(string) {
+      return string.replace(/\d/g, function (match) {
+        return symbolMap[match];
+      });
+    },
+    // Punjabi notation for meridiems are quite fuzzy in practice. While there exists
+    // a rigid notion of a 'Pahar' it is not used as rigidly in modern Punjabi.
+    meridiemParse: /ਰਾਤ|ਸਵੇਰ|ਦੁਪਹਿਰ|ਸ਼ਾਮ/,
+    meridiemHour: function meridiemHour(hour, meridiem) {
+      if (hour === 12) {
+        hour = 0;
+      }
+      if (meridiem === 'ਰਾਤ') {
+        return hour < 4 ? hour : hour + 12;
+      } else if (meridiem === 'ਸਵੇਰ') {
+        return hour;
+      } else if (meridiem === 'ਦੁਪਹਿਰ') {
+        return hour >= 10 ? hour : hour + 12;
+      } else if (meridiem === 'ਸ਼ਾਮ') {
+        return hour + 12;
+      }
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 4) {
+        return 'ਰਾਤ';
+      } else if (hour < 10) {
+        return 'ਸਵੇਰ';
+      } else if (hour < 17) {
+        return 'ਦੁਪਹਿਰ';
+      } else if (hour < 20) {
+        return 'ਸ਼ਾਮ';
+      } else {
+        return 'ਰਾਤ';
+      }
+    },
+    week: {
+      dow: 0, // Sunday is the first day of the week.
+      doy: 6 // The week that contains Jan 6th is the first week of the year.
+    } });
+
+
+  return paIn;
+
+});
+
+/***/ }),
+/* 148 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/pl.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Polish [pl]
+//! author : Rafal Hirsz : https://github.com/evoL
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var monthsNominative = 'styczeń_luty_marzec_kwiecień_maj_czerwiec_lipiec_sierpień_wrzesień_październik_listopad_grudzień'.split(
+  '_'),
+
+  monthsSubjective = 'stycznia_lutego_marca_kwietnia_maja_czerwca_lipca_sierpnia_września_października_listopada_grudnia'.split(
+  '_'),
+
+  monthsParse = [
+  /^sty/i,
+  /^lut/i,
+  /^mar/i,
+  /^kwi/i,
+  /^maj/i,
+  /^cze/i,
+  /^lip/i,
+  /^sie/i,
+  /^wrz/i,
+  /^paź/i,
+  /^lis/i,
+  /^gru/i];
+
+  function plural(n) {
+    return n % 10 < 5 && n % 10 > 1 && ~~(n / 10) % 10 !== 1;
+  }
+  function translate(number, withoutSuffix, key) {
+    var result = number + ' ';
+    switch (key) {
+      case 'ss':
+        return result + (plural(number) ? 'sekundy' : 'sekund');
+      case 'm':
+        return withoutSuffix ? 'minuta' : 'minutę';
+      case 'mm':
+        return result + (plural(number) ? 'minuty' : 'minut');
+      case 'h':
+        return withoutSuffix ? 'godzina' : 'godzinę';
+      case 'hh':
+        return result + (plural(number) ? 'godziny' : 'godzin');
+      case 'ww':
+        return result + (plural(number) ? 'tygodnie' : 'tygodni');
+      case 'MM':
+        return result + (plural(number) ? 'miesiące' : 'miesięcy');
+      case 'yy':
+        return result + (plural(number) ? 'lata' : 'lat');}
+
+  }
+
+  var pl = moment.defineLocale('pl', {
+    months: function months(momentToFormat, format) {
+      if (!momentToFormat) {
+        return monthsNominative;
+      } else if (/D MMMM/.test(format)) {
+        return monthsSubjective[momentToFormat.month()];
+      } else {
+        return monthsNominative[momentToFormat.month()];
+      }
+    },
+    monthsShort: 'sty_lut_mar_kwi_maj_cze_lip_sie_wrz_paź_lis_gru'.split('_'),
+    monthsParse: monthsParse,
+    longMonthsParse: monthsParse,
+    shortMonthsParse: monthsParse,
+    weekdays: 'niedziela_poniedziałek_wtorek_środa_czwartek_piątek_sobota'.split(
+    '_'),
+
+    weekdaysShort: 'ndz_pon_wt_śr_czw_pt_sob'.split('_'),
+    weekdaysMin: 'Nd_Pn_Wt_Śr_Cz_Pt_So'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd, D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[Dziś o] LT',
+      nextDay: '[Jutro o] LT',
+      nextWeek: function nextWeek() {
+        switch (this.day()) {
+          case 0:
+            return '[W niedzielę o] LT';
+
+          case 2:
+            return '[We wtorek o] LT';
+
+          case 3:
+            return '[W środę o] LT';
+
+          case 6:
+            return '[W sobotę o] LT';
+
+          default:
+            return '[W] dddd [o] LT';}
+
+      },
+      lastDay: '[Wczoraj o] LT',
+      lastWeek: function lastWeek() {
+        switch (this.day()) {
+          case 0:
+            return '[W zeszłą niedzielę o] LT';
+          case 3:
+            return '[W zeszłą środę o] LT';
+          case 6:
+            return '[W zeszłą sobotę o] LT';
+          default:
+            return '[W zeszły] dddd [o] LT';}
+
+      },
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'za %s',
+      past: '%s temu',
+      s: 'kilka sekund',
+      ss: translate,
+      m: translate,
+      mm: translate,
+      h: translate,
+      hh: translate,
+      d: '1 dzień',
+      dd: '%d dni',
+      w: 'tydzień',
+      ww: translate,
+      M: 'miesiąc',
+      MM: translate,
+      y: 'rok',
+      yy: translate },
+
+    dayOfMonthOrdinalParse: /\d{1,2}\./,
+    ordinal: '%d.',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return pl;
+
+});
+
+/***/ }),
+/* 149 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/pt.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Portuguese [pt]
+//! author : Jefferson : https://github.com/jalex79
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var pt = moment.defineLocale('pt', {
+    months: 'janeiro_fevereiro_março_abril_maio_junho_julho_agosto_setembro_outubro_novembro_dezembro'.split(
+    '_'),
+
+    monthsShort: 'jan_fev_mar_abr_mai_jun_jul_ago_set_out_nov_dez'.split('_'),
+    weekdays: 'Domingo_Segunda-feira_Terça-feira_Quarta-feira_Quinta-feira_Sexta-feira_Sábado'.split(
+    '_'),
+
+    weekdaysShort: 'Dom_Seg_Ter_Qua_Qui_Sex_Sáb'.split('_'),
+    weekdaysMin: 'Do_2ª_3ª_4ª_5ª_6ª_Sá'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D [de] MMMM [de] YYYY',
+      LLL: 'D [de] MMMM [de] YYYY HH:mm',
+      LLLL: 'dddd, D [de] MMMM [de] YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[Hoje às] LT',
+      nextDay: '[Amanhã às] LT',
+      nextWeek: 'dddd [às] LT',
+      lastDay: '[Ontem às] LT',
+      lastWeek: function lastWeek() {
+        return this.day() === 0 || this.day() === 6 ?
+        '[Último] dddd [às] LT' // Saturday + Sunday
+        : '[Última] dddd [às] LT'; // Monday - Friday
+      },
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'em %s',
+      past: 'há %s',
+      s: 'segundos',
+      ss: '%d segundos',
+      m: 'um minuto',
+      mm: '%d minutos',
+      h: 'uma hora',
+      hh: '%d horas',
+      d: 'um dia',
+      dd: '%d dias',
+      w: 'uma semana',
+      ww: '%d semanas',
+      M: 'um mês',
+      MM: '%d meses',
+      y: 'um ano',
+      yy: '%d anos' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}º/,
+    ordinal: '%dº',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return pt;
+
+});
+
+/***/ }),
+/* 150 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/pt-br.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Portuguese (Brazil) [pt-br]
+//! author : Caio Ribeiro Pereira : https://github.com/caio-ribeiro-pereira
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var ptBr = moment.defineLocale('pt-br', {
+    months: 'janeiro_fevereiro_março_abril_maio_junho_julho_agosto_setembro_outubro_novembro_dezembro'.split(
+    '_'),
+
+    monthsShort: 'jan_fev_mar_abr_mai_jun_jul_ago_set_out_nov_dez'.split('_'),
+    weekdays: 'domingo_segunda-feira_terça-feira_quarta-feira_quinta-feira_sexta-feira_sábado'.split(
+    '_'),
+
+    weekdaysShort: 'dom_seg_ter_qua_qui_sex_sáb'.split('_'),
+    weekdaysMin: 'do_2ª_3ª_4ª_5ª_6ª_sá'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D [de] MMMM [de] YYYY',
+      LLL: 'D [de] MMMM [de] YYYY [às] HH:mm',
+      LLLL: 'dddd, D [de] MMMM [de] YYYY [às] HH:mm' },
+
+    calendar: {
+      sameDay: '[Hoje às] LT',
+      nextDay: '[Amanhã às] LT',
+      nextWeek: 'dddd [às] LT',
+      lastDay: '[Ontem às] LT',
+      lastWeek: function lastWeek() {
+        return this.day() === 0 || this.day() === 6 ?
+        '[Último] dddd [às] LT' // Saturday + Sunday
+        : '[Última] dddd [às] LT'; // Monday - Friday
+      },
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'em %s',
+      past: 'há %s',
+      s: 'poucos segundos',
+      ss: '%d segundos',
+      m: 'um minuto',
+      mm: '%d minutos',
+      h: 'uma hora',
+      hh: '%d horas',
+      d: 'um dia',
+      dd: '%d dias',
+      M: 'um mês',
+      MM: '%d meses',
+      y: 'um ano',
+      yy: '%d anos' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}º/,
+    ordinal: '%dº',
+    invalidDate: 'Data inválida' });
+
+
+  return ptBr;
+
+});
+
+/***/ }),
+/* 151 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ro.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Romanian [ro]
+//! author : Vlad Gurdiga : https://github.com/gurdiga
+//! author : Valentin Agachi : https://github.com/avaly
+//! author : Emanuel Cepoi : https://github.com/cepem
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  function relativeTimeWithPlural(number, withoutSuffix, key) {
+    var format = {
+      ss: 'secunde',
+      mm: 'minute',
+      hh: 'ore',
+      dd: 'zile',
+      ww: 'săptămâni',
+      MM: 'luni',
+      yy: 'ani' },
+
+    separator = ' ';
+    if (number % 100 >= 20 || number >= 100 && number % 100 === 0) {
+      separator = ' de ';
+    }
+    return number + separator + format[key];
+  }
+
+  var ro = moment.defineLocale('ro', {
+    months: 'ianuarie_februarie_martie_aprilie_mai_iunie_iulie_august_septembrie_octombrie_noiembrie_decembrie'.split(
+    '_'),
+
+    monthsShort: 'ian._feb._mart._apr._mai_iun._iul._aug._sept._oct._nov._dec.'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'duminică_luni_marți_miercuri_joi_vineri_sâmbătă'.split('_'),
+    weekdaysShort: 'Dum_Lun_Mar_Mie_Joi_Vin_Sâm'.split('_'),
+    weekdaysMin: 'Du_Lu_Ma_Mi_Jo_Vi_Sâ'.split('_'),
+    longDateFormat: {
+      LT: 'H:mm',
+      LTS: 'H:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY H:mm',
+      LLLL: 'dddd, D MMMM YYYY H:mm' },
+
+    calendar: {
+      sameDay: '[azi la] LT',
+      nextDay: '[mâine la] LT',
+      nextWeek: 'dddd [la] LT',
+      lastDay: '[ieri la] LT',
+      lastWeek: '[fosta] dddd [la] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'peste %s',
+      past: '%s în urmă',
+      s: 'câteva secunde',
+      ss: relativeTimeWithPlural,
+      m: 'un minut',
+      mm: relativeTimeWithPlural,
+      h: 'o oră',
+      hh: relativeTimeWithPlural,
+      d: 'o zi',
+      dd: relativeTimeWithPlural,
+      w: 'o săptămână',
+      ww: relativeTimeWithPlural,
+      M: 'o lună',
+      MM: relativeTimeWithPlural,
+      y: 'un an',
+      yy: relativeTimeWithPlural },
+
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 7 // The week that contains Jan 7th is the first week of the year.
+    } });
+
+
+  return ro;
+
+});
+
+/***/ }),
+/* 152 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ru.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Russian [ru]
+//! author : Viktorminator : https://github.com/Viktorminator
+//! author : Menelion Elensúle : https://github.com/Oire
+//! author : Коренберг Марк : https://github.com/socketpair
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  function plural(word, num) {
+    var forms = word.split('_');
+    return num % 10 === 1 && num % 100 !== 11 ?
+    forms[0] :
+    num % 10 >= 2 && num % 10 <= 4 && (num % 100 < 10 || num % 100 >= 20) ?
+    forms[1] :
+    forms[2];
+  }
+  function relativeTimeWithPlural(number, withoutSuffix, key) {
+    var format = {
+      ss: withoutSuffix ? 'секунда_секунды_секунд' : 'секунду_секунды_секунд',
+      mm: withoutSuffix ? 'минута_минуты_минут' : 'минуту_минуты_минут',
+      hh: 'час_часа_часов',
+      dd: 'день_дня_дней',
+      ww: 'неделя_недели_недель',
+      MM: 'месяц_месяца_месяцев',
+      yy: 'год_года_лет' };
+
+    if (key === 'm') {
+      return withoutSuffix ? 'минута' : 'минуту';
+    } else {
+      return number + ' ' + plural(format[key], +number);
+    }
+  }
+  var monthsParse = [
+  /^янв/i,
+  /^фев/i,
+  /^мар/i,
+  /^апр/i,
+  /^ма[йя]/i,
+  /^июн/i,
+  /^июл/i,
+  /^авг/i,
+  /^сен/i,
+  /^окт/i,
+  /^ноя/i,
+  /^дек/i];
+
+
+  // http://new.gramota.ru/spravka/rules/139-prop : § 103
+  // Сокращения месяцев: http://new.gramota.ru/spravka/buro/search-answer?s=242637
+  // CLDR data:          http://www.unicode.org/cldr/charts/28/summary/ru.html#1753
+  var ru = moment.defineLocale('ru', {
+    months: {
+      format: 'января_февраля_марта_апреля_мая_июня_июля_августа_сентября_октября_ноября_декабря'.split(
+      '_'),
+
+      standalone: 'январь_февраль_март_апрель_май_июнь_июль_август_сентябрь_октябрь_ноябрь_декабрь'.split(
+      '_') },
+
+
+    monthsShort: {
+      // по CLDR именно "июл." и "июн.", но какой смысл менять букву на точку?
+      format: 'янв._февр._мар._апр._мая_июня_июля_авг._сент._окт._нояб._дек.'.split(
+      '_'),
+
+      standalone: 'янв._февр._март_апр._май_июнь_июль_авг._сент._окт._нояб._дек.'.split(
+      '_') },
+
+
+    weekdays: {
+      standalone: 'воскресенье_понедельник_вторник_среда_четверг_пятница_суббота'.split(
+      '_'),
+
+      format: 'воскресенье_понедельник_вторник_среду_четверг_пятницу_субботу'.split(
+      '_'),
+
+      isFormat: /\[ ?[Вв] ?(?:прошлую|следующую|эту)? ?] ?dddd/ },
+
+    weekdaysShort: 'вс_пн_вт_ср_чт_пт_сб'.split('_'),
+    weekdaysMin: 'вс_пн_вт_ср_чт_пт_сб'.split('_'),
+    monthsParse: monthsParse,
+    longMonthsParse: monthsParse,
+    shortMonthsParse: monthsParse,
+
+    // полные названия с падежами, по три буквы, для некоторых, по 4 буквы, сокращения с точкой и без точки
+    monthsRegex: /^(январ[ья]|янв\.?|феврал[ья]|февр?\.?|марта?|мар\.?|апрел[ья]|апр\.?|ма[йя]|июн[ья]|июн\.?|июл[ья]|июл\.?|августа?|авг\.?|сентябр[ья]|сент?\.?|октябр[ья]|окт\.?|ноябр[ья]|нояб?\.?|декабр[ья]|дек\.?)/i,
+
+    // копия предыдущего
+    monthsShortRegex: /^(январ[ья]|янв\.?|феврал[ья]|февр?\.?|марта?|мар\.?|апрел[ья]|апр\.?|ма[йя]|июн[ья]|июн\.?|июл[ья]|июл\.?|августа?|авг\.?|сентябр[ья]|сент?\.?|октябр[ья]|окт\.?|ноябр[ья]|нояб?\.?|декабр[ья]|дек\.?)/i,
+
+    // полные названия с падежами
+    monthsStrictRegex: /^(январ[яь]|феврал[яь]|марта?|апрел[яь]|ма[яй]|июн[яь]|июл[яь]|августа?|сентябр[яь]|октябр[яь]|ноябр[яь]|декабр[яь])/i,
+
+    // Выражение, которое соответствует только сокращённым формам
+    monthsShortStrictRegex: /^(янв\.|февр?\.|мар[т.]|апр\.|ма[яй]|июн[ья.]|июл[ья.]|авг\.|сент?\.|окт\.|нояб?\.|дек\.)/i,
+    longDateFormat: {
+      LT: 'H:mm',
+      LTS: 'H:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'D MMMM YYYY г.',
+      LLL: 'D MMMM YYYY г., H:mm',
+      LLLL: 'dddd, D MMMM YYYY г., H:mm' },
+
+    calendar: {
+      sameDay: '[Сегодня, в] LT',
+      nextDay: '[Завтра, в] LT',
+      lastDay: '[Вчера, в] LT',
+      nextWeek: function nextWeek(now) {
+        if (now.week() !== this.week()) {
+          switch (this.day()) {
+            case 0:
+              return '[В следующее] dddd, [в] LT';
+            case 1:
+            case 2:
+            case 4:
+              return '[В следующий] dddd, [в] LT';
+            case 3:
+            case 5:
+            case 6:
+              return '[В следующую] dddd, [в] LT';}
+
+        } else {
+          if (this.day() === 2) {
+            return '[Во] dddd, [в] LT';
+          } else {
+            return '[В] dddd, [в] LT';
+          }
+        }
+      },
+      lastWeek: function lastWeek(now) {
+        if (now.week() !== this.week()) {
+          switch (this.day()) {
+            case 0:
+              return '[В прошлое] dddd, [в] LT';
+            case 1:
+            case 2:
+            case 4:
+              return '[В прошлый] dddd, [в] LT';
+            case 3:
+            case 5:
+            case 6:
+              return '[В прошлую] dddd, [в] LT';}
+
+        } else {
+          if (this.day() === 2) {
+            return '[Во] dddd, [в] LT';
+          } else {
+            return '[В] dddd, [в] LT';
+          }
+        }
+      },
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'через %s',
+      past: '%s назад',
+      s: 'несколько секунд',
+      ss: relativeTimeWithPlural,
+      m: relativeTimeWithPlural,
+      mm: relativeTimeWithPlural,
+      h: 'час',
+      hh: relativeTimeWithPlural,
+      d: 'день',
+      dd: relativeTimeWithPlural,
+      w: 'неделя',
+      ww: relativeTimeWithPlural,
+      M: 'месяц',
+      MM: relativeTimeWithPlural,
+      y: 'год',
+      yy: relativeTimeWithPlural },
+
+    meridiemParse: /ночи|утра|дня|вечера/i,
+    isPM: function isPM(input) {
+      return /^(дня|вечера)$/.test(input);
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 4) {
+        return 'ночи';
+      } else if (hour < 12) {
+        return 'утра';
+      } else if (hour < 17) {
+        return 'дня';
+      } else {
+        return 'вечера';
+      }
+    },
+    dayOfMonthOrdinalParse: /\d{1,2}-(й|го|я)/,
+    ordinal: function ordinal(number, period) {
+      switch (period) {
+        case 'M':
+        case 'd':
+        case 'DDD':
+          return number + '-й';
+        case 'D':
+          return number + '-го';
+        case 'w':
+        case 'W':
+          return number + '-я';
+        default:
+          return number;}
+
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return ru;
+
+});
+
+/***/ }),
+/* 153 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/sd.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Sindhi [sd]
+//! author : Narain Sagar : https://github.com/narainsagar
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var months = [
+  'جنوري',
+  'فيبروري',
+  'مارچ',
+  'اپريل',
+  'مئي',
+  'جون',
+  'جولاءِ',
+  'آگسٽ',
+  'سيپٽمبر',
+  'آڪٽوبر',
+  'نومبر',
+  'ڊسمبر'],
+
+  days = ['آچر', 'سومر', 'اڱارو', 'اربع', 'خميس', 'جمع', 'ڇنڇر'];
+
+  var sd = moment.defineLocale('sd', {
+    months: months,
+    monthsShort: months,
+    weekdays: days,
+    weekdaysShort: days,
+    weekdaysMin: days,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd، D MMMM YYYY HH:mm' },
+
+    meridiemParse: /صبح|شام/,
+    isPM: function isPM(input) {
+      return 'شام' === input;
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 12) {
+        return 'صبح';
+      }
+      return 'شام';
+    },
+    calendar: {
+      sameDay: '[اڄ] LT',
+      nextDay: '[سڀاڻي] LT',
+      nextWeek: 'dddd [اڳين هفتي تي] LT',
+      lastDay: '[ڪالهه] LT',
+      lastWeek: '[گزريل هفتي] dddd [تي] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s پوء',
+      past: '%s اڳ',
+      s: 'چند سيڪنڊ',
+      ss: '%d سيڪنڊ',
+      m: 'هڪ منٽ',
+      mm: '%d منٽ',
+      h: 'هڪ ڪلاڪ',
+      hh: '%d ڪلاڪ',
+      d: 'هڪ ڏينهن',
+      dd: '%d ڏينهن',
+      M: 'هڪ مهينو',
+      MM: '%d مهينا',
+      y: 'هڪ سال',
+      yy: '%d سال' },
+
+    preparse: function preparse(string) {
+      return string.replace(/،/g, ',');
+    },
+    postformat: function postformat(string) {
+      return string.replace(/,/g, '،');
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return sd;
+
+});
+
+/***/ }),
+/* 154 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/se.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Northern Sami [se]
+//! authors : Bård Rolstad Henriksen : https://github.com/karamell
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var se = moment.defineLocale('se', {
+    months: 'ođđajagemánnu_guovvamánnu_njukčamánnu_cuoŋománnu_miessemánnu_geassemánnu_suoidnemánnu_borgemánnu_čakčamánnu_golggotmánnu_skábmamánnu_juovlamánnu'.split(
+    '_'),
+
+    monthsShort: 'ođđj_guov_njuk_cuo_mies_geas_suoi_borg_čakč_golg_skáb_juov'.split(
+    '_'),
+
+    weekdays: 'sotnabeaivi_vuossárga_maŋŋebárga_gaskavahkku_duorastat_bearjadat_lávvardat'.split(
+    '_'),
+
+    weekdaysShort: 'sotn_vuos_maŋ_gask_duor_bear_láv'.split('_'),
+    weekdaysMin: 's_v_m_g_d_b_L'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'MMMM D. [b.] YYYY',
+      LLL: 'MMMM D. [b.] YYYY [ti.] HH:mm',
+      LLLL: 'dddd, MMMM D. [b.] YYYY [ti.] HH:mm' },
+
+    calendar: {
+      sameDay: '[otne ti] LT',
+      nextDay: '[ihttin ti] LT',
+      nextWeek: 'dddd [ti] LT',
+      lastDay: '[ikte ti] LT',
+      lastWeek: '[ovddit] dddd [ti] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s geažes',
+      past: 'maŋit %s',
+      s: 'moadde sekunddat',
+      ss: '%d sekunddat',
+      m: 'okta minuhta',
+      mm: '%d minuhtat',
+      h: 'okta diimmu',
+      hh: '%d diimmut',
+      d: 'okta beaivi',
+      dd: '%d beaivvit',
+      M: 'okta mánnu',
+      MM: '%d mánut',
+      y: 'okta jahki',
+      yy: '%d jagit' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}\./,
+    ordinal: '%d.',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return se;
+
+});
+
+/***/ }),
+/* 155 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/si.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Sinhalese [si]
+//! author : Sampath Sitinamaluwa : https://github.com/sampathsris
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  /*jshint -W100*/
+  var si = moment.defineLocale('si', {
+    months: 'ජනවාරි_පෙබරවාරි_මාර්තු_අප්‍රේල්_මැයි_ජූනි_ජූලි_අගෝස්තු_සැප්තැම්බර්_ඔක්තෝබර්_නොවැම්බර්_දෙසැම්බර්'.split(
+    '_'),
+
+    monthsShort: 'ජන_පෙබ_මාර්_අප්_මැයි_ජූනි_ජූලි_අගෝ_සැප්_ඔක්_නොවැ_දෙසැ'.split(
+    '_'),
+
+    weekdays: 'ඉරිදා_සඳුදා_අඟහරුවාදා_බදාදා_බ්‍රහස්පතින්දා_සිකුරාදා_සෙනසුරාදා'.split(
+    '_'),
+
+    weekdaysShort: 'ඉරි_සඳු_අඟ_බදා_බ්‍රහ_සිකු_සෙන'.split('_'),
+    weekdaysMin: 'ඉ_ස_අ_බ_බ්‍ර_සි_සෙ'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'a h:mm',
+      LTS: 'a h:mm:ss',
+      L: 'YYYY/MM/DD',
+      LL: 'YYYY MMMM D',
+      LLL: 'YYYY MMMM D, a h:mm',
+      LLLL: 'YYYY MMMM D [වැනි] dddd, a h:mm:ss' },
+
+    calendar: {
+      sameDay: '[අද] LT[ට]',
+      nextDay: '[හෙට] LT[ට]',
+      nextWeek: 'dddd LT[ට]',
+      lastDay: '[ඊයේ] LT[ට]',
+      lastWeek: '[පසුගිය] dddd LT[ට]',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%sකින්',
+      past: '%sකට පෙර',
+      s: 'තත්පර කිහිපය',
+      ss: 'තත්පර %d',
+      m: 'මිනිත්තුව',
+      mm: 'මිනිත්තු %d',
+      h: 'පැය',
+      hh: 'පැය %d',
+      d: 'දිනය',
+      dd: 'දින %d',
+      M: 'මාසය',
+      MM: 'මාස %d',
+      y: 'වසර',
+      yy: 'වසර %d' },
+
+    dayOfMonthOrdinalParse: /\d{1,2} වැනි/,
+    ordinal: function ordinal(number) {
+      return number + ' වැනි';
+    },
+    meridiemParse: /පෙර වරු|පස් වරු|පෙ.ව|ප.ව./,
+    isPM: function isPM(input) {
+      return input === 'ප.ව.' || input === 'පස් වරු';
+    },
+    meridiem: function meridiem(hours, minutes, isLower) {
+      if (hours > 11) {
+        return isLower ? 'ප.ව.' : 'පස් වරු';
+      } else {
+        return isLower ? 'පෙ.ව.' : 'පෙර වරු';
+      }
+    } });
+
+
+  return si;
+
+});
+
+/***/ }),
+/* 156 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/sk.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Slovak [sk]
+//! author : Martin Minka : https://github.com/k2s
+//! based on work of petrbela : https://github.com/petrbela
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var months = 'január_február_marec_apríl_máj_jún_júl_august_september_október_november_december'.split(
+  '_'),
+
+  monthsShort = 'jan_feb_mar_apr_máj_jún_júl_aug_sep_okt_nov_dec'.split('_');
+  function plural(n) {
+    return n > 1 && n < 5;
+  }
+  function translate(number, withoutSuffix, key, isFuture) {
+    var result = number + ' ';
+    switch (key) {
+      case 's': // a few seconds / in a few seconds / a few seconds ago
+        return withoutSuffix || isFuture ? 'pár sekúnd' : 'pár sekundami';
+      case 'ss': // 9 seconds / in 9 seconds / 9 seconds ago
+        if (withoutSuffix || isFuture) {
+          return result + (plural(number) ? 'sekundy' : 'sekúnd');
+        } else {
+          return result + 'sekundami';
+        }
+      case 'm': // a minute / in a minute / a minute ago
+        return withoutSuffix ? 'minúta' : isFuture ? 'minútu' : 'minútou';
+      case 'mm': // 9 minutes / in 9 minutes / 9 minutes ago
+        if (withoutSuffix || isFuture) {
+          return result + (plural(number) ? 'minúty' : 'minút');
+        } else {
+          return result + 'minútami';
+        }
+      case 'h': // an hour / in an hour / an hour ago
+        return withoutSuffix ? 'hodina' : isFuture ? 'hodinu' : 'hodinou';
+      case 'hh': // 9 hours / in 9 hours / 9 hours ago
+        if (withoutSuffix || isFuture) {
+          return result + (plural(number) ? 'hodiny' : 'hodín');
+        } else {
+          return result + 'hodinami';
+        }
+      case 'd': // a day / in a day / a day ago
+        return withoutSuffix || isFuture ? 'deň' : 'dňom';
+      case 'dd': // 9 days / in 9 days / 9 days ago
+        if (withoutSuffix || isFuture) {
+          return result + (plural(number) ? 'dni' : 'dní');
+        } else {
+          return result + 'dňami';
+        }
+      case 'M': // a month / in a month / a month ago
+        return withoutSuffix || isFuture ? 'mesiac' : 'mesiacom';
+      case 'MM': // 9 months / in 9 months / 9 months ago
+        if (withoutSuffix || isFuture) {
+          return result + (plural(number) ? 'mesiace' : 'mesiacov');
+        } else {
+          return result + 'mesiacmi';
+        }
+      case 'y': // a year / in a year / a year ago
+        return withoutSuffix || isFuture ? 'rok' : 'rokom';
+      case 'yy': // 9 years / in 9 years / 9 years ago
+        if (withoutSuffix || isFuture) {
+          return result + (plural(number) ? 'roky' : 'rokov');
+        } else {
+          return result + 'rokmi';
+        }}
+
+  }
+
+  var sk = moment.defineLocale('sk', {
+    months: months,
+    monthsShort: monthsShort,
+    weekdays: 'nedeľa_pondelok_utorok_streda_štvrtok_piatok_sobota'.split('_'),
+    weekdaysShort: 'ne_po_ut_st_št_pi_so'.split('_'),
+    weekdaysMin: 'ne_po_ut_st_št_pi_so'.split('_'),
+    longDateFormat: {
+      LT: 'H:mm',
+      LTS: 'H:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'D. MMMM YYYY',
+      LLL: 'D. MMMM YYYY H:mm',
+      LLLL: 'dddd D. MMMM YYYY H:mm' },
+
+    calendar: {
+      sameDay: '[dnes o] LT',
+      nextDay: '[zajtra o] LT',
+      nextWeek: function nextWeek() {
+        switch (this.day()) {
+          case 0:
+            return '[v nedeľu o] LT';
+          case 1:
+          case 2:
+            return '[v] dddd [o] LT';
+          case 3:
+            return '[v stredu o] LT';
+          case 4:
+            return '[vo štvrtok o] LT';
+          case 5:
+            return '[v piatok o] LT';
+          case 6:
+            return '[v sobotu o] LT';}
+
+      },
+      lastDay: '[včera o] LT',
+      lastWeek: function lastWeek() {
+        switch (this.day()) {
+          case 0:
+            return '[minulú nedeľu o] LT';
+          case 1:
+          case 2:
+            return '[minulý] dddd [o] LT';
+          case 3:
+            return '[minulú stredu o] LT';
+          case 4:
+          case 5:
+            return '[minulý] dddd [o] LT';
+          case 6:
+            return '[minulú sobotu o] LT';}
+
+      },
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'za %s',
+      past: 'pred %s',
+      s: translate,
+      ss: translate,
+      m: translate,
+      mm: translate,
+      h: translate,
+      hh: translate,
+      d: translate,
+      dd: translate,
+      M: translate,
+      MM: translate,
+      y: translate,
+      yy: translate },
+
+    dayOfMonthOrdinalParse: /\d{1,2}\./,
+    ordinal: '%d.',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return sk;
+
+});
+
+/***/ }),
+/* 157 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/sl.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Slovenian [sl]
+//! author : Robert Sedovšek : https://github.com/sedovsek
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  function processRelativeTime(number, withoutSuffix, key, isFuture) {
+    var result = number + ' ';
+    switch (key) {
+      case 's':
+        return withoutSuffix || isFuture ?
+        'nekaj sekund' :
+        'nekaj sekundami';
+      case 'ss':
+        if (number === 1) {
+          result += withoutSuffix ? 'sekundo' : 'sekundi';
+        } else if (number === 2) {
+          result += withoutSuffix || isFuture ? 'sekundi' : 'sekundah';
+        } else if (number < 5) {
+          result += withoutSuffix || isFuture ? 'sekunde' : 'sekundah';
+        } else {
+          result += 'sekund';
+        }
+        return result;
+      case 'm':
+        return withoutSuffix ? 'ena minuta' : 'eno minuto';
+      case 'mm':
+        if (number === 1) {
+          result += withoutSuffix ? 'minuta' : 'minuto';
+        } else if (number === 2) {
+          result += withoutSuffix || isFuture ? 'minuti' : 'minutama';
+        } else if (number < 5) {
+          result += withoutSuffix || isFuture ? 'minute' : 'minutami';
+        } else {
+          result += withoutSuffix || isFuture ? 'minut' : 'minutami';
+        }
+        return result;
+      case 'h':
+        return withoutSuffix ? 'ena ura' : 'eno uro';
+      case 'hh':
+        if (number === 1) {
+          result += withoutSuffix ? 'ura' : 'uro';
+        } else if (number === 2) {
+          result += withoutSuffix || isFuture ? 'uri' : 'urama';
+        } else if (number < 5) {
+          result += withoutSuffix || isFuture ? 'ure' : 'urami';
+        } else {
+          result += withoutSuffix || isFuture ? 'ur' : 'urami';
+        }
+        return result;
+      case 'd':
+        return withoutSuffix || isFuture ? 'en dan' : 'enim dnem';
+      case 'dd':
+        if (number === 1) {
+          result += withoutSuffix || isFuture ? 'dan' : 'dnem';
+        } else if (number === 2) {
+          result += withoutSuffix || isFuture ? 'dni' : 'dnevoma';
+        } else {
+          result += withoutSuffix || isFuture ? 'dni' : 'dnevi';
+        }
+        return result;
+      case 'M':
+        return withoutSuffix || isFuture ? 'en mesec' : 'enim mesecem';
+      case 'MM':
+        if (number === 1) {
+          result += withoutSuffix || isFuture ? 'mesec' : 'mesecem';
+        } else if (number === 2) {
+          result += withoutSuffix || isFuture ? 'meseca' : 'mesecema';
+        } else if (number < 5) {
+          result += withoutSuffix || isFuture ? 'mesece' : 'meseci';
+        } else {
+          result += withoutSuffix || isFuture ? 'mesecev' : 'meseci';
+        }
+        return result;
+      case 'y':
+        return withoutSuffix || isFuture ? 'eno leto' : 'enim letom';
+      case 'yy':
+        if (number === 1) {
+          result += withoutSuffix || isFuture ? 'leto' : 'letom';
+        } else if (number === 2) {
+          result += withoutSuffix || isFuture ? 'leti' : 'letoma';
+        } else if (number < 5) {
+          result += withoutSuffix || isFuture ? 'leta' : 'leti';
+        } else {
+          result += withoutSuffix || isFuture ? 'let' : 'leti';
+        }
+        return result;}
+
+  }
+
+  var sl = moment.defineLocale('sl', {
+    months: 'januar_februar_marec_april_maj_junij_julij_avgust_september_oktober_november_december'.split(
+    '_'),
+
+    monthsShort: 'jan._feb._mar._apr._maj._jun._jul._avg._sep._okt._nov._dec.'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'nedelja_ponedeljek_torek_sreda_četrtek_petek_sobota'.split('_'),
+    weekdaysShort: 'ned._pon._tor._sre._čet._pet._sob.'.split('_'),
+    weekdaysMin: 'ne_po_to_sr_če_pe_so'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'H:mm',
+      LTS: 'H:mm:ss',
+      L: 'DD. MM. YYYY',
+      LL: 'D. MMMM YYYY',
+      LLL: 'D. MMMM YYYY H:mm',
+      LLLL: 'dddd, D. MMMM YYYY H:mm' },
+
+    calendar: {
+      sameDay: '[danes ob] LT',
+      nextDay: '[jutri ob] LT',
+
+      nextWeek: function nextWeek() {
+        switch (this.day()) {
+          case 0:
+            return '[v] [nedeljo] [ob] LT';
+          case 3:
+            return '[v] [sredo] [ob] LT';
+          case 6:
+            return '[v] [soboto] [ob] LT';
+          case 1:
+          case 2:
+          case 4:
+          case 5:
+            return '[v] dddd [ob] LT';}
+
+      },
+      lastDay: '[včeraj ob] LT',
+      lastWeek: function lastWeek() {
+        switch (this.day()) {
+          case 0:
+            return '[prejšnjo] [nedeljo] [ob] LT';
+          case 3:
+            return '[prejšnjo] [sredo] [ob] LT';
+          case 6:
+            return '[prejšnjo] [soboto] [ob] LT';
+          case 1:
+          case 2:
+          case 4:
+          case 5:
+            return '[prejšnji] dddd [ob] LT';}
+
+      },
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'čez %s',
+      past: 'pred %s',
+      s: processRelativeTime,
+      ss: processRelativeTime,
+      m: processRelativeTime,
+      mm: processRelativeTime,
+      h: processRelativeTime,
+      hh: processRelativeTime,
+      d: processRelativeTime,
+      dd: processRelativeTime,
+      M: processRelativeTime,
+      MM: processRelativeTime,
+      y: processRelativeTime,
+      yy: processRelativeTime },
+
+    dayOfMonthOrdinalParse: /\d{1,2}\./,
+    ordinal: '%d.',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 7 // The week that contains Jan 7th is the first week of the year.
+    } });
+
+
+  return sl;
+
+});
+
+/***/ }),
+/* 158 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/sq.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Albanian [sq]
+//! author : Flakërim Ismani : https://github.com/flakerimi
+//! author : Menelion Elensúle : https://github.com/Oire
+//! author : Oerd Cukalla : https://github.com/oerd
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var sq = moment.defineLocale('sq', {
+    months: 'Janar_Shkurt_Mars_Prill_Maj_Qershor_Korrik_Gusht_Shtator_Tetor_Nëntor_Dhjetor'.split(
+    '_'),
+
+    monthsShort: 'Jan_Shk_Mar_Pri_Maj_Qer_Kor_Gus_Sht_Tet_Nën_Dhj'.split('_'),
+    weekdays: 'E Diel_E Hënë_E Martë_E Mërkurë_E Enjte_E Premte_E Shtunë'.split(
+    '_'),
+
+    weekdaysShort: 'Die_Hën_Mar_Mër_Enj_Pre_Sht'.split('_'),
+    weekdaysMin: 'D_H_Ma_Më_E_P_Sh'.split('_'),
+    weekdaysParseExact: true,
+    meridiemParse: /PD|MD/,
+    isPM: function isPM(input) {
+      return input.charAt(0) === 'M';
+    },
+    meridiem: function meridiem(hours, minutes, isLower) {
+      return hours < 12 ? 'PD' : 'MD';
+    },
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd, D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[Sot në] LT',
+      nextDay: '[Nesër në] LT',
+      nextWeek: 'dddd [në] LT',
+      lastDay: '[Dje në] LT',
+      lastWeek: 'dddd [e kaluar në] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'në %s',
+      past: '%s më parë',
+      s: 'disa sekonda',
+      ss: '%d sekonda',
+      m: 'një minutë',
+      mm: '%d minuta',
+      h: 'një orë',
+      hh: '%d orë',
+      d: 'një ditë',
+      dd: '%d ditë',
+      M: 'një muaj',
+      MM: '%d muaj',
+      y: 'një vit',
+      yy: '%d vite' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}\./,
+    ordinal: '%d.',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return sq;
+
+});
+
+/***/ }),
+/* 159 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/sr.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Serbian [sr]
+//! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
+//! author : Stefan Crnjaković <stefan@hotmail.rs> : https://github.com/crnjakovic
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var translator = {
+    words: {
+      //Different grammatical cases
+      ss: ['sekunda', 'sekunde', 'sekundi'],
+      m: ['jedan minut', 'jedne minute'],
+      mm: ['minut', 'minute', 'minuta'],
+      h: ['jedan sat', 'jednog sata'],
+      hh: ['sat', 'sata', 'sati'],
+      dd: ['dan', 'dana', 'dana'],
+      MM: ['mesec', 'meseca', 'meseci'],
+      yy: ['godina', 'godine', 'godina'] },
+
+    correctGrammaticalCase: function correctGrammaticalCase(number, wordKey) {
+      return number === 1 ?
+      wordKey[0] :
+      number >= 2 && number <= 4 ?
+      wordKey[1] :
+      wordKey[2];
+    },
+    translate: function translate(number, withoutSuffix, key) {
+      var wordKey = translator.words[key];
+      if (key.length === 1) {
+        return withoutSuffix ? wordKey[0] : wordKey[1];
+      } else {
+        return (
+          number +
+          ' ' +
+          translator.correctGrammaticalCase(number, wordKey));
+
+      }
+    } };
+
+
+  var sr = moment.defineLocale('sr', {
+    months: 'januar_februar_mart_april_maj_jun_jul_avgust_septembar_oktobar_novembar_decembar'.split(
+    '_'),
+
+    monthsShort: 'jan._feb._mar._apr._maj_jun_jul_avg._sep._okt._nov._dec.'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'nedelja_ponedeljak_utorak_sreda_četvrtak_petak_subota'.split(
+    '_'),
+
+    weekdaysShort: 'ned._pon._uto._sre._čet._pet._sub.'.split('_'),
+    weekdaysMin: 'ne_po_ut_sr_če_pe_su'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'H:mm',
+      LTS: 'H:mm:ss',
+      L: 'D. M. YYYY.',
+      LL: 'D. MMMM YYYY.',
+      LLL: 'D. MMMM YYYY. H:mm',
+      LLLL: 'dddd, D. MMMM YYYY. H:mm' },
+
+    calendar: {
+      sameDay: '[danas u] LT',
+      nextDay: '[sutra u] LT',
+      nextWeek: function nextWeek() {
+        switch (this.day()) {
+          case 0:
+            return '[u] [nedelju] [u] LT';
+          case 3:
+            return '[u] [sredu] [u] LT';
+          case 6:
+            return '[u] [subotu] [u] LT';
+          case 1:
+          case 2:
+          case 4:
+          case 5:
+            return '[u] dddd [u] LT';}
+
+      },
+      lastDay: '[juče u] LT',
+      lastWeek: function lastWeek() {
+        var lastWeekDays = [
+        '[prošle] [nedelje] [u] LT',
+        '[prošlog] [ponedeljka] [u] LT',
+        '[prošlog] [utorka] [u] LT',
+        '[prošle] [srede] [u] LT',
+        '[prošlog] [četvrtka] [u] LT',
+        '[prošlog] [petka] [u] LT',
+        '[prošle] [subote] [u] LT'];
+
+        return lastWeekDays[this.day()];
+      },
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'za %s',
+      past: 'pre %s',
+      s: 'nekoliko sekundi',
+      ss: translator.translate,
+      m: translator.translate,
+      mm: translator.translate,
+      h: translator.translate,
+      hh: translator.translate,
+      d: 'dan',
+      dd: translator.translate,
+      M: 'mesec',
+      MM: translator.translate,
+      y: 'godinu',
+      yy: translator.translate },
+
+    dayOfMonthOrdinalParse: /\d{1,2}\./,
+    ordinal: '%d.',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 7 // The week that contains Jan 7th is the first week of the year.
+    } });
+
+
+  return sr;
+
+});
+
+/***/ }),
+/* 160 */
+/*!******************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/sr-cyrl.js ***!
+  \******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Serbian Cyrillic [sr-cyrl]
+//! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
+//! author : Stefan Crnjaković <stefan@hotmail.rs> : https://github.com/crnjakovic
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var translator = {
+    words: {
+      //Different grammatical cases
+      ss: ['секунда', 'секунде', 'секунди'],
+      m: ['један минут', 'једне минуте'],
+      mm: ['минут', 'минуте', 'минута'],
+      h: ['један сат', 'једног сата'],
+      hh: ['сат', 'сата', 'сати'],
+      dd: ['дан', 'дана', 'дана'],
+      MM: ['месец', 'месеца', 'месеци'],
+      yy: ['година', 'године', 'година'] },
+
+    correctGrammaticalCase: function correctGrammaticalCase(number, wordKey) {
+      return number === 1 ?
+      wordKey[0] :
+      number >= 2 && number <= 4 ?
+      wordKey[1] :
+      wordKey[2];
+    },
+    translate: function translate(number, withoutSuffix, key) {
+      var wordKey = translator.words[key];
+      if (key.length === 1) {
+        return withoutSuffix ? wordKey[0] : wordKey[1];
+      } else {
+        return (
+          number +
+          ' ' +
+          translator.correctGrammaticalCase(number, wordKey));
+
+      }
+    } };
+
+
+  var srCyrl = moment.defineLocale('sr-cyrl', {
+    months: 'јануар_фебруар_март_април_мај_јун_јул_август_септембар_октобар_новембар_децембар'.split(
+    '_'),
+
+    monthsShort: 'јан._феб._мар._апр._мај_јун_јул_авг._сеп._окт._нов._дец.'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'недеља_понедељак_уторак_среда_четвртак_петак_субота'.split('_'),
+    weekdaysShort: 'нед._пон._уто._сре._чет._пет._суб.'.split('_'),
+    weekdaysMin: 'не_по_ут_ср_че_пе_су'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'H:mm',
+      LTS: 'H:mm:ss',
+      L: 'D. M. YYYY.',
+      LL: 'D. MMMM YYYY.',
+      LLL: 'D. MMMM YYYY. H:mm',
+      LLLL: 'dddd, D. MMMM YYYY. H:mm' },
+
+    calendar: {
+      sameDay: '[данас у] LT',
+      nextDay: '[сутра у] LT',
+      nextWeek: function nextWeek() {
+        switch (this.day()) {
+          case 0:
+            return '[у] [недељу] [у] LT';
+          case 3:
+            return '[у] [среду] [у] LT';
+          case 6:
+            return '[у] [суботу] [у] LT';
+          case 1:
+          case 2:
+          case 4:
+          case 5:
+            return '[у] dddd [у] LT';}
+
+      },
+      lastDay: '[јуче у] LT',
+      lastWeek: function lastWeek() {
+        var lastWeekDays = [
+        '[прошле] [недеље] [у] LT',
+        '[прошлог] [понедељка] [у] LT',
+        '[прошлог] [уторка] [у] LT',
+        '[прошле] [среде] [у] LT',
+        '[прошлог] [четвртка] [у] LT',
+        '[прошлог] [петка] [у] LT',
+        '[прошле] [суботе] [у] LT'];
+
+        return lastWeekDays[this.day()];
+      },
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'за %s',
+      past: 'пре %s',
+      s: 'неколико секунди',
+      ss: translator.translate,
+      m: translator.translate,
+      mm: translator.translate,
+      h: translator.translate,
+      hh: translator.translate,
+      d: 'дан',
+      dd: translator.translate,
+      M: 'месец',
+      MM: translator.translate,
+      y: 'годину',
+      yy: translator.translate },
+
+    dayOfMonthOrdinalParse: /\d{1,2}\./,
+    ordinal: '%d.',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 7 // The week that contains Jan 1st is the first week of the year.
+    } });
+
+
+  return srCyrl;
+
+});
+
+/***/ }),
+/* 161 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ss.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : siSwati [ss]
+//! author : Nicolai Davies<mail@nicolai.io> : https://github.com/nicolaidavies
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var ss = moment.defineLocale('ss', {
+    months: "Bhimbidvwane_Indlovana_Indlov'lenkhulu_Mabasa_Inkhwekhweti_Inhlaba_Kholwane_Ingci_Inyoni_Imphala_Lweti_Ingongoni".split(
+    '_'),
+
+    monthsShort: 'Bhi_Ina_Inu_Mab_Ink_Inh_Kho_Igc_Iny_Imp_Lwe_Igo'.split('_'),
+    weekdays: 'Lisontfo_Umsombuluko_Lesibili_Lesitsatfu_Lesine_Lesihlanu_Umgcibelo'.split(
+    '_'),
+
+    weekdaysShort: 'Lis_Umb_Lsb_Les_Lsi_Lsh_Umg'.split('_'),
+    weekdaysMin: 'Li_Us_Lb_Lt_Ls_Lh_Ug'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'h:mm A',
+      LTS: 'h:mm:ss A',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY h:mm A',
+      LLLL: 'dddd, D MMMM YYYY h:mm A' },
+
+    calendar: {
+      sameDay: '[Namuhla nga] LT',
+      nextDay: '[Kusasa nga] LT',
+      nextWeek: 'dddd [nga] LT',
+      lastDay: '[Itolo nga] LT',
+      lastWeek: 'dddd [leliphelile] [nga] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'nga %s',
+      past: 'wenteka nga %s',
+      s: 'emizuzwana lomcane',
+      ss: '%d mzuzwana',
+      m: 'umzuzu',
+      mm: '%d emizuzu',
+      h: 'lihora',
+      hh: '%d emahora',
+      d: 'lilanga',
+      dd: '%d emalanga',
+      M: 'inyanga',
+      MM: '%d tinyanga',
+      y: 'umnyaka',
+      yy: '%d iminyaka' },
+
+    meridiemParse: /ekuseni|emini|entsambama|ebusuku/,
+    meridiem: function meridiem(hours, minutes, isLower) {
+      if (hours < 11) {
+        return 'ekuseni';
+      } else if (hours < 15) {
+        return 'emini';
+      } else if (hours < 19) {
+        return 'entsambama';
+      } else {
+        return 'ebusuku';
+      }
+    },
+    meridiemHour: function meridiemHour(hour, meridiem) {
+      if (hour === 12) {
+        hour = 0;
+      }
+      if (meridiem === 'ekuseni') {
+        return hour;
+      } else if (meridiem === 'emini') {
+        return hour >= 11 ? hour : hour + 12;
+      } else if (meridiem === 'entsambama' || meridiem === 'ebusuku') {
+        if (hour === 0) {
+          return 0;
+        }
+        return hour + 12;
+      }
+    },
+    dayOfMonthOrdinalParse: /\d{1,2}/,
+    ordinal: '%d',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return ss;
+
+});
+
+/***/ }),
+/* 162 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/sv.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Swedish [sv]
+//! author : Jens Alm : https://github.com/ulmus
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var sv = moment.defineLocale('sv', {
+    months: 'januari_februari_mars_april_maj_juni_juli_augusti_september_oktober_november_december'.split(
+    '_'),
+
+    monthsShort: 'jan_feb_mar_apr_maj_jun_jul_aug_sep_okt_nov_dec'.split('_'),
+    weekdays: 'söndag_måndag_tisdag_onsdag_torsdag_fredag_lördag'.split('_'),
+    weekdaysShort: 'sön_mån_tis_ons_tor_fre_lör'.split('_'),
+    weekdaysMin: 'sö_må_ti_on_to_fr_lö'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'YYYY-MM-DD',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY [kl.] HH:mm',
+      LLLL: 'dddd D MMMM YYYY [kl.] HH:mm',
+      lll: 'D MMM YYYY HH:mm',
+      llll: 'ddd D MMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[Idag] LT',
+      nextDay: '[Imorgon] LT',
+      lastDay: '[Igår] LT',
+      nextWeek: '[På] dddd LT',
+      lastWeek: '[I] dddd[s] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'om %s',
+      past: 'för %s sedan',
+      s: 'några sekunder',
+      ss: '%d sekunder',
+      m: 'en minut',
+      mm: '%d minuter',
+      h: 'en timme',
+      hh: '%d timmar',
+      d: 'en dag',
+      dd: '%d dagar',
+      M: 'en månad',
+      MM: '%d månader',
+      y: 'ett år',
+      yy: '%d år' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(\:e|\:a)/,
+    ordinal: function ordinal(number) {
+      var b = number % 10,
+      output =
+      ~~(number % 100 / 10) === 1 ?
+      ':e' :
+      b === 1 ?
+      ':a' :
+      b === 2 ?
+      ':a' :
+      b === 3 ?
+      ':e' :
+      ':e';
+      return number + output;
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return sv;
+
+});
+
+/***/ }),
+/* 163 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/sw.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Swahili [sw]
+//! author : Fahad Kassim : https://github.com/fadsel
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var sw = moment.defineLocale('sw', {
+    months: 'Januari_Februari_Machi_Aprili_Mei_Juni_Julai_Agosti_Septemba_Oktoba_Novemba_Desemba'.split(
+    '_'),
+
+    monthsShort: 'Jan_Feb_Mac_Apr_Mei_Jun_Jul_Ago_Sep_Okt_Nov_Des'.split('_'),
+    weekdays: 'Jumapili_Jumatatu_Jumanne_Jumatano_Alhamisi_Ijumaa_Jumamosi'.split(
+    '_'),
+
+    weekdaysShort: 'Jpl_Jtat_Jnne_Jtan_Alh_Ijm_Jmos'.split('_'),
+    weekdaysMin: 'J2_J3_J4_J5_Al_Ij_J1'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'hh:mm A',
+      LTS: 'HH:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd, D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[leo saa] LT',
+      nextDay: '[kesho saa] LT',
+      nextWeek: '[wiki ijayo] dddd [saat] LT',
+      lastDay: '[jana] LT',
+      lastWeek: '[wiki iliyopita] dddd [saat] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s baadaye',
+      past: 'tokea %s',
+      s: 'hivi punde',
+      ss: 'sekunde %d',
+      m: 'dakika moja',
+      mm: 'dakika %d',
+      h: 'saa limoja',
+      hh: 'masaa %d',
+      d: 'siku moja',
+      dd: 'siku %d',
+      M: 'mwezi mmoja',
+      MM: 'miezi %d',
+      y: 'mwaka mmoja',
+      yy: 'miaka %d' },
+
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 7 // The week that contains Jan 7th is the first week of the year.
+    } });
+
+
+  return sw;
+
+});
+
+/***/ }),
+/* 164 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ta.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Tamil [ta]
+//! author : Arjunkumar Krishnamoorthy : https://github.com/tk120404
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var symbolMap = {
+    1: '௧',
+    2: '௨',
+    3: '௩',
+    4: '௪',
+    5: '௫',
+    6: '௬',
+    7: '௭',
+    8: '௮',
+    9: '௯',
+    0: '௦' },
+
+  numberMap = {
+    '௧': '1',
+    '௨': '2',
+    '௩': '3',
+    '௪': '4',
+    '௫': '5',
+    '௬': '6',
+    '௭': '7',
+    '௮': '8',
+    '௯': '9',
+    '௦': '0' };
+
+
+  var ta = moment.defineLocale('ta', {
+    months: 'ஜனவரி_பிப்ரவரி_மார்ச்_ஏப்ரல்_மே_ஜூன்_ஜூலை_ஆகஸ்ட்_செப்டெம்பர்_அக்டோபர்_நவம்பர்_டிசம்பர்'.split(
+    '_'),
+
+    monthsShort: 'ஜனவரி_பிப்ரவரி_மார்ச்_ஏப்ரல்_மே_ஜூன்_ஜூலை_ஆகஸ்ட்_செப்டெம்பர்_அக்டோபர்_நவம்பர்_டிசம்பர்'.split(
+    '_'),
+
+    weekdays: 'ஞாயிற்றுக்கிழமை_திங்கட்கிழமை_செவ்வாய்கிழமை_புதன்கிழமை_வியாழக்கிழமை_வெள்ளிக்கிழமை_சனிக்கிழமை'.split(
+    '_'),
+
+    weekdaysShort: 'ஞாயிறு_திங்கள்_செவ்வாய்_புதன்_வியாழன்_வெள்ளி_சனி'.split(
+    '_'),
+
+    weekdaysMin: 'ஞா_தி_செ_பு_வி_வெ_ச'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY, HH:mm',
+      LLLL: 'dddd, D MMMM YYYY, HH:mm' },
+
+    calendar: {
+      sameDay: '[இன்று] LT',
+      nextDay: '[நாளை] LT',
+      nextWeek: 'dddd, LT',
+      lastDay: '[நேற்று] LT',
+      lastWeek: '[கடந்த வாரம்] dddd, LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s இல்',
+      past: '%s முன்',
+      s: 'ஒரு சில விநாடிகள்',
+      ss: '%d விநாடிகள்',
+      m: 'ஒரு நிமிடம்',
+      mm: '%d நிமிடங்கள்',
+      h: 'ஒரு மணி நேரம்',
+      hh: '%d மணி நேரம்',
+      d: 'ஒரு நாள்',
+      dd: '%d நாட்கள்',
+      M: 'ஒரு மாதம்',
+      MM: '%d மாதங்கள்',
+      y: 'ஒரு வருடம்',
+      yy: '%d ஆண்டுகள்' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}வது/,
+    ordinal: function ordinal(number) {
+      return number + 'வது';
+    },
+    preparse: function preparse(string) {
+      return string.replace(/[௧௨௩௪௫௬௭௮௯௦]/g, function (match) {
+        return numberMap[match];
+      });
+    },
+    postformat: function postformat(string) {
+      return string.replace(/\d/g, function (match) {
+        return symbolMap[match];
+      });
+    },
+    // refer http://ta.wikipedia.org/s/1er1
+    meridiemParse: /யாமம்|வைகறை|காலை|நண்பகல்|எற்பாடு|மாலை/,
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 2) {
+        return ' யாமம்';
+      } else if (hour < 6) {
+        return ' வைகறை'; // வைகறை
+      } else if (hour < 10) {
+        return ' காலை'; // காலை
+      } else if (hour < 14) {
+        return ' நண்பகல்'; // நண்பகல்
+      } else if (hour < 18) {
+        return ' எற்பாடு'; // எற்பாடு
+      } else if (hour < 22) {
+        return ' மாலை'; // மாலை
+      } else {
+        return ' யாமம்';
+      }
+    },
+    meridiemHour: function meridiemHour(hour, meridiem) {
+      if (hour === 12) {
+        hour = 0;
+      }
+      if (meridiem === 'யாமம்') {
+        return hour < 2 ? hour : hour + 12;
+      } else if (meridiem === 'வைகறை' || meridiem === 'காலை') {
+        return hour;
+      } else if (meridiem === 'நண்பகல்') {
+        return hour >= 10 ? hour : hour + 12;
+      } else {
+        return hour + 12;
+      }
+    },
+    week: {
+      dow: 0, // Sunday is the first day of the week.
+      doy: 6 // The week that contains Jan 6th is the first week of the year.
+    } });
+
+
+  return ta;
+
+});
+
+/***/ }),
+/* 165 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/te.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Telugu [te]
+//! author : Krishna Chaitanya Thota : https://github.com/kcthota
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var te = moment.defineLocale('te', {
+    months: 'జనవరి_ఫిబ్రవరి_మార్చి_ఏప్రిల్_మే_జూన్_జులై_ఆగస్టు_సెప్టెంబర్_అక్టోబర్_నవంబర్_డిసెంబర్'.split(
+    '_'),
+
+    monthsShort: 'జన._ఫిబ్ర._మార్చి_ఏప్రి._మే_జూన్_జులై_ఆగ._సెప్._అక్టో._నవ._డిసె.'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'ఆదివారం_సోమవారం_మంగళవారం_బుధవారం_గురువారం_శుక్రవారం_శనివారం'.split(
+    '_'),
+
+    weekdaysShort: 'ఆది_సోమ_మంగళ_బుధ_గురు_శుక్ర_శని'.split('_'),
+    weekdaysMin: 'ఆ_సో_మం_బు_గు_శు_శ'.split('_'),
+    longDateFormat: {
+      LT: 'A h:mm',
+      LTS: 'A h:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY, A h:mm',
+      LLLL: 'dddd, D MMMM YYYY, A h:mm' },
+
+    calendar: {
+      sameDay: '[నేడు] LT',
+      nextDay: '[రేపు] LT',
+      nextWeek: 'dddd, LT',
+      lastDay: '[నిన్న] LT',
+      lastWeek: '[గత] dddd, LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s లో',
+      past: '%s క్రితం',
+      s: 'కొన్ని క్షణాలు',
+      ss: '%d సెకన్లు',
+      m: 'ఒక నిమిషం',
+      mm: '%d నిమిషాలు',
+      h: 'ఒక గంట',
+      hh: '%d గంటలు',
+      d: 'ఒక రోజు',
+      dd: '%d రోజులు',
+      M: 'ఒక నెల',
+      MM: '%d నెలలు',
+      y: 'ఒక సంవత్సరం',
+      yy: '%d సంవత్సరాలు' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}వ/,
+    ordinal: '%dవ',
+    meridiemParse: /రాత్రి|ఉదయం|మధ్యాహ్నం|సాయంత్రం/,
+    meridiemHour: function meridiemHour(hour, meridiem) {
+      if (hour === 12) {
+        hour = 0;
+      }
+      if (meridiem === 'రాత్రి') {
+        return hour < 4 ? hour : hour + 12;
+      } else if (meridiem === 'ఉదయం') {
+        return hour;
+      } else if (meridiem === 'మధ్యాహ్నం') {
+        return hour >= 10 ? hour : hour + 12;
+      } else if (meridiem === 'సాయంత్రం') {
+        return hour + 12;
+      }
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 4) {
+        return 'రాత్రి';
+      } else if (hour < 10) {
+        return 'ఉదయం';
+      } else if (hour < 17) {
+        return 'మధ్యాహ్నం';
+      } else if (hour < 20) {
+        return 'సాయంత్రం';
+      } else {
+        return 'రాత్రి';
+      }
+    },
+    week: {
+      dow: 0, // Sunday is the first day of the week.
+      doy: 6 // The week that contains Jan 6th is the first week of the year.
+    } });
+
+
+  return te;
+
+});
+
+/***/ }),
+/* 166 */
+/*!**************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/tet.js ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Tetun Dili (East Timor) [tet]
+//! author : Joshua Brooks : https://github.com/joshbrooks
+//! author : Onorio De J. Afonso : https://github.com/marobo
+//! author : Sonia Simoes : https://github.com/soniasimoes
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var tet = moment.defineLocale('tet', {
+    months: 'Janeiru_Fevereiru_Marsu_Abril_Maiu_Juñu_Jullu_Agustu_Setembru_Outubru_Novembru_Dezembru'.split(
+    '_'),
+
+    monthsShort: 'Jan_Fev_Mar_Abr_Mai_Jun_Jul_Ago_Set_Out_Nov_Dez'.split('_'),
+    weekdays: 'Domingu_Segunda_Tersa_Kuarta_Kinta_Sesta_Sabadu'.split('_'),
+    weekdaysShort: 'Dom_Seg_Ters_Kua_Kint_Sest_Sab'.split('_'),
+    weekdaysMin: 'Do_Seg_Te_Ku_Ki_Ses_Sa'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd, D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[Ohin iha] LT',
+      nextDay: '[Aban iha] LT',
+      nextWeek: 'dddd [iha] LT',
+      lastDay: '[Horiseik iha] LT',
+      lastWeek: 'dddd [semana kotuk] [iha] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'iha %s',
+      past: '%s liuba',
+      s: 'segundu balun',
+      ss: 'segundu %d',
+      m: 'minutu ida',
+      mm: 'minutu %d',
+      h: 'oras ida',
+      hh: 'oras %d',
+      d: 'loron ida',
+      dd: 'loron %d',
+      M: 'fulan ida',
+      MM: 'fulan %d',
+      y: 'tinan ida',
+      yy: 'tinan %d' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(st|nd|rd|th)/,
+    ordinal: function ordinal(number) {
+      var b = number % 10,
+      output =
+      ~~(number % 100 / 10) === 1 ?
+      'th' :
+      b === 1 ?
+      'st' :
+      b === 2 ?
+      'nd' :
+      b === 3 ?
+      'rd' :
+      'th';
+      return number + output;
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return tet;
+
+});
+
+/***/ }),
+/* 167 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/tg.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Tajik [tg]
+//! author : Orif N. Jr. : https://github.com/orif-jr
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var suffixes = {
+    0: '-ум',
+    1: '-ум',
+    2: '-юм',
+    3: '-юм',
+    4: '-ум',
+    5: '-ум',
+    6: '-ум',
+    7: '-ум',
+    8: '-ум',
+    9: '-ум',
+    10: '-ум',
+    12: '-ум',
+    13: '-ум',
+    20: '-ум',
+    30: '-юм',
+    40: '-ум',
+    50: '-ум',
+    60: '-ум',
+    70: '-ум',
+    80: '-ум',
+    90: '-ум',
+    100: '-ум' };
+
+
+  var tg = moment.defineLocale('tg', {
+    months: {
+      format: 'январи_феврали_марти_апрели_майи_июни_июли_августи_сентябри_октябри_ноябри_декабри'.split(
+      '_'),
+
+      standalone: 'январ_феврал_март_апрел_май_июн_июл_август_сентябр_октябр_ноябр_декабр'.split(
+      '_') },
+
+
+    monthsShort: 'янв_фев_мар_апр_май_июн_июл_авг_сен_окт_ноя_дек'.split('_'),
+    weekdays: 'якшанбе_душанбе_сешанбе_чоршанбе_панҷшанбе_ҷумъа_шанбе'.split(
+    '_'),
+
+    weekdaysShort: 'яшб_дшб_сшб_чшб_пшб_ҷум_шнб'.split('_'),
+    weekdaysMin: 'яш_дш_сш_чш_пш_ҷм_шб'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd, D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[Имрӯз соати] LT',
+      nextDay: '[Фардо соати] LT',
+      lastDay: '[Дирӯз соати] LT',
+      nextWeek: 'dddd[и] [ҳафтаи оянда соати] LT',
+      lastWeek: 'dddd[и] [ҳафтаи гузашта соати] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'баъди %s',
+      past: '%s пеш',
+      s: 'якчанд сония',
+      m: 'як дақиқа',
+      mm: '%d дақиқа',
+      h: 'як соат',
+      hh: '%d соат',
+      d: 'як рӯз',
+      dd: '%d рӯз',
+      M: 'як моҳ',
+      MM: '%d моҳ',
+      y: 'як сол',
+      yy: '%d сол' },
+
+    meridiemParse: /шаб|субҳ|рӯз|бегоҳ/,
+    meridiemHour: function meridiemHour(hour, meridiem) {
+      if (hour === 12) {
+        hour = 0;
+      }
+      if (meridiem === 'шаб') {
+        return hour < 4 ? hour : hour + 12;
+      } else if (meridiem === 'субҳ') {
+        return hour;
+      } else if (meridiem === 'рӯз') {
+        return hour >= 11 ? hour : hour + 12;
+      } else if (meridiem === 'бегоҳ') {
+        return hour + 12;
+      }
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 4) {
+        return 'шаб';
+      } else if (hour < 11) {
+        return 'субҳ';
+      } else if (hour < 16) {
+        return 'рӯз';
+      } else if (hour < 19) {
+        return 'бегоҳ';
+      } else {
+        return 'шаб';
+      }
+    },
+    dayOfMonthOrdinalParse: /\d{1,2}-(ум|юм)/,
+    ordinal: function ordinal(number) {
+      var a = number % 10,
+      b = number >= 100 ? 100 : null;
+      return number + (suffixes[number] || suffixes[a] || suffixes[b]);
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 7 // The week that contains Jan 1th is the first week of the year.
+    } });
+
+
+  return tg;
+
+});
+
+/***/ }),
+/* 168 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/th.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Thai [th]
+//! author : Kridsada Thanabulpong : https://github.com/sirn
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var th = moment.defineLocale('th', {
+    months: 'มกราคม_กุมภาพันธ์_มีนาคม_เมษายน_พฤษภาคม_มิถุนายน_กรกฎาคม_สิงหาคม_กันยายน_ตุลาคม_พฤศจิกายน_ธันวาคม'.split(
+    '_'),
+
+    monthsShort: 'ม.ค._ก.พ._มี.ค._เม.ย._พ.ค._มิ.ย._ก.ค._ส.ค._ก.ย._ต.ค._พ.ย._ธ.ค.'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'อาทิตย์_จันทร์_อังคาร_พุธ_พฤหัสบดี_ศุกร์_เสาร์'.split('_'),
+    weekdaysShort: 'อาทิตย์_จันทร์_อังคาร_พุธ_พฤหัส_ศุกร์_เสาร์'.split('_'), // yes, three characters difference
+    weekdaysMin: 'อา._จ._อ._พ._พฤ._ศ._ส.'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'H:mm',
+      LTS: 'H:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY เวลา H:mm',
+      LLLL: 'วันddddที่ D MMMM YYYY เวลา H:mm' },
+
+    meridiemParse: /ก่อนเที่ยง|หลังเที่ยง/,
+    isPM: function isPM(input) {
+      return input === 'หลังเที่ยง';
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 12) {
+        return 'ก่อนเที่ยง';
+      } else {
+        return 'หลังเที่ยง';
+      }
+    },
+    calendar: {
+      sameDay: '[วันนี้ เวลา] LT',
+      nextDay: '[พรุ่งนี้ เวลา] LT',
+      nextWeek: 'dddd[หน้า เวลา] LT',
+      lastDay: '[เมื่อวานนี้ เวลา] LT',
+      lastWeek: '[วัน]dddd[ที่แล้ว เวลา] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'อีก %s',
+      past: '%sที่แล้ว',
+      s: 'ไม่กี่วินาที',
+      ss: '%d วินาที',
+      m: '1 นาที',
+      mm: '%d นาที',
+      h: '1 ชั่วโมง',
+      hh: '%d ชั่วโมง',
+      d: '1 วัน',
+      dd: '%d วัน',
+      w: '1 สัปดาห์',
+      ww: '%d สัปดาห์',
+      M: '1 เดือน',
+      MM: '%d เดือน',
+      y: '1 ปี',
+      yy: '%d ปี' } });
+
+
+
+  return th;
+
+});
+
+/***/ }),
+/* 169 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/tk.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Turkmen [tk]
+//! author : Atamyrat Abdyrahmanov : https://github.com/atamyratabdy
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var suffixes = {
+    1: "'inji",
+    5: "'inji",
+    8: "'inji",
+    70: "'inji",
+    80: "'inji",
+    2: "'nji",
+    7: "'nji",
+    20: "'nji",
+    50: "'nji",
+    3: "'ünji",
+    4: "'ünji",
+    100: "'ünji",
+    6: "'njy",
+    9: "'unjy",
+    10: "'unjy",
+    30: "'unjy",
+    60: "'ynjy",
+    90: "'ynjy" };
+
+
+  var tk = moment.defineLocale('tk', {
+    months: 'Ýanwar_Fewral_Mart_Aprel_Maý_Iýun_Iýul_Awgust_Sentýabr_Oktýabr_Noýabr_Dekabr'.split(
+    '_'),
+
+    monthsShort: 'Ýan_Few_Mar_Apr_Maý_Iýn_Iýl_Awg_Sen_Okt_Noý_Dek'.split('_'),
+    weekdays: 'Ýekşenbe_Duşenbe_Sişenbe_Çarşenbe_Penşenbe_Anna_Şenbe'.split(
+    '_'),
+
+    weekdaysShort: 'Ýek_Duş_Siş_Çar_Pen_Ann_Şen'.split('_'),
+    weekdaysMin: 'Ýk_Dş_Sş_Çr_Pn_An_Şn'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd, D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[bugün sagat] LT',
+      nextDay: '[ertir sagat] LT',
+      nextWeek: '[indiki] dddd [sagat] LT',
+      lastDay: '[düýn] LT',
+      lastWeek: '[geçen] dddd [sagat] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s soň',
+      past: '%s öň',
+      s: 'birnäçe sekunt',
+      m: 'bir minut',
+      mm: '%d minut',
+      h: 'bir sagat',
+      hh: '%d sagat',
+      d: 'bir gün',
+      dd: '%d gün',
+      M: 'bir aý',
+      MM: '%d aý',
+      y: 'bir ýyl',
+      yy: '%d ýyl' },
+
+    ordinal: function ordinal(number, period) {
+      switch (period) {
+        case 'd':
+        case 'D':
+        case 'Do':
+        case 'DD':
+          return number;
+        default:
+          if (number === 0) {
+            // special case for zero
+            return number + "'unjy";
+          }
+          var a = number % 10,
+          b = number % 100 - a,
+          c = number >= 100 ? 100 : null;
+          return number + (suffixes[a] || suffixes[b] || suffixes[c]);}
+
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 7 // The week that contains Jan 7th is the first week of the year.
+    } });
+
+
+  return tk;
+
+});
+
+/***/ }),
+/* 170 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/tl-ph.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Tagalog (Philippines) [tl-ph]
+//! author : Dan Hagman : https://github.com/hagmandan
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var tlPh = moment.defineLocale('tl-ph', {
+    months: 'Enero_Pebrero_Marso_Abril_Mayo_Hunyo_Hulyo_Agosto_Setyembre_Oktubre_Nobyembre_Disyembre'.split(
+    '_'),
+
+    monthsShort: 'Ene_Peb_Mar_Abr_May_Hun_Hul_Ago_Set_Okt_Nob_Dis'.split('_'),
+    weekdays: 'Linggo_Lunes_Martes_Miyerkules_Huwebes_Biyernes_Sabado'.split(
+    '_'),
+
+    weekdaysShort: 'Lin_Lun_Mar_Miy_Huw_Biy_Sab'.split('_'),
+    weekdaysMin: 'Li_Lu_Ma_Mi_Hu_Bi_Sab'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'MM/D/YYYY',
+      LL: 'MMMM D, YYYY',
+      LLL: 'MMMM D, YYYY HH:mm',
+      LLLL: 'dddd, MMMM DD, YYYY HH:mm' },
+
+    calendar: {
+      sameDay: 'LT [ngayong araw]',
+      nextDay: '[Bukas ng] LT',
+      nextWeek: 'LT [sa susunod na] dddd',
+      lastDay: 'LT [kahapon]',
+      lastWeek: 'LT [noong nakaraang] dddd',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'sa loob ng %s',
+      past: '%s ang nakalipas',
+      s: 'ilang segundo',
+      ss: '%d segundo',
+      m: 'isang minuto',
+      mm: '%d minuto',
+      h: 'isang oras',
+      hh: '%d oras',
+      d: 'isang araw',
+      dd: '%d araw',
+      M: 'isang buwan',
+      MM: '%d buwan',
+      y: 'isang taon',
+      yy: '%d taon' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}/,
+    ordinal: function ordinal(number) {
+      return number;
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return tlPh;
+
+});
+
+/***/ }),
+/* 171 */
+/*!**************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/tlh.js ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Klingon [tlh]
+//! author : Dominika Kruk : https://github.com/amaranthrose
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var numbersNouns = 'pagh_wa’_cha’_wej_loS_vagh_jav_Soch_chorgh_Hut'.split('_');
+
+  function translateFuture(output) {
+    var time = output;
+    time =
+    output.indexOf('jaj') !== -1 ?
+    time.slice(0, -3) + 'leS' :
+    output.indexOf('jar') !== -1 ?
+    time.slice(0, -3) + 'waQ' :
+    output.indexOf('DIS') !== -1 ?
+    time.slice(0, -3) + 'nem' :
+    time + ' pIq';
+    return time;
+  }
+
+  function translatePast(output) {
+    var time = output;
+    time =
+    output.indexOf('jaj') !== -1 ?
+    time.slice(0, -3) + 'Hu’' :
+    output.indexOf('jar') !== -1 ?
+    time.slice(0, -3) + 'wen' :
+    output.indexOf('DIS') !== -1 ?
+    time.slice(0, -3) + 'ben' :
+    time + ' ret';
+    return time;
+  }
+
+  function translate(number, withoutSuffix, string, isFuture) {
+    var numberNoun = numberAsNoun(number);
+    switch (string) {
+      case 'ss':
+        return numberNoun + ' lup';
+      case 'mm':
+        return numberNoun + ' tup';
+      case 'hh':
+        return numberNoun + ' rep';
+      case 'dd':
+        return numberNoun + ' jaj';
+      case 'MM':
+        return numberNoun + ' jar';
+      case 'yy':
+        return numberNoun + ' DIS';}
+
+  }
+
+  function numberAsNoun(number) {
+    var hundred = Math.floor(number % 1000 / 100),
+    ten = Math.floor(number % 100 / 10),
+    one = number % 10,
+    word = '';
+    if (hundred > 0) {
+      word += numbersNouns[hundred] + 'vatlh';
+    }
+    if (ten > 0) {
+      word += (word !== '' ? ' ' : '') + numbersNouns[ten] + 'maH';
+    }
+    if (one > 0) {
+      word += (word !== '' ? ' ' : '') + numbersNouns[one];
+    }
+    return word === '' ? 'pagh' : word;
+  }
+
+  var tlh = moment.defineLocale('tlh', {
+    months: 'tera’ jar wa’_tera’ jar cha’_tera’ jar wej_tera’ jar loS_tera’ jar vagh_tera’ jar jav_tera’ jar Soch_tera’ jar chorgh_tera’ jar Hut_tera’ jar wa’maH_tera’ jar wa’maH wa’_tera’ jar wa’maH cha’'.split(
+    '_'),
+
+    monthsShort: 'jar wa’_jar cha’_jar wej_jar loS_jar vagh_jar jav_jar Soch_jar chorgh_jar Hut_jar wa’maH_jar wa’maH wa’_jar wa’maH cha’'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'lojmItjaj_DaSjaj_povjaj_ghItlhjaj_loghjaj_buqjaj_ghInjaj'.split(
+    '_'),
+
+    weekdaysShort: 'lojmItjaj_DaSjaj_povjaj_ghItlhjaj_loghjaj_buqjaj_ghInjaj'.split(
+    '_'),
+
+    weekdaysMin: 'lojmItjaj_DaSjaj_povjaj_ghItlhjaj_loghjaj_buqjaj_ghInjaj'.split(
+    '_'),
+
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd, D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[DaHjaj] LT',
+      nextDay: '[wa’leS] LT',
+      nextWeek: 'LLL',
+      lastDay: '[wa’Hu’] LT',
+      lastWeek: 'LLL',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: translateFuture,
+      past: translatePast,
+      s: 'puS lup',
+      ss: translate,
+      m: 'wa’ tup',
+      mm: translate,
+      h: 'wa’ rep',
+      hh: translate,
+      d: 'wa’ jaj',
+      dd: translate,
+      M: 'wa’ jar',
+      MM: translate,
+      y: 'wa’ DIS',
+      yy: translate },
+
+    dayOfMonthOrdinalParse: /\d{1,2}\./,
+    ordinal: '%d.',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return tlh;
+
+});
+
+/***/ }),
+/* 172 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/tr.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Turkish [tr]
+//! authors : Erhan Gundogan : https://github.com/erhangundogan,
+//!           Burak Yiğit Kaya: https://github.com/BYK
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var suffixes = {
+    1: "'inci",
+    5: "'inci",
+    8: "'inci",
+    70: "'inci",
+    80: "'inci",
+    2: "'nci",
+    7: "'nci",
+    20: "'nci",
+    50: "'nci",
+    3: "'üncü",
+    4: "'üncü",
+    100: "'üncü",
+    6: "'ncı",
+    9: "'uncu",
+    10: "'uncu",
+    30: "'uncu",
+    60: "'ıncı",
+    90: "'ıncı" };
+
+
+  var tr = moment.defineLocale('tr', {
+    months: 'Ocak_Şubat_Mart_Nisan_Mayıs_Haziran_Temmuz_Ağustos_Eylül_Ekim_Kasım_Aralık'.split(
+    '_'),
+
+    monthsShort: 'Oca_Şub_Mar_Nis_May_Haz_Tem_Ağu_Eyl_Eki_Kas_Ara'.split('_'),
+    weekdays: 'Pazar_Pazartesi_Salı_Çarşamba_Perşembe_Cuma_Cumartesi'.split(
+    '_'),
+
+    weekdaysShort: 'Paz_Pts_Sal_Çar_Per_Cum_Cts'.split('_'),
+    weekdaysMin: 'Pz_Pt_Sa_Ça_Pe_Cu_Ct'.split('_'),
+    meridiem: function meridiem(hours, minutes, isLower) {
+      if (hours < 12) {
+        return isLower ? 'öö' : 'ÖÖ';
+      } else {
+        return isLower ? 'ös' : 'ÖS';
+      }
+    },
+    meridiemParse: /öö|ÖÖ|ös|ÖS/,
+    isPM: function isPM(input) {
+      return input === 'ös' || input === 'ÖS';
+    },
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd, D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[bugün saat] LT',
+      nextDay: '[yarın saat] LT',
+      nextWeek: '[gelecek] dddd [saat] LT',
+      lastDay: '[dün] LT',
+      lastWeek: '[geçen] dddd [saat] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s sonra',
+      past: '%s önce',
+      s: 'birkaç saniye',
+      ss: '%d saniye',
+      m: 'bir dakika',
+      mm: '%d dakika',
+      h: 'bir saat',
+      hh: '%d saat',
+      d: 'bir gün',
+      dd: '%d gün',
+      w: 'bir hafta',
+      ww: '%d hafta',
+      M: 'bir ay',
+      MM: '%d ay',
+      y: 'bir yıl',
+      yy: '%d yıl' },
+
+    ordinal: function ordinal(number, period) {
+      switch (period) {
+        case 'd':
+        case 'D':
+        case 'Do':
+        case 'DD':
+          return number;
+        default:
+          if (number === 0) {
+            // special case for zero
+            return number + "'ıncı";
+          }
+          var a = number % 10,
+          b = number % 100 - a,
+          c = number >= 100 ? 100 : null;
+          return number + (suffixes[a] || suffixes[b] || suffixes[c]);}
+
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 7 // The week that contains Jan 7th is the first week of the year.
+    } });
+
+
+  return tr;
+
+});
+
+/***/ }),
+/* 173 */
+/*!**************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/tzl.js ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Talossan [tzl]
+//! author : Robin van der Vliet : https://github.com/robin0van0der0v
+//! author : Iustì Canun
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  // After the year there should be a slash and the amount of years since December 26, 1979 in Roman numerals.
+  // This is currently too difficult (maybe even impossible) to add.
+  var tzl = moment.defineLocale('tzl', {
+    months: 'Januar_Fevraglh_Març_Avrïu_Mai_Gün_Julia_Guscht_Setemvar_Listopäts_Noemvar_Zecemvar'.split(
+    '_'),
+
+    monthsShort: 'Jan_Fev_Mar_Avr_Mai_Gün_Jul_Gus_Set_Lis_Noe_Zec'.split('_'),
+    weekdays: 'Súladi_Lúneçi_Maitzi_Márcuri_Xhúadi_Viénerçi_Sáturi'.split('_'),
+    weekdaysShort: 'Súl_Lún_Mai_Már_Xhú_Vié_Sát'.split('_'),
+    weekdaysMin: 'Sú_Lú_Ma_Má_Xh_Vi_Sá'.split('_'),
+    longDateFormat: {
+      LT: 'HH.mm',
+      LTS: 'HH.mm.ss',
+      L: 'DD.MM.YYYY',
+      LL: 'D. MMMM [dallas] YYYY',
+      LLL: 'D. MMMM [dallas] YYYY HH.mm',
+      LLLL: 'dddd, [li] D. MMMM [dallas] YYYY HH.mm' },
+
+    meridiemParse: /d\'o|d\'a/i,
+    isPM: function isPM(input) {
+      return "d'o" === input.toLowerCase();
+    },
+    meridiem: function meridiem(hours, minutes, isLower) {
+      if (hours > 11) {
+        return isLower ? "d'o" : "D'O";
+      } else {
+        return isLower ? "d'a" : "D'A";
+      }
+    },
+    calendar: {
+      sameDay: '[oxhi à] LT',
+      nextDay: '[demà à] LT',
+      nextWeek: 'dddd [à] LT',
+      lastDay: '[ieiri à] LT',
+      lastWeek: '[sür el] dddd [lasteu à] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'osprei %s',
+      past: 'ja%s',
+      s: processRelativeTime,
+      ss: processRelativeTime,
+      m: processRelativeTime,
+      mm: processRelativeTime,
+      h: processRelativeTime,
+      hh: processRelativeTime,
+      d: processRelativeTime,
+      dd: processRelativeTime,
+      M: processRelativeTime,
+      MM: processRelativeTime,
+      y: processRelativeTime,
+      yy: processRelativeTime },
+
+    dayOfMonthOrdinalParse: /\d{1,2}\./,
+    ordinal: '%d.',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  function processRelativeTime(number, withoutSuffix, key, isFuture) {
+    var format = {
+      s: ['viensas secunds', "'iensas secunds"],
+      ss: [number + ' secunds', '' + number + ' secunds'],
+      m: ["'n míut", "'iens míut"],
+      mm: [number + ' míuts', '' + number + ' míuts'],
+      h: ["'n þora", "'iensa þora"],
+      hh: [number + ' þoras', '' + number + ' þoras'],
+      d: ["'n ziua", "'iensa ziua"],
+      dd: [number + ' ziuas', '' + number + ' ziuas'],
+      M: ["'n mes", "'iens mes"],
+      MM: [number + ' mesen', '' + number + ' mesen'],
+      y: ["'n ar", "'iens ar"],
+      yy: [number + ' ars', '' + number + ' ars'] };
+
+    return isFuture ?
+    format[key][0] :
+    withoutSuffix ?
+    format[key][0] :
+    format[key][1];
+  }
+
+  return tzl;
+
+});
+
+/***/ }),
+/* 174 */
+/*!**************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/tzm.js ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Central Atlas Tamazight [tzm]
+//! author : Abdel Said : https://github.com/abdelsaid
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var tzm = moment.defineLocale('tzm', {
+    months: 'ⵉⵏⵏⴰⵢⵔ_ⴱⵕⴰⵢⵕ_ⵎⴰⵕⵚ_ⵉⴱⵔⵉⵔ_ⵎⴰⵢⵢⵓ_ⵢⵓⵏⵢⵓ_ⵢⵓⵍⵢⵓⵣ_ⵖⵓⵛⵜ_ⵛⵓⵜⴰⵏⴱⵉⵔ_ⴽⵟⵓⴱⵕ_ⵏⵓⵡⴰⵏⴱⵉⵔ_ⴷⵓⵊⵏⴱⵉⵔ'.split(
+    '_'),
+
+    monthsShort: 'ⵉⵏⵏⴰⵢⵔ_ⴱⵕⴰⵢⵕ_ⵎⴰⵕⵚ_ⵉⴱⵔⵉⵔ_ⵎⴰⵢⵢⵓ_ⵢⵓⵏⵢⵓ_ⵢⵓⵍⵢⵓⵣ_ⵖⵓⵛⵜ_ⵛⵓⵜⴰⵏⴱⵉⵔ_ⴽⵟⵓⴱⵕ_ⵏⵓⵡⴰⵏⴱⵉⵔ_ⴷⵓⵊⵏⴱⵉⵔ'.split(
+    '_'),
+
+    weekdays: 'ⴰⵙⴰⵎⴰⵙ_ⴰⵢⵏⴰⵙ_ⴰⵙⵉⵏⴰⵙ_ⴰⴽⵔⴰⵙ_ⴰⴽⵡⴰⵙ_ⴰⵙⵉⵎⵡⴰⵙ_ⴰⵙⵉⴹⵢⴰⵙ'.split('_'),
+    weekdaysShort: 'ⴰⵙⴰⵎⴰⵙ_ⴰⵢⵏⴰⵙ_ⴰⵙⵉⵏⴰⵙ_ⴰⴽⵔⴰⵙ_ⴰⴽⵡⴰⵙ_ⴰⵙⵉⵎⵡⴰⵙ_ⴰⵙⵉⴹⵢⴰⵙ'.split('_'),
+    weekdaysMin: 'ⴰⵙⴰⵎⴰⵙ_ⴰⵢⵏⴰⵙ_ⴰⵙⵉⵏⴰⵙ_ⴰⴽⵔⴰⵙ_ⴰⴽⵡⴰⵙ_ⴰⵙⵉⵎⵡⴰⵙ_ⴰⵙⵉⴹⵢⴰⵙ'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[ⴰⵙⴷⵅ ⴴ] LT',
+      nextDay: '[ⴰⵙⴽⴰ ⴴ] LT',
+      nextWeek: 'dddd [ⴴ] LT',
+      lastDay: '[ⴰⵚⴰⵏⵜ ⴴ] LT',
+      lastWeek: 'dddd [ⴴ] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'ⴷⴰⴷⵅ ⵙ ⵢⴰⵏ %s',
+      past: 'ⵢⴰⵏ %s',
+      s: 'ⵉⵎⵉⴽ',
+      ss: '%d ⵉⵎⵉⴽ',
+      m: 'ⵎⵉⵏⵓⴺ',
+      mm: '%d ⵎⵉⵏⵓⴺ',
+      h: 'ⵙⴰⵄⴰ',
+      hh: '%d ⵜⴰⵙⵙⴰⵄⵉⵏ',
+      d: 'ⴰⵙⵙ',
+      dd: '%d oⵙⵙⴰⵏ',
+      M: 'ⴰⵢoⵓⵔ',
+      MM: '%d ⵉⵢⵢⵉⵔⵏ',
+      y: 'ⴰⵙⴳⴰⵙ',
+      yy: '%d ⵉⵙⴳⴰⵙⵏ' },
+
+    week: {
+      dow: 6, // Saturday is the first day of the week.
+      doy: 12 // The week that contains Jan 12th is the first week of the year.
+    } });
+
+
+  return tzm;
+
+});
+
+/***/ }),
+/* 175 */
+/*!*******************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/tzm-latn.js ***!
+  \*******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Central Atlas Tamazight Latin [tzm-latn]
+//! author : Abdel Said : https://github.com/abdelsaid
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var tzmLatn = moment.defineLocale('tzm-latn', {
+    months: 'innayr_brˤayrˤ_marˤsˤ_ibrir_mayyw_ywnyw_ywlywz_ɣwšt_šwtanbir_ktˤwbrˤ_nwwanbir_dwjnbir'.split(
+    '_'),
+
+    monthsShort: 'innayr_brˤayrˤ_marˤsˤ_ibrir_mayyw_ywnyw_ywlywz_ɣwšt_šwtanbir_ktˤwbrˤ_nwwanbir_dwjnbir'.split(
+    '_'),
+
+    weekdays: 'asamas_aynas_asinas_akras_akwas_asimwas_asiḍyas'.split('_'),
+    weekdaysShort: 'asamas_aynas_asinas_akras_akwas_asimwas_asiḍyas'.split('_'),
+    weekdaysMin: 'asamas_aynas_asinas_akras_akwas_asimwas_asiḍyas'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[asdkh g] LT',
+      nextDay: '[aska g] LT',
+      nextWeek: 'dddd [g] LT',
+      lastDay: '[assant g] LT',
+      lastWeek: 'dddd [g] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'dadkh s yan %s',
+      past: 'yan %s',
+      s: 'imik',
+      ss: '%d imik',
+      m: 'minuḍ',
+      mm: '%d minuḍ',
+      h: 'saɛa',
+      hh: '%d tassaɛin',
+      d: 'ass',
+      dd: '%d ossan',
+      M: 'ayowr',
+      MM: '%d iyyirn',
+      y: 'asgas',
+      yy: '%d isgasn' },
+
+    week: {
+      dow: 6, // Saturday is the first day of the week.
+      doy: 12 // The week that contains Jan 12th is the first week of the year.
+    } });
+
+
+  return tzmLatn;
+
+});
+
+/***/ }),
+/* 176 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ug-cn.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Uyghur (China) [ug-cn]
+//! author: boyaq : https://github.com/boyaq
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var ugCn = moment.defineLocale('ug-cn', {
+    months: 'يانۋار_فېۋرال_مارت_ئاپرېل_ماي_ئىيۇن_ئىيۇل_ئاۋغۇست_سېنتەبىر_ئۆكتەبىر_نويابىر_دېكابىر'.split(
+    '_'),
+
+    monthsShort: 'يانۋار_فېۋرال_مارت_ئاپرېل_ماي_ئىيۇن_ئىيۇل_ئاۋغۇست_سېنتەبىر_ئۆكتەبىر_نويابىر_دېكابىر'.split(
+    '_'),
+
+    weekdays: 'يەكشەنبە_دۈشەنبە_سەيشەنبە_چارشەنبە_پەيشەنبە_جۈمە_شەنبە'.split(
+    '_'),
+
+    weekdaysShort: 'يە_دۈ_سە_چا_پە_جۈ_شە'.split('_'),
+    weekdaysMin: 'يە_دۈ_سە_چا_پە_جۈ_شە'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'YYYY-MM-DD',
+      LL: 'YYYY-يىلىM-ئاينىڭD-كۈنى',
+      LLL: 'YYYY-يىلىM-ئاينىڭD-كۈنى، HH:mm',
+      LLLL: 'dddd، YYYY-يىلىM-ئاينىڭD-كۈنى، HH:mm' },
+
+    meridiemParse: /يېرىم كېچە|سەھەر|چۈشتىن بۇرۇن|چۈش|چۈشتىن كېيىن|كەچ/,
+    meridiemHour: function meridiemHour(hour, meridiem) {
+      if (hour === 12) {
+        hour = 0;
+      }
+      if (
+      meridiem === 'يېرىم كېچە' ||
+      meridiem === 'سەھەر' ||
+      meridiem === 'چۈشتىن بۇرۇن')
+      {
+        return hour;
+      } else if (meridiem === 'چۈشتىن كېيىن' || meridiem === 'كەچ') {
+        return hour + 12;
+      } else {
+        return hour >= 11 ? hour : hour + 12;
+      }
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      var hm = hour * 100 + minute;
+      if (hm < 600) {
+        return 'يېرىم كېچە';
+      } else if (hm < 900) {
+        return 'سەھەر';
+      } else if (hm < 1130) {
+        return 'چۈشتىن بۇرۇن';
+      } else if (hm < 1230) {
+        return 'چۈش';
+      } else if (hm < 1800) {
+        return 'چۈشتىن كېيىن';
+      } else {
+        return 'كەچ';
+      }
+    },
+    calendar: {
+      sameDay: '[بۈگۈن سائەت] LT',
+      nextDay: '[ئەتە سائەت] LT',
+      nextWeek: '[كېلەركى] dddd [سائەت] LT',
+      lastDay: '[تۆنۈگۈن] LT',
+      lastWeek: '[ئالدىنقى] dddd [سائەت] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s كېيىن',
+      past: '%s بۇرۇن',
+      s: 'نەچچە سېكونت',
+      ss: '%d سېكونت',
+      m: 'بىر مىنۇت',
+      mm: '%d مىنۇت',
+      h: 'بىر سائەت',
+      hh: '%d سائەت',
+      d: 'بىر كۈن',
+      dd: '%d كۈن',
+      M: 'بىر ئاي',
+      MM: '%d ئاي',
+      y: 'بىر يىل',
+      yy: '%d يىل' },
+
+
+    dayOfMonthOrdinalParse: /\d{1,2}(-كۈنى|-ئاي|-ھەپتە)/,
+    ordinal: function ordinal(number, period) {
+      switch (period) {
+        case 'd':
+        case 'D':
+        case 'DDD':
+          return number + '-كۈنى';
+        case 'w':
+        case 'W':
+          return number + '-ھەپتە';
+        default:
+          return number;}
+
+    },
+    preparse: function preparse(string) {
+      return string.replace(/،/g, ',');
+    },
+    postformat: function postformat(string) {
+      return string.replace(/,/g, '،');
+    },
+    week: {
+      // GB/T 7408-1994《数据元和交换格式·信息交换·日期和时间表示法》与ISO 8601:1988等效
+      dow: 1, // Monday is the first day of the week.
+      doy: 7 // The week that contains Jan 1st is the first week of the year.
+    } });
+
+
+  return ugCn;
+
+});
+
+/***/ }),
+/* 177 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/uk.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Ukrainian [uk]
+//! author : zemlanin : https://github.com/zemlanin
+//! Author : Menelion Elensúle : https://github.com/Oire
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  function plural(word, num) {
+    var forms = word.split('_');
+    return num % 10 === 1 && num % 100 !== 11 ?
+    forms[0] :
+    num % 10 >= 2 && num % 10 <= 4 && (num % 100 < 10 || num % 100 >= 20) ?
+    forms[1] :
+    forms[2];
+  }
+  function relativeTimeWithPlural(number, withoutSuffix, key) {
+    var format = {
+      ss: withoutSuffix ? 'секунда_секунди_секунд' : 'секунду_секунди_секунд',
+      mm: withoutSuffix ? 'хвилина_хвилини_хвилин' : 'хвилину_хвилини_хвилин',
+      hh: withoutSuffix ? 'година_години_годин' : 'годину_години_годин',
+      dd: 'день_дні_днів',
+      MM: 'місяць_місяці_місяців',
+      yy: 'рік_роки_років' };
+
+    if (key === 'm') {
+      return withoutSuffix ? 'хвилина' : 'хвилину';
+    } else if (key === 'h') {
+      return withoutSuffix ? 'година' : 'годину';
+    } else {
+      return number + ' ' + plural(format[key], +number);
+    }
+  }
+  function weekdaysCaseReplace(m, format) {
+    var weekdays = {
+      nominative: 'неділя_понеділок_вівторок_середа_четвер_п’ятниця_субота'.split(
+      '_'),
+
+      accusative: 'неділю_понеділок_вівторок_середу_четвер_п’ятницю_суботу'.split(
+      '_'),
+
+      genitive: 'неділі_понеділка_вівторка_середи_четверга_п’ятниці_суботи'.split(
+      '_') },
+
+
+    nounCase;
+
+    if (m === true) {
+      return weekdays['nominative'].
+      slice(1, 7).
+      concat(weekdays['nominative'].slice(0, 1));
+    }
+    if (!m) {
+      return weekdays['nominative'];
+    }
+
+    nounCase = /(\[[ВвУу]\]) ?dddd/.test(format) ?
+    'accusative' :
+    /\[?(?:минулої|наступної)? ?\] ?dddd/.test(format) ?
+    'genitive' :
+    'nominative';
+    return weekdays[nounCase][m.day()];
+  }
+  function processHoursFunction(str) {
+    return function () {
+      return str + 'о' + (this.hours() === 11 ? 'б' : '') + '] LT';
+    };
+  }
+
+  var uk = moment.defineLocale('uk', {
+    months: {
+      format: 'січня_лютого_березня_квітня_травня_червня_липня_серпня_вересня_жовтня_листопада_грудня'.split(
+      '_'),
+
+      standalone: 'січень_лютий_березень_квітень_травень_червень_липень_серпень_вересень_жовтень_листопад_грудень'.split(
+      '_') },
+
+
+    monthsShort: 'січ_лют_бер_квіт_трав_черв_лип_серп_вер_жовт_лист_груд'.split(
+    '_'),
+
+    weekdays: weekdaysCaseReplace,
+    weekdaysShort: 'нд_пн_вт_ср_чт_пт_сб'.split('_'),
+    weekdaysMin: 'нд_пн_вт_ср_чт_пт_сб'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD.MM.YYYY',
+      LL: 'D MMMM YYYY р.',
+      LLL: 'D MMMM YYYY р., HH:mm',
+      LLLL: 'dddd, D MMMM YYYY р., HH:mm' },
+
+    calendar: {
+      sameDay: processHoursFunction('[Сьогодні '),
+      nextDay: processHoursFunction('[Завтра '),
+      lastDay: processHoursFunction('[Вчора '),
+      nextWeek: processHoursFunction('[У] dddd ['),
+      lastWeek: function lastWeek() {
+        switch (this.day()) {
+          case 0:
+          case 3:
+          case 5:
+          case 6:
+            return processHoursFunction('[Минулої] dddd [').call(this);
+          case 1:
+          case 2:
+          case 4:
+            return processHoursFunction('[Минулого] dddd [').call(this);}
+
+      },
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'за %s',
+      past: '%s тому',
+      s: 'декілька секунд',
+      ss: relativeTimeWithPlural,
+      m: relativeTimeWithPlural,
+      mm: relativeTimeWithPlural,
+      h: 'годину',
+      hh: relativeTimeWithPlural,
+      d: 'день',
+      dd: relativeTimeWithPlural,
+      M: 'місяць',
+      MM: relativeTimeWithPlural,
+      y: 'рік',
+      yy: relativeTimeWithPlural },
+
+    // M. E.: those two are virtually unused but a user might want to implement them for his/her website for some reason
+    meridiemParse: /ночі|ранку|дня|вечора/,
+    isPM: function isPM(input) {
+      return /^(дня|вечора)$/.test(input);
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 4) {
+        return 'ночі';
+      } else if (hour < 12) {
+        return 'ранку';
+      } else if (hour < 17) {
+        return 'дня';
+      } else {
+        return 'вечора';
+      }
+    },
+    dayOfMonthOrdinalParse: /\d{1,2}-(й|го)/,
+    ordinal: function ordinal(number, period) {
+      switch (period) {
+        case 'M':
+        case 'd':
+        case 'DDD':
+        case 'w':
+        case 'W':
+          return number + '-й';
+        case 'D':
+          return number + '-го';
+        default:
+          return number;}
+
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 7 // The week that contains Jan 7th is the first week of the year.
+    } });
+
+
+  return uk;
+
+});
+
+/***/ }),
+/* 178 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ur.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Urdu [ur]
+//! author : Sawood Alam : https://github.com/ibnesayeed
+//! author : Zack : https://github.com/ZackVision
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var months = [
+  'جنوری',
+  'فروری',
+  'مارچ',
+  'اپریل',
+  'مئی',
+  'جون',
+  'جولائی',
+  'اگست',
+  'ستمبر',
+  'اکتوبر',
+  'نومبر',
+  'دسمبر'],
+
+  days = ['اتوار', 'پیر', 'منگل', 'بدھ', 'جمعرات', 'جمعہ', 'ہفتہ'];
+
+  var ur = moment.defineLocale('ur', {
+    months: months,
+    monthsShort: months,
+    weekdays: days,
+    weekdaysShort: days,
+    weekdaysMin: days,
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd، D MMMM YYYY HH:mm' },
+
+    meridiemParse: /صبح|شام/,
+    isPM: function isPM(input) {
+      return 'شام' === input;
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      if (hour < 12) {
+        return 'صبح';
+      }
+      return 'شام';
+    },
+    calendar: {
+      sameDay: '[آج بوقت] LT',
+      nextDay: '[کل بوقت] LT',
+      nextWeek: 'dddd [بوقت] LT',
+      lastDay: '[گذشتہ روز بوقت] LT',
+      lastWeek: '[گذشتہ] dddd [بوقت] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s بعد',
+      past: '%s قبل',
+      s: 'چند سیکنڈ',
+      ss: '%d سیکنڈ',
+      m: 'ایک منٹ',
+      mm: '%d منٹ',
+      h: 'ایک گھنٹہ',
+      hh: '%d گھنٹے',
+      d: 'ایک دن',
+      dd: '%d دن',
+      M: 'ایک ماہ',
+      MM: '%d ماہ',
+      y: 'ایک سال',
+      yy: '%d سال' },
+
+    preparse: function preparse(string) {
+      return string.replace(/،/g, ',');
+    },
+    postformat: function postformat(string) {
+      return string.replace(/,/g, '،');
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return ur;
+
+});
+
+/***/ }),
+/* 179 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/uz.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Uzbek [uz]
+//! author : Sardor Muminov : https://github.com/muminoff
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var uz = moment.defineLocale('uz', {
+    months: 'январ_феврал_март_апрел_май_июн_июл_август_сентябр_октябр_ноябр_декабр'.split(
+    '_'),
+
+    monthsShort: 'янв_фев_мар_апр_май_июн_июл_авг_сен_окт_ноя_дек'.split('_'),
+    weekdays: 'Якшанба_Душанба_Сешанба_Чоршанба_Пайшанба_Жума_Шанба'.split('_'),
+    weekdaysShort: 'Якш_Душ_Сеш_Чор_Пай_Жум_Шан'.split('_'),
+    weekdaysMin: 'Як_Ду_Се_Чо_Па_Жу_Ша'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'D MMMM YYYY, dddd HH:mm' },
+
+    calendar: {
+      sameDay: '[Бугун соат] LT [да]',
+      nextDay: '[Эртага] LT [да]',
+      nextWeek: 'dddd [куни соат] LT [да]',
+      lastDay: '[Кеча соат] LT [да]',
+      lastWeek: '[Утган] dddd [куни соат] LT [да]',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'Якин %s ичида',
+      past: 'Бир неча %s олдин',
+      s: 'фурсат',
+      ss: '%d фурсат',
+      m: 'бир дакика',
+      mm: '%d дакика',
+      h: 'бир соат',
+      hh: '%d соат',
+      d: 'бир кун',
+      dd: '%d кун',
+      M: 'бир ой',
+      MM: '%d ой',
+      y: 'бир йил',
+      yy: '%d йил' },
+
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 7 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return uz;
+
+});
+
+/***/ }),
+/* 180 */
+/*!******************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/uz-latn.js ***!
+  \******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Uzbek Latin [uz-latn]
+//! author : Rasulbek Mirzayev : github.com/Rasulbeeek
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var uzLatn = moment.defineLocale('uz-latn', {
+    months: 'Yanvar_Fevral_Mart_Aprel_May_Iyun_Iyul_Avgust_Sentabr_Oktabr_Noyabr_Dekabr'.split(
+    '_'),
+
+    monthsShort: 'Yan_Fev_Mar_Apr_May_Iyun_Iyul_Avg_Sen_Okt_Noy_Dek'.split('_'),
+    weekdays: 'Yakshanba_Dushanba_Seshanba_Chorshanba_Payshanba_Juma_Shanba'.split(
+    '_'),
+
+    weekdaysShort: 'Yak_Dush_Sesh_Chor_Pay_Jum_Shan'.split('_'),
+    weekdaysMin: 'Ya_Du_Se_Cho_Pa_Ju_Sha'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'D MMMM YYYY, dddd HH:mm' },
+
+    calendar: {
+      sameDay: '[Bugun soat] LT [da]',
+      nextDay: '[Ertaga] LT [da]',
+      nextWeek: 'dddd [kuni soat] LT [da]',
+      lastDay: '[Kecha soat] LT [da]',
+      lastWeek: "[O'tgan] dddd [kuni soat] LT [da]",
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'Yaqin %s ichida',
+      past: 'Bir necha %s oldin',
+      s: 'soniya',
+      ss: '%d soniya',
+      m: 'bir daqiqa',
+      mm: '%d daqiqa',
+      h: 'bir soat',
+      hh: '%d soat',
+      d: 'bir kun',
+      dd: '%d kun',
+      M: 'bir oy',
+      MM: '%d oy',
+      y: 'bir yil',
+      yy: '%d yil' },
+
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 7 // The week that contains Jan 7th is the first week of the year.
+    } });
+
+
+  return uzLatn;
+
+});
+
+/***/ }),
+/* 181 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/vi.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Vietnamese [vi]
+//! author : Bang Nguyen : https://github.com/bangnk
+//! author : Chien Kira : https://github.com/chienkira
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var vi = moment.defineLocale('vi', {
+    months: 'tháng 1_tháng 2_tháng 3_tháng 4_tháng 5_tháng 6_tháng 7_tháng 8_tháng 9_tháng 10_tháng 11_tháng 12'.split(
+    '_'),
+
+    monthsShort: 'Thg 01_Thg 02_Thg 03_Thg 04_Thg 05_Thg 06_Thg 07_Thg 08_Thg 09_Thg 10_Thg 11_Thg 12'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'chủ nhật_thứ hai_thứ ba_thứ tư_thứ năm_thứ sáu_thứ bảy'.split(
+    '_'),
+
+    weekdaysShort: 'CN_T2_T3_T4_T5_T6_T7'.split('_'),
+    weekdaysMin: 'CN_T2_T3_T4_T5_T6_T7'.split('_'),
+    weekdaysParseExact: true,
+    meridiemParse: /sa|ch/i,
+    isPM: function isPM(input) {
+      return /^ch$/i.test(input);
+    },
+    meridiem: function meridiem(hours, minutes, isLower) {
+      if (hours < 12) {
+        return isLower ? 'sa' : 'SA';
+      } else {
+        return isLower ? 'ch' : 'CH';
+      }
+    },
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM [năm] YYYY',
+      LLL: 'D MMMM [năm] YYYY HH:mm',
+      LLLL: 'dddd, D MMMM [năm] YYYY HH:mm',
+      l: 'DD/M/YYYY',
+      ll: 'D MMM YYYY',
+      lll: 'D MMM YYYY HH:mm',
+      llll: 'ddd, D MMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[Hôm nay lúc] LT',
+      nextDay: '[Ngày mai lúc] LT',
+      nextWeek: 'dddd [tuần tới lúc] LT',
+      lastDay: '[Hôm qua lúc] LT',
+      lastWeek: 'dddd [tuần trước lúc] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: '%s tới',
+      past: '%s trước',
+      s: 'vài giây',
+      ss: '%d giây',
+      m: 'một phút',
+      mm: '%d phút',
+      h: 'một giờ',
+      hh: '%d giờ',
+      d: 'một ngày',
+      dd: '%d ngày',
+      w: 'một tuần',
+      ww: '%d tuần',
+      M: 'một tháng',
+      MM: '%d tháng',
+      y: 'một năm',
+      yy: '%d năm' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}/,
+    ordinal: function ordinal(number) {
+      return number;
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return vi;
+
+});
+
+/***/ }),
+/* 182 */
+/*!*******************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/x-pseudo.js ***!
+  \*******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Pseudo [x-pseudo]
+//! author : Andrew Hood : https://github.com/andrewhood125
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var xPseudo = moment.defineLocale('x-pseudo', {
+    months: 'J~áñúá~rý_F~ébrú~árý_~Márc~h_Áp~ríl_~Máý_~Júñé~_Júl~ý_Áú~gúst~_Sép~témb~ér_Ó~ctób~ér_Ñ~óvém~bér_~Décé~mbér'.split(
+    '_'),
+
+    monthsShort: 'J~áñ_~Féb_~Már_~Ápr_~Máý_~Júñ_~Júl_~Áúg_~Sép_~Óct_~Ñóv_~Déc'.split(
+    '_'),
+
+    monthsParseExact: true,
+    weekdays: 'S~úñdá~ý_Mó~ñdáý~_Túé~sdáý~_Wéd~ñésd~áý_T~húrs~dáý_~Fríd~áý_S~átúr~dáý'.split(
+    '_'),
+
+    weekdaysShort: 'S~úñ_~Móñ_~Túé_~Wéd_~Thú_~Frí_~Sát'.split('_'),
+    weekdaysMin: 'S~ú_Mó~_Tú_~Wé_T~h_Fr~_Sá'.split('_'),
+    weekdaysParseExact: true,
+    longDateFormat: {
+      LT: 'HH:mm',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY HH:mm',
+      LLLL: 'dddd, D MMMM YYYY HH:mm' },
+
+    calendar: {
+      sameDay: '[T~ódá~ý át] LT',
+      nextDay: '[T~ómó~rró~w át] LT',
+      nextWeek: 'dddd [át] LT',
+      lastDay: '[Ý~ést~érdá~ý át] LT',
+      lastWeek: '[L~ást] dddd [át] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'í~ñ %s',
+      past: '%s á~gó',
+      s: 'á ~féw ~sécó~ñds',
+      ss: '%d s~écóñ~ds',
+      m: 'á ~míñ~úté',
+      mm: '%d m~íñú~tés',
+      h: 'á~ñ hó~úr',
+      hh: '%d h~óúrs',
+      d: 'á ~dáý',
+      dd: '%d d~áýs',
+      M: 'á ~móñ~th',
+      MM: '%d m~óñt~hs',
+      y: 'á ~ýéár',
+      yy: '%d ý~éárs' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(th|st|nd|rd)/,
+    ordinal: function ordinal(number) {
+      var b = number % 10,
+      output =
+      ~~(number % 100 / 10) === 1 ?
+      'th' :
+      b === 1 ?
+      'st' :
+      b === 2 ?
+      'nd' :
+      b === 3 ?
+      'rd' :
+      'th';
+      return number + output;
+    },
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return xPseudo;
+
+});
+
+/***/ }),
+/* 183 */
+/*!*************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/yo.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Yoruba Nigeria [yo]
+//! author : Atolagbe Abisoye : https://github.com/andela-batolagbe
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var yo = moment.defineLocale('yo', {
+    months: 'Sẹ́rẹ́_Èrèlè_Ẹrẹ̀nà_Ìgbé_Èbibi_Òkùdu_Agẹmo_Ògún_Owewe_Ọ̀wàrà_Bélú_Ọ̀pẹ̀̀'.split(
+    '_'),
+
+    monthsShort: 'Sẹ́r_Èrl_Ẹrn_Ìgb_Èbi_Òkù_Agẹ_Ògú_Owe_Ọ̀wà_Bél_Ọ̀pẹ̀̀'.split('_'),
+    weekdays: 'Àìkú_Ajé_Ìsẹ́gun_Ọjọ́rú_Ọjọ́bọ_Ẹtì_Àbámẹ́ta'.split('_'),
+    weekdaysShort: 'Àìk_Ajé_Ìsẹ́_Ọjr_Ọjb_Ẹtì_Àbá'.split('_'),
+    weekdaysMin: 'Àì_Aj_Ìs_Ọr_Ọb_Ẹt_Àb'.split('_'),
+    longDateFormat: {
+      LT: 'h:mm A',
+      LTS: 'h:mm:ss A',
+      L: 'DD/MM/YYYY',
+      LL: 'D MMMM YYYY',
+      LLL: 'D MMMM YYYY h:mm A',
+      LLLL: 'dddd, D MMMM YYYY h:mm A' },
+
+    calendar: {
+      sameDay: '[Ònì ni] LT',
+      nextDay: '[Ọ̀la ni] LT',
+      nextWeek: "dddd [Ọsẹ̀ tón'bọ] [ni] LT",
+      lastDay: '[Àna ni] LT',
+      lastWeek: 'dddd [Ọsẹ̀ tólọ́] [ni] LT',
+      sameElse: 'L' },
+
+    relativeTime: {
+      future: 'ní %s',
+      past: '%s kọjá',
+      s: 'ìsẹjú aayá die',
+      ss: 'aayá %d',
+      m: 'ìsẹjú kan',
+      mm: 'ìsẹjú %d',
+      h: 'wákati kan',
+      hh: 'wákati %d',
+      d: 'ọjọ́ kan',
+      dd: 'ọjọ́ %d',
+      M: 'osù kan',
+      MM: 'osù %d',
+      y: 'ọdún kan',
+      yy: 'ọdún %d' },
+
+    dayOfMonthOrdinalParse: /ọjọ́\s\d{1,2}/,
+    ordinal: 'ọjọ́ %d',
+    week: {
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return yo;
+
+});
+
+/***/ }),
+/* 184 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/zh-cn.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Chinese (China) [zh-cn]
+//! author : suupic : https://github.com/suupic
+//! author : Zeno Zeng : https://github.com/zenozeng
+//! author : uu109 : https://github.com/uu109
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var zhCn = moment.defineLocale('zh-cn', {
+    months: '一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月'.split(
+    '_'),
+
+    monthsShort: '1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月'.split(
+    '_'),
+
+    weekdays: '星期日_星期一_星期二_星期三_星期四_星期五_星期六'.split('_'),
+    weekdaysShort: '周日_周一_周二_周三_周四_周五_周六'.split('_'),
+    weekdaysMin: '日_一_二_三_四_五_六'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'YYYY/MM/DD',
+      LL: 'YYYY年M月D日',
+      LLL: 'YYYY年M月D日Ah点mm分',
+      LLLL: 'YYYY年M月D日ddddAh点mm分',
+      l: 'YYYY/M/D',
+      ll: 'YYYY年M月D日',
+      lll: 'YYYY年M月D日 HH:mm',
+      llll: 'YYYY年M月D日dddd HH:mm' },
+
+    meridiemParse: /凌晨|早上|上午|中午|下午|晚上/,
+    meridiemHour: function meridiemHour(hour, meridiem) {
+      if (hour === 12) {
+        hour = 0;
+      }
+      if (meridiem === '凌晨' || meridiem === '早上' || meridiem === '上午') {
+        return hour;
+      } else if (meridiem === '下午' || meridiem === '晚上') {
+        return hour + 12;
+      } else {
+        // '中午'
+        return hour >= 11 ? hour : hour + 12;
+      }
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      var hm = hour * 100 + minute;
+      if (hm < 600) {
+        return '凌晨';
+      } else if (hm < 900) {
+        return '早上';
+      } else if (hm < 1130) {
+        return '上午';
+      } else if (hm < 1230) {
+        return '中午';
+      } else if (hm < 1800) {
+        return '下午';
+      } else {
+        return '晚上';
+      }
+    },
+    calendar: {
+      sameDay: '[今天]LT',
+      nextDay: '[明天]LT',
+      nextWeek: function nextWeek(now) {
+        if (now.week() !== this.week()) {
+          return '[下]dddLT';
+        } else {
+          return '[本]dddLT';
+        }
+      },
+      lastDay: '[昨天]LT',
+      lastWeek: function lastWeek(now) {
+        if (this.week() !== now.week()) {
+          return '[上]dddLT';
+        } else {
+          return '[本]dddLT';
+        }
+      },
+      sameElse: 'L' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(日|月|周)/,
+    ordinal: function ordinal(number, period) {
+      switch (period) {
+        case 'd':
+        case 'D':
+        case 'DDD':
+          return number + '日';
+        case 'M':
+          return number + '月';
+        case 'w':
+        case 'W':
+          return number + '周';
+        default:
+          return number;}
+
+    },
+    relativeTime: {
+      future: '%s后',
+      past: '%s前',
+      s: '几秒',
+      ss: '%d 秒',
+      m: '1 分钟',
+      mm: '%d 分钟',
+      h: '1 小时',
+      hh: '%d 小时',
+      d: '1 天',
+      dd: '%d 天',
+      w: '1 周',
+      ww: '%d 周',
+      M: '1 个月',
+      MM: '%d 个月',
+      y: '1 年',
+      yy: '%d 年' },
+
+    week: {
+      // GB/T 7408-1994《数据元和交换格式·信息交换·日期和时间表示法》与ISO 8601:1988等效
+      dow: 1, // Monday is the first day of the week.
+      doy: 4 // The week that contains Jan 4th is the first week of the year.
+    } });
+
+
+  return zhCn;
+
+});
+
+/***/ }),
+/* 185 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/zh-hk.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Chinese (Hong Kong) [zh-hk]
+//! author : Ben : https://github.com/ben-lin
+//! author : Chris Lam : https://github.com/hehachris
+//! author : Konstantin : https://github.com/skfd
+//! author : Anthony : https://github.com/anthonylau
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var zhHk = moment.defineLocale('zh-hk', {
+    months: '一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月'.split(
+    '_'),
+
+    monthsShort: '1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月'.split(
+    '_'),
+
+    weekdays: '星期日_星期一_星期二_星期三_星期四_星期五_星期六'.split('_'),
+    weekdaysShort: '週日_週一_週二_週三_週四_週五_週六'.split('_'),
+    weekdaysMin: '日_一_二_三_四_五_六'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'YYYY/MM/DD',
+      LL: 'YYYY年M月D日',
+      LLL: 'YYYY年M月D日 HH:mm',
+      LLLL: 'YYYY年M月D日dddd HH:mm',
+      l: 'YYYY/M/D',
+      ll: 'YYYY年M月D日',
+      lll: 'YYYY年M月D日 HH:mm',
+      llll: 'YYYY年M月D日dddd HH:mm' },
+
+    meridiemParse: /凌晨|早上|上午|中午|下午|晚上/,
+    meridiemHour: function meridiemHour(hour, meridiem) {
+      if (hour === 12) {
+        hour = 0;
+      }
+      if (meridiem === '凌晨' || meridiem === '早上' || meridiem === '上午') {
+        return hour;
+      } else if (meridiem === '中午') {
+        return hour >= 11 ? hour : hour + 12;
+      } else if (meridiem === '下午' || meridiem === '晚上') {
+        return hour + 12;
+      }
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      var hm = hour * 100 + minute;
+      if (hm < 600) {
+        return '凌晨';
+      } else if (hm < 900) {
+        return '早上';
+      } else if (hm < 1200) {
+        return '上午';
+      } else if (hm === 1200) {
+        return '中午';
+      } else if (hm < 1800) {
+        return '下午';
+      } else {
+        return '晚上';
+      }
+    },
+    calendar: {
+      sameDay: '[今天]LT',
+      nextDay: '[明天]LT',
+      nextWeek: '[下]ddddLT',
+      lastDay: '[昨天]LT',
+      lastWeek: '[上]ddddLT',
+      sameElse: 'L' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(日|月|週)/,
+    ordinal: function ordinal(number, period) {
+      switch (period) {
+        case 'd':
+        case 'D':
+        case 'DDD':
+          return number + '日';
+        case 'M':
+          return number + '月';
+        case 'w':
+        case 'W':
+          return number + '週';
+        default:
+          return number;}
+
+    },
+    relativeTime: {
+      future: '%s後',
+      past: '%s前',
+      s: '幾秒',
+      ss: '%d 秒',
+      m: '1 分鐘',
+      mm: '%d 分鐘',
+      h: '1 小時',
+      hh: '%d 小時',
+      d: '1 天',
+      dd: '%d 天',
+      M: '1 個月',
+      MM: '%d 個月',
+      y: '1 年',
+      yy: '%d 年' } });
+
+
+
+  return zhHk;
+
+});
+
+/***/ }),
+/* 186 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/zh-mo.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Chinese (Macau) [zh-mo]
+//! author : Ben : https://github.com/ben-lin
+//! author : Chris Lam : https://github.com/hehachris
+//! author : Tan Yuanhong : https://github.com/le0tan
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var zhMo = moment.defineLocale('zh-mo', {
+    months: '一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月'.split(
+    '_'),
+
+    monthsShort: '1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月'.split(
+    '_'),
+
+    weekdays: '星期日_星期一_星期二_星期三_星期四_星期五_星期六'.split('_'),
+    weekdaysShort: '週日_週一_週二_週三_週四_週五_週六'.split('_'),
+    weekdaysMin: '日_一_二_三_四_五_六'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'DD/MM/YYYY',
+      LL: 'YYYY年M月D日',
+      LLL: 'YYYY年M月D日 HH:mm',
+      LLLL: 'YYYY年M月D日dddd HH:mm',
+      l: 'D/M/YYYY',
+      ll: 'YYYY年M月D日',
+      lll: 'YYYY年M月D日 HH:mm',
+      llll: 'YYYY年M月D日dddd HH:mm' },
+
+    meridiemParse: /凌晨|早上|上午|中午|下午|晚上/,
+    meridiemHour: function meridiemHour(hour, meridiem) {
+      if (hour === 12) {
+        hour = 0;
+      }
+      if (meridiem === '凌晨' || meridiem === '早上' || meridiem === '上午') {
+        return hour;
+      } else if (meridiem === '中午') {
+        return hour >= 11 ? hour : hour + 12;
+      } else if (meridiem === '下午' || meridiem === '晚上') {
+        return hour + 12;
+      }
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      var hm = hour * 100 + minute;
+      if (hm < 600) {
+        return '凌晨';
+      } else if (hm < 900) {
+        return '早上';
+      } else if (hm < 1130) {
+        return '上午';
+      } else if (hm < 1230) {
+        return '中午';
+      } else if (hm < 1800) {
+        return '下午';
+      } else {
+        return '晚上';
+      }
+    },
+    calendar: {
+      sameDay: '[今天] LT',
+      nextDay: '[明天] LT',
+      nextWeek: '[下]dddd LT',
+      lastDay: '[昨天] LT',
+      lastWeek: '[上]dddd LT',
+      sameElse: 'L' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(日|月|週)/,
+    ordinal: function ordinal(number, period) {
+      switch (period) {
+        case 'd':
+        case 'D':
+        case 'DDD':
+          return number + '日';
+        case 'M':
+          return number + '月';
+        case 'w':
+        case 'W':
+          return number + '週';
+        default:
+          return number;}
+
+    },
+    relativeTime: {
+      future: '%s內',
+      past: '%s前',
+      s: '幾秒',
+      ss: '%d 秒',
+      m: '1 分鐘',
+      mm: '%d 分鐘',
+      h: '1 小時',
+      hh: '%d 小時',
+      d: '1 天',
+      dd: '%d 天',
+      M: '1 個月',
+      MM: '%d 個月',
+      y: '1 年',
+      yy: '%d 年' } });
+
+
+
+  return zhMo;
+
+});
+
+/***/ }),
+/* 187 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/zh-tw.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Chinese (Taiwan) [zh-tw]
+//! author : Ben : https://github.com/ben-lin
+//! author : Chris Lam : https://github.com/hehachris
+
+;(function (global, factory) {
+   true ? factory(__webpack_require__(/*! ../moment */ 50)) :
+  undefined;
+})(this, function (moment) {'use strict';
+
+  //! moment.js locale configuration
+
+  var zhTw = moment.defineLocale('zh-tw', {
+    months: '一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月'.split(
+    '_'),
+
+    monthsShort: '1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月'.split(
+    '_'),
+
+    weekdays: '星期日_星期一_星期二_星期三_星期四_星期五_星期六'.split('_'),
+    weekdaysShort: '週日_週一_週二_週三_週四_週五_週六'.split('_'),
+    weekdaysMin: '日_一_二_三_四_五_六'.split('_'),
+    longDateFormat: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      L: 'YYYY/MM/DD',
+      LL: 'YYYY年M月D日',
+      LLL: 'YYYY年M月D日 HH:mm',
+      LLLL: 'YYYY年M月D日dddd HH:mm',
+      l: 'YYYY/M/D',
+      ll: 'YYYY年M月D日',
+      lll: 'YYYY年M月D日 HH:mm',
+      llll: 'YYYY年M月D日dddd HH:mm' },
+
+    meridiemParse: /凌晨|早上|上午|中午|下午|晚上/,
+    meridiemHour: function meridiemHour(hour, meridiem) {
+      if (hour === 12) {
+        hour = 0;
+      }
+      if (meridiem === '凌晨' || meridiem === '早上' || meridiem === '上午') {
+        return hour;
+      } else if (meridiem === '中午') {
+        return hour >= 11 ? hour : hour + 12;
+      } else if (meridiem === '下午' || meridiem === '晚上') {
+        return hour + 12;
+      }
+    },
+    meridiem: function meridiem(hour, minute, isLower) {
+      var hm = hour * 100 + minute;
+      if (hm < 600) {
+        return '凌晨';
+      } else if (hm < 900) {
+        return '早上';
+      } else if (hm < 1130) {
+        return '上午';
+      } else if (hm < 1230) {
+        return '中午';
+      } else if (hm < 1800) {
+        return '下午';
+      } else {
+        return '晚上';
+      }
+    },
+    calendar: {
+      sameDay: '[今天] LT',
+      nextDay: '[明天] LT',
+      nextWeek: '[下]dddd LT',
+      lastDay: '[昨天] LT',
+      lastWeek: '[上]dddd LT',
+      sameElse: 'L' },
+
+    dayOfMonthOrdinalParse: /\d{1,2}(日|月|週)/,
+    ordinal: function ordinal(number, period) {
+      switch (period) {
+        case 'd':
+        case 'D':
+        case 'DDD':
+          return number + '日';
+        case 'M':
+          return number + '月';
+        case 'w':
+        case 'W':
+          return number + '週';
+        default:
+          return number;}
+
+    },
+    relativeTime: {
+      future: '%s後',
+      past: '%s前',
+      s: '幾秒',
+      ss: '%d 秒',
+      m: '1 分鐘',
+      mm: '%d 分鐘',
+      h: '1 小時',
+      hh: '%d 小時',
+      d: '1 天',
+      dd: '%d 天',
+      M: '1 個月',
+      MM: '%d 個月',
+      y: '1 年',
+      yy: '%d 年' } });
+
+
+
+  return zhTw;
+
+});
 
 /***/ })
-
-}]);
+]]);
 //# sourceMappingURL=../../.sourcemap/mp-weixin/common/vendor.js.map

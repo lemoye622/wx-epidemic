@@ -14,7 +14,7 @@
 		<!-- 白色区域部分 -->
 		<view class="content-main">
 			<!-- 统计时间 -->
-			<view class="times">统计截止 2020-10-30 12:54:02</view>
+			<view class="times">统计截止 {{deadline}}</view>
 			<!-- 累积数量 -->
 			<view class="content-main-data">
 				<block v-for="(item,index) in peopleList" :key="index">
@@ -53,6 +53,8 @@
 	let Dbcrud = require('../../config/dataBase.js')
 	// 计算确诊、治愈、死亡   每一个的总和的类
 	let Total = require('../../config/total.js')
+	// 计算最晚时间
+	import {timestamp} from '../../config/time.js'
 	let { log } = console
 	// 地图组件
 	import MAP from './components/map.vue'
@@ -64,6 +66,8 @@
 		components:{MAP,Line,Table},
 		data() {
 			return {
+				// 统计截止日期
+				deadline: '',
 				peopleList:[
 					{
 						'data': 0,
@@ -139,16 +143,25 @@
 				let diagTotal = await new Total(diagdata).sum()
 				// log(diagTotal)
 				this.$set(this.peopleList[0], 'data', diagTotal.sumdata)
+				// 时间
+				let diagTime = diagTotal.startTime
 				
 				// 累积治愈
 				let cureTotal = await new Total(curedata).sum()
 				// log(cureTotal)
 				this.$set(this.peopleList[1], 'data', cureTotal.sumdata)
+				let cureTime = cureTotal.startTime
 				
 				// 累积死亡
 				let deathTotal = await new Total(diedata).sum()
 				// log(deathTotal)
 				this.$set(this.peopleList[2], 'data', deathTotal.sumdata)
+				let deathTime = deathTotal.startTime
+				
+				// 将时间拆分合并为一个新的数组
+				let timearr = [...diagTime, ...cureTime, ...deathTime]
+				log(timearr)
+				this.deadline = timestamp(timearr)
 			}
 		}
 	}

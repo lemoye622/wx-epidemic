@@ -14,22 +14,35 @@ class Total {
 				let times = item.time
 				return { data, times }
 			})
-			// log('重组的数组')
-			// log(typearr)
+			log('重组的数组')
+			log(typearr)
+			
 			// 取出键值对的 value值
-			let objList = typearr.map((item) => {
-				// 取出对象的value值用es7的 Object.values()
-				return Object.values(item.data)
-			})
+			// 注意：在某些机型上小程序并不支持es7的语法，另外在微信小程序pc端也不支持
+			// let objList = typearr.map((item) => {
+			// 	// 取出对象的value值用es7的 Object.values()
+			// 	return Object.values(item.data)
+			// })
 			// log('value值')
 			// log(objList)
-			// 合并返回的value值push进一个新的数组
+			
+			// 换用es5的forEach和遍历对象的for...in
 			let arrList = []
-			objList.forEach((item) => {
-				arrList.push(...item)
+			typearr.forEach((item) => {
+				for (let key in item.data) {
+					arrList.push(item.data[key])
+				}
 			})
+			// log(arrList)
+			
+			// 合并返回的value值push进一个新的数组
+			// let arrList = []
+			// objList.forEach((item) => {
+			// 	arrList.push(...item)
+			// })
 			// log('合并的value值')
 			// log(arrList)
+			
 			// 计算 arrList 里的数字总和
 			let sumdata = arrList.reduce((prev, cur) => {
 				return prev + cur
