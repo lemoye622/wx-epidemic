@@ -12,32 +12,36 @@
 var { log } = console;
 import uCharts from '@/components/u-charts/u-charts.js';
 // 引入广东省的地图
-let gd = require('config/provinces.json');
+let gd = require('config/province.json');
+// 广东省地图的js文件
+import { arrRess } from '../../../config/provinceRess.js'
 var canvaMap = null;
 export default {
+	props: {
+		mapdata: Array
+	},
 	data() {
 		return {
 			cWidth: '',
 			cHeight: '',
-			pixelRatio:1,
+			pixelRatio: 1,
 			// 接收所有城市确诊数的对象
-			regiondata:{},
+			regiondata: {},
 			// 赋值的动态地图数据
-			mapdatas:[]
+			mapdatas: []
 		}
 	},
 
 	created() {
-		this.cWidth = uni.upx2px(650);
-		this.cHeight = uni.upx2px(700);
-		this.getServerData()
+		
 	},
 
 	methods: {
-		getServerData() {
-			log(gd)
-			let cMap = gd.features
-			this.showMap('canvasPie', cMap);
+		getServerData(mapdatas) {
+			// log(gd)
+			// let cMap = gd.features
+			// this.showMap('canvasPie', cMap);
+			this.showMap('canvasPie', mapdatas);
 		},
 		showMap(canvasId, chartData) {
 			canvaMap = new uCharts({
@@ -73,7 +77,7 @@ export default {
 			//下面是自定义文案
 			let textList = [{ text: `广州市: 确诊${this.regiondata.guangzhou}`, color: '#facc14' }];
 			//下面是event的模拟,tooltip的Y坐标值通过这个mp.changedTouches[0].y控制
-			let tmpevent = { mp: { changedTouches: [{ identifier: 0, x: 222, y: 185 }] } };
+			let tmpevent = { mp: { changedTouches: [{ identifier: 0, x: 168, y: 156 }] } };
 			setTimeout(() => {
 				canvaMap.showToolTip(tmpevent, {
 					index: cindex,
@@ -86,7 +90,7 @@ export default {
 		touchMap(e) {
 			log(e);
 			canvaMap.showToolTip(e, {
-				format: item => {
+				format: (item) => {
 					return item.properties.name + ': 确诊' + item.properties.subFeatureIndex;
 				}
 			});
@@ -95,145 +99,146 @@ export default {
 
 	watch: {
 		mapdata(newvalue, oldvalue) {
-			// log('地图，确诊数：')
-			// log(newvalue)
+			log(newvalue)
 			// 广州市
 			let numgz = 0;
 			newvalue.forEach(item => {
-				numgz += item.diadata.Guangzhoudig;
+				numgz += item.data.Guangzhoudig;
 			});
 			this.regiondata['guangzhou'] = numgz;
+			// log('22')
+			log(this.regiondata)
 			// 韶关市
 			let numsg = 0;
 			newvalue.forEach(item => {
-				numsg += item.diadata.Shaoguandig;
+				numsg += item.data.Shaoguandig;
 			});
 			this.regiondata['shaoguan'] = numsg;
 			// 深圳市
 			let numsz = 0;
 			newvalue.forEach(item => {
-				numsz += item.diadata.Shenzhendig;
+				numsz += item.data.Shenzhendig;
 			});
 			this.regiondata['shenzhen'] = numsz;
 			// 珠海市
 			let numzh = 0;
 			newvalue.forEach(item => {
-				numzh += item.diadata.Zhuhaidig;
+				numzh += item.data.Zhuhaidig;
 			});
 			this.regiondata['zhuhai'] = numzh;
 			// 汕头市
 			let numst = 0;
 			newvalue.forEach(item => {
-				numst += item.diadata.Shantoudig;
+				numst += item.data.Shantoudig;
 			});
 			this.regiondata['shantou'] = numst;
 			// 佛山市
 			let numfs = 0;
 			newvalue.forEach(item => {
-				numfs += item.diadata.Foshandig;
+				numfs += item.data.Foshandig;
 			});
 			this.regiondata['foshan'] = numfs;
 			// 江门市
 			let numjm = 0;
 			newvalue.forEach(item => {
-				numjm += item.diadata.Jiangmendig;
+				numjm += item.data.Jiangmendig;
 			});
 			this.regiondata['jiangmen'] = numjm;
 			// 湛江市
 			let numzj = 0;
 			newvalue.forEach(item => {
-				numzj += item.diadata.Zhanjiangdig;
+				numzj += item.data.Zhanjiangdig;
 			});
 			this.regiondata['zhanjiang'] = numzj;
 			// 茂名市
 			let nummm = 0;
 			newvalue.forEach(item => {
-				nummm += item.diadata.Maomingdig;
+				nummm += item.data.Maomingdig;
 			});
 			this.regiondata['maoming'] = nummm;
 			// 肇庆市
 			let numzq = 0;
 			newvalue.forEach(item => {
-				numzq += item.diadata.Zhaoqingdig;
+				numzq += item.data.Zhaoqingdig;
 			});
 			this.regiondata['zhaoqing'] = numzq;
 			// 惠州市
 			let numhz = 0;
 			newvalue.forEach(item => {
-				numhz += item.diadata.Huizhoudig;
+				numhz += item.data.Huizhoudig;
 			});
 			this.regiondata['huizhou'] = numhz;
 			// 梅州市
 			let nummz = 0;
 			newvalue.forEach(item => {
-				nummz += item.diadata.Meizhoudig;
+				nummz += item.data.Meizhoudig;
 			});
 			this.regiondata['meizhou'] = nummz;
 			// 汕尾市
 			let numsw = 0;
 			newvalue.forEach(item => {
-				numsw += item.diadata.Shanweidig;
+				numsw += item.data.Shanweidig;
 			});
 			this.regiondata['shanwei'] = numsw;
 			// 河源市
 			let numhy = 0;
 			newvalue.forEach(item => {
-				numhy += item.diadata.Heyuandig;
+				numhy += item.data.Heyuandig;
 			});
 			this.regiondata['heyuan'] = numhy;
 			// 阳江市
 			let numyj = 0;
 			newvalue.forEach(item => {
-				numyj += item.diadata.Yangjiangdig;
+				numyj += item.data.Yangjiangdig;
 			});
 			this.regiondata['yangjiang'] = numyj;
 			// 清远市
 			let numqy = 0;
 			newvalue.forEach(item => {
-				numqy += item.diadata.Qingyuandig;
+				numqy += item.data.Qingyuandig;
 			});
 			this.regiondata['qingyuan'] = numqy;
 			// 东莞市
 			let numdw = 0;
 			newvalue.forEach(item => {
-				numdw += item.diadata.Dongwandig;
+				numdw += item.data.Dongwandig;
 			});
 			this.regiondata['dongwan'] = numdw;
 			// 中山市
 			let numzs = 0;
 			newvalue.forEach(item => {
-				numzs += item.diadata.Zhongshandig;
+				numzs += item.data.Zhongshandig;
 			});
 			this.regiondata['zhongshan'] = numzs;
 			// 东沙群岛
 			let numdsqd = 0;
 			newvalue.forEach(item => {
-				numdsqd += item.diadata.Dongshaqundaodig;
+				numdsqd += item.data.Dongshaqundaodig;
 			});
 			this.regiondata['dongshaqundao'] = numdsqd;
 			// 潮州市
 			let numcz = 0;
 			newvalue.forEach(item => {
-				numcz += item.diadata.Chaozhoudig;
+				numcz += item.data.Chaozhoudig;
 			});
 			this.regiondata['chaozhou'] = numcz;
 			// 揭阳市
 			let numjy = 0;
 			newvalue.forEach(item => {
-				numjy += item.diadata.Jieyangdig;
+				numjy += item.data.Jieyangdig;
 			});
 			this.regiondata['jieyang'] = numjy;
 			// 云浮市
 			let numyf = 0;
 			newvalue.forEach(item => {
-				numyf += item.diadata.Yunfudig;
+				numyf += item.data.Yunfudig;
 			});
 			this.regiondata['yunfu'] = numyf;
-			// log(this.regiondata)
-			this.mapdatas = arrRess(this.regiondata);
-			this.cWidth = uni.upx2px(650);
-			this.cHeight = uni.upx2px(700);
-			this.getServerData(this.mapdatas);
+			this.mapdatas = arrRess(this.regiondata)
+			log(this.mapdatas)
+			this.cWidth=uni.upx2px(650);
+			this.cHeight=uni.upx2px(700);
+			this.getServerData(this.mapdatas)
 		}
 	}
 };

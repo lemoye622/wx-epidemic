@@ -14,8 +14,8 @@ class Total {
 				let times = item.time
 				return { data, times }
 			})
-			log('重组的数组')
-			log(typearr)
+			// log('重组的数组')
+			// log(typearr)
 			
 			// 取出键值对的 value值
 			// 注意：在某些机型上小程序并不支持es7的语法，另外在微信小程序pc端也不支持
@@ -53,6 +53,7 @@ class Total {
 			// 	numdata += item
 			// })
 			// log(numdata)
+			
 			// log('新增总数')
 			// log(sumdata)
 			

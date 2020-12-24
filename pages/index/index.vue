@@ -17,7 +17,7 @@
 			<view class="times">统计截止 {{deadline}}</view>
 			<!-- 累积数量 -->
 			<view class="content-main-data">
-				<block v-for="(item,index) in peopleList" :key="index">
+				<block v-for="(item, index) in peopleList" :key="index">
 				<view>
 					<text>{{item.data}}</text>
 					<text>{{item.status}}</text>
@@ -26,7 +26,7 @@
 			</view>
 			<!-- 菜单 -->
 			<view class="content-menu">
-				<block v-for="(item,index) in menuList" :key="index">
+				<block v-for="(item, index) in menuList" :key="index">
 				<view class="content-menu-table">
 					<view>
 						<image :src="item.img" mode="widthFix"></image>
@@ -39,7 +39,7 @@
 				</block>
 			</view>
 			<!-- 地图 -->
-			<MAP></MAP>
+			<MAP :mapdata="mapdata"></MAP>
 			<!-- 折线图 -->
 			<Line></Line>
 			<!-- 表格 -->
@@ -63,12 +63,14 @@
 	// 表格
 	import Table from './components/table.vue'
 	export default {
-		components:{MAP,Line,Table},
+		components: { MAP, Line, Table },
 		data() {
 			return {
 				// 统计截止日期
 				deadline: '',
-				peopleList:[
+				// 地图对应城市确诊人数数据
+				mapdata: [],
+				peopleList: [
 					{
 						'data': 0,
 						'status': '累积确诊'
@@ -83,30 +85,30 @@
 					}
 				],
 				//菜单
-				menuList:[
+				menuList: [
 					{
-						'img':'../../static/health.png',
-						'text':'健康信息',
-						'label':'上报健康信息',
-						'url':'../report/report'
+						'img': '../../static/health.png',
+						'text': '健康信息',
+						'label': '上报健康信息',
+						'url': '../report/report'
 					},
 					{
-						'img':'../../static/news.png',
-						'text':'疫情新闻',
-						'label':'热点早知道',
-						'url':'../news/news'
+						'img': '../../static/news.png',
+						'text': '疫情新闻',
+						'label': '热点早知道',
+						'url': '../news/news'
 					},
 					{
-						'img':'../../static/shatter-rumors.png',
-						'text':'粉碎谣言',
-						'label':'假消息不能信',
-						'url':''
+						'img': '../../static/shatter-rumors.png',
+						'text': '粉碎谣言',
+						'label': '假消息不能信',
+						'url': ''
 					},
 					{
-						'img':'../../static/work-resumption.png',
-						'text':'复工复产',
-						'label':'复工出行助你安全',
-						'url':''
+						'img': '../../static/work-resumption.png',
+						'text': '复工复产',
+						'label': '复工出行助你安全',
+						'url': ''
 					}
 				]
 			}
@@ -131,6 +133,8 @@
 					let curedata = res[1].data
 					let diedata = res[2].data
 					this.covidTotal(diagdata, curedata, diedata)
+					// 地图上各城市确诊人数数据
+					this.mapdata = diagdata
 				})
 				.catch((error) => {
 					log(error)
@@ -160,7 +164,7 @@
 				
 				// 将时间拆分合并为一个新的数组
 				let timearr = [...diagTime, ...cureTime, ...deathTime]
-				log(timearr)
+				// log(timearr)
 				this.deadline = timestamp(timearr)
 			}
 		}
