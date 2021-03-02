@@ -240,10 +240,11 @@ var _time = __webpack_require__(/*! ../../config/time.js */ 20);function _intero
 var Dbcrud = __webpack_require__(/*! ../../config/dataBase.js */ 159); // 计算确诊、治愈、死亡   每一个的总和的类
 var Total = __webpack_require__(/*! ../../config/total.js */ 160); // 计算最晚时间
 var _console = console,log = _console.log; // 地图组件
-var MAP = function MAP() {Promise.all(/*! require.ensure | pages/index/components/map */[__webpack_require__.e("common/vendor"), __webpack_require__.e("pages/index/components/map")]).then((function () {return resolve(__webpack_require__(/*! ./components/map.vue */ 163));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var Line = function Line() {Promise.all(/*! require.ensure | pages/index/components/brokenLine */[__webpack_require__.e("common/vendor"), __webpack_require__.e("pages/index/components/brokenLine")]).then((function () {return resolve(__webpack_require__(/*! ./components/brokenLine.vue */ 173));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var Table = function Table() {__webpack_require__.e(/*! require.ensure | pages/index/components/table */ "pages/index/components/table").then((function () {return resolve(__webpack_require__(/*! ./components/table.vue */ 181));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { components: { MAP: MAP, Line: Line, Table: Table }, data: function data() {return { // 统计截止日期
+var MAP = function MAP() {Promise.all(/*! require.ensure | pages/index/components/map */[__webpack_require__.e("common/vendor"), __webpack_require__.e("pages/index/components/map")]).then((function () {return resolve(__webpack_require__(/*! ./components/map.vue */ 163));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var Line = function Line() {Promise.all(/*! require.ensure | pages/index/components/brokenLine */[__webpack_require__.e("common/vendor"), __webpack_require__.e("pages/index/components/brokenLine")]).then((function () {return resolve(__webpack_require__(/*! ./components/brokenLine.vue */ 173));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var Table = function Table() {__webpack_require__.e(/*! require.ensure | pages/index/components/table */ "pages/index/components/table").then((function () {return resolve(__webpack_require__(/*! ./components/table.vue */ 182));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { components: { MAP: MAP, Line: Line, Table: Table }, data: function data() {return { // 统计截止日期
       deadline: '', // 地图对应城市确诊人数数据
-      mapdata: [], peopleList: [{ 'data': 0, 'status': '累积确诊' }, { 'data': 0, 'status': '累积治愈' }, { 'data': 0, 'status': '累积死亡' }], //菜单
+      mapdata: [], brokenLineData: [], peopleList: [{ 'data': 0, 'status': '累积确诊' }, { 'data': 0, 'status': '累积治愈' }, { 'data': 0, 'status': '累积死亡' }], //菜单
       menuList: [{ 'img': '../../static/health.png', 'text': '健康信息', 'label': '上报健康信息', 'url': '../report/report' }, { 'img': '../../static/news.png', 'text': '疫情新闻', 'label': '热点早知道', 'url': '../news/news' }, { 'img': '../../static/shatter-rumors.png', 'text': '粉碎谣言', 'label': '假消息不能信', 'url': '' }, { 'img': '../../static/work-resumption.png', 'text': '复工复产', 'label': '复工出行助你安全', 'url': '' }] };
+
   },
   created: function created() {
     this.epidemicData();
@@ -267,6 +268,8 @@ var MAP = function MAP() {Promise.all(/*! require.ensure | pages/index/component
         _this.covidTotal(diagdata, curedata, diedata);
         // 地图上各城市确诊人数数据
         _this.mapdata = diagdata;
+        // 折线图数据
+        _this.brokenLineData = res;
       }).
       catch(function (error) {
         log(error);

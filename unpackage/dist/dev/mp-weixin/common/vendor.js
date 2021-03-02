@@ -8570,6 +8570,7 @@ if (hadRuntime) {
 Object.defineProperty(exports, "__esModule", { value: true });exports.timestamp = void 0;function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;} // 计算最晚时间
 
 var moment = __webpack_require__(/*! moment */ 21);
+moment.locale('zh-cn');
 
 // 写一个简单的方法，不用面向对象
 var timestamp = function timestamp(timearr) {
@@ -44744,13 +44745,95 @@ module.exports = {"type":"FeatureCollection","features":[{"type":"Feature","prop
 /* 176 */,
 /* 177 */,
 /* 178 */
-/*!*********************************************************************!*\
-  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/config/line.json ***!
-  \*********************************************************************/
-/*! exports provided: data, default */
-/***/ (function(module) {
+/*!*******************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/config/lineEpidemicData.js ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = {"data":{"LineA":{"chartData":{"categories":["06-13","06-14","06-15","06-16","06-17","06-18"],"series":[{"name":"新增确诊","data":[35,20,25,37,4,20]},{"name":"新增治愈","data":[35,50,65,77,49,80]},{"name":"新增死亡","data":[100,20,5,3,4,40]}]}}}};
+function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;} // 折线图的疫情数据
+
+var moment = __webpack_require__(/*! moment */ 21);
+moment.locale('zh-cn');var _console =
+
+console,log = _console.log;var
+
+LineChart = /*#__PURE__*/function () {"use strict";
+  // catedays: 日期
+  // typedatas： 确诊 || 治愈 || 死亡
+  function LineChart(catedays, typedatas) {_classCallCheck(this, LineChart);
+    this.catedays = catedays;
+    this.typedatas = typedatas;
+  }_createClass(LineChart, [{ key: "lineChartsdata", value: function lineChartsdata()
+
+    {var _this = this;
+      return new Promise(function (resolve, reject) {
+        // 根据日期筛选当天的新增确诊 || 治愈 || 死亡
+        var todaydatas = _this.catedays.map(function (itemday) {
+          var vpdatas = _this.typedatas.filter(function (item) {
+            return moment(item.time).format('MM-DD') == itemday;
+          });
+          return vpdatas;
+        });
+        // log('当前日期 -- 筛选出的数据')
+        // log(todaydatas)
+        // 遍历6次，选取当天的 确诊 || 治愈 || 死亡 总和
+        var maparr = [0, 1, 2, 3, 4, 5];
+        var maplist = maparr.map(function (itemarr) {
+          // 遍历取到云数据库data的值
+          var databasearr = todaydatas[itemarr].map(function (item) {
+            return item.data;
+          });
+          // log('筛选的database数据')
+          // log(databasearr)
+          // 取 value 值
+          var arrlist = [];
+          databasearr.forEach(function (item) {
+            for (var key in item) {
+              arrlist.push(item[key]);
+            }
+          });
+          // 计算 确诊 || 治愈 || 死亡 总和
+          var num = 0;
+          arrlist.forEach(function (item) {
+            num += item;
+          });
+          return num;
+        });
+        resolve(maplist);
+      });
+    } }]);return LineChart;}();
+
+
+module.exports = LineChart;
+
+/***/ }),
+/* 179 */
+/*!***********************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/config/linedata.js ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.linedata = void 0; // 折线图的动态数据（替换line.json的模拟数据）
+
+var linedata = function linedata(catedays, diagdata, curedata, diedata) {
+  var chartData = {
+    "categories": catedays,
+    "series": [{
+      "name": "新增确诊",
+      "data": diagdata },
+    {
+      "name": "新增治愈",
+      "data": curedata },
+    {
+      "name": "新增死亡",
+      "data": diedata }] };
+
+
+  return chartData;
+};exports.linedata = linedata;
 
 /***/ })
 ]]);

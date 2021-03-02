@@ -41,7 +41,7 @@
 			<!-- 地图 -->
 			<MAP :mapdata="mapdata"></MAP>
 			<!-- 折线图 -->
-			<Line></Line>
+			<Line :brokenLineData="brokenLineData"></Line>
 			<!-- 表格 -->
 			<Table></Table>
 		</view>
@@ -70,6 +70,7 @@
 				deadline: '',
 				// 地图对应城市确诊人数数据
 				mapdata: [],
+				brokenLineData: [],
 				peopleList: [
 					{
 						'data': 0,
@@ -135,6 +136,8 @@
 					this.covidTotal(diagdata, curedata, diedata)
 					// 地图上各城市确诊人数数据
 					this.mapdata = diagdata
+					// 折线图数据
+					this.brokenLineData = res
 				})
 				.catch((error) => {
 					log(error)

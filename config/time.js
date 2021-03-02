@@ -1,6 +1,7 @@
 // 计算最晚时间
 
 let moment = require('moment')
+moment.locale('zh-cn')
 
 // 写一个简单的方法，不用面向对象
 let timestamp = function(timearr) {
