@@ -757,7 +757,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -7095,7 +7095,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -7116,14 +7116,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -7199,7 +7199,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -44745,6 +44745,34 @@ module.exports = {"type":"FeatureCollection","features":[{"type":"Feature","prop
 /* 176 */,
 /* 177 */,
 /* 178 */
+/*!***********************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/config/linedata.js ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.linedata = void 0; // 折线图的动态数据（替换line.json的模拟数据）
+
+var linedata = function linedata(catedays, diagdata, curedata, diedata) {
+  var chartData = {
+    "categories": catedays,
+    "series": [{
+      "name": "新增确诊",
+      "data": diagdata },
+    {
+      "name": "新增治愈",
+      "data": curedata },
+    {
+      "name": "新增死亡",
+      "data": diedata }] };
+
+
+  return chartData;
+};exports.linedata = linedata;
+
+/***/ }),
+/* 179 */
 /*!*******************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/config/lineEpidemicData.js ***!
   \*******************************************************************************/
@@ -44808,32 +44836,106 @@ LineChart = /*#__PURE__*/function () {"use strict";
 module.exports = LineChart;
 
 /***/ }),
-/* 179 */
-/*!***********************************************************************!*\
-  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/config/linedata.js ***!
-  \***********************************************************************/
+/* 180 */,
+/* 181 */,
+/* 182 */,
+/* 183 */,
+/* 184 */,
+/* 185 */,
+/* 186 */,
+/* 187 */,
+/* 188 */,
+/* 189 */,
+/* 190 */,
+/* 191 */,
+/* 192 */,
+/* 193 */,
+/* 194 */
+/*!************************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/config/tabledata.js ***!
+  \************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.linedata = void 0; // 折线图的动态数据（替换line.json的模拟数据）
+function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;} // 表格数据处理
+// var {log} = console
+var
+TableData = /*#__PURE__*/function () {"use strict";
+  // city：城市
+  // diaglist：当天的新增确诊
+  // index：数组索引
+  // accdiag：累计确诊
+  // acccure：治愈
+  // accdeath：死亡
+  function TableData(city, diaglist, index, accdiag, acccure, accdeath) {_classCallCheck(this, TableData);
+    this.city = city;
+    this.diaglist = diaglist;
+    this.index = index;
+    this.accdiag = accdiag;
+    this.acccure = acccure;
+    this.accdeath = accdeath;
+  }_createClass(TableData, [{ key: "tablepro", value: function tablepro()
 
-var linedata = function linedata(catedays, diagdata, curedata, diedata) {
-  var chartData = {
-    "categories": catedays,
-    "series": [{
-      "name": "新增确诊",
-      "data": diagdata },
-    {
-      "name": "新增治愈",
-      "data": curedata },
-    {
-      "name": "新增死亡",
-      "data": diedata }] };
+    {var _this = this;
+      return new Promise(function (resolve, reject) {
+        // 当天的新增确诊总和
+        var newdata = [];
+        _this.diaglist.forEach(function (item) {
+          newdata.push(item[_this.index]);
+        });
+        var diagsum = 0;
+        newdata.forEach(function (item) {
+          diagsum += item;
+        });
+        // log(diagsum)
+
+        // 累积确诊
+        var diagdatas = _this.sumtype(_this.accdiag);
+        // log(diagdatas)
+
+        // 累积治愈
+        var curedatas = _this.sumtype(_this.acccure);
+        // log(curedatas)
+
+        // 累积死亡
+        var deathdatas = _this.sumtype(_this.accdeath);
+        // log(deathdatas)		
+
+        // 组合成一个对象返回出去
+        var tableobj = {
+          region: _this.city,
+          newlydiag: diagsum,
+          diagtotal: diagdatas,
+          curetotal: curedatas,
+          deathtotal: deathdatas };
+
+        resolve(tableobj);
+      });
+    } }, { key: "sumtype", value: function sumtype(
 
 
-  return chartData;
-};exports.linedata = linedata;
+    type) {var _this2 = this;
+      var accumulate = type.map(function (item) {
+        var valuelist = [];
+        for (var key in item.data) {
+          valuelist.push(item.data[key]);
+        }
+        return valuelist;
+      });
+      // log(accumulate)
+      var sumlist = [];
+      accumulate.forEach(function (item) {
+        sumlist.push(item[_this2.index]);
+      });
+      var accsum = 0;
+      sumlist.forEach(function (item) {
+        accsum += item;
+      });
+      return accsum;
+    } }]);return TableData;}();
+
+
+module.exports = TableData;
 
 /***/ })
 ]]);

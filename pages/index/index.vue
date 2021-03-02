@@ -43,7 +43,7 @@
 			<!-- 折线图 -->
 			<Line :brokenLineData="brokenLineData"></Line>
 			<!-- 表格 -->
-			<Table></Table>
+			<Table :tableData="tableData"></Table>
 		</view>
 	</view>
 </template>
@@ -71,6 +71,7 @@
 				// 地图对应城市确诊人数数据
 				mapdata: [],
 				brokenLineData: [],
+				tableData: [],
 				peopleList: [
 					{
 						'data': 0,
@@ -138,6 +139,8 @@
 					this.mapdata = diagdata
 					// 折线图数据
 					this.brokenLineData = res
+					// 表格数据
+					this.tableData = res 
 				})
 				.catch((error) => {
 					log(error)

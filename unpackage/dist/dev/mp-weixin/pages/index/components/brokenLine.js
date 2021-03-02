@@ -134,7 +134,7 @@ var _uCharts = _interopRequireDefault(__webpack_require__(/*! @/components/u-cha
 
 
 
-var _linedata = __webpack_require__(/*! ../../../config/linedata.js */ 179);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} //
+var _linedata = __webpack_require__(/*! ../../../config/linedata.js */ 178);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} //
 //
 //
 //
@@ -145,7 +145,7 @@ var _linedata = __webpack_require__(/*! ../../../config/linedata.js */ 179);func
 //
 //
 var _console = console,log = _console.log;var moment = __webpack_require__(/*! moment */ 21);moment.locale('zh-cn'); // 折线图的类
-var LineChart = __webpack_require__(/*! ../../../config/lineEpidemicData.js */ 178); // // 折线图数据
+var LineChart = __webpack_require__(/*! ../../../config/lineEpidemicData.js */ 179); // // 折线图数据
 // let lineDatas = require('config/line.json')
 // 折线图的动态数据
 var canvaLineA = null;var lastMoveTime = null; //最后执行移动的时间戳
