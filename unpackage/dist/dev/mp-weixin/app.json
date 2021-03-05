@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/report/report",
     "pages/index/index"
   ],
   "subPackages": [],
@@ -10,5 +11,5 @@
     "backgroundColor": "#F8F8F8"
   },
   "usingComponents": {},
-  "sitemapLocation": "sitemap29.json"
+  "sitemapLocation": "sitemap41.json"
 }
