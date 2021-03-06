@@ -757,7 +757,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -7095,7 +7095,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -7116,14 +7116,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -7199,7 +7199,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -7772,138 +7772,16 @@ function normalizeComponent (
 /* 15 */,
 /* 16 */,
 /* 17 */
-/*!********************************************************************!*\
-  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/config/check.js ***!
-  \********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.check = void 0; // 健康信息上报的表单校验
-
-// 身份证正则
-var idCardReg = /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
-// 手机号码正则
-var iphoneReg = /^1[3456789]\d{9}$/;
-
-var check = function check(obj) {var
-
-  name =
-
-
-
-
-
-
-
-
-
-
-  obj.name,iphone = obj.iphone,IDcard = obj.IDcard,selectGender = obj.selectGender,date = obj.date,koseki = obj.koseki,province = obj.province,address = obj.address,selectValue = obj.selectValue,selectSymptom = obj.selectSymptom,agree = obj.agree;
-  return new Promise(function (resolve, reject) {
-    // 姓名
-    if (name == '') {
-      var _tip = '请填写姓名';
-      resolve(_tip);
-      return false;
-    }
-    // 手机号码
-    if (iphone == '') {
-      var _tip2 = '请填写手机号码';
-      resolve(_tip2);
-      return false;
-    }
-    if (iphone && !iphoneReg.test(iphone)) {
-      var _tip3 = '请填写正确的手机号码';
-      resolve(_tip3);
-      return false;
-    }
-    // 身份证
-    if (IDcard == '') {
-      var _tip4 = '请填写身份证号码';
-      resolve(_tip4);
-      return false;
-    }
-    if (IDcard && !idCardReg.test(IDcard)) {
-      var _tip5 = '请填写正确的身份证号码';
-      resolve(_tip5);
-      return false;
-    }
-    // 性别
-    if (selectGender == '') {
-      var _tip6 = '请选择性别';
-      resolve(_tip6);
-      return false;
-    }
-    // 出生日期
-    if (date == '') {
-      var _tip7 = '请选择出生日期';
-      resolve(_tip7);
-      return false;
-    }
-    // 户籍
-    if (koseki == '') {
-      var _tip8 = '请选择户籍所在地';
-      resolve(_tip8);
-      return false;
-    }
-    // 居住省市
-    if (province == '') {
-      var _tip9 = '请选择居住省市';
-      resolve(_tip9);
-      return false;
-    }
-    // 详细地址
-    if (address == '') {
-      var _tip10 = '请填写详细地址';
-      resolve(_tip10);
-      return false;
-    }
-    // 是否常住广东
-    if (selectValue == '') {
-      var _tip11 = '请选择是否常住广东';
-      resolve(_tip11);
-      return false;
-    }
-    // 是否出现症状
-    if (selectSymptom.length == 0) {
-      var _tip12 = '请选择是否出现症状';
-      resolve(_tip12);
-      return false;
-    }
-    // 勾选，同意
-    if (agree.length == 0) {
-      var _tip13 = '请勾选本申报所列事项';
-      resolve(_tip13);
-      return false;
-    }
-    // 全部通过
-    var tip = 'SUCCESS';
-    resolve(tip);
-
-  });
-};exports.check = check;
-
-/***/ }),
-/* 18 */,
-/* 19 */,
-/* 20 */,
-/* 21 */,
-/* 22 */,
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */
 /*!*********************************************************************************************!*\
   !*** ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator/index.js ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! regenerator-runtime */ 27);
+module.exports = __webpack_require__(/*! regenerator-runtime */ 18);
 
 /***/ }),
-/* 27 */
+/* 18 */
 /*!************************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
   \************************************************************/
@@ -7934,7 +7812,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(/*! ./runtime */ 28);
+module.exports = __webpack_require__(/*! ./runtime */ 19);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -7950,7 +7828,7 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 28 */
+/* 19 */
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
   \*****************************************************/
@@ -8681,7 +8559,187 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 29 */
+/* 20 */
+/*!********************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/config/check.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.check = void 0; // 健康信息上报的表单校验
+
+// 身份证正则
+var idCardReg = /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
+// 手机号码正则
+var phoneReg = /^1[3456789]\d{9}$/;
+
+var check = function check(obj) {var
+
+  name =
+
+
+
+
+
+
+
+
+
+
+
+  obj.name,phone = obj.phone,IDcard = obj.IDcard,selectGender = obj.selectGender,birthday = obj.birthday,koseki = obj.koseki,residencePlace = obj.residencePlace,detailAddress = obj.detailAddress,isPermanentLive = obj.isPermanentLive,selectSymptom = obj.selectSymptom,healthCodeState = obj.healthCodeState,isAgree = obj.isAgree;
+  return new Promise(function (resolve, reject) {
+    // 姓名
+    if (name == '') {
+      var _tip = '请填写姓名';
+      resolve(_tip);
+      return false;
+    }
+    // 手机号码
+    if (phone == '') {
+      var _tip2 = '请填写手机号码';
+      resolve(_tip2);
+      return false;
+    }
+    if (phone && !phoneReg.test(phone)) {
+      var _tip3 = '请填写正确的手机号码';
+      resolve(_tip3);
+      return false;
+    }
+    // 身份证
+    if (IDcard == '') {
+      var _tip4 = '请填写身份证号码';
+      resolve(_tip4);
+      return false;
+    }
+    if (IDcard && !idCardReg.test(IDcard)) {
+      var _tip5 = '请填写正确的身份证号码';
+      resolve(_tip5);
+      return false;
+    }
+    // 性别
+    if (selectGender == '') {
+      var _tip6 = '请选择性别';
+      resolve(_tip6);
+      return false;
+    }
+    // 出生日期
+    if (birthday == '') {
+      var _tip7 = '请选择出生日期';
+      resolve(_tip7);
+      return false;
+    }
+    // 户籍
+    if (koseki == '') {
+      var _tip8 = '请选择户籍所在地';
+      resolve(_tip8);
+      return false;
+    }
+    // 居住省市
+    if (residencePlace == '') {
+      var _tip9 = '请选择居住省市';
+      resolve(_tip9);
+      return false;
+    }
+    // 详细地址
+    if (detailAddress == '') {
+      var _tip10 = '请填写详细地址';
+      resolve(_tip10);
+      return false;
+    }
+    // 是否常住广东
+    if (isPermanentLive == '') {
+      var _tip11 = '请选择是否常住广东';
+      resolve(_tip11);
+      return false;
+    }
+    // 是否出现症状
+    if (selectSymptom.length == 0) {
+      var _tip12 = '请选择是否出现症状';
+      resolve(_tip12);
+      return false;
+    }
+    // 是否选择了粤康码的状态
+    if (healthCodeState == '') {
+      var _tip13 = '请选择粤康码状态';
+      resolve(_tip13);
+      return false;
+    }
+    // 勾选，同意
+    if (isAgree.length == 0) {
+      var _tip14 = '请勾选本申报所列事项';
+      resolve(_tip14);
+      return false;
+    }
+    // 全部通过
+    var tip = 'SUCCESS';
+    resolve(tip);
+
+  });
+};exports.check = check;
+
+/***/ }),
+/* 21 */
+/*!***********************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/config/dataBase.js ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;} // 操作数据库 CRUD 的类
+var db = wx.cloud.database();var
+
+Dbcrud = /*#__PURE__*/function () {"use strict";
+  function Dbcrud(gather, datas) {_classCallCheck(this, Dbcrud);
+    this.gather = gather;
+    this.datas = datas;
+  }
+
+  // get请求数据库
+  _createClass(Dbcrud, [{ key: "pullGet", value: function pullGet() {var _this = this;
+      return new Promise(function (resolve, reject) {
+        var base = db.collection(_this.gather);
+        base.get().
+        then(function (res) {
+          resolve(res);
+        }).
+        catch(function (error) {
+          reject(error);
+        });
+      });
+    }
+
+    // add提交数据到集合
+  }, { key: "pushAdd", value: function pushAdd() {var _this2 = this;
+      return new Promise(function (resolve, reject) {
+        var base = db.collection(_this2.gather);
+        // 注意：add()方法里必须是个对象，且必须加上 data（也是一个对象），具体参见微信官方文档——>云开发
+        base.add({
+          data: _this2.datas }).
+
+        then(function (res) {
+          resolve(res);
+        }).
+        catch(function (error) {
+          reject(error);
+        });
+      });
+    } }]);return Dbcrud;}();
+
+
+module.exports = Dbcrud;
+
+/***/ }),
+/* 22 */,
+/* 23 */,
+/* 24 */,
+/* 25 */,
+/* 26 */,
+/* 27 */,
+/* 28 */,
+/* 29 */,
+/* 30 */
 /*!*******************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/config/time.js ***!
   \*******************************************************************/
@@ -8691,7 +8749,7 @@ if (hadRuntime) {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.timestamp = void 0;function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;} // 计算最晚时间
 
-var moment = __webpack_require__(/*! moment */ 30);
+var moment = __webpack_require__(/*! moment */ 31);
 moment.locale('zh-cn');
 
 // 写一个简单的方法，不用面向对象
@@ -8710,7 +8768,7 @@ var timestamp = function timestamp(timearr) {
 };exports.timestamp = timestamp;
 
 /***/ }),
-/* 30 */
+/* 31 */
 /*!**********************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/moment.js ***!
   \**********************************************************************************/
@@ -10807,7 +10865,7 @@ var timestamp = function timestamp(timearr) {
       try {
         oldLocale = globalLocale._abbr;
         aliasedRequire = require;
-        __webpack_require__(32)("./" + name);
+        __webpack_require__(33)("./" + name);
         getSetGlobalLocale(oldLocale);
       } catch (e) {
         // mark as not found to avoid repeating expensive file require call causing high CPU
@@ -14386,10 +14444,10 @@ var timestamp = function timestamp(timearr) {
   return hooks;
 
 });
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! (webpack)/buildin/module.js */ 31)(module)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! (webpack)/buildin/module.js */ 32)(module)))
 
 /***/ }),
-/* 31 */
+/* 32 */
 /*!***********************************!*\
   !*** (webpack)/buildin/module.js ***!
   \***********************************/
@@ -14421,7 +14479,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /*!*********************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale sync ^\.\/.*$ ***!
   \*********************************************************************************************/
@@ -14429,276 +14487,276 @@ module.exports = function(module) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 33,
-	"./af.js": 33,
-	"./ar": 34,
-	"./ar-dz": 35,
-	"./ar-dz.js": 35,
-	"./ar-kw": 36,
-	"./ar-kw.js": 36,
-	"./ar-ly": 37,
-	"./ar-ly.js": 37,
-	"./ar-ma": 38,
-	"./ar-ma.js": 38,
-	"./ar-sa": 39,
-	"./ar-sa.js": 39,
-	"./ar-tn": 40,
-	"./ar-tn.js": 40,
-	"./ar.js": 34,
-	"./az": 41,
-	"./az.js": 41,
-	"./be": 42,
-	"./be.js": 42,
-	"./bg": 43,
-	"./bg.js": 43,
-	"./bm": 44,
-	"./bm.js": 44,
-	"./bn": 45,
-	"./bn-bd": 46,
-	"./bn-bd.js": 46,
-	"./bn.js": 45,
-	"./bo": 47,
-	"./bo.js": 47,
-	"./br": 48,
-	"./br.js": 48,
-	"./bs": 49,
-	"./bs.js": 49,
-	"./ca": 50,
-	"./ca.js": 50,
-	"./cs": 51,
-	"./cs.js": 51,
-	"./cv": 52,
-	"./cv.js": 52,
-	"./cy": 53,
-	"./cy.js": 53,
-	"./da": 54,
-	"./da.js": 54,
-	"./de": 55,
-	"./de-at": 56,
-	"./de-at.js": 56,
-	"./de-ch": 57,
-	"./de-ch.js": 57,
-	"./de.js": 55,
-	"./dv": 58,
-	"./dv.js": 58,
-	"./el": 59,
-	"./el.js": 59,
-	"./en-au": 60,
-	"./en-au.js": 60,
-	"./en-ca": 61,
-	"./en-ca.js": 61,
-	"./en-gb": 62,
-	"./en-gb.js": 62,
-	"./en-ie": 63,
-	"./en-ie.js": 63,
-	"./en-il": 64,
-	"./en-il.js": 64,
-	"./en-in": 65,
-	"./en-in.js": 65,
-	"./en-nz": 66,
-	"./en-nz.js": 66,
-	"./en-sg": 67,
-	"./en-sg.js": 67,
-	"./eo": 68,
-	"./eo.js": 68,
-	"./es": 69,
-	"./es-do": 70,
-	"./es-do.js": 70,
-	"./es-mx": 71,
-	"./es-mx.js": 71,
-	"./es-us": 72,
-	"./es-us.js": 72,
-	"./es.js": 69,
-	"./et": 73,
-	"./et.js": 73,
-	"./eu": 74,
-	"./eu.js": 74,
-	"./fa": 75,
-	"./fa.js": 75,
-	"./fi": 76,
-	"./fi.js": 76,
-	"./fil": 77,
-	"./fil.js": 77,
-	"./fo": 78,
-	"./fo.js": 78,
-	"./fr": 79,
-	"./fr-ca": 80,
-	"./fr-ca.js": 80,
-	"./fr-ch": 81,
-	"./fr-ch.js": 81,
-	"./fr.js": 79,
-	"./fy": 82,
-	"./fy.js": 82,
-	"./ga": 83,
-	"./ga.js": 83,
-	"./gd": 84,
-	"./gd.js": 84,
-	"./gl": 85,
-	"./gl.js": 85,
-	"./gom-deva": 86,
-	"./gom-deva.js": 86,
-	"./gom-latn": 87,
-	"./gom-latn.js": 87,
-	"./gu": 88,
-	"./gu.js": 88,
-	"./he": 89,
-	"./he.js": 89,
-	"./hi": 90,
-	"./hi.js": 90,
-	"./hr": 91,
-	"./hr.js": 91,
-	"./hu": 92,
-	"./hu.js": 92,
-	"./hy-am": 93,
-	"./hy-am.js": 93,
-	"./id": 94,
-	"./id.js": 94,
-	"./is": 95,
-	"./is.js": 95,
-	"./it": 96,
-	"./it-ch": 97,
-	"./it-ch.js": 97,
-	"./it.js": 96,
-	"./ja": 98,
-	"./ja.js": 98,
-	"./jv": 99,
-	"./jv.js": 99,
-	"./ka": 100,
-	"./ka.js": 100,
-	"./kk": 101,
-	"./kk.js": 101,
-	"./km": 102,
-	"./km.js": 102,
-	"./kn": 103,
-	"./kn.js": 103,
-	"./ko": 104,
-	"./ko.js": 104,
-	"./ku": 105,
-	"./ku.js": 105,
-	"./ky": 106,
-	"./ky.js": 106,
-	"./lb": 107,
-	"./lb.js": 107,
-	"./lo": 108,
-	"./lo.js": 108,
-	"./lt": 109,
-	"./lt.js": 109,
-	"./lv": 110,
-	"./lv.js": 110,
-	"./me": 111,
-	"./me.js": 111,
-	"./mi": 112,
-	"./mi.js": 112,
-	"./mk": 113,
-	"./mk.js": 113,
-	"./ml": 114,
-	"./ml.js": 114,
-	"./mn": 115,
-	"./mn.js": 115,
-	"./mr": 116,
-	"./mr.js": 116,
-	"./ms": 117,
-	"./ms-my": 118,
-	"./ms-my.js": 118,
-	"./ms.js": 117,
-	"./mt": 119,
-	"./mt.js": 119,
-	"./my": 120,
-	"./my.js": 120,
-	"./nb": 121,
-	"./nb.js": 121,
-	"./ne": 122,
-	"./ne.js": 122,
-	"./nl": 123,
-	"./nl-be": 124,
-	"./nl-be.js": 124,
-	"./nl.js": 123,
-	"./nn": 125,
-	"./nn.js": 125,
-	"./oc-lnc": 126,
-	"./oc-lnc.js": 126,
-	"./pa-in": 127,
-	"./pa-in.js": 127,
-	"./pl": 128,
-	"./pl.js": 128,
-	"./pt": 129,
-	"./pt-br": 130,
-	"./pt-br.js": 130,
-	"./pt.js": 129,
-	"./ro": 131,
-	"./ro.js": 131,
-	"./ru": 132,
-	"./ru.js": 132,
-	"./sd": 133,
-	"./sd.js": 133,
-	"./se": 134,
-	"./se.js": 134,
-	"./si": 135,
-	"./si.js": 135,
-	"./sk": 136,
-	"./sk.js": 136,
-	"./sl": 137,
-	"./sl.js": 137,
-	"./sq": 138,
-	"./sq.js": 138,
-	"./sr": 139,
-	"./sr-cyrl": 140,
-	"./sr-cyrl.js": 140,
-	"./sr.js": 139,
-	"./ss": 141,
-	"./ss.js": 141,
-	"./sv": 142,
-	"./sv.js": 142,
-	"./sw": 143,
-	"./sw.js": 143,
-	"./ta": 144,
-	"./ta.js": 144,
-	"./te": 145,
-	"./te.js": 145,
-	"./tet": 146,
-	"./tet.js": 146,
-	"./tg": 147,
-	"./tg.js": 147,
-	"./th": 148,
-	"./th.js": 148,
-	"./tk": 149,
-	"./tk.js": 149,
-	"./tl-ph": 150,
-	"./tl-ph.js": 150,
-	"./tlh": 151,
-	"./tlh.js": 151,
-	"./tr": 152,
-	"./tr.js": 152,
-	"./tzl": 153,
-	"./tzl.js": 153,
-	"./tzm": 154,
-	"./tzm-latn": 155,
-	"./tzm-latn.js": 155,
-	"./tzm.js": 154,
-	"./ug-cn": 156,
-	"./ug-cn.js": 156,
-	"./uk": 157,
-	"./uk.js": 157,
-	"./ur": 158,
-	"./ur.js": 158,
-	"./uz": 159,
-	"./uz-latn": 160,
-	"./uz-latn.js": 160,
-	"./uz.js": 159,
-	"./vi": 161,
-	"./vi.js": 161,
-	"./x-pseudo": 162,
-	"./x-pseudo.js": 162,
-	"./yo": 163,
-	"./yo.js": 163,
-	"./zh-cn": 164,
-	"./zh-cn.js": 164,
-	"./zh-hk": 165,
-	"./zh-hk.js": 165,
-	"./zh-mo": 166,
-	"./zh-mo.js": 166,
-	"./zh-tw": 167,
-	"./zh-tw.js": 167
+	"./af": 34,
+	"./af.js": 34,
+	"./ar": 35,
+	"./ar-dz": 36,
+	"./ar-dz.js": 36,
+	"./ar-kw": 37,
+	"./ar-kw.js": 37,
+	"./ar-ly": 38,
+	"./ar-ly.js": 38,
+	"./ar-ma": 39,
+	"./ar-ma.js": 39,
+	"./ar-sa": 40,
+	"./ar-sa.js": 40,
+	"./ar-tn": 41,
+	"./ar-tn.js": 41,
+	"./ar.js": 35,
+	"./az": 42,
+	"./az.js": 42,
+	"./be": 43,
+	"./be.js": 43,
+	"./bg": 44,
+	"./bg.js": 44,
+	"./bm": 45,
+	"./bm.js": 45,
+	"./bn": 46,
+	"./bn-bd": 47,
+	"./bn-bd.js": 47,
+	"./bn.js": 46,
+	"./bo": 48,
+	"./bo.js": 48,
+	"./br": 49,
+	"./br.js": 49,
+	"./bs": 50,
+	"./bs.js": 50,
+	"./ca": 51,
+	"./ca.js": 51,
+	"./cs": 52,
+	"./cs.js": 52,
+	"./cv": 53,
+	"./cv.js": 53,
+	"./cy": 54,
+	"./cy.js": 54,
+	"./da": 55,
+	"./da.js": 55,
+	"./de": 56,
+	"./de-at": 57,
+	"./de-at.js": 57,
+	"./de-ch": 58,
+	"./de-ch.js": 58,
+	"./de.js": 56,
+	"./dv": 59,
+	"./dv.js": 59,
+	"./el": 60,
+	"./el.js": 60,
+	"./en-au": 61,
+	"./en-au.js": 61,
+	"./en-ca": 62,
+	"./en-ca.js": 62,
+	"./en-gb": 63,
+	"./en-gb.js": 63,
+	"./en-ie": 64,
+	"./en-ie.js": 64,
+	"./en-il": 65,
+	"./en-il.js": 65,
+	"./en-in": 66,
+	"./en-in.js": 66,
+	"./en-nz": 67,
+	"./en-nz.js": 67,
+	"./en-sg": 68,
+	"./en-sg.js": 68,
+	"./eo": 69,
+	"./eo.js": 69,
+	"./es": 70,
+	"./es-do": 71,
+	"./es-do.js": 71,
+	"./es-mx": 72,
+	"./es-mx.js": 72,
+	"./es-us": 73,
+	"./es-us.js": 73,
+	"./es.js": 70,
+	"./et": 74,
+	"./et.js": 74,
+	"./eu": 75,
+	"./eu.js": 75,
+	"./fa": 76,
+	"./fa.js": 76,
+	"./fi": 77,
+	"./fi.js": 77,
+	"./fil": 78,
+	"./fil.js": 78,
+	"./fo": 79,
+	"./fo.js": 79,
+	"./fr": 80,
+	"./fr-ca": 81,
+	"./fr-ca.js": 81,
+	"./fr-ch": 82,
+	"./fr-ch.js": 82,
+	"./fr.js": 80,
+	"./fy": 83,
+	"./fy.js": 83,
+	"./ga": 84,
+	"./ga.js": 84,
+	"./gd": 85,
+	"./gd.js": 85,
+	"./gl": 86,
+	"./gl.js": 86,
+	"./gom-deva": 87,
+	"./gom-deva.js": 87,
+	"./gom-latn": 88,
+	"./gom-latn.js": 88,
+	"./gu": 89,
+	"./gu.js": 89,
+	"./he": 90,
+	"./he.js": 90,
+	"./hi": 91,
+	"./hi.js": 91,
+	"./hr": 92,
+	"./hr.js": 92,
+	"./hu": 93,
+	"./hu.js": 93,
+	"./hy-am": 94,
+	"./hy-am.js": 94,
+	"./id": 95,
+	"./id.js": 95,
+	"./is": 96,
+	"./is.js": 96,
+	"./it": 97,
+	"./it-ch": 98,
+	"./it-ch.js": 98,
+	"./it.js": 97,
+	"./ja": 99,
+	"./ja.js": 99,
+	"./jv": 100,
+	"./jv.js": 100,
+	"./ka": 101,
+	"./ka.js": 101,
+	"./kk": 102,
+	"./kk.js": 102,
+	"./km": 103,
+	"./km.js": 103,
+	"./kn": 104,
+	"./kn.js": 104,
+	"./ko": 105,
+	"./ko.js": 105,
+	"./ku": 106,
+	"./ku.js": 106,
+	"./ky": 107,
+	"./ky.js": 107,
+	"./lb": 108,
+	"./lb.js": 108,
+	"./lo": 109,
+	"./lo.js": 109,
+	"./lt": 110,
+	"./lt.js": 110,
+	"./lv": 111,
+	"./lv.js": 111,
+	"./me": 112,
+	"./me.js": 112,
+	"./mi": 113,
+	"./mi.js": 113,
+	"./mk": 114,
+	"./mk.js": 114,
+	"./ml": 115,
+	"./ml.js": 115,
+	"./mn": 116,
+	"./mn.js": 116,
+	"./mr": 117,
+	"./mr.js": 117,
+	"./ms": 118,
+	"./ms-my": 119,
+	"./ms-my.js": 119,
+	"./ms.js": 118,
+	"./mt": 120,
+	"./mt.js": 120,
+	"./my": 121,
+	"./my.js": 121,
+	"./nb": 122,
+	"./nb.js": 122,
+	"./ne": 123,
+	"./ne.js": 123,
+	"./nl": 124,
+	"./nl-be": 125,
+	"./nl-be.js": 125,
+	"./nl.js": 124,
+	"./nn": 126,
+	"./nn.js": 126,
+	"./oc-lnc": 127,
+	"./oc-lnc.js": 127,
+	"./pa-in": 128,
+	"./pa-in.js": 128,
+	"./pl": 129,
+	"./pl.js": 129,
+	"./pt": 130,
+	"./pt-br": 131,
+	"./pt-br.js": 131,
+	"./pt.js": 130,
+	"./ro": 132,
+	"./ro.js": 132,
+	"./ru": 133,
+	"./ru.js": 133,
+	"./sd": 134,
+	"./sd.js": 134,
+	"./se": 135,
+	"./se.js": 135,
+	"./si": 136,
+	"./si.js": 136,
+	"./sk": 137,
+	"./sk.js": 137,
+	"./sl": 138,
+	"./sl.js": 138,
+	"./sq": 139,
+	"./sq.js": 139,
+	"./sr": 140,
+	"./sr-cyrl": 141,
+	"./sr-cyrl.js": 141,
+	"./sr.js": 140,
+	"./ss": 142,
+	"./ss.js": 142,
+	"./sv": 143,
+	"./sv.js": 143,
+	"./sw": 144,
+	"./sw.js": 144,
+	"./ta": 145,
+	"./ta.js": 145,
+	"./te": 146,
+	"./te.js": 146,
+	"./tet": 147,
+	"./tet.js": 147,
+	"./tg": 148,
+	"./tg.js": 148,
+	"./th": 149,
+	"./th.js": 149,
+	"./tk": 150,
+	"./tk.js": 150,
+	"./tl-ph": 151,
+	"./tl-ph.js": 151,
+	"./tlh": 152,
+	"./tlh.js": 152,
+	"./tr": 153,
+	"./tr.js": 153,
+	"./tzl": 154,
+	"./tzl.js": 154,
+	"./tzm": 155,
+	"./tzm-latn": 156,
+	"./tzm-latn.js": 156,
+	"./tzm.js": 155,
+	"./ug-cn": 157,
+	"./ug-cn.js": 157,
+	"./uk": 158,
+	"./uk.js": 158,
+	"./ur": 159,
+	"./ur.js": 159,
+	"./uz": 160,
+	"./uz-latn": 161,
+	"./uz-latn.js": 161,
+	"./uz.js": 160,
+	"./vi": 162,
+	"./vi.js": 162,
+	"./x-pseudo": 163,
+	"./x-pseudo.js": 163,
+	"./yo": 164,
+	"./yo.js": 164,
+	"./zh-cn": 165,
+	"./zh-cn.js": 165,
+	"./zh-hk": 166,
+	"./zh-hk.js": 166,
+	"./zh-mo": 167,
+	"./zh-mo.js": 167,
+	"./zh-tw": 168,
+	"./zh-tw.js": 168
 };
 
 
@@ -14720,10 +14778,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 32;
+webpackContext.id = 33;
 
 /***/ }),
-/* 33 */
+/* 34 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/af.js ***!
   \*************************************************************************************/
@@ -14735,7 +14793,7 @@ webpackContext.id = 32;
 //! author : Werner Mollentze : https://github.com/wernerm
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -14812,7 +14870,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 34 */
+/* 35 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ar.js ***!
   \*************************************************************************************/
@@ -14826,7 +14884,7 @@ webpackContext.id = 32;
 //! author : forabi https://github.com/forabi
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -15019,7 +15077,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 35 */
+/* 36 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ar-dz.js ***!
   \****************************************************************************************/
@@ -15035,7 +15093,7 @@ webpackContext.id = 32;
 //! author : Noureddine LOUAHEDJ : https://github.com/noureddinem
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -15193,7 +15251,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 36 */
+/* 37 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ar-kw.js ***!
   \****************************************************************************************/
@@ -15205,7 +15263,7 @@ webpackContext.id = 32;
 //! author : Nusret Parlak: https://github.com/nusretparlak
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -15265,7 +15323,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 37 */
+/* 38 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ar-ly.js ***!
   \****************************************************************************************/
@@ -15277,7 +15335,7 @@ webpackContext.id = 32;
 //! author : Ali Hmer: https://github.com/kikoanis
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -15454,7 +15512,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 38 */
+/* 39 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ar-ma.js ***!
   \****************************************************************************************/
@@ -15467,7 +15525,7 @@ webpackContext.id = 32;
 //! author : Abdel Said : https://github.com/abdelsaid
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -15527,7 +15585,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 39 */
+/* 40 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ar-sa.js ***!
   \****************************************************************************************/
@@ -15539,7 +15597,7 @@ webpackContext.id = 32;
 //! author : Suhail Alkowaileet : https://github.com/xsoh
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -15649,7 +15707,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 40 */
+/* 41 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ar-tn.js ***!
   \****************************************************************************************/
@@ -15661,7 +15719,7 @@ webpackContext.id = 32;
 //! author : Nader Toukabri : https://github.com/naderio
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -15721,7 +15779,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 41 */
+/* 42 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/az.js ***!
   \*************************************************************************************/
@@ -15733,7 +15791,7 @@ webpackContext.id = 32;
 //! author : topchiyev : https://github.com/topchiyev
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -15840,7 +15898,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 42 */
+/* 43 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/be.js ***!
   \*************************************************************************************/
@@ -15854,7 +15912,7 @@ webpackContext.id = 32;
 //! Author : Menelion Elensúle : https://github.com/Oire
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -15999,7 +16057,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 43 */
+/* 44 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/bg.js ***!
   \*************************************************************************************/
@@ -16011,7 +16069,7 @@ webpackContext.id = 32;
 //! author : Krasen Borisov : https://github.com/kraz
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -16104,7 +16162,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 44 */
+/* 45 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/bm.js ***!
   \*************************************************************************************/
@@ -16116,7 +16174,7 @@ webpackContext.id = 32;
 //! author : Estelle Comment : https://github.com/estellecomment
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -16173,7 +16231,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 45 */
+/* 46 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/bn.js ***!
   \*************************************************************************************/
@@ -16185,7 +16243,7 @@ webpackContext.id = 32;
 //! author : Kaushik Gandhi : https://github.com/kaushikgandhi
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -16309,7 +16367,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 46 */
+/* 47 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/bn-bd.js ***!
   \****************************************************************************************/
@@ -16321,7 +16379,7 @@ webpackContext.id = 32;
 //! author : Asraf Hossain Patoary : https://github.com/ashwoolford
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -16455,7 +16513,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 47 */
+/* 48 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/bo.js ***!
   \*************************************************************************************/
@@ -16467,7 +16525,7 @@ webpackContext.id = 32;
 //! author : Thupten N. Chakrishar : https://github.com/vajradog
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -16595,7 +16653,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 48 */
+/* 49 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/br.js ***!
   \*************************************************************************************/
@@ -16607,7 +16665,7 @@ webpackContext.id = 32;
 //! author : Jean-Baptiste Le Duigou : https://github.com/jbleduigou
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -16778,7 +16836,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 49 */
+/* 50 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/bs.js ***!
   \*************************************************************************************/
@@ -16791,7 +16849,7 @@ webpackContext.id = 32;
 //! based on (hr) translation by Bojan Marković
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -16945,7 +17003,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 50 */
+/* 51 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ca.js ***!
   \*************************************************************************************/
@@ -16957,7 +17015,7 @@ webpackContext.id = 32;
 //! author : Juan G. Hurtado : https://github.com/juanghurtado
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -17060,7 +17118,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 51 */
+/* 52 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/cs.js ***!
   \*************************************************************************************/
@@ -17072,7 +17130,7 @@ webpackContext.id = 32;
 //! author : petrbela : https://github.com/petrbela
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -17249,7 +17307,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 52 */
+/* 53 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/cv.js ***!
   \*************************************************************************************/
@@ -17261,7 +17319,7 @@ webpackContext.id = 32;
 //! author : Anatoly Mironov : https://github.com/mirontoli
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -17329,7 +17387,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 53 */
+/* 54 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/cy.js ***!
   \*************************************************************************************/
@@ -17342,7 +17400,7 @@ webpackContext.id = 32;
 //! author : https://github.com/ryangreaves
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -17444,7 +17502,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 54 */
+/* 55 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/da.js ***!
   \*************************************************************************************/
@@ -17456,7 +17514,7 @@ webpackContext.id = 32;
 //! author : Ulrik Nielsen : https://github.com/mrbase
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -17515,7 +17573,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 55 */
+/* 56 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/de.js ***!
   \*************************************************************************************/
@@ -17529,7 +17587,7 @@ webpackContext.id = 32;
 //! author : Mikolaj Dadela : https://github.com/mik01aj
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -17611,7 +17669,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 56 */
+/* 57 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/de-at.js ***!
   \****************************************************************************************/
@@ -17626,7 +17684,7 @@ webpackContext.id = 32;
 //! author : Mikolaj Dadela : https://github.com/mik01aj
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -17708,7 +17766,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 57 */
+/* 58 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/de-ch.js ***!
   \****************************************************************************************/
@@ -17720,7 +17778,7 @@ webpackContext.id = 32;
 //! author : sschueller : https://github.com/sschueller
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -17802,7 +17860,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 58 */
+/* 59 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/dv.js ***!
   \*************************************************************************************/
@@ -17814,7 +17872,7 @@ webpackContext.id = 32;
 //! author : Jawish Hameed : https://github.com/jawish
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -17910,7 +17968,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 59 */
+/* 60 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/el.js ***!
   \*************************************************************************************/
@@ -17922,7 +17980,7 @@ webpackContext.id = 32;
 //! author : Aggelos Karalias : https://github.com/mehiel
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -18032,7 +18090,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 60 */
+/* 61 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/en-au.js ***!
   \****************************************************************************************/
@@ -18044,7 +18102,7 @@ webpackContext.id = 32;
 //! author : Jared Morse : https://github.com/jarcoal
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -18118,7 +18176,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 61 */
+/* 62 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/en-ca.js ***!
   \****************************************************************************************/
@@ -18130,7 +18188,7 @@ webpackContext.id = 32;
 //! author : Jonathan Abourbih : https://github.com/jonbca
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -18200,7 +18258,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 62 */
+/* 63 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/en-gb.js ***!
   \****************************************************************************************/
@@ -18212,7 +18270,7 @@ webpackContext.id = 32;
 //! author : Chris Gedrim : https://github.com/chrisgedrim
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -18286,7 +18344,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 63 */
+/* 64 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/en-ie.js ***!
   \****************************************************************************************/
@@ -18298,7 +18356,7 @@ webpackContext.id = 32;
 //! author : Chris Cartlidge : https://github.com/chriscartlidge
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -18372,7 +18430,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 64 */
+/* 65 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/en-il.js ***!
   \****************************************************************************************/
@@ -18384,7 +18442,7 @@ webpackContext.id = 32;
 //! author : Chris Gedrim : https://github.com/chrisgedrim
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -18454,7 +18512,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 65 */
+/* 66 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/en-in.js ***!
   \****************************************************************************************/
@@ -18466,7 +18524,7 @@ webpackContext.id = 32;
 //! author : Jatin Agrawal : https://github.com/jatinag22
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -18540,7 +18598,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 66 */
+/* 67 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/en-nz.js ***!
   \****************************************************************************************/
@@ -18552,7 +18610,7 @@ webpackContext.id = 32;
 //! author : Luke McGregor : https://github.com/lukemcgregor
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -18626,7 +18684,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 67 */
+/* 68 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/en-sg.js ***!
   \****************************************************************************************/
@@ -18638,7 +18696,7 @@ webpackContext.id = 32;
 //! author : Matthew Castrillon-Madrigal : https://github.com/techdimension
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -18712,7 +18770,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 68 */
+/* 69 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/eo.js ***!
   \*************************************************************************************/
@@ -18727,7 +18785,7 @@ webpackContext.id = 32;
 //! comment : Vivakvo corrected the translation by colindean and miestasmia
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -18798,7 +18856,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 69 */
+/* 70 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/es.js ***!
   \*************************************************************************************/
@@ -18810,7 +18868,7 @@ webpackContext.id = 32;
 //! author : Julio Napurí : https://github.com/julionc
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -18922,7 +18980,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 70 */
+/* 71 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/es-do.js ***!
   \****************************************************************************************/
@@ -18933,7 +18991,7 @@ webpackContext.id = 32;
 //! locale : Spanish (Dominican Republic) [es-do]
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -19044,7 +19102,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 71 */
+/* 72 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/es-mx.js ***!
   \****************************************************************************************/
@@ -19056,7 +19114,7 @@ webpackContext.id = 32;
 //! author : JC Franco : https://github.com/jcfranco
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -19168,7 +19226,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 72 */
+/* 73 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/es-us.js ***!
   \****************************************************************************************/
@@ -19181,7 +19239,7 @@ webpackContext.id = 32;
 //! author : chrisrodz : https://github.com/chrisrodz
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -19292,7 +19350,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 73 */
+/* 74 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/et.js ***!
   \*************************************************************************************/
@@ -19305,7 +19363,7 @@ webpackContext.id = 32;
 //! improvements : Illimar Tambek : https://github.com/ragulka
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -19388,7 +19446,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 74 */
+/* 75 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/eu.js ***!
   \*************************************************************************************/
@@ -19400,7 +19458,7 @@ webpackContext.id = 32;
 //! author : Eneko Illarramendi : https://github.com/eillarra
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -19469,7 +19527,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 75 */
+/* 76 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/fa.js ***!
   \*************************************************************************************/
@@ -19481,7 +19539,7 @@ webpackContext.id = 32;
 //! author : Ebrahim Byagowi : https://github.com/ebraminio
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -19597,7 +19655,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 76 */
+/* 77 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/fi.js ***!
   \*************************************************************************************/
@@ -19609,7 +19667,7 @@ webpackContext.id = 32;
 //! author : Tarmo Aidantausta : https://github.com/bleadof
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -19736,7 +19794,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 77 */
+/* 78 */
 /*!**************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/fil.js ***!
   \**************************************************************************************/
@@ -19749,7 +19807,7 @@ webpackContext.id = 32;
 //! author : Matthew Co : https://github.com/matthewdeeco
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -19812,7 +19870,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 78 */
+/* 79 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/fo.js ***!
   \*************************************************************************************/
@@ -19825,7 +19883,7 @@ webpackContext.id = 32;
 //! author : Kristian Sakarisson : https://github.com/sakarisson
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -19886,7 +19944,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 79 */
+/* 80 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/fr.js ***!
   \*************************************************************************************/
@@ -19898,7 +19956,7 @@ webpackContext.id = 32;
 //! author : John Fischer : https://github.com/jfroffice
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -20008,7 +20066,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 80 */
+/* 81 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/fr-ca.js ***!
   \****************************************************************************************/
@@ -20020,7 +20078,7 @@ webpackContext.id = 32;
 //! author : Jonathan Abourbih : https://github.com/jonbca
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -20095,7 +20153,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 81 */
+/* 82 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/fr-ch.js ***!
   \****************************************************************************************/
@@ -20107,7 +20165,7 @@ webpackContext.id = 32;
 //! author : Gaspard Bucher : https://github.com/gaspard
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -20186,7 +20244,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 82 */
+/* 83 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/fy.js ***!
   \*************************************************************************************/
@@ -20198,7 +20256,7 @@ webpackContext.id = 32;
 //! author : Robin van der Vliet : https://github.com/robin0van0der0v
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -20281,7 +20339,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 83 */
+/* 84 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ga.js ***!
   \*************************************************************************************/
@@ -20293,7 +20351,7 @@ webpackContext.id = 32;
 //! author : André Silva : https://github.com/askpt
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -20394,7 +20452,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 84 */
+/* 85 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/gd.js ***!
   \*************************************************************************************/
@@ -20406,7 +20464,7 @@ webpackContext.id = 32;
 //! author : Jon Ashdown : https://github.com/jonashdown
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -20507,7 +20565,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 85 */
+/* 86 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/gl.js ***!
   \*************************************************************************************/
@@ -20519,7 +20577,7 @@ webpackContext.id = 32;
 //! author : Juan G. Hurtado : https://github.com/juanghurtado
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -20599,7 +20657,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 86 */
+/* 87 */
 /*!*******************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/gom-deva.js ***!
   \*******************************************************************************************/
@@ -20611,7 +20669,7 @@ webpackContext.id = 32;
 //! author : The Discoverer : https://github.com/WikiDiscoverer
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -20741,7 +20799,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 87 */
+/* 88 */
 /*!*******************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/gom-latn.js ***!
   \*******************************************************************************************/
@@ -20753,7 +20811,7 @@ webpackContext.id = 32;
 //! author : The Discoverer : https://github.com/WikiDiscoverer
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -20883,7 +20941,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 88 */
+/* 89 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/gu.js ***!
   \*************************************************************************************/
@@ -20895,7 +20953,7 @@ webpackContext.id = 32;
 //! author : Kaushik Thanki : https://github.com/Kaushik1987
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -21022,7 +21080,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 89 */
+/* 90 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/he.js ***!
   \*************************************************************************************/
@@ -21036,7 +21094,7 @@ webpackContext.id = 32;
 //! author : Tal Ater : https://github.com/TalAter
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -21134,7 +21192,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 90 */
+/* 91 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/hi.js ***!
   \*************************************************************************************/
@@ -21146,7 +21204,7 @@ webpackContext.id = 32;
 //! author : Mayank Singhal : https://github.com/mayanksinghal
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -21316,7 +21374,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 91 */
+/* 92 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/hr.js ***!
   \*************************************************************************************/
@@ -21328,7 +21386,7 @@ webpackContext.id = 32;
 //! author : Bojan Marković : https://github.com/bmarkovic
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -21488,7 +21546,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 92 */
+/* 93 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/hu.js ***!
   \*************************************************************************************/
@@ -21501,7 +21559,7 @@ webpackContext.id = 32;
 //! author : Peter Viszt  : https://github.com/passatgt
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -21624,7 +21682,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 93 */
+/* 94 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/hy-am.js ***!
   \****************************************************************************************/
@@ -21636,7 +21694,7 @@ webpackContext.id = 32;
 //! author : Armendarabyan : https://github.com/armendarabyan
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -21734,7 +21792,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 94 */
+/* 95 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/id.js ***!
   \*************************************************************************************/
@@ -21747,7 +21805,7 @@ webpackContext.id = 32;
 //! reference: http://id.wikisource.org/wiki/Pedoman_Umum_Ejaan_Bahasa_Indonesia_yang_Disempurnakan
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -21828,7 +21886,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 95 */
+/* 96 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/is.js ***!
   \*************************************************************************************/
@@ -21840,7 +21898,7 @@ webpackContext.id = 32;
 //! author : Hinrik Örn Sigurðsson : https://github.com/hinrik
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -21985,7 +22043,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 96 */
+/* 97 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/it.js ***!
   \*************************************************************************************/
@@ -21999,7 +22057,7 @@ webpackContext.id = 32;
 //! author: Marco : https://github.com/Manfre98
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -22109,7 +22167,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 97 */
+/* 98 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/it-ch.js ***!
   \****************************************************************************************/
@@ -22121,7 +22179,7 @@ webpackContext.id = 32;
 //! author : xfh : https://github.com/xfh
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -22191,7 +22249,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 98 */
+/* 99 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ja.js ***!
   \*************************************************************************************/
@@ -22203,7 +22261,7 @@ webpackContext.id = 32;
 //! author : LI Long : https://github.com/baryon
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -22357,7 +22415,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 99 */
+/* 100 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/jv.js ***!
   \*************************************************************************************/
@@ -22370,7 +22428,7 @@ webpackContext.id = 32;
 //! reference: http://jv.wikipedia.org/wiki/Basa_Jawa
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -22451,7 +22509,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 100 */
+/* 101 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ka.js ***!
   \*************************************************************************************/
@@ -22463,7 +22521,7 @@ webpackContext.id = 32;
 //! author : Irakli Janiashvili : https://github.com/IrakliJani
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -22561,7 +22619,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 101 */
+/* 102 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/kk.js ***!
   \*************************************************************************************/
@@ -22573,7 +22631,7 @@ webpackContext.id = 32;
 //! authors : Nurlan Rakhimzhanov : https://github.com/nurlan
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -22661,7 +22719,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 102 */
+/* 103 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/km.js ***!
   \*************************************************************************************/
@@ -22673,7 +22731,7 @@ webpackContext.id = 32;
 //! author : Kruy Vanna : https://github.com/kruyvanna
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -22781,7 +22839,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 103 */
+/* 104 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/kn.js ***!
   \*************************************************************************************/
@@ -22793,7 +22851,7 @@ webpackContext.id = 32;
 //! author : Rajeev Naik : https://github.com/rajeevnaikte
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -22922,7 +22980,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 104 */
+/* 105 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ko.js ***!
   \*************************************************************************************/
@@ -22935,7 +22993,7 @@ webpackContext.id = 32;
 //! author : Jeeeyul Lee <jeeeyul@gmail.com>
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -23015,7 +23073,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 105 */
+/* 106 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ku.js ***!
   \*************************************************************************************/
@@ -23027,7 +23085,7 @@ webpackContext.id = 32;
 //! author : Shahram Mebashar : https://github.com/ShahramMebashar
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -23151,7 +23209,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 106 */
+/* 107 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ky.js ***!
   \*************************************************************************************/
@@ -23163,7 +23221,7 @@ webpackContext.id = 32;
 //! author : Chyngyz Arystan uulu : https://github.com/chyngyz
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -23253,7 +23311,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 107 */
+/* 108 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/lb.js ***!
   \*************************************************************************************/
@@ -23266,7 +23324,7 @@ webpackContext.id = 32;
 //! author : David Raison : https://github.com/kwisatz
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -23406,7 +23464,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 108 */
+/* 109 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/lo.js ***!
   \*************************************************************************************/
@@ -23418,7 +23476,7 @@ webpackContext.id = 32;
 //! author : Ryan Hart : https://github.com/ryanhart2
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -23489,7 +23547,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 109 */
+/* 110 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/lt.js ***!
   \*************************************************************************************/
@@ -23501,7 +23559,7 @@ webpackContext.id = 32;
 //! author : Mindaugas Mozūras : https://github.com/mmozuras
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -23630,7 +23688,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 110 */
+/* 111 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/lv.js ***!
   \*************************************************************************************/
@@ -23643,7 +23701,7 @@ webpackContext.id = 32;
 //! author : Jānis Elmeris : https://github.com/JanisE
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -23741,7 +23799,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 111 */
+/* 112 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/me.js ***!
   \*************************************************************************************/
@@ -23753,7 +23811,7 @@ webpackContext.id = 32;
 //! author : Miodrag Nikač <miodrag@restartit.me> : https://github.com/miodragnikac
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -23877,7 +23935,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 112 */
+/* 113 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/mi.js ***!
   \*************************************************************************************/
@@ -23889,7 +23947,7 @@ webpackContext.id = 32;
 //! author : John Corrigan <robbiecloset@gmail.com> : https://github.com/johnideal
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -23954,7 +24012,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 113 */
+/* 114 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/mk.js ***!
   \*************************************************************************************/
@@ -23967,7 +24025,7 @@ webpackContext.id = 32;
 //! author : Sashko Todorov : https://github.com/bkyceh
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -24058,7 +24116,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 114 */
+/* 115 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ml.js ***!
   \*************************************************************************************/
@@ -24070,7 +24128,7 @@ webpackContext.id = 32;
 //! author : Floyd Pink : https://github.com/floydpink
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -24156,7 +24214,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 115 */
+/* 116 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/mn.js ***!
   \*************************************************************************************/
@@ -24168,7 +24226,7 @@ webpackContext.id = 32;
 //! author : Javkhlantugs Nyamdorj : https://github.com/javkhaanj7
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -24273,7 +24331,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 116 */
+/* 117 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/mr.js ***!
   \*************************************************************************************/
@@ -24286,7 +24344,7 @@ webpackContext.id = 32;
 //! author : Vivek Athalye : https://github.com/vnathalye
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -24493,7 +24551,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 117 */
+/* 118 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ms.js ***!
   \*************************************************************************************/
@@ -24505,7 +24563,7 @@ webpackContext.id = 32;
 //! author : Weldan Jamili : https://github.com/weldan
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -24586,7 +24644,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 118 */
+/* 119 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ms-my.js ***!
   \****************************************************************************************/
@@ -24599,7 +24657,7 @@ webpackContext.id = 32;
 //! author : Weldan Jamili : https://github.com/weldan
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -24680,7 +24738,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 119 */
+/* 120 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/mt.js ***!
   \*************************************************************************************/
@@ -24692,7 +24750,7 @@ webpackContext.id = 32;
 //! author : Alessandro Maruccia : https://github.com/alesma
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -24753,7 +24811,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 120 */
+/* 121 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/my.js ***!
   \*************************************************************************************/
@@ -24767,7 +24825,7 @@ webpackContext.id = 32;
 //! author : Tin Aung Lin : https://github.com/thanyawzinmin
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -24862,7 +24920,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 121 */
+/* 122 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/nb.js ***!
   \*************************************************************************************/
@@ -24876,7 +24934,7 @@ webpackContext.id = 32;
 //!           Stephen Ramthun : https://github.com/stephenramthun
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -24941,7 +24999,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 122 */
+/* 123 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ne.js ***!
   \*************************************************************************************/
@@ -24953,7 +25011,7 @@ webpackContext.id = 32;
 //! author : suvash : https://github.com/suvash
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -25079,7 +25137,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 123 */
+/* 124 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/nl.js ***!
   \*************************************************************************************/
@@ -25092,7 +25150,7 @@ webpackContext.id = 32;
 //! author : Jacob Middag : https://github.com/middagj
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -25201,7 +25259,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 124 */
+/* 125 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/nl-be.js ***!
   \****************************************************************************************/
@@ -25214,7 +25272,7 @@ webpackContext.id = 32;
 //! author : Jacob Middag : https://github.com/middagj
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -25321,7 +25379,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 125 */
+/* 126 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/nn.js ***!
   \*************************************************************************************/
@@ -25334,7 +25392,7 @@ webpackContext.id = 32;
 //!           Stephen Ramthun : https://github.com/stephenramthun
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -25399,7 +25457,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 126 */
+/* 127 */
 /*!*****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/oc-lnc.js ***!
   \*****************************************************************************************/
@@ -25411,7 +25469,7 @@ webpackContext.id = 32;
 //! author : Quentin PAGÈS : https://github.com/Quenty31
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -25500,7 +25558,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 127 */
+/* 128 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/pa-in.js ***!
   \****************************************************************************************/
@@ -25512,7 +25570,7 @@ webpackContext.id = 32;
 //! author : Harpreet Singh : https://github.com/harpreetkhalsagtbit
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -25639,7 +25697,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 128 */
+/* 129 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/pl.js ***!
   \*************************************************************************************/
@@ -25651,7 +25709,7 @@ webpackContext.id = 32;
 //! author : Rafal Hirsz : https://github.com/evoL
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -25796,7 +25854,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 129 */
+/* 130 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/pt.js ***!
   \*************************************************************************************/
@@ -25808,7 +25866,7 @@ webpackContext.id = 32;
 //! author : Jefferson : https://github.com/jalex79
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -25876,7 +25934,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 130 */
+/* 131 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/pt-br.js ***!
   \****************************************************************************************/
@@ -25888,7 +25946,7 @@ webpackContext.id = 32;
 //! author : Caio Ribeiro Pereira : https://github.com/caio-ribeiro-pereira
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -25951,7 +26009,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 131 */
+/* 132 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ro.js ***!
   \*************************************************************************************/
@@ -25965,7 +26023,7 @@ webpackContext.id = 32;
 //! author : Emanuel Cepoi : https://github.com/cepem
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -26044,7 +26102,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 132 */
+/* 133 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ru.js ***!
   \*************************************************************************************/
@@ -26058,7 +26116,7 @@ webpackContext.id = 32;
 //! author : Коренберг Марк : https://github.com/socketpair
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -26268,7 +26326,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 133 */
+/* 134 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/sd.js ***!
   \*************************************************************************************/
@@ -26280,7 +26338,7 @@ webpackContext.id = 32;
 //! author : Narain Sagar : https://github.com/narainsagar
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -26367,7 +26425,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 134 */
+/* 135 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/se.js ***!
   \*************************************************************************************/
@@ -26379,7 +26437,7 @@ webpackContext.id = 32;
 //! authors : Bård Rolstad Henriksen : https://github.com/karamell
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -26442,7 +26500,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 135 */
+/* 136 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/si.js ***!
   \*************************************************************************************/
@@ -26454,7 +26512,7 @@ webpackContext.id = 32;
 //! author : Sampath Sitinamaluwa : https://github.com/sampathsris
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -26528,7 +26586,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 136 */
+/* 137 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/sk.js ***!
   \*************************************************************************************/
@@ -26541,7 +26599,7 @@ webpackContext.id = 32;
 //! based on work of petrbela : https://github.com/petrbela
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -26690,7 +26748,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 137 */
+/* 138 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/sl.js ***!
   \*************************************************************************************/
@@ -26702,7 +26760,7 @@ webpackContext.id = 32;
 //! author : Robert Sedovšek : https://github.com/sedovsek
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -26878,7 +26936,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 138 */
+/* 139 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/sq.js ***!
   \*************************************************************************************/
@@ -26892,7 +26950,7 @@ webpackContext.id = 32;
 //! author : Oerd Cukalla : https://github.com/oerd
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -26961,7 +27019,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 139 */
+/* 140 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/sr.js ***!
   \*************************************************************************************/
@@ -26974,7 +27032,7 @@ webpackContext.id = 32;
 //! author : Stefan Crnjaković <stefan@hotmail.rs> : https://github.com/crnjakovic
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -27097,7 +27155,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 140 */
+/* 141 */
 /*!******************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/sr-cyrl.js ***!
   \******************************************************************************************/
@@ -27110,7 +27168,7 @@ webpackContext.id = 32;
 //! author : Stefan Crnjaković <stefan@hotmail.rs> : https://github.com/crnjakovic
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -27231,7 +27289,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 141 */
+/* 142 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ss.js ***!
   \*************************************************************************************/
@@ -27243,7 +27301,7 @@ webpackContext.id = 32;
 //! author : Nicolai Davies<mail@nicolai.io> : https://github.com/nicolaidavies
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -27332,7 +27390,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 142 */
+/* 143 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/sv.js ***!
   \*************************************************************************************/
@@ -27344,7 +27402,7 @@ webpackContext.id = 32;
 //! author : Jens Alm : https://github.com/ulmus
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -27418,7 +27476,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 143 */
+/* 144 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/sw.js ***!
   \*************************************************************************************/
@@ -27430,7 +27488,7 @@ webpackContext.id = 32;
 //! author : Fahad Kassim : https://github.com/fadsel
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -27490,7 +27548,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 144 */
+/* 145 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ta.js ***!
   \*************************************************************************************/
@@ -27502,7 +27560,7 @@ webpackContext.id = 32;
 //! author : Arjunkumar Krishnamoorthy : https://github.com/tk120404
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -27637,7 +27695,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 145 */
+/* 146 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/te.js ***!
   \*************************************************************************************/
@@ -27649,7 +27707,7 @@ webpackContext.id = 32;
 //! author : Krishna Chaitanya Thota : https://github.com/kcthota
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -27741,7 +27799,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 146 */
+/* 147 */
 /*!**************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/tet.js ***!
   \**************************************************************************************/
@@ -27755,7 +27813,7 @@ webpackContext.id = 32;
 //! author : Sonia Simoes : https://github.com/soniasimoes
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -27827,7 +27885,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 147 */
+/* 148 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/tg.js ***!
   \*************************************************************************************/
@@ -27839,7 +27897,7 @@ webpackContext.id = 32;
 //! author : Orif N. Jr. : https://github.com/orif-jr
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -27961,7 +28019,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 148 */
+/* 149 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/th.js ***!
   \*************************************************************************************/
@@ -27973,7 +28031,7 @@ webpackContext.id = 32;
 //! author : Kridsada Thanabulpong : https://github.com/sirn
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -28043,7 +28101,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 149 */
+/* 150 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/tk.js ***!
   \*************************************************************************************/
@@ -28055,7 +28113,7 @@ webpackContext.id = 32;
 //! author : Atamyrat Abdyrahmanov : https://github.com/atamyratabdy
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -28152,7 +28210,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 150 */
+/* 151 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/tl-ph.js ***!
   \****************************************************************************************/
@@ -28164,7 +28222,7 @@ webpackContext.id = 32;
 //! author : Dan Hagman : https://github.com/hagmandan
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -28227,7 +28285,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 151 */
+/* 152 */
 /*!**************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/tlh.js ***!
   \**************************************************************************************/
@@ -28239,7 +28297,7 @@ webpackContext.id = 32;
 //! author : Dominika Kruk : https://github.com/amaranthrose
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -28370,7 +28428,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 152 */
+/* 153 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/tr.js ***!
   \*************************************************************************************/
@@ -28383,7 +28441,7 @@ webpackContext.id = 32;
 //!           Burak Yiğit Kaya: https://github.com/BYK
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -28494,7 +28552,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 153 */
+/* 154 */
 /*!**************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/tzl.js ***!
   \**************************************************************************************/
@@ -28507,7 +28565,7 @@ webpackContext.id = 32;
 //! author : Iustì Canun
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -28601,7 +28659,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 154 */
+/* 155 */
 /*!**************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/tzm.js ***!
   \**************************************************************************************/
@@ -28613,7 +28671,7 @@ webpackContext.id = 32;
 //! author : Abdel Said : https://github.com/abdelsaid
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -28672,7 +28730,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 155 */
+/* 156 */
 /*!*******************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/tzm-latn.js ***!
   \*******************************************************************************************/
@@ -28684,7 +28742,7 @@ webpackContext.id = 32;
 //! author : Abdel Said : https://github.com/abdelsaid
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -28743,7 +28801,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 156 */
+/* 157 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ug-cn.js ***!
   \****************************************************************************************/
@@ -28755,7 +28813,7 @@ webpackContext.id = 32;
 //! author: boyaq : https://github.com/boyaq
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -28871,7 +28929,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 157 */
+/* 158 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/uk.js ***!
   \*************************************************************************************/
@@ -28884,7 +28942,7 @@ webpackContext.id = 32;
 //! Author : Menelion Elensúle : https://github.com/Oire
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -29052,7 +29110,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 158 */
+/* 159 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/ur.js ***!
   \*************************************************************************************/
@@ -29065,7 +29123,7 @@ webpackContext.id = 32;
 //! author : Zack : https://github.com/ZackVision
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -29152,7 +29210,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 159 */
+/* 160 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/uz.js ***!
   \*************************************************************************************/
@@ -29164,7 +29222,7 @@ webpackContext.id = 32;
 //! author : Sardor Muminov : https://github.com/muminoff
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -29221,7 +29279,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 160 */
+/* 161 */
 /*!******************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/uz-latn.js ***!
   \******************************************************************************************/
@@ -29233,7 +29291,7 @@ webpackContext.id = 32;
 //! author : Rasulbek Mirzayev : github.com/Rasulbeeek
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -29292,7 +29350,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 161 */
+/* 162 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/vi.js ***!
   \*************************************************************************************/
@@ -29305,7 +29363,7 @@ webpackContext.id = 32;
 //! author : Chien Kira : https://github.com/chienkira
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -29389,7 +29447,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 162 */
+/* 163 */
 /*!*******************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/x-pseudo.js ***!
   \*******************************************************************************************/
@@ -29401,7 +29459,7 @@ webpackContext.id = 32;
 //! author : Andrew Hood : https://github.com/andrewhood125
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -29478,7 +29536,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 163 */
+/* 164 */
 /*!*************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/yo.js ***!
   \*************************************************************************************/
@@ -29490,7 +29548,7 @@ webpackContext.id = 32;
 //! author : Atolagbe Abisoye : https://github.com/andela-batolagbe
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -29549,7 +29607,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 164 */
+/* 165 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/zh-cn.js ***!
   \****************************************************************************************/
@@ -29563,7 +29621,7 @@ webpackContext.id = 32;
 //! author : uu109 : https://github.com/uu109
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -29687,7 +29745,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 165 */
+/* 166 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/zh-hk.js ***!
   \****************************************************************************************/
@@ -29702,7 +29760,7 @@ webpackContext.id = 32;
 //! author : Anthony : https://github.com/anthonylau
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -29806,7 +29864,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 166 */
+/* 167 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/zh-mo.js ***!
   \****************************************************************************************/
@@ -29820,7 +29878,7 @@ webpackContext.id = 32;
 //! author : Tan Yuanhong : https://github.com/le0tan
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -29924,7 +29982,7 @@ webpackContext.id = 32;
 });
 
 /***/ }),
-/* 167 */
+/* 168 */
 /*!****************************************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/node_modules/moment/locale/zh-tw.js ***!
   \****************************************************************************************/
@@ -29937,7 +29995,7 @@ webpackContext.id = 32;
 //! author : Chris Lam : https://github.com/hehachris
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 30)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 31)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -30039,57 +30097,6 @@ webpackContext.id = 32;
   return zhTw;
 
 });
-
-/***/ }),
-/* 168 */
-/*!***********************************************************************!*\
-  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/config/dataBase.js ***!
-  \***********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;} // 操作数据库 CRUD 的类
-var db = wx.cloud.database();var
-
-Dbcrud = /*#__PURE__*/function () {"use strict";
-  function Dbcrud(gather, datas) {_classCallCheck(this, Dbcrud);
-    this.gather = gather;
-    this.datas = datas;
-  }
-
-  // get请求数据库
-  _createClass(Dbcrud, [{ key: "pullGet", value: function pullGet() {var _this = this;
-      return new Promise(function (resolve, reject) {
-        var base = db.collection(_this.gather);
-        base.get().
-        then(function (res) {
-          resolve(res);
-        }).
-        catch(function (error) {
-          reject(error);
-        });
-      });
-    }
-
-    // add提交数据到集合
-  }, { key: "pushAdd", value: function pushAdd() {var _this2 = this;
-      return new Promise(function (resolve, reject) {
-        var base = db.collection(_this2.gather);
-        // 注意：add()方法里必须是个对象，且必须加上 data（也是一个对象），具体参见微信官方文档——>云开发
-        base.add({
-          data: _this2.datas }).
-
-        then(function (res) {
-          resolve(res);
-        }).
-        catch(function (error) {
-          reject(error);
-        });
-      });
-    } }]);return Dbcrud;}();
-
-
-module.exports = Dbcrud;
 
 /***/ }),
 /* 169 */
@@ -44928,7 +44935,7 @@ var linedata = function linedata(catedays, diagdata, curedata, diedata) {
 
 function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;} // 折线图的疫情数据
 
-var moment = __webpack_require__(/*! moment */ 30);
+var moment = __webpack_require__(/*! moment */ 31);
 moment.locale('zh-cn');var _console =
 
 console,log = _console.log;var

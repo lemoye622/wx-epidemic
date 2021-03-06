@@ -3,21 +3,22 @@
 // 身份证正则
 var idCardReg = /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/
 // 手机号码正则
-var iphoneReg = /^1[3456789]\d{9}$/
+var phoneReg = /^1[3456789]\d{9}$/
 
 let check = function(obj){
 	let{
 		name,
-		iphone,
+		phone,
 		IDcard,
 		selectGender,
-		date,
+		birthday,
 		koseki,
-		province,
-		address,
-		selectValue,
+		residencePlace,
+		detailAddress,
+		isPermanentLive,
 		selectSymptom,
-		agree
+		healthCodeState,
+		isAgree
 	} = obj
 	return new Promise((resolve,reject)=>{
 		// 姓名
@@ -27,12 +28,12 @@ let check = function(obj){
 			return false
 		}
 		// 手机号码
-		if (iphone == '') {
+		if (phone == '') {
 			let tip = '请填写手机号码'
 			resolve(tip)
 			return false
 		}
-		if (iphone && !iphoneReg.test(iphone)){
+		if (phone && !phoneReg.test(phone)){
 			let tip = '请填写正确的手机号码'
 			resolve(tip)
 			return false
@@ -55,7 +56,7 @@ let check = function(obj){
 			return false
 		}
 		// 出生日期
-		if(date == ''){
+		if(birthday == ''){
 			let tip = '请选择出生日期'
 			resolve(tip)
 			return false
@@ -67,19 +68,19 @@ let check = function(obj){
 			return false
 		}
 		// 居住省市
-		if(province == ''){
+		if(residencePlace == ''){
 			let tip = '请选择居住省市'
 			resolve(tip)
 			return false
 		}
 		// 详细地址
-		if(address == ''){
+		if(detailAddress == ''){
 			let tip = '请填写详细地址'
 			resolve(tip)
 			return false
 		}
 		// 是否常住广东
-		if(selectValue == ''){
+		if(isPermanentLive == ''){
 			let tip = '请选择是否常住广东'
 			resolve(tip)
 			return false
@@ -90,8 +91,14 @@ let check = function(obj){
 			resolve(tip)
 			return false
 		}
+		// 是否选择了粤康码的状态
+		if(healthCodeState == ''){
+			let tip = '请选择粤康码状态'
+			resolve(tip)
+			return false
+		}
 		// 勾选，同意
-		if(agree.length == 0){
+		if(isAgree.length == 0){
 			let tip = '请勾选本申报所列事项'
 			resolve(tip)
 			return false

@@ -4,15 +4,15 @@
 			<!-- 基本信息 -->
 			<view class="title">基本信息</view>
 			<view class="information">
-				<text>* 姓名</text>
+				<text>姓名</text>
 				<input type="text" v-model="name" placeholder="你的姓名" placeholder-style="color:#bdbdc5"/>
 			</view>
 			<view class="information">
-				<text>* 手机号码</text>
-				<input type="number" v-model="iphone" placeholder="你的手机号码" placeholder-style="color:#bdbdc5"/>
+				<text>手机号码</text>
+				<input type="number" v-model="phone" placeholder="你的手机号码" placeholder-style="color:#bdbdc5"/>
 			</view>
 			<view class="information">
-				<text>* 身份证号码</text>
+				<text>身份证号码</text>
 				<view class="discern-cont">
 				<view class="discern-inpu"><input type="text" v-model="IDcard" placeholder="你的身份证号码" placeholder-style="color:#bdbdc5"/></view>
 				<view class="discern-img" @click="identify()">
@@ -21,7 +21,7 @@
 				</view>
 			</view>
 			<view class="information">
-				<text>* 性别</text>
+				<text>性别</text>
 				<view class="discern-cont">
 				<view class="discern-inpu"><input type="text" v-model="gender[index]" disabled placeholder="请选择你的性别" placeholder-style="color:#bdbdc5"/></view>
 				<view class="discern-right">
@@ -32,18 +32,18 @@
 				</view>
 			</view>
 			<view class="information">
-				<text>* 出生日期</text>
+				<text>出生日期</text>
 				<view class="discern-cont">
-				<view class="discern-inpu"><input type="text" v-model="date" disabled placeholder="请选择出生日期" placeholder-style="color:#bdbdc5"/></view>
+				<view class="discern-inpu"><input type="text" v-model="birthday" disabled placeholder="请选择出生日期" placeholder-style="color:#bdbdc5"/></view>
 				<view class="discern-right">
-					 <picker mode="date" :value="date" :start="startDate" :end="endDate" @change="birthdayChange">
+					 <picker mode="date" :value="birthday" :start="startDate" :end="endDate" @change="birthdayChange">
 						<view class="uni-input">选择</view>
 					</picker>
 				</view>
 				</view>
 			</view>
 			<view class="information">
-				<text>* 户籍所在地</text>
+				<text>户籍所在地</text>
 				<view class="discern-cont">
 				<view class="discern-inpu"><input type="text" v-model="koseki" disabled placeholder="请选择户籍所在地" placeholder-style="color:#bdbdc5"/></view>
 				<view class="discern-right">
@@ -54,19 +54,19 @@
 				</view>
 			</view>
 			<view class="information">
-				<text>* 居住省/市</text>
+				<text>居住省/市</text>
 				<view class="discern-cont">
-				<view class="discern-inpu"><input type="text" v-model="province" disabled placeholder="请选择居住省/市" placeholder-style="color:#bdbdc5"/></view>
+				<view class="discern-inpu"><input type="text" v-model="residencePlace" disabled placeholder="请选择居住省/市" placeholder-style="color:#bdbdc5"/></view>
 				<view class="discern-right">
-					<picker mode="region" :value="province"  @change="provinceChange">
+					<picker mode="region" :value="residencePlace"  @change="residencePlaceChange">
 						<view class="uni-input">选择</view>
 					</picker>
 				</view>
 				</view>
 			</view>
 			<view class="information">
-				<text>* 详细住址</text>
-				<input type="text" v-model="address" placeholder="请填写详细住址" placeholder-style="color:#bdbdc5"/>
+				<text>详细住址</text>
+				<input type="text" v-model="detailAddress" placeholder="请填写详细住址" placeholder-style="color:#bdbdc5"/>
 			</view>
 			<view class="title distance">是否常住广东</view>
 			<view class="trip">
@@ -82,8 +82,20 @@
 			<!-- 是否有如下症状 -->
 			<view class="title distance">是否有如下症状</view>
 			<view class="trip">
-				<block v-for="(item,index) in symptom" :key="index">
-				<view class="trip-flex" @click="radiosymptom(index,item.value)">
+				<block v-for="(item, index) in symptom" :key="index">
+				<view class="trip-flex" @click="radiosymptom(index, item.value)">
+					<view class="trip-listing">
+						<image src="../../static/weixuanzhong.svg" v-if="item.Selection == 'hide' "></image>
+						<image v-else src="../../static/xuanzhong.svg"></image>
+					</view>
+					<view>{{item.name}}</view>
+				</view>
+				</block>
+			</view>
+			<view class="title distance">粤康码状态（须为粤康码，广东省内各地区粤康码通用，广州市用穗康码亦可）</view>
+			<view class="trip">
+				<block v-for="(item, index) in healthCode" :key="index">
+				<view class="trip-flex" @click="radioHealthCode(index, item.value)">
 					<view class="trip-listing">
 						<image src="../../static/weixuanzhong.svg" v-if="item.Selection == 'hide' "></image>
 						<image v-else src="../../static/xuanzhong.svg"></image>
@@ -108,10 +120,7 @@
 				</view>
 			</view>
 			<!-- 提交未通过的信息提示组件 -->
-			<HMmessages ref="HMmessages" @complete="HMmessages = $refs.HMmessages" @clickMessage="clickMessage"></HMmessages>
-			
-						
-						
+			<HMmessages ref="HMmessages" @complete="HMmessages = $refs.HMmessages" @clickMessage="clickMessage"></HMmessages>					
 		</view>	
 	</view>
 </template>
@@ -128,16 +137,16 @@ export default {
 	data() {
 		return {
 			name: '',
-			iphone: '',
+			phone: '',
 			IDcard: '',
 			gender: ['男', '女'],
 			index: -1,
-			date: '',
+			birthday: '',
 			koseki: '',
-			province: '',
-			address: '',
+			residencePlace: '',
+			detailAddress: '',
 			kosekivalue: 1,
-			provincevalue: 2,
+			residencePlaceValue: 2,
 			// 是否常住广东
 			isPermanent: [
 				{
@@ -151,7 +160,7 @@ export default {
 			],
 			current: -1,
 			// 保存对于是否常住广东的选择信息
-			selectValue: '',
+			isPermanentLive: '',
 			// 保存选择的性别，最终提交到云数据库
 			selectGender: '',
 			// 症状
@@ -184,6 +193,36 @@ export default {
 			],
 			// 保存症状的选择
 			selectSymptom: [],
+			// 粤康码状态
+			healthCode: [
+				{
+					value:'001',
+					name:'绿码',
+					Selection:'hide'
+				},
+				{
+					value:'002',
+					name:'黄码',
+					Selection:'hide'
+				},
+				{
+					value:'003',
+					name:'橙码',
+					Selection:'hide'
+				},
+				{
+					value:'004',
+					name:'红码',
+					Selection:'hide'
+				},
+				{
+					value:'005',
+					name:'未办理',
+					Selection:'hide'
+				}
+			],
+			// 保存粤康码的状态
+			healthCodeState: '',
 			// 用户勾选提交确认
 			checkboxContent: [
 				{
@@ -193,7 +232,7 @@ export default {
 				}
 			],
 			// 保存用户是否勾选同意
-			agree:[]
+			isAgree: ''
 		}
 	},
 	methods: {
@@ -201,13 +240,13 @@ export default {
 			this.index = e.target.value
 		},
 		birthdayChange(e){
-			this.date = e.target.value
+			this.birthday = e.target.value
 		},
 		kosekiChange(e){
 			this.publicRegion(e.target.value, this.kosekivalue)
 		},
-		provinceChange(e) {
-			this.publicRegion(e.target.value, this.provincevalue)
+		residencePlaceChange(e) {
+			this.publicRegion(e.target.value, this.residencePlaceValue)
 		},
 		// 户籍所在地和省市区共用方法
 		publicRegion(value, type) {
@@ -219,21 +258,21 @@ export default {
 				if (type == 1) {
 					this.koseki = str.substr(0, str.length - 1)
 				} else {
-					this.province = str.substr(0, str.length - 1)
+					this.residencePlace = str.substr(0, str.length - 1)
 				}
 			}
 		},
 		radioChange(e) {
-			this.selectValue = e.target.value
+			this.isPermanentLive = e.target.value
 		},
 		// 是否常住广东的选择
 		selectLive() {
-			if (this.selectValue == 'YES') {
-				this.selectValue = this.isPermanent[0].name
-			} else if (this.selectValue == 'NO') {
-				this.selectValue = this.isPermanent[1].name
+			if (this.isPermanentLive == 'YES') {
+				this.isPermanentLive = this.isPermanent[0].name
+			} else if (this.isPermanentLive == 'NO') {
+				this.isPermanentLive = this.isPermanent[1].name
 			} else {
-				this.selectValue = ''
+				this.isPermanentLive = ''
 			}
 		},
 		// 性别的选择
@@ -288,23 +327,77 @@ export default {
 			})
 			console.log(this.selectSymptom)
 		},
+		// 粤康码状态
+		radioHealthCode(index, value) {
+			switch (value){
+				case '001':
+					this.$set(this.healthCode[index], 'Selection', 'show')
+					this.$set(this.healthCode[1], 'Selection', 'hide')
+					this.$set(this.healthCode[2], 'Selection', 'hide')
+					this.$set(this.healthCode[3], 'Selection', 'hide')
+					this.$set(this.healthCode[4], 'Selection', 'hide')
+					break;
+				case '002':
+					this.$set(this.healthCode[index], 'Selection', 'show')
+					this.$set(this.healthCode[0], 'Selection', 'hide')
+					this.$set(this.healthCode[2], 'Selection', 'hide')
+					this.$set(this.healthCode[3], 'Selection', 'hide')
+					this.$set(this.healthCode[4], 'Selection', 'hide')
+					break;
+				case '003':
+					this.$set(this.healthCode[index], 'Selection', 'show')
+					this.$set(this.healthCode[0], 'Selection', 'hide')
+					this.$set(this.healthCode[1], 'Selection', 'hide')
+					this.$set(this.healthCode[3], 'Selection', 'hide')
+					this.$set(this.healthCode[4], 'Selection', 'hide')
+					break;
+				case '004':
+					this.$set(this.healthCode[index], 'Selection', 'show')
+					this.$set(this.healthCode[0], 'Selection', 'hide')
+					this.$set(this.healthCode[1], 'Selection', 'hide')
+					this.$set(this.healthCode[2], 'Selection', 'hide')
+					this.$set(this.healthCode[4], 'Selection', 'hide')
+					break;
+				case '005':
+					this.$set(this.healthCode[index], 'Selection', 'show')
+					this.$set(this.healthCode[0], 'Selection', 'hide')
+					this.$set(this.healthCode[1], 'Selection', 'hide')
+					this.$set(this.healthCode[2], 'Selection', 'hide')
+					this.$set(this.healthCode[3], 'Selection', 'hide')
+					break;
+				default:
+					break;
+			}
+		},
+		// 粤康码状态的选择
+		selectHealthCodeFun() {
+			let selectState = this.healthCode.filter((item) => {
+				return item.Selection == 'show'
+			})
+			let healthCodeArr = selectState.map((item) => {
+				return item.name
+			})
+			this.healthCodeState = healthCodeArr.toString()
+			console.log(this.healthCodeState)
+		},
 		// 用户是否勾选同意
 		checkboxChange(event) {
-			this.agree = event.target.value
+			this.isAgree = event.target.value.toString()
 		},
 		submit() {
 			let obj = {
 				name: this.name,
-				iphone: this.iphone,
+				phone: this.phone,
 				IDcard: this.IDcard,
 				selectGender: this.selectGender,
-				date: this.date,
+				birthday: this.birthday,
 				koseki: this.koseki,
-				province: this.province,
-				address: this.address,
-				selectValue: this.selectValue,
+				residencePlace: this.residencePlace,
+				detailAddress: this.detailAddress,
+				isPermanentLive: this.isPermanentLive,
 				selectSymptom: this.selectSymptom,
-				agree: this.agree
+				healthCodeState: this.healthCodeState,
+				isAgree: this.isAgree
 			}
 			console.log(obj)
 			check(obj).then((res) => {
@@ -363,6 +456,10 @@ export default {
 		// 监听症状
 		monitorSymptom() {
 			return this.selectSymptomFun()
+		},
+		// 监听粤康码状态
+		monitorHealthCode() {
+			return this.selectHealthCodeFun()
 		}
 	}
 }
@@ -377,6 +474,11 @@ padding-left: 20rpx;}
 .information{font-size: 30rpx;
 margin: 20rpx 0;
 border-bottom: 1px solid #F1F1F1;}
+/* 必填项前添加红色星号 */
+.information::before {
+	content: '* ';
+	color: red;
+}
 /* AI识别身份证 */
 .discern-img image{width: 45rpx; height: 45rpx;}
 .discern-cont{display: flex; justify-content: space-between;}

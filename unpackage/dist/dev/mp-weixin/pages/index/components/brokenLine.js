@@ -114,7 +114,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 26));
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 17));
 
 
 
@@ -144,7 +144,7 @@ var _linedata = __webpack_require__(/*! ../../../config/linedata.js */ 194);func
 //
 //
 //
-var _console = console,log = _console.log;var moment = __webpack_require__(/*! moment */ 30);moment.locale('zh-cn'); // 折线图的类
+var _console = console,log = _console.log;var moment = __webpack_require__(/*! moment */ 31);moment.locale('zh-cn'); // 折线图的类
 var LineChart = __webpack_require__(/*! ../../../config/lineEpidemicData.js */ 195); // // 折线图数据
 // let lineDatas = require('config/line.json')
 // 折线图的动态数据
