@@ -130,6 +130,8 @@ import {check} from '../../config/check.js'
 // 引入顶部信息提示组件
 import HMmessages from "@/components/HM-messages/HM-messages.vue"
 let Dbcrud = require('../../config/dataBase.js')
+let Upload = require('../../config/upload.js')
+let ErrorInfo = require('../../config/errorInfo.js')
 export default {
 	components: {
 		HMmessages
@@ -442,6 +444,42 @@ export default {
 				this.tips('提交失败', iconType)
 			}
 
+		},
+		// 从本地相册选择图片或使用相机拍照
+		async identify() {
+			// 获取图片的临时链接地址
+			let tempImgPath = await new Upload().uploadimg()
+			// 给用户一个 loading 提示
+			wx.showLoading({
+				title: '正在识别中...',
+				mask: true
+			})
+			// 获取云文件ID
+			let fileID = await new Upload().uploadImgToCloudStorage(tempImgPath)
+			// 获取真实https链接
+			let realImgURL = await new Upload().changeLine(fileID)
+			try{
+				// 获取身份证信息
+				let idCardInfo = await new Upload().idCardDiscernFun(realImgURL)
+				wx.hideLoading()
+				console.log(idCardInfo)
+				this.handleCardInfo(idCardInfo.result)
+			}catch(e){
+				wx.hideLoading()
+				// console.log('识别失败！')
+				// 未解决bug：加上 throw 控制台报错：Uncaught (in promise) undefined
+				// throw new ErrorInfo().hint()
+				new ErrorInfo().hint()
+			}
+		},
+		// 处理身份证信息
+		handleCardInfo(info) {
+			let { Name, IdNum, Sex, Birth, Address } = info
+			this.name = Name
+			this.IDcard = IdNum
+			this.index = Sex == '男' ? this.index = 0 : this.index = 1
+			this.birthday = Birth
+			this.koseki = Address
 		}
 	},
 	computed: {
