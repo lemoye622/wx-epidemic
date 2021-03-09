@@ -8559,127 +8559,7 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 20 */
-/*!********************************************************************!*\
-  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/config/check.js ***!
-  \********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.check = void 0; // 健康信息上报的表单校验
-
-// 身份证正则
-var idCardReg = /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
-// 手机号码正则
-var phoneReg = /^1[3456789]\d{9}$/;
-
-var check = function check(obj) {var
-
-  name =
-
-
-
-
-
-
-
-
-
-
-
-  obj.name,phone = obj.phone,IDcard = obj.IDcard,selectGender = obj.selectGender,birthday = obj.birthday,koseki = obj.koseki,residencePlace = obj.residencePlace,detailAddress = obj.detailAddress,isPermanentLive = obj.isPermanentLive,selectSymptom = obj.selectSymptom,healthCodeState = obj.healthCodeState,isAgree = obj.isAgree;
-  return new Promise(function (resolve, reject) {
-    // 姓名
-    if (name == '') {
-      var _tip = '请填写姓名';
-      resolve(_tip);
-      return false;
-    }
-    // 手机号码
-    if (phone == '') {
-      var _tip2 = '请填写手机号码';
-      resolve(_tip2);
-      return false;
-    }
-    if (phone && !phoneReg.test(phone)) {
-      var _tip3 = '请填写正确的手机号码';
-      resolve(_tip3);
-      return false;
-    }
-    // 身份证
-    if (IDcard == '') {
-      var _tip4 = '请填写身份证号码';
-      resolve(_tip4);
-      return false;
-    }
-    if (IDcard && !idCardReg.test(IDcard)) {
-      var _tip5 = '请填写正确的身份证号码';
-      resolve(_tip5);
-      return false;
-    }
-    // 性别
-    if (selectGender == '') {
-      var _tip6 = '请选择性别';
-      resolve(_tip6);
-      return false;
-    }
-    // 出生日期
-    if (birthday == '') {
-      var _tip7 = '请选择出生日期';
-      resolve(_tip7);
-      return false;
-    }
-    // 户籍
-    if (koseki == '') {
-      var _tip8 = '请选择户籍所在地';
-      resolve(_tip8);
-      return false;
-    }
-    // 居住省市
-    if (residencePlace == '') {
-      var _tip9 = '请选择居住省市';
-      resolve(_tip9);
-      return false;
-    }
-    // 详细地址
-    if (detailAddress == '') {
-      var _tip10 = '请填写详细地址';
-      resolve(_tip10);
-      return false;
-    }
-    // 是否常住广东
-    if (isPermanentLive == '') {
-      var _tip11 = '请选择是否常住广东';
-      resolve(_tip11);
-      return false;
-    }
-    // 是否出现症状
-    if (selectSymptom.length == 0) {
-      var _tip12 = '请选择是否出现症状';
-      resolve(_tip12);
-      return false;
-    }
-    // 是否选择了粤康码的状态
-    if (healthCodeState == '') {
-      var _tip13 = '请选择粤康码状态';
-      resolve(_tip13);
-      return false;
-    }
-    // 勾选，同意
-    if (isAgree.length == 0) {
-      var _tip14 = '请勾选本申报所列事项';
-      resolve(_tip14);
-      return false;
-    }
-    // 全部通过
-    var tip = 'SUCCESS';
-    resolve(tip);
-
-  });
-};exports.check = check;
-
-/***/ }),
+/* 20 */,
 /* 21 */
 /*!***********************************************************************!*\
   !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/config/dataBase.js ***!
@@ -8718,6 +8598,20 @@ Dbcrud = /*#__PURE__*/function () {"use strict";
         base.add({
           data: _this2.datas }).
 
+        then(function (res) {
+          resolve(res);
+        }).
+        catch(function (error) {
+          reject(error);
+        });
+      });
+    }
+
+    // where查询数据库集合
+  }, { key: "queryWhere", value: function queryWhere(obj) {var _this3 = this;
+      return new Promise(function (resolve, reject) {
+        var base = db.collection(_this3.gather);
+        base.where(obj).get().
         then(function (res) {
           resolve(res);
         }).
@@ -45206,6 +45100,129 @@ TableData = /*#__PURE__*/function () {"use strict";
 
 
 module.exports = TableData;
+
+/***/ }),
+/* 206 */,
+/* 207 */,
+/* 208 */
+/*!********************************************************************!*\
+  !*** C:/Users/Mac/Desktop/广东新冠疫情追踪小程序/wx-epidemic/config/check.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.check = void 0; // 健康信息上报的表单校验
+
+// 身份证正则
+var idCardReg = /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
+// 手机号码正则
+var phoneReg = /^1[3456789]\d{9}$/;
+
+var check = function check(obj) {var
+
+  name =
+
+
+
+
+
+
+
+
+
+
+
+  obj.name,phone = obj.phone,IDcard = obj.IDcard,selectGender = obj.selectGender,birthday = obj.birthday,koseki = obj.koseki,residencePlace = obj.residencePlace,detailAddress = obj.detailAddress,isPermanentLive = obj.isPermanentLive,selectSymptom = obj.selectSymptom,healthCodeState = obj.healthCodeState,isAgree = obj.isAgree;
+  return new Promise(function (resolve, reject) {
+    // 姓名
+    if (name == '') {
+      var _tip = '请填写姓名';
+      resolve(_tip);
+      return false;
+    }
+    // 手机号码
+    if (phone == '') {
+      var _tip2 = '请填写手机号码';
+      resolve(_tip2);
+      return false;
+    }
+    if (phone && !phoneReg.test(phone)) {
+      var _tip3 = '请填写正确的手机号码';
+      resolve(_tip3);
+      return false;
+    }
+    // 身份证
+    if (IDcard == '') {
+      var _tip4 = '请填写身份证号码';
+      resolve(_tip4);
+      return false;
+    }
+    if (IDcard && !idCardReg.test(IDcard)) {
+      var _tip5 = '请填写正确的身份证号码';
+      resolve(_tip5);
+      return false;
+    }
+    // 性别
+    if (selectGender == '') {
+      var _tip6 = '请选择性别';
+      resolve(_tip6);
+      return false;
+    }
+    // 出生日期
+    if (birthday == '') {
+      var _tip7 = '请选择出生日期';
+      resolve(_tip7);
+      return false;
+    }
+    // 户籍
+    if (koseki == '') {
+      var _tip8 = '请选择户籍所在地';
+      resolve(_tip8);
+      return false;
+    }
+    // 居住省市
+    if (residencePlace == '') {
+      var _tip9 = '请选择居住省市';
+      resolve(_tip9);
+      return false;
+    }
+    // 详细地址
+    if (detailAddress == '') {
+      var _tip10 = '请填写详细地址';
+      resolve(_tip10);
+      return false;
+    }
+    // 是否常住广东
+    if (isPermanentLive == '') {
+      var _tip11 = '请选择是否常住广东';
+      resolve(_tip11);
+      return false;
+    }
+    // 是否出现症状
+    if (selectSymptom.length == 0) {
+      var _tip12 = '请选择是否出现症状';
+      resolve(_tip12);
+      return false;
+    }
+    // 是否选择了粤康码的状态
+    if (healthCodeState == '') {
+      var _tip13 = '请选择粤康码状态';
+      resolve(_tip13);
+      return false;
+    }
+    // 勾选，同意
+    if (isAgree.length == 0) {
+      var _tip14 = '请勾选本申报所列事项';
+      resolve(_tip14);
+      return false;
+    }
+    // 全部通过
+    var tip = 'SUCCESS';
+    resolve(tip);
+
+  });
+};exports.check = check;
 
 /***/ })
 ]]);

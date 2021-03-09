@@ -1,127 +1,139 @@
 <template>
 	<view>
-		<view class="report-cont" v-if="!usersing">
-			<!-- 基本信息 -->
-			<view class="title">基本信息</view>
-			<view class="information">
-				<text>姓名</text>
-				<input type="text" v-model="name" placeholder="你的姓名" placeholder-style="color:#bdbdc5"/>
-			</view>
-			<view class="information">
-				<text>手机号码</text>
-				<input type="number" v-model="phone" placeholder="你的手机号码" placeholder-style="color:#bdbdc5"/>
-			</view>
-			<view class="information">
-				<text>身份证号码</text>
-				<view class="discern-cont">
-				<view class="discern-inpu"><input type="text" v-model="IDcard" placeholder="你的身份证号码" placeholder-style="color:#bdbdc5"/></view>
-				<view class="discern-img" @click="identify()">
-					<image src="../../static/shibie.png" mode="widthFix"></image>
+		<!-- 用户如果提交过健康信息申报，则提交表单和登录页面均不显示 -->
+		<view v-if="display">
+			<view class="report-cont" v-if="!isLogin">
+				<!-- 基本信息 -->
+				<view class="title">基本信息</view>
+				<view class="information">
+					<text>姓名</text>
+					<input type="text" v-model="name" placeholder="你的姓名" placeholder-style="color:#bdbdc5"/>
 				</view>
+				<view class="information">
+					<text>手机号码</text>
+					<input type="number" v-model="phone" placeholder="你的手机号码" placeholder-style="color:#bdbdc5"/>
 				</view>
-			</view>
-			<view class="information">
-				<text>性别</text>
-				<view class="discern-cont">
-				<view class="discern-inpu"><input type="text" v-model="gender[index]" disabled placeholder="请选择你的性别" placeholder-style="color:#bdbdc5"/></view>
-				<view class="discern-right">
-					<picker @change="genderChange" :value="index" :range="gender">
-						<view class="uni-input">选择</view>
-					</picker>
+				<view class="information">
+					<text>身份证号码</text>
+					<view class="discern-cont">
+					<view class="discern-inpu"><input type="text" v-model="IDcard" placeholder="你的身份证号码" placeholder-style="color:#bdbdc5"/></view>
+					<view class="discern-img" @click="identify()">
+						<image src="../../static/shibie.png" mode="widthFix"></image>
+					</view>
+					</view>
 				</view>
+				<view class="information">
+					<text>性别</text>
+					<view class="discern-cont">
+					<view class="discern-inpu"><input type="text" v-model="gender[index]" disabled placeholder="请选择你的性别" placeholder-style="color:#bdbdc5"/></view>
+					<view class="discern-right">
+						<picker @change="genderChange" :value="index" :range="gender">
+							<view class="uni-input">选择</view>
+						</picker>
+					</view>
+					</view>
 				</view>
-			</view>
-			<view class="information">
-				<text>出生日期</text>
-				<view class="discern-cont">
-				<view class="discern-inpu"><input type="text" v-model="birthday" disabled placeholder="请选择出生日期" placeholder-style="color:#bdbdc5"/></view>
-				<view class="discern-right">
-					 <picker mode="date" :value="birthday" :start="startDate" :end="endDate" @change="birthdayChange">
-						<view class="uni-input">选择</view>
-					</picker>
+				<view class="information">
+					<text>出生日期</text>
+					<view class="discern-cont">
+					<view class="discern-inpu"><input type="text" v-model="birthday" disabled placeholder="请选择出生日期" placeholder-style="color:#bdbdc5"/></view>
+					<view class="discern-right">
+						 <picker mode="date" :value="birthday" :start="startDate" :end="endDate" @change="birthdayChange">
+							<view class="uni-input">选择</view>
+						</picker>
+					</view>
+					</view>
 				</view>
+				<view class="information">
+					<text>户籍所在地</text>
+					<view class="discern-cont">
+					<view class="discern-inpu"><input type="text" v-model="koseki" disabled placeholder="请选择户籍所在地" placeholder-style="color:#bdbdc5"/></view>
+					<view class="discern-right">
+						<picker mode="region" :value="koseki"  @change="kosekiChange">
+							<view class="uni-input">选择</view>
+						</picker>
+					</view>
+					</view>
 				</view>
-			</view>
-			<view class="information">
-				<text>户籍所在地</text>
-				<view class="discern-cont">
-				<view class="discern-inpu"><input type="text" v-model="koseki" disabled placeholder="请选择户籍所在地" placeholder-style="color:#bdbdc5"/></view>
-				<view class="discern-right">
-					<picker mode="region" :value="koseki"  @change="kosekiChange">
-						<view class="uni-input">选择</view>
-					</picker>
+				<view class="information">
+					<text>居住省/市</text>
+					<view class="discern-cont">
+					<view class="discern-inpu"><input type="text" v-model="residencePlace" disabled placeholder="请选择居住省/市" placeholder-style="color:#bdbdc5"/></view>
+					<view class="discern-right">
+						<picker mode="region" :value="residencePlace"  @change="residencePlaceChange">
+							<view class="uni-input">选择</view>
+						</picker>
+					</view>
+					</view>
 				</view>
+				<view class="information">
+					<text>详细住址</text>
+					<input type="text" v-model="detailAddress" placeholder="请填写详细住址" placeholder-style="color:#bdbdc5"/>
 				</view>
-			</view>
-			<view class="information">
-				<text>居住省/市</text>
-				<view class="discern-cont">
-				<view class="discern-inpu"><input type="text" v-model="residencePlace" disabled placeholder="请选择居住省/市" placeholder-style="color:#bdbdc5"/></view>
-				<view class="discern-right">
-					<picker mode="region" :value="residencePlace"  @change="residencePlaceChange">
-						<view class="uni-input">选择</view>
-					</picker>
+				<view class="title distance">是否常住广东</view>
+				<view class="trip">
+					<radio-group @change="radioChange">
+						<label class="trip-cont" v-for="(item, index) in isPermanent" :key="item.value">
+							<view>
+								<radio :value="item.value" :checked="index === current" />
+							</view>
+							<view>{{item.name}}</view>
+						</label>
+					</radio-group>
 				</view>
-				</view>
-			</view>
-			<view class="information">
-				<text>详细住址</text>
-				<input type="text" v-model="detailAddress" placeholder="请填写详细住址" placeholder-style="color:#bdbdc5"/>
-			</view>
-			<view class="title distance">是否常住广东</view>
-			<view class="trip">
-				<radio-group @change="radioChange">
-					<label class="trip-cont" v-for="(item, index) in isPermanent" :key="item.value">
-						<view>
-							<radio :value="item.value" :checked="index === current" />
+				<!-- 是否有如下症状 -->
+				<view class="title distance">是否有如下症状</view>
+				<view class="trip">
+					<block v-for="(item, index) in symptom" :key="index">
+					<view class="trip-flex" @click="radiosymptom(index, item.value)">
+						<view class="trip-listing">
+							<image src="../../static/weixuanzhong.svg" v-if="item.Selection == 'hide' "></image>
+							<image v-else src="../../static/xuanzhong.svg"></image>
 						</view>
 						<view>{{item.name}}</view>
-					</label>
-				</radio-group>
-			</view>
-			<!-- 是否有如下症状 -->
-			<view class="title distance">是否有如下症状</view>
-			<view class="trip">
-				<block v-for="(item, index) in symptom" :key="index">
-				<view class="trip-flex" @click="radiosymptom(index, item.value)">
-					<view class="trip-listing">
-						<image src="../../static/weixuanzhong.svg" v-if="item.Selection == 'hide' "></image>
-						<image v-else src="../../static/xuanzhong.svg"></image>
 					</view>
-					<view>{{item.name}}</view>
+					</block>
 				</view>
-				</block>
-			</view>
-			<view class="title distance">粤康码状态（须为粤康码，广东省内各地区粤康码通用，广州市用穗康码亦可）</view>
-			<view class="trip">
-				<block v-for="(item, index) in healthCode" :key="index">
-				<view class="trip-flex" @click="radioHealthCode(index, item.value)">
-					<view class="trip-listing">
-						<image src="../../static/weixuanzhong.svg" v-if="item.Selection == 'hide' "></image>
-						<image v-else src="../../static/xuanzhong.svg"></image>
-					</view>
-					<view>{{item.name}}</view>
-				</view>
-				</block>
-			</view>
-			<!-- 提交 -->
-			<view class="Submit">
-				<checkbox-group @change="checkboxChange">
-					<label class="trip-cont trip-bottom" v-for="item in checkboxContent" :key="item.value">
-						<view>
-							<checkbox class="check-sub" :value="item.value" :checked="item.checked" color="#10c963"/>
+				<view class="title distance">粤康码状态（须为粤康码，广东省内各地区粤康码通用，广州市用穗康码亦可）</view>
+				<view class="trip">
+					<block v-for="(item, index) in healthCode" :key="index">
+					<view class="trip-flex" @click="radioHealthCode(index, item.value)">
+						<view class="trip-listing">
+							<image src="../../static/weixuanzhong.svg" v-if="item.Selection == 'hide' "></image>
+							<image v-else src="../../static/xuanzhong.svg"></image>
 						</view>
 						<view>{{item.name}}</view>
-					</label>
-				</checkbox-group>
-				<!-- 按钮 -->
-				<view class="Submit-button" @click="submit()">
-					提交
+					</view>
+					</block>
 				</view>
-			</view>
+				<!-- 提交 -->
+				<view class="Submit">
+					<checkbox-group @change="checkboxChange">
+						<label class="trip-cont trip-bottom" v-for="item in checkboxContent" :key="item.value">
+							<view>
+								<checkbox class="check-sub" :value="item.value" :checked="item.checked" color="#10c963"/>
+							</view>
+							<view>{{item.name}}</view>
+						</label>
+					</checkbox-group>
+					<!-- 按钮 -->
+					<view class="Submit-button" @click="submit()">
+						提交
+					</view>
+				</view>
+			</view>	
 			<!-- 提交未通过的信息提示组件 -->
-			<HMmessages ref="HMmessages" @complete="HMmessages = $refs.HMmessages" @clickMessage="clickMessage"></HMmessages>					
-		</view>	
+			<HMmessages ref="HMmessages" @complete="HMmessages = $refs.HMmessages" @clickMessage="clickMessage"></HMmessages>
+			<!-- 登录 -->
+			<view v-if="isLogin" class="wx-button">
+				<button  plain="true" open-type="getUserInfo" @getuserinfo="getUserInfo">去登录</button>
+			</view>
+		</view>
+		<!-- 已提交过健康信息申报 -->
+		<view class="tipsdata" v-if="reveal">
+			<image src="../../static/chenggong.svg" mode="widthFix"></image>
+			<text>{{hintmsg}}</text>
+		</view>
 	</view>
 </template>
 
@@ -138,6 +150,14 @@ export default {
 	},
 	data() {
 		return {
+			// 是否显示登录页面
+			isLogin: true,
+			// 已提交过健康信息申报的提示
+			hintmsg: '上报成功',
+			// 是否显示已提交的提示页面
+			reveal: false,
+			// 用户初次进入页面，将提交表单和登录页面均隐藏，先去云数据库查询是否提交过健康信息申报
+			display: false,
 			name: '',
 			phone: '',
 			IDcard: '',
@@ -237,6 +257,17 @@ export default {
 			isAgree: ''
 		}
 	},
+	created() {
+		let getUserMsg = uni.getStorageSync('userMsg')
+		if (!getUserMsg) {
+			console.log('没有用户信息')
+			this.isLogin = true
+			this.display = true
+		} else {
+			console.log('有用户信息')
+			this.queryHealthInfo(getUserMsg.openid)
+		}
+	},
 	methods: {
 		genderChange(e) {
 			this.index = e.target.value
@@ -327,7 +358,7 @@ export default {
 			this.selectSymptom = selectarr.map((item) => {
 				return item.name
 			})
-			console.log(this.selectSymptom)
+			// console.log(this.selectSymptom)
 		},
 		// 粤康码状态
 		radioHealthCode(index, value) {
@@ -439,6 +470,8 @@ export default {
 				await new Dbcrud('healthInfo', obj).pushAdd()
 				// 隐藏消息提示框
 				uni.hideToast();
+				this.reveal = true
+				this.display = false
 			}catch(err){
 				let iconType = 'error'
 				this.tips('提交失败', iconType)
@@ -480,6 +513,76 @@ export default {
 			this.index = Sex == '男' ? this.index = 0 : this.index = 1
 			this.birthday = Birth
 			this.koseki = Address
+		},
+		// 登录
+		async getUserInfo(event) {
+			console.log(event)
+			uni.showToast({
+				title: '正在登陆中...',
+				icon: 'loading',
+				mask: true
+			})
+			// 用户所有信息
+			const usermsg = event.target.userInfo
+			try{
+				// 向云数据库请求信息
+				let getinfo = await new Dbcrud('userInfo').pullGet()
+				console.log(getinfo)
+				if (getinfo.data.length === 0) {
+					console.log('未登陆过')
+					this.firstLogin(usermsg)
+				} else {
+					console.log('以前登录过')
+					this.sinceLogin(getinfo)
+				}
+			}catch(e){
+				uni.hideToast()
+				this.tips('登录失败', 'danger')
+			}
+		},
+		// 未登陆过，首次登录存储用户信息到云数据库
+		async firstLogin(msg) {
+			try{
+				await new Dbcrud('userInfo', msg).pushAdd()
+				// 第一次上传信息到云数据库后再拉取下来存到本地
+				let pullinfo = await new Dbcrud('userInfo').pullGet()
+				this.sinceLogin(pullinfo)
+			}catch(e){
+				uni.hideToast()
+				this.tips('登录失败', 'danger')
+			}
+		},
+		// 之前登陆过，从云数据库拉取用户信息并存储到本地
+		 sinceLogin(message) {
+			let msgObj = {
+				'avatarUrl': message.data[0].avatarUrl,
+				'nickName': message.data[0].nickName,
+				'openid': message.data[0]._openid
+			}
+			uni.setStorageSync('userMsg', msgObj)
+			this.queryHealthInfo(message.data[0]._openid)
+		},
+		// 查询用户之前是否提交过健康信息申报
+		async queryHealthInfo(option) {
+			try{
+				let openIdObj = {_openid: option}
+				// 通过传入登录时用户信息中的_openid来查询用户之前是否提交过健康信息申报
+				// _openid是唯一的
+				let userHealthInfo = await new Dbcrud('healthInfo').queryWhere(openIdObj)
+				// console.log(userHealthInfo)
+				if (userHealthInfo.data.length === 0) {
+					console.log('以前没有提交过健康信息申报')
+					this.isLogin = false
+					this.reveal = false
+					this.display = true
+				} else {
+					console.log('以前提交过健康信息申报')
+					this.reveal = true
+					this.display = false
+				}
+			}catch(e){
+				this.tips('服务器错误', 'danger')
+			}
 		}
 	},
 	computed: {

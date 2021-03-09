@@ -37,6 +37,20 @@ class Dbcrud {
 			})
 		})
 	}
+	
+	// where查询数据库集合
+	queryWhere(obj) {
+		return new Promise((resolve, reject) => {
+			const base = db.collection(this.gather)
+			base.where(obj).get()
+			.then((res) => {
+				resolve(res)
+			})
+			.catch((error) => {
+				reject(error)
+			})
+		})
+	}
 }
 
 module.exports = Dbcrud
