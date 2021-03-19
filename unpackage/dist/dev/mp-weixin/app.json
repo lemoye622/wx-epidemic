@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/canvasview/canvas",
     "pages/index/index",
+    "pages/canvasview/canvas",
     "pages/news/news",
     "pages/news/article",
     "pages/report/report"

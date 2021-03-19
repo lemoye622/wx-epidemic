@@ -6,7 +6,7 @@
 			<!-- <view class="content-character">广东疫情大数据实时追踪</view> -->
 		</view>
 		<!-- 分享 -->
-		<view class="wx-share">分享</view>
+		<view class="wx-share" @click="share()">分享</view>
 		<!-- 数据来源 -->
 		<view class="source">
 			数据来源：广东省卫健委
@@ -179,6 +179,20 @@
 				uni.navigateTo({
 					// url: url
 					url
+				})
+			},
+			
+			// 分享海报
+			share() {
+				let objdata = {
+					deadline: this.deadline,
+					diagdatas: this.peopleList[0].data,
+					curedatas: this.peopleList[1].data,
+					deathdatas: this.peopleList[2].data,
+				}
+				let strdata = JSON.stringify(objdata)
+				uni.navigateTo({
+					url:'../canvasview/canvas?obj=' + strdata
 				})
 			}
 		}
