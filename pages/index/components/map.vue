@@ -89,6 +89,7 @@ export default {
 		// 事件
 		touchMap(e) {
 			log(e);
+			// showToolTip用来展示数据的详细内容
 			canvaMap.showToolTip(e, {
 				format: (item) => {
 					return item.properties.name + ': 确诊' + item.properties.subFeatureIndex;

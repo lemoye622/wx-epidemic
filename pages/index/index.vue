@@ -27,7 +27,7 @@
 			<!-- 菜单 -->
 			<view class="content-menu">
 				<block v-for="(item, index) in menuList" :key="index">
-				<view class="content-menu-table">
+				<view class="content-menu-table" @click="getMenuContent(item.url)">
 					<view>
 						<image :src="item.img" mode="widthFix"></image>
 					</view>
@@ -104,13 +104,13 @@
 						'img': '../../static/shatter-rumors.png',
 						'text': '粉碎谣言',
 						'label': '假消息不能信',
-						'url': ''
+						'url': '../news/ShatterRumors'
 					},
 					{
 						'img': '../../static/work-resumption.png',
 						'text': '复工复产',
 						'label': '复工出行助你安全',
-						'url': ''
+						'url': '../news/WorkResumption'
 					}
 				]
 			}
@@ -172,6 +172,14 @@
 				let timearr = [...diagTime, ...cureTime, ...deathTime]
 				// log(timearr)
 				this.deadline = timestamp(timearr)
+			},
+			
+			// 菜单页面跳转
+			getMenuContent(url) {
+				uni.navigateTo({
+					// url: url
+					url
+				})
 			}
 		}
 	}

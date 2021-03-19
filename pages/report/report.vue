@@ -432,10 +432,10 @@ export default {
 				healthCodeState: this.healthCodeState,
 				isAgree: this.isAgree
 			}
-			console.log(obj)
 			check(obj).then((res) => {
 				if (res == 'SUCCESS') {
 					console.log('全部通过')
+					console.log(obj)
 					// 显示消息提示框
 					uni.showToast({
 						title: '正在提交',

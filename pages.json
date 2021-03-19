@@ -1,9 +1,9 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/report/report",
+			"path": "pages/canvasview/canvas",
 			"style": {
-				"navigationBarTitleText": "健康信息上报"
+				"navigationBarTitleText": "分享海报"
 			}
 		},
 		{
@@ -11,6 +11,24 @@
 			"style": {
 				"navigationBarTitleText": "广东疫情追踪",
 				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/news/news",
+			"style": {
+				"navigationBarTitleText": "疫情新闻"
+			}
+		},
+		{
+			"path": "pages/news/article",
+			"style": {
+				"navigationBarTitleText": "疫情新闻详情"
+			}
+		},
+		{
+			"path": "pages/report/report",
+			"style": {
+				"navigationBarTitleText": "健康信息上报"
 			}
 		}
 	],

@@ -1,7 +1,10 @@
 {
   "pages": [
-    "pages/report/report",
-    "pages/index/index"
+    "pages/canvasview/canvas",
+    "pages/index/index",
+    "pages/news/news",
+    "pages/news/article",
+    "pages/report/report"
   ],
   "subPackages": [],
   "window": {
@@ -10,6 +13,5 @@
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8"
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap11.json"
+  "usingComponents": {}
 }
