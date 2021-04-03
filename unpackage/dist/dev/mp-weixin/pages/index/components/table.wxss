@@ -19,9 +19,9 @@ font-size: 25rpx;}
 border-right: 1px solid #fff;}
 .table-cont text.data-v-5e03891c:nth-child(1){background: #f2f5f7; text-align: left; -webkit-box-flex: 2; -webkit-flex: 2; flex: 2; padding-left: 10rpx;}
 .table-cont text.data-v-5e03891c:nth-child(2){background: #e8effc; color: #005dff; -webkit-box-flex: 1; -webkit-flex: 1; flex: 1;}
-.table-cont text.data-v-5e03891c:nth-child(3){background: #fdeeee; color: #f55253; -webkit-box-flex: 1; -webkit-flex: 1; flex: 1;}
+.table-cont text.data-v-5e03891c:nth-child(3){background: #FFFFE0; color: #FFD700; -webkit-box-flex: 1; -webkit-flex: 1; flex: 1;}
 .table-cont text.data-v-5e03891c:nth-child(4){background: #e9f7ec; color: #178b50; -webkit-box-flex: 1; -webkit-flex: 1; flex: 1;}
-.table-cont text.data-v-5e03891c:nth-child(5){background: #f2f2f2; color: #66666c; -webkit-box-flex: 1; -webkit-flex: 1; flex: 1;
+.table-cont text.data-v-5e03891c:nth-child(5){background: #fdeeee; color: #f55253; -webkit-box-flex: 1; -webkit-flex: 1; flex: 1;
 border-right: 0;}
 /* 确诊人数 */
 .table-datas text.data-v-5e03891c{display: block;height: 70rpx; line-height: 70rpx; text-align: center;

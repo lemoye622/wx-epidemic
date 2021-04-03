@@ -40,7 +40,7 @@
 		},
 		data() {
 			return {
-				tableList: ['地区', '新增确诊', '累计确诊', '治愈', '死亡'],
+				tableList: ['地区', '新增确诊', '累积确诊', '累积治愈', '累积死亡'],
 				tabledatas: []
 			}
 		},
@@ -168,9 +168,9 @@
 	border-right: 1px solid #fff;}
 	.table-cont text:nth-child(1){background: #f2f5f7; text-align: left; flex: 2; padding-left: 10upx;}
 	.table-cont text:nth-child(2){background: #e8effc; color: #005dff; flex: 1;}
-	.table-cont text:nth-child(3){background: #fdeeee; color: #f55253; flex: 1;}
+	.table-cont text:nth-child(3){background: #FFFFE0; color: #FFD700; flex: 1;}
 	.table-cont text:nth-child(4){background: #e9f7ec; color: #178b50; flex: 1;}
-	.table-cont text:nth-child(5){background: #f2f2f2; color: #66666c; flex: 1;
+	.table-cont text:nth-child(5){background: #fdeeee; color: #f55253; flex: 1;
 	border-right: 0;}
 	/* 确诊人数 */
 	.table-datas text{display: block;height: 70upx; line-height: 70upx; text-align: center;

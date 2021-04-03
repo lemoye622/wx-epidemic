@@ -1,10 +1,17 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+	{
+		"path": "pages/index/start",
+		"style": {
+			"navigationBarTitleText": "声明",
+			"navigationStyle": "custom"
+		}
+	},
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "广东疫情追踪",
-				"navigationStyle": "custom"
+				"navigationBarTitleText": "广东疫情追踪"
+				// "navigationStyle": "custom"
 			}
 		},
 		{
@@ -26,6 +33,30 @@
 			}
 		},
 		{
+			"path": "pages/news/ShatterRumors",
+			"style": {
+				"navigationBarTitleText": "粉碎谣言"
+			}
+		},
+		{
+			"path": "pages/news/ShatterRumorsDetail",
+			"style": {
+				"navigationBarTitleText": "粉碎谣言详情"
+			}
+		},
+		{
+			"path": "pages/news/WorkResumption",
+			"style": {
+				"navigationBarTitleText": "复工复产"
+			}
+		},
+		{
+			"path": "pages/news/WorkResumptionDetail",
+			"style": {
+				"navigationBarTitleText": "复工复产详情"
+			}
+		},
+		{
 			"path": "pages/report/report",
 			"style": {
 				"navigationBarTitleText": "健康信息上报"
@@ -34,7 +65,7 @@
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "广东疫情追踪",
+		"navigationBarTitleText": "声明",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	}

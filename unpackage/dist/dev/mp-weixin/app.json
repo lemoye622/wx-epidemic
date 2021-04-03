@@ -1,17 +1,23 @@
 {
   "pages": [
+    "pages/index/start",
     "pages/index/index",
     "pages/canvasview/canvas",
     "pages/news/news",
     "pages/news/article",
+    "pages/news/ShatterRumors",
+    "pages/news/ShatterRumorsDetail",
+    "pages/news/WorkResumption",
+    "pages/news/WorkResumptionDetail",
     "pages/report/report"
   ],
   "subPackages": [],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "广东疫情追踪",
+    "navigationBarTitleText": "声明",
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8"
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap25.json"
 }

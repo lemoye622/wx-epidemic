@@ -1,6 +1,5 @@
 {
   "navigationBarTitleText": "广东疫情追踪",
-  "navigationStyle": "custom",
   "usingComponents": {
     "m-a-p": "/pages/index/components/map",
     "line": "/pages/index/components/brokenLine",

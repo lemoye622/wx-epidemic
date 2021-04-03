@@ -1,27 +1,3 @@
-<!-- <template>
-	<view>
-		<ListPage></ListPage>
-	</view>
-</template>
-
-<script>
-import Line from '../common/ListPage.vue'
-export default{
-	data() {
-		return {
-			
-		}
-	},
-	
-	methods: {}
-		
-}
-</script>
-
-<style scoped>
-
-</style> -->
-
 <template>
 	<view>
 		<view class="content">
@@ -41,8 +17,8 @@ export default{
 </template>
 
 <script>
-let articlePublic = require('../../config/articlePublic.js')
 // let Dbcrud = require('../../config/dataBase.js')
+let articlePublic = require('../../config/articlePublic.js')
 export default{
 	data() {
 		return {
@@ -54,30 +30,28 @@ export default{
 		newsDetail(id) {
 			// console.log(id)
 			uni.navigateTo({
-				url: './article?id=' + id
+				url: './WorkResumptionDetail?id=' + id
 			})
 		}
 	},
 	
 	async created() {
 		// let newsList = await new Dbcrud('newsListPage').pullGet()
-		// console.log('疫情新闻', newsList)
-		
+		// console.log('复工复产', newsList)
 		// let target = newsList.data.filter(item => {
-		// 	let newsReg = /(!谣言|!风景|!能不能|!后遗症|!复工|!复厂|新冠)/g;
-		// 	return newsReg.test(item.titles)
+		// 	let workReg = /(复工|复厂|开业)/g;
+		// 	return workReg.test(item.titles)
 		// })
 		// console.log(target)
+		// this.newsListPage = target
 		
-		let data = await new articlePublic('newsListPage', null).listPage()
+		let data = await new articlePublic('newsListPage', 'workResumption').listPage()
 		console.log('谣言', data)
 		this.newsListPage = data
-		
-		// this.newsListPage = newsList.data
 	}
 }
 </script>
 
-<style>
+<style scoped>
 @import '../../cssing/listPagePublic.css'
 </style>

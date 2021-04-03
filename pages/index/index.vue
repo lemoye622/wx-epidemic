@@ -103,7 +103,7 @@
 					{
 						'img': '../../static/shatter-rumors.png',
 						'text': '粉碎谣言',
-						'label': '假消息不能信',
+						'label': '谣言不可信',
 						'url': '../news/ShatterRumors'
 					},
 					{

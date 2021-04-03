@@ -28,8 +28,8 @@
 		},
 		data() {
 			return {
-				cWith:'',
-				cHeight:'',
+				cWith: '',
+				cHeight: '',
 				pixelRatio: 1,
 				// 动态日期
 				catedays: [],
@@ -50,7 +50,7 @@
 			getServerData(linevp) {
 				// log(lineDatas);
 				// let lineData = lineDatas.data.LineA.chartData
-				let LineA={categories:[],series:[]};
+				let LineA={categories:[], series:[]};
 				//这里我后台返回的是数组，所以用等于，如果您后台返回的是单条数据，需要push进去
 				LineA.categories=linevp.categories;
 				LineA.series=linevp.series;
@@ -58,41 +58,41 @@
 				//第二根线为虚线的设置
 				// LineA.series[1].lineType='dash';
 				// LineA.series[1].dashLength=10;
-				this.showLineA("canvasLineA",LineA);
+				this.showLineA("canvasLineA", LineA);
 			},
 			showLineA(canvasId,chartData) {
 				canvaLineA = new uCharts({
-					$this:this,
+					$this: this,
 					canvasId: canvasId,
 					type: 'line',
-					colors:[ '#facc14', '#f04864', '#8543e0' ],
-					fontSize:11,
-					padding:[15,15,0,15],
+					colors: ['#facc14', '#8543e0', '#f04864'],
+					fontSize: 11,
+					padding: [15, 15, 0, 15],
 					legend:{
-						show:true,
-						padding:5,
-						lineHeight:11,
-						margin:0,
+						show: true,
+						padding: 5,
+						lineHeight: 11,
+						margin: 0,
 					},
-					dataLabel:false,
-					dataPointShape:true,
-					background:'#FFFFFF',
-					pixelRatio:this.pixelRatio,
+					dataLabel: false,
+					dataPointShape: true,
+					background: '#FFFFFF',
+					pixelRatio: this.pixelRatio,
 					categories: chartData.categories,
 					series: chartData.series,
 					animation: true,
 					xAxis: {
-						type:'grid',
-						gridColor:'#CCCCCC',
-						gridType:'dash',
-						dashLength:2,
-						axisLine:false
-						// disableGrid:true
+						type: 'grid',
+						gridColor: '#CCCCCC',
+						gridType: 'dash',
+						dashLength: 2,
+						axisLine: false
+						// disableGrid: true
 					},
 					yAxis: {
-						gridType:'dash',
-						gridColor:'#CCCCCC',
-						dashLength:2
+						gridType: 'dash',
+						gridColor: '#CCCCCC',
+						dashLength: 2
 					},
 					width: this.cWidth*this.pixelRatio,
 					height: this.cHeight*this.pixelRatio,
@@ -108,8 +108,8 @@
 				//下面是自定义文案
 				let textList = [
 					{ text: `${this.catedays[5]}: 新增确诊${this.diagdata[5]}`, color: '#facc14' },
-					{ text: `${this.catedays[5]}: 新增治愈${this.curedata[5]}`, color: '#f04864' },
-					{ text: `${this.catedays[5]}: 新增死亡${this.diedata[5]}`, color: '#8543e0' }
+					{ text: `${this.catedays[5]}: 新增治愈${this.curedata[5]}`, color: '#8543e0'},
+					{ text: `${this.catedays[5]}: 新增死亡${this.diedata[5]}`, color: '#f04864' }
 				];
 				//下面是event的模拟,tooltip的Y坐标值通过这个mp.changedTouches[0].y控制
 				let tmpevent = { mp: { changedTouches: [{ identifier: 0, x: 335, y: 93 }]}};
@@ -154,7 +154,8 @@
 				// 死亡
 				this.diedata = await new LineChart(this.catedays, newvalue[2].data).lineChartsdata()
 				let linevp = linedata(this.catedays, this.diagdata, this.curedata, this.diedata)
-				this.cWidth = uni.upx2px(750);
+				// this.cWidth = uni.upx2px(750);
+				this.cWidth = uni.upx2px(700);
 				this.cHeight = uni.upx2px(500);
 				this.getServerData(linevp);
 			}

@@ -1,27 +1,3 @@
-<!-- <template>
-	<view>
-		<ListPage></ListPage>
-	</view>
-</template>
-
-<script>
-import Line from '../common/ListPage.vue'
-export default{
-	data() {
-		return {
-			
-		}
-	},
-	
-	methods: {}
-		
-}
-</script>
-
-<style scoped>
-
-</style> -->
-
 <template>
 	<view>
 		<view class="content">
@@ -41,8 +17,8 @@ export default{
 </template>
 
 <script>
-let articlePublic = require('../../config/articlePublic.js')
 // let Dbcrud = require('../../config/dataBase.js')
+let articlePublic = require('../../config/articlePublic.js')
 export default{
 	data() {
 		return {
@@ -52,32 +28,47 @@ export default{
 	
 	methods:{
 		newsDetail(id) {
-			// console.log(id)
 			uni.navigateTo({
-				url: './article?id=' + id
+				url: './ShatterRumorsDetail?id=' + id
 			})
 		}
 	},
 	
 	async created() {
 		// let newsList = await new Dbcrud('newsListPage').pullGet()
-		// console.log('疫情新闻', newsList)
+		// console.log('粉碎谣言', newsList)
 		
 		// let target = newsList.data.filter(item => {
-		// 	let newsReg = /(!谣言|!风景|!能不能|!后遗症|!复工|!复厂|新冠)/g;
-		// 	return newsReg.test(item.titles)
+		// 方法一：
+		// 	// let index = item.titles.indexOf('谣言')
+		// 	// console.log('indexof', index);
+		// 	// if (index > -1) {
+		// 	// 	return item;
+		// 	// } else {
+		// 	// 	return 0;
+		// 	// }
+		// 方法二：
+		// 	let rumorReg = new RegExp('谣言', 'g')
+		// 	let rumorArr = rumorReg.exec(item.titles)
+		// 	console.log(rumorArr)
+		// 	if (rumorArr !== null) return rumorArr;
+		// })
+		
+		// 方法三：
+		// let target = newsList.data.filter(item => {
+		// 	let rumorsReg = /(谣言|不能|能不能|后遗症)/g;
+		// 	return rumorsReg.test(item.titles)
 		// })
 		// console.log(target)
+		// this.newsListPage = target
 		
-		let data = await new articlePublic('newsListPage', null).listPage()
+		let data = await new articlePublic('newsListPage', 'shatterRumors').listPage()
 		console.log('谣言', data)
 		this.newsListPage = data
-		
-		// this.newsListPage = newsList.data
 	}
 }
 </script>
 
-<style>
+<style scoped>
 @import '../../cssing/listPagePublic.css'
 </style>

@@ -49,3 +49,4 @@ export default{
 @import '../../cssing/detailPagePublic.css'
 </style>
 
+
